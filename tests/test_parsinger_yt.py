@@ -25,5 +25,4 @@ def test_password_text():
     button.click()
 
     assert button.get_attribute("password") == "GET-TH1S-C0D3"
-
     driver.quit()
