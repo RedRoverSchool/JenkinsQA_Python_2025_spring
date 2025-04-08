@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 url = 'https://www.saucedemo.com/'
-user_name_standard = 'standard_user'git
+user_name_standard = 'standard_user'
 password = 'secret_sauce'
 
 def test_standard_user_login_url_check():
