@@ -14,6 +14,3 @@ def test_login():
     driver.find_element(By.CSS_SELECTOR, 'button[onclick="logIn()"]').click()
     time.sleep(5)
     driver.quit()
-
-
-
