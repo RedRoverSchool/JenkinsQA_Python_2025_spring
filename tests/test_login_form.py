@@ -9,8 +9,8 @@ def test_login_standart_user():
     username_fild.send_keys('standard_user')
     password_fild = driver.find_element(By.XPATH, '//input[@id="password"]')
     password_fild.send_keys('secret_sauce')
-    login_bottom = driver.find_element(By.XPATH, '//input[@id="login-button"]')
-    login_bottom.click()
+    login_button = driver.find_element(By.XPATH, '//input[@id="login-button"]')
+    login_button.click()
     assert driver.current_url == 'https://www.saucedemo.com/inventory.html'
     driver.quit()
 
