@@ -35,7 +35,7 @@ def test_standard_user_title(driver):
     titel = "Products"
     login_standard_user(driver)
     title = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "span[data-test='title']")))
+    EC.presence_of_element_located((By.CSS_SELECTOR, "span[data-test='title']")))
     assert title.text == titel, (f'expected result {titel} but got {title.text}')
 
 def test_product_add(driver):
