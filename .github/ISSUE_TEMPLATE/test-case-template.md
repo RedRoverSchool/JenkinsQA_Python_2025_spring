@@ -1,0 +1,39 @@
+---
+name: Test Case Template
+about: This is a template for creating a new test case.
+title: ''
+labels: TC
+assignees: ''
+
+---
+
+**ID:** 
+
+TC_XX.YYY.ZZ | [EPIC NAME] > [USER STORY NAME] > [TEST CASE NAME]
+ 
+**Preconditions:**
+
+What needs to be set up before the test.
+
+**Description:** 
+
+Brief description of the test case.
+
+**Steps:**  
+
+1. [Step 1]  
+2. [Step 2]  
+3. [Step 3]  
+
+**Expected Result:** 
+
+What should happen.
+
+**Comments / Notes:**
+
+Additional details, attachments, logs etc.
+
+**Acceptance Criteria:**
+
+1. By [Action/Trigger], the user can access [Feature/Functionality].
+2. Clicking on [Element] opens [Page/Section], where [Feature/Functionality] is also available in [Location].
