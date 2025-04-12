@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 import time
 
 
+
+
 def test_cart_icon_displays_correct_item_count():
     driver = webdriver.Chrome()
     driver.get("https://www.saucedemo.com/")
