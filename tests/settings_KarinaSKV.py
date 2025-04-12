@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import requests
+import  json
+
 
 
 BASE_URL = "https://www.saucedemo.com"
@@ -22,3 +25,13 @@ def check_autorizathion():
 
     assert "/inventory.html" in autorizathion().driver.current_url
     autorizathion().driver.quit()
+
+
+BASE_URL2 = 'https://simple-books-api.glitch.me'
+ENDPOINR_GET = f"{BASE_URL2}/status"
+
+def get_method():
+   responce  = requests.get(f"{ENDPOINR_GET}")
+   print(responce.status_code)
+   assert responce.status_code == 200, "Неверный статус кода. Получили: {responce.status_code}"
+
