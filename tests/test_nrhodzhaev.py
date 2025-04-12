@@ -25,3 +25,5 @@ def test_cart_icon_displays_correct_item_count():
     assert cart_badge.text == "1", f"Ожидалось '1' в корзине, но получено '{cart_badge.text}'"
 
     driver.quit()
+
+
