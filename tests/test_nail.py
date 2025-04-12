@@ -12,12 +12,12 @@ def test_cart_icon_displays_correct_item_count():
     driver.find_element(By.ID, "login-button").click()
     time.sleep(2)
 
-      driver.find_element(By.XPATH, "//*[@id='item_4_title_link']/div").click()
+    driver.find_element(By.XPATH, "//*[@id='item_4_title_link']/div").click()
     time.sleep(2)
 
     driver.find_element(By.XPATH, "//*[@id='add-to-cart']").click()
 
-     cart_badge = driver.find_element(By.XPATH, "//*[@id='shopping_cart_container']/a/span")
+    cart_badge = driver.find_element(By.XPATH, "//*[@id='shopping_cart_container']/a/span")
     assert cart_badge.text == "1", f"Ожидалось '1' в корзине, но получено '{cart_badge.text}'"
 
     driver.quit()
