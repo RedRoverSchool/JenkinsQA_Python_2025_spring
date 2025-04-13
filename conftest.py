@@ -8,7 +8,11 @@ from selenium import webdriver
 def config():
     return Config.load()
 
-
+@pytest.fixture
+def sauce(driver):
+    driver.get("https://www.saucedemo.com/")
+    return driver 
+    
 @pytest.fixture(scope="function")
 def driver(config):
 

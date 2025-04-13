@@ -1,11 +1,6 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
-@pytest.fixture
-def sauce(driver):
-    driver.get("https://www.saucedemo.com/")
-    return driver 
     
 def test_accepted_user_names_are_shown_to_user(sauce):
     user_names_node = sauce.find_element(By.XPATH,"//div[@id='login_credentials']")
