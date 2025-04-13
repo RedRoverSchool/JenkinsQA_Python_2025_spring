@@ -4,16 +4,14 @@ from selenium.webdriver.common.by import By
 import time
 
 @pytest.fixture
-def driver():
-    driver = webdriver.Chrome()
+def driver2(driver):
     driver.maximize_window()
     yield driver
-    driver.quit()
 
 @pytest.fixture
-def sauce(driver):
-    driver.get("https://www.saucedemo.com/")
-    return driver
+def sauce(driver2):
+    driver2.get("https://www.saucedemo.com/")
+    return driver2
 
 def test_successful_login_redirect(sauce):
     sauce.find_element(By.ID, 'user-name').send_keys("standard_user")
