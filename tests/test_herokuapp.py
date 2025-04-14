@@ -29,10 +29,7 @@ def test_hovers(hero):
 def test_typos(hero):
     hero.find_element(By.XPATH, '//a[@href="/typos"]').click()
     typo = hero.find_element(By.XPATH,".//p[contains(text(), 'Sometimes')]").text
-    if typo == "Sometimes you'll see a typo, other times you won,t.":
-        print("Grammar mistake is detected")
-    else:
-        print("Grammar mistake is not detected")
+    assert typo == "Sometimes you'll see a typo, other times you won,t.", "Grammar mistake is not detected"
 
 def test_add_remove_elements(hero):
     hero.find_element(By.XPATH, '//a[@href="/add_remove_elements/"]').click()
