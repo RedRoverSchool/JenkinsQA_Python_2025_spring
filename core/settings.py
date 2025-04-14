@@ -14,7 +14,11 @@ class BrowserConfig(ConfigBase):
     OPTIONS_EDGE: str = "--window-size=1920,1080"
 
 
-class Config(BaseSettings):
+class Config(ConfigBase):
+    URL: str
+    USER: str
+    PASSWORD: str
+
     browser: BrowserConfig = Field(default_factory=BrowserConfig)
 
     @classmethod
