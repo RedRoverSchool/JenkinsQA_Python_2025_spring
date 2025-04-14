@@ -15,9 +15,6 @@ class BrowserConfig(ConfigBase):
 
 
 class Config(ConfigBase):
-    URL: str
-    USER: str
-    PASSWORD: str
 
     browser: BrowserConfig = Field(default_factory=BrowserConfig)
 
