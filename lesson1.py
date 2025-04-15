@@ -16,5 +16,4 @@ driver = webdriver.Chrome(service=service, options=options)
 driver.get("https://www.google.com")
 print("Заголовок:", driver.title)
 
-driver.quit()
-additional line
+driver.quit()""""""""
