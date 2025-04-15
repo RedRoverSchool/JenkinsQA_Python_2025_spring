@@ -17,5 +17,5 @@ driver.get("https://www.yahoo.com")
 print("Заголовок:", driver.title)
 
 driver.quit()
-+++
+
 
