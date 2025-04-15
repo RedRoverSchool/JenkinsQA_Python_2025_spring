@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 def setup_driver():
     options = webdriver.ChromeOptions()
-    options.add_argument('--user-data-dir=profile')
+    # options.add_argument('--user-data-dir=profile')
     driver = webdriver.Chrome(options)
     return driver
 
