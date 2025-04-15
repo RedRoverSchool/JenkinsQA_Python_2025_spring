@@ -13,7 +13,7 @@ service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
 
 # Тестовая загрузка страницы
-driver.get("https://www.google.com"++++)
+driver.get("https://www.yahoo.com")
 print("Заголовок:", driver.title)
 
 driver.quit()
