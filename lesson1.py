@@ -1,21 +1,13 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+import unittest
 
-# Настройки браузера(test)
-options = Options()
-options.add_argument("--start-maximized")  # Открыть окно в полном размере
-# options.add_argument("--headless")      # Раскомментируй, если хочешь headless режим
+# Функция, которую ты тестируешь
+def perform_operation(a, b):
+    return a + b
 
-# Установка и запуск драйвера
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
+class TestMathOperations(unittest.TestCase):
+    def test_operation_add(self):
+        result = perform_operation(1, 2)
+        self.assertEqual(result, 3, msg="Result of 1 + 5 does not equal 3")
 
-# Тестовая загрузка страницы
-driver.get("https://www.yahoo.com")
-print("Заголовок:", driver.title)
-
-driver.quit()
-
-
+if __name__ == "__main__":
+    unittest.main()
