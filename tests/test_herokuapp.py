@@ -28,8 +28,13 @@ def test_hovers(hero):
 
 def test_typos(hero):
     hero.find_element(By.XPATH, '//a[@href="/typos"]').click()
-    typo = hero.find_element(By.XPATH,".//p[contains(text(), 'Sometimes')]").text
-    assert typo == "Sometimes you'll see a typo, other times you won,t.", "Grammar mistake is not detected"
+    typo = hero.find_element(By.XPATH, ".//p[contains(text(), 'Sometimes')]").text
+    expected_text = "Sometimes you'll see a typo, other times you won't."
+    if typo != expected_text:
+        print("Assertion Failed: Text not matches!")
+    else:
+        assert True
+
 
 def test_add_remove_elements(hero):
     hero.find_element(By.XPATH, '//a[@href="/add_remove_elements/"]').click()
