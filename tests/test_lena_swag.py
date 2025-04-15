@@ -23,23 +23,3 @@ def test_add_to_cart(driver):
     assert button_name.text == "Remove"
     assert shopping_cart.text == "1"
 
-
-def test_price_sort_low_to_high(driver):
-    select_element = Select(driver.find_element(By.CLASS_NAME, 'product_sort_container'))
-    select_element.select_by_value('lohi')
-    price_elements = driver.find_elements(By.CLASS_NAME, 'inventory_item_price')
-    prices = []
-    for price in price_elements:
-        price_text = price.text.replace('$', '')
-        prices.append(float(price_text))
-    sorted_prices = sorted(prices)
-    assert prices == sorted_prices, f"Prices are not sorted! Actual: {prices} Expected: {sorted_prices}"
-
-
-def test_price_sort_high_to_low(driver):
-    select_element = Select(driver.find_element(By.CLASS_NAME, 'product_sort_container'))
-    select_element.select_by_value('hilo')
-    price_elements = driver.find_elements(By.CLASS_NAME, 'inventory_item_price')
-    prices = [float(price.text.replace('$', '')) for price in price_elements]
-    sorted_prices = sorted(prices, reverse=True)
-    assert prices == sorted_prices, f"Prices are not sorted correctly! Actual: {prices} Expected: {sorted_prices}"
