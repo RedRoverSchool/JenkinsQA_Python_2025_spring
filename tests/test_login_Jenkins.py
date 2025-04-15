@@ -15,6 +15,7 @@ def authorization_jenkins():
     return driver
 
 
+
 def test_login(authorization_jenkins):
     driver = authorization_jenkins
     driver.find_element(By.XPATH, "//button[@name='Submit']").click()
