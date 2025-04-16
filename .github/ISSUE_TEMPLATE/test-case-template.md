@@ -23,7 +23,8 @@ assignees: ''
 #### Expected Result: 
 (What should happen)
 
-#   
+#### Comments / Notes:** (Additional details, attachments, logs) 
+
 #### Acceptence Criteria:
 By [Action/Trigger], the user can access [Feature/Functionality].  
 Clicking on [Element] opens [Page/Section], where [Feature/Functionality] is also available in [Location].
