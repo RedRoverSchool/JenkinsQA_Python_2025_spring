@@ -2,6 +2,8 @@ import pytest
 
 from core.settings import Config
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 
 @pytest.fixture(scope="session")
@@ -32,4 +34,10 @@ def driver(config):
     yield driver
 
     driver.quit()
+
+
+
+
+
+
 
