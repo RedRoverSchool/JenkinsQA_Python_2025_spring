@@ -29,5 +29,6 @@ def test_user_can_log_out_of_the_site(setup_driver):
     setup_driver.find_element(By.ID, 'react-burger-menu-btn').click()
     wait.until(EC.visibility_of_element_located((By.ID, 'logout_sidebar_link')))
     setup_driver.find_element(By.ID, 'logout_sidebar_link').click()
+    wait.until(EC.visibility_of_element_located((By.ID, 'login-button')))
 
     assert setup_driver.current_url == 'https://www.saucedemo.com/', 'wrong url'
