@@ -18,7 +18,7 @@ def random_string():
     return str(uuid.uuid4())
 
 
-@pytest.fixture()
+@pytest.fixture
 def random_dob():
     start_date = datetime.date(1904, 1, 1)
     end_date = datetime.date(2007, 12, 31)
