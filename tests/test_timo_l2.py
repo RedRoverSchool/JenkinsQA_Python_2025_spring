@@ -23,7 +23,7 @@ def toyota_com(driver):
 
 def test_build_4runner(toyota_com):
 
-    color = 'Supersonic Red'
+    color_1 = 'Supersonic Red'
 
     wait = WebDriverWait(toyota_com, 45)
     try:
@@ -60,4 +60,4 @@ def test_build_4runner(toyota_com):
         (By.XPATH, "//section/div[@class='detail-wrapper']//span[text()='Supersonic Red ']")
     ))
 
-    assert color in check_color.text
+    assert color_1 in check_color.text
