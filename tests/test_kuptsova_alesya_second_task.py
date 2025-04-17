@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 username_correct = 'problem_user'
 password_correct = 'secret_sauce'
 
+
 @pytest.fixture
 def setup_driver(driver):
     driver.get("https://www.saucedemo.com/")
@@ -15,6 +16,7 @@ def test_log_in_with_unfilled_fields(setup_driver):
 
     error_message = setup_driver.find_element(By.XPATH, "//h3[@data-test='error']")
     assert error_message.text == 'Epic sadface: Username is required'
+
 
 def test_user_can_log_out_of_the_site(setup_driver):
     setup_driver.find_element(By.ID, 'user-name').send_keys(username_correct)
