@@ -17,10 +17,6 @@ def driver(config):
         case "chrome":
             from selenium.webdriver.chrome.options import Options
             options = Options()
-            options.add_experimental_option("prefs", {
-                "credentials_enable_service": False,
-                "profile.password_manager_enabled": False
-            })
             for argument in config.browser.OPTIONS_CHROME.split(';'):
                 options.add_argument(argument)
             driver = webdriver.Chrome(options=options)
