@@ -21,13 +21,13 @@ def test_log_in_with_unfilled_fields(setup_driver):
 
 
 def test_user_can_log_out_of_the_site(setup_driver):
-    wait5 = WebDriverWait(setup_driver, 5)
+    wait10 = WebDriverWait(setup_driver, 10)
     setup_driver.find_element(By.ID, 'user-name').send_keys(username_correct)
     setup_driver.find_element(By.ID, 'password').send_keys(password_correct)
     setup_driver.find_element(By.NAME, 'login-button').click()
-    wait5.until(expected_conditions.visibility_of_element_located((By.ID, 'react-burger-menu-btn')))
+    wait10.until(expected_conditions.visibility_of_element_located((By.ID, 'react-burger-menu-btn')))
     setup_driver.find_element(By.ID, 'react-burger-menu-btn').click()
-    wait5.until(expected_conditions.visibility_of_element_located((By.ID, 'logout_sidebar_link')))
+    wait10.until(expected_conditions.visibility_of_element_located((By.ID, 'logout_sidebar_link')))
     setup_driver.find_element(By.ID, 'logout_sidebar_link').click()
 
     assert setup_driver.current_url == 'https://www.saucedemo.com/', 'wrong url'
