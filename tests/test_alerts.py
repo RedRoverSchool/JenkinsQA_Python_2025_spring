@@ -79,4 +79,5 @@ def test_prompt_box(alerts):
     alert.accept()
     confirm_text = alerts.find_element(By.ID, "promptResult").text
 
-    assert confirm_text == f"You entered {test_text}"
+    assert confirm_text == f"You entered {test_text}'"
+    t
