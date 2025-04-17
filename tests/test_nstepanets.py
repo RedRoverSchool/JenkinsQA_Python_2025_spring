@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -19,11 +21,13 @@ def test_login_page_opens(login_page):
     header = login_page.find_element(By.XPATH, '//*[@id="login"]/h2')
     assert header.text == "Test login"
 
-def test_login_successful(login_page):
+def test_login_successful(login_page, wait):
     login_page.find_element(By.ID, "username").send_keys("student")
     login_page.find_element(By.ID, "password").send_keys("Password123")
     login_page.find_element(By.XPATH, '//button[@id="submit"]').click()
-    assert "practicetestautomation.com/logged-in-successfully/" in login_page.current_url
+    wait.until(EC.url_contains("practicetestautomation.com/logged-in-successfully/"), "URL is not as expected")
+    message = login_page.find_element(By.XPATH, '//h1')
+    assert message.text == "Logged In Successfully"
 
 def test_login_with_invalid_password(login_page, wait):
     login_page.find_element(By.ID, "username").send_keys("student")
