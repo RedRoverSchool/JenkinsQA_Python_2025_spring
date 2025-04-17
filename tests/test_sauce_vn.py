@@ -1,17 +1,14 @@
-import time
-
 import pytest
-
-from selenium import webdriver
+from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from conftest import driver
 
-
 LOGIN_PAGE_URL = "https://www.saucedemo.com/"
 PRODUCTS_PAGE_URL = "https://www.saucedemo.com/inventory.html"
+
 
 @pytest.fixture
 def login(driver):
@@ -20,8 +17,8 @@ def login(driver):
     driver.find_element(By.ID, 'password').send_keys("secret_sauce")
     driver.find_element(By.NAME, 'login-button').click()
 
-def test_login(login, driver):
 
+def test_login(login, driver):
     assert driver.current_url == PRODUCTS_PAGE_URL
 
 
@@ -33,9 +30,7 @@ def test_open_sidebar_menu(driver, login):
 def test_add_item_to_cart(driver, login):
     driver.find_element(By.XPATH, "//button[contains(text(),'Add to cart')]").click()
     driver.find_element(By.XPATH, "//a[@class='shopping_cart_link']").click()
-
     WebDriverWait(driver, 5).until(EC.url_to_be("https://www.saucedemo.com/cart.html"))
-
     assert driver.current_url == "https://www.saucedemo.com/cart.html"
 
 
@@ -50,6 +45,7 @@ def test_check_item_in_cart(driver, login):
     assert len(items) > 0, "Item not found in cart"
 
     # assert driver.find_element(By.XPATH, "//div[text()='Sauce Labs Backpack']/ancestor::div[@class='cart_item']")
+
 
 def test_open_item(driver, login):
     driver.find_element(By.XPATH, "//div[contains(text(),'Sauce Labs Fleece Jacket')]").click()
@@ -101,4 +97,3 @@ def test_empty_username_password_fields(driver):
 
     error_message = driver.find_element(By.XPATH, '//h3[@data-test= "error"]')
     assert error_message.text == "Epic sadface: Username is required"
-
