@@ -26,13 +26,11 @@ def test_login(login, driver):
 
 
 def test_open_sidebar_menu(driver, login):
-    driver.switch_to.alert.accept()
     driver.find_element(By.XPATH, "//button[text()='Open Menu']").click()
     assert driver.find_element(By.XPATH, "// a[text() = 'About']")
 
 
 def test_add_item_to_cart(driver, login):
-    driver.switch_to.alert.accept()
     driver.find_elements(By.XPATH, "//button[contains(text(),'Add to cart')]")[0].click()
     driver.find_element(By.XPATH, "//a[@class='shopping_cart_link']").click()
 
@@ -42,7 +40,6 @@ def test_add_item_to_cart(driver, login):
 
 
 def test_check_item_in_cart(driver, login):
-    driver.switch_to.alert.accept()
     driver.find_element(By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']").click()
     driver.find_element(By.XPATH, "//a[@class = 'shopping_cart_link']").click()
 
@@ -55,7 +52,6 @@ def test_check_item_in_cart(driver, login):
     # assert driver.find_element(By.XPATH, "//div[text()='Sauce Labs Backpack']/ancestor::div[@class='cart_item']")
 
 def test_open_item(driver, login):
-    driver.switch_to.alert.accept()
     driver.find_element(By.XPATH, "//div[contains(text(),'Sauce Labs Fleece Jacket')]").click()
 
     assert driver.current_url == "https://www.saucedemo.com/inventory-item.html?id=5"
