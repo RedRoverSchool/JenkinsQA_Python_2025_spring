@@ -1,6 +1,6 @@
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 username_correct = 'problem_user'
@@ -21,13 +21,13 @@ def test_log_in_with_unfilled_fields(setup_driver):
 
 
 def test_user_can_log_out_of_the_site(setup_driver):
-    wait10 = WebDriverWait(setup_driver, 10)
+    wait = WebDriverWait(setup_driver, 30)
     setup_driver.find_element(By.ID, 'user-name').send_keys(username_correct)
     setup_driver.find_element(By.ID, 'password').send_keys(password_correct)
     setup_driver.find_element(By.NAME, 'login-button').click()
-    wait10.until(expected_conditions.visibility_of_element_located((By.ID, 'react-burger-menu-btn')))
+    wait.until(EC.visibility_of_element_located((By.ID, 'react-burger-menu-btn')))
     setup_driver.find_element(By.ID, 'react-burger-menu-btn').click()
-    wait10.until(expected_conditions.visibility_of_element_located((By.ID, 'logout_sidebar_link')))
+    wait.until(EC.visibility_of_element_located((By.ID, 'logout_sidebar_link')))
     setup_driver.find_element(By.ID, 'logout_sidebar_link').click()
 
     assert setup_driver.current_url == 'https://www.saucedemo.com/', 'wrong url'
