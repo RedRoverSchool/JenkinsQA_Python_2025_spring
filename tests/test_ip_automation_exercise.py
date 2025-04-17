@@ -50,7 +50,7 @@ def user_data(random_string, random_dob):
         "state": fake.state(),
         "country": "United States",
         "zip": fake.zipcode(),
-        "phone": f"+1 {Faker().msisdn()[3:]}"
+        "phone": f"+1 {fake.msisdn()[3:]}"
     }
 
 
