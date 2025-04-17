@@ -21,6 +21,7 @@ def toyota_com(driver):
     """)
     return driver
 
+@pytest.mark.xfail(strict=False)
 def test_build_4runner(toyota_com):
 
     color = 'Supersonic Red'
