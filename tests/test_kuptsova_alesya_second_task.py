@@ -8,6 +8,7 @@ password_correct = 'secret_sauce'
 @pytest.fixture
 def setup_driver(driver):
     driver.get("https://www.saucedemo.com/")
+    driver.implicitly_wait(5)
     return driver
 
 
