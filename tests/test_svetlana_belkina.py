@@ -50,6 +50,7 @@ def test_added_to_cart(sauce_site):
     sauce_site.find_element(By.ID, 'user-name').send_keys("standard_user")
     sauce_site.find_element(By.ID, 'password').send_keys("secret_sauce")
     sauce_site.find_element(By.NAME, 'login-button').click()
+
     try:
         WebDriverWait(driver,10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
