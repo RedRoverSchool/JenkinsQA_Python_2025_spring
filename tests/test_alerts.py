@@ -16,7 +16,7 @@ def driver(config):
         case "chrome":
             from selenium.webdriver.chrome.options import Options
             options = Options()
-            options.page_load_strategy="none"
+            options.page_load_strategy="eager"
             for argument in config.browser.OPTIONS_CHROME.split(';'):
                 options.add_argument(argument)
             driver = webdriver.Chrome(options=options)
