@@ -1,6 +1,9 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 import pytest
 
 @pytest.fixture
@@ -9,7 +12,6 @@ def login(driver):
     driver.find_element(By.ID, 'user-name').send_keys("standard_user")
     driver.find_element(By.ID, 'password').send_keys("secret_sauce")
     driver.find_element(By.NAME, 'login-button').click()
-
 
 
 def test_logo(driver, login):
@@ -42,5 +44,16 @@ def test_price_sort_high_to_low(driver, login):
     prices = [float(price.text.replace('$', '')) for price in price_elements]
     sorted_prices = sorted(prices, reverse=True)
     assert prices == sorted_prices, f"Prices are not sorted correctly! Actual: {prices} Expected: {sorted_prices}"
+
+def test_hamburger_menu_items(driver,login):
+    expected_items = ['All Items', 'About', 'Logout', 'Reset App State']
+    time.sleep(3)
+    driver.find_element(By.ID, 'react-burger-menu-btn').click()
+    time.sleep(3)
+    actual =[]
+    for el in driver.find_elements(By.CSS_SELECTOR, '.bm-item.menu-item'):
+        actual.append(el.text.strip())
+    assert actual == expected_items
+
 
 
