@@ -3,7 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-username_correct = 'problem_user'
+username_correct = 'standard_user'
 password_correct = 'secret_sauce'
 
 
