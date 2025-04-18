@@ -56,5 +56,6 @@ def test_added_to_cart(sauce_site):
         alert.accept()
     except:
         print("Нет модального окна")
+
     sauce_site.find_element(By.ID,'item_4_title_link').click()
     assert sauce_site.current_url == "https://www.saucedemo.com/inventory-item.html?id=4", "wrong url"
