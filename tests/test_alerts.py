@@ -37,7 +37,7 @@ def alerts(driver):
     driver.get("https://demoqa.com/alerts")
     return driver
 
-@pytest.mark.xfail(strick="False")
+@pytest.mark.xfail(strick=False)
 def test_see_alert(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "alertButton")))
@@ -45,7 +45,7 @@ def test_see_alert(alerts):
 
     assert alerts.switch_to.alert.text == "You clicked a button", "Alert isn't present"
 
-@pytest.mark.xfail(strick="False")
+@pytest.mark.xfail(strick=False)
 def test_timer_alert(alerts):
     waiter10 = WebDriverWait(alerts, 10)
     waiter5 = WebDriverWait(alerts, 5)
@@ -55,7 +55,7 @@ def test_timer_alert(alerts):
 
     assert alerts.switch_to.alert.text == "This alert appeared after 5 seconds", "Alert isn't present"
 
-@pytest.mark.xfail(strick="False")
+@pytest.mark.xfail(sstrick=False)
 def test_confirm_box_alert(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "confirmButton")))
@@ -69,7 +69,7 @@ def test_confirm_box_alert(alerts):
 
     assert confirm_text == "You selected Ok"
 
-@pytest.mark.xfail(strick="False")
+@pytest.mark.xfail(strick=False)
 def test_prompt_box(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "promtButton")))
