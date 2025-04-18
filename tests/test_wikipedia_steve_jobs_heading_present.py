@@ -12,9 +12,11 @@ def test_wikipedia_steve_jobs_heading_present(driver):
     # Choosing English
     driver.find_element(By.ID, "js-link-box-en").click()
 
+    # Explicit wait to ensure the input is ready for interaction
     wait = WebDriverWait(driver, 10)
     search_input = wait.until(
-        EC.presence_of_element_located((By.XPATH, "(//input[@class='cdx-text-input__input'])[1]")))
+        EC.element_to_be_clickable((By.XPATH, "(//input[@class='cdx-text-input__input'])[1]"))
+    )
 
     # looking for "Steve Jobs"
     search_input = driver.find_element(By.XPATH, "(//input[@class='cdx-text-input__input'])[1]")
