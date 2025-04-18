@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
 
 from core.settings import Config
 from selenium import webdriver
@@ -8,6 +9,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 @pytest.fixture(scope="session")
 def config():
     return Config.load()
+
+@pytest.fixture
+def wait(driver):
+    wait = WebDriverWait(driver, timeout=15)
+    return wait
 
 
 @pytest.fixture(scope="function")
