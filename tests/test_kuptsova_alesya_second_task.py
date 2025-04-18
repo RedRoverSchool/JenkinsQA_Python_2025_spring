@@ -24,10 +24,10 @@ def test_user_can_log_out_of_the_site(saucedemo):
     saucedemo.find_element(By.ID, 'user-name').send_keys(username_correct)
     saucedemo.find_element(By.ID, 'password').send_keys(password_correct)
     saucedemo.find_element(By.NAME, 'login-button').click()
-    wait.until(EC.element_to_be_clickable((By.ID, 'react-burger-menu-btn')))
-    saucedemo.find_element(By.ID, 'react-burger-menu-btn').click()
-    wait.until(EC.element_to_be_clickable((By.ID, 'logout_sidebar_link')))
-    saucedemo.find_element(By.ID, 'logout_sidebar_link').click()
+    menu_button = wait.until(EC.element_to_be_clickable((By.ID, 'react-burger-menu-btn')))
+    menu_button.click()
+    logout_button = wait.until(EC.element_to_be_clickable((By.ID, 'logout_sidebar_link')))
+    logout_button.click()
     wait.until(EC.visibility_of_element_located((By.NAME, 'login-button')))
 
     assert saucedemo.current_url == 'https://www.saucedemo.com/', 'wrong url'
