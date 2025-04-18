@@ -25,7 +25,7 @@ def test_build_4runner(toyota_com):
 
     color = 'Supersonic Red'
 
-    wait = WebDriverWait(toyota_com, 45)
+    wait = WebDriverWait(toyota_com, 10)
     try:
         toyota_com.find_element(By.XPATH, "//button[contains(text(), 'Decline')]").click()
     except NoSuchElementException:
@@ -60,4 +60,4 @@ def test_build_4runner(toyota_com):
         (By.XPATH, "//section/div[@class='detail-wrapper']//span[text()='Supersonic Red ']")
     ))
 
-    assert color in check_color.text
+    assert color in check_color.text, 'Exterior color mismatched'
