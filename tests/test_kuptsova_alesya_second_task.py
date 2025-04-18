@@ -20,7 +20,7 @@ def test_log_in_with_unfilled_fields(saucedemo):
 def test_user_can_log_out_of_the_site(saucedemo):
     username_correct = 'standard_user'
     password_correct = 'secret_sauce'
-    wait = WebDriverWait(saucedemo, 5)
+    wait = WebDriverWait(saucedemo, 10)
     saucedemo.find_element(By.ID, 'user-name').send_keys(username_correct)
     saucedemo.find_element(By.ID, 'password').send_keys(password_correct)
     saucedemo.find_element(By.NAME, 'login-button').click()
