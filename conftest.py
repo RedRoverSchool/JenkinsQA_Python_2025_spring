@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-
 @pytest.fixture(scope="session")
 def config():
     return Config.load()
