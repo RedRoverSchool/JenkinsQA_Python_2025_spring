@@ -20,5 +20,4 @@ def test_register_user(auto_login):
     current_url = auto_login.current_url
     expected_url ="https://www.automationexercise.com/"
     assert current_url == expected_url, f"Expected URL: {expected_url}, but got: {current_url}"
-    print("The page is correct. Current URL:", current_url)
 
