@@ -37,15 +37,14 @@ def alerts(driver):
     driver.get("https://demoqa.com/alerts")
     return driver
 
-@pytest.mark.xfail(strick=False)
 def test_see_alert(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "alertButton")))
     alerts.find_element(By.ID, "alertButton").click()
+    waiter5.until(EC.alert_is_present())
 
     assert alerts.switch_to.alert.text == "You clicked a button", "Alert isn't present"
 
-@pytest.mark.xfail(strick=False)
 def test_timer_alert(alerts):
     waiter10 = WebDriverWait(alerts, 10)
     waiter5 = WebDriverWait(alerts, 5)
@@ -55,32 +54,33 @@ def test_timer_alert(alerts):
 
     assert alerts.switch_to.alert.text == "This alert appeared after 5 seconds", "Alert isn't present"
 
-@pytest.mark.xfail(sstrick=False)
 def test_confirm_box_alert(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "confirmButton")))
     alerts.find_element(By.ID, "confirmButton").click()
-    alert = alerts.switch_to.alert
+    waiter5.until(EC.alert_is_present())
 
-    assert alert.text == "Do you confirm action?", "Confirm box isn't present"
+    assert alerts.switch_to.alert.text == "Do you confirm action?", "Confirm box isn't present"
 
-    alert.accept()
+    alerts.switch_to.alert.accept()
+    waiter5.until(EC.visibility_of_element_located((By.ID, "confirmResult")))
     confirm_text = alerts.find_element(By.ID, "confirmResult").text
 
     assert confirm_text == "You selected Ok"
 
-@pytest.mark.xfail(strick=False)
 def test_prompt_box(alerts):
     waiter5 = WebDriverWait(alerts, 5)
     waiter5.until(EC.visibility_of_element_located((By.ID, "promtButton")))
     test_text = "Testing prompt box..."
     alerts.find_element(By.ID, "promtButton").click()
+    waiter5.until(EC.alert_is_present())
 
     assert alerts.switch_to.alert.text == "Please enter your name", "Prompt box isn't present"
 
     alert = alerts.switch_to.alert
     alert.send_keys(test_text)
     alert.accept()
+    waiter5.until(EC.visibility_of_element_located((By.ID, "promptResult")))
     confirm_text = alerts.find_element(By.ID, "promptResult").text
 
     assert confirm_text == f"You entered {test_text}"
