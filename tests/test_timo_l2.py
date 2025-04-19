@@ -4,7 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementClickInterceptedException
-
 '''
 https://www.toyota.com/4runner/
 '''
@@ -27,7 +26,7 @@ def test_build_4runner(toyota_com):
 
     color = 'Supersonic Red'
 
-    wait = WebDriverWait(toyota_com, 45)
+    wait = WebDriverWait(toyota_com, 10)
     try:
         toyota_com.find_element(By.XPATH, "//button[contains(text(), 'Decline')]").click()
     except NoSuchElementException:
@@ -39,8 +38,7 @@ def test_build_4runner(toyota_com):
     toyota_com.find_element(By.XPATH, "//button[@type='submit']").click()
 
     # Step 2: Select trim and color
-    wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@data-grade='TRD Off-Road i-FORCE MAX' and @href]"))).click() 
-
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@aria-label='Trim Build Button' and @data-grade='TRD Off-Road i-FORCE MAX' and span[text()='Build']]"))).click()
     swatch = wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='vcr-selection-card-inner']//div[@data-code='03U5']")))
     # Scroll into view
     toyota_com.execute_script("arguments[0].scrollIntoView(true);", swatch)
@@ -62,4 +60,4 @@ def test_build_4runner(toyota_com):
         (By.XPATH, "//section/div[@class='detail-wrapper']//span[text()='Supersonic Red ']")
     ))
 
-    assert color in check_color.text
+    assert color in check_color.text, 'Exterior color mismatched'
