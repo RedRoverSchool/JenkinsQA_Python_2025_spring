@@ -7,33 +7,24 @@ assignees: ''
 
 ---
 
-**ID:** 
+#### ID: TC_XX.YYY.ZZ | Epic Name > User Story Name > Test Case Name
 
-TC_XX.YYY.ZZ | [EPIC NAME] > [USER STORY NAME] > [TEST CASE NAME]
- 
-**Preconditions:**
+#### Preconditions: 
+(What needs to be set up before the test)
 
-What needs to be set up before the test.
+#### Description: 
+(Brief description of the test case)
 
-**Description:** 
+#### Steps:  
+[Step 1]  
+[Step 2]  
+[Step 3]  
 
-Brief description of the test case.
+#### Expected Result: 
+(What should happen)
 
-**Steps:**  
+#### Comments / Notes:** (Additional details, attachments, logs) 
 
-1. [Step 1]  
-2. [Step 2]  
-3. [Step 3]  
-
-**Expected Result:** 
-
-What should happen.
-
-**Comments / Notes:**
-
-Additional details, attachments, logs etc.
-
-**Acceptance Criteria:**
-
-1. By [Action/Trigger], the user can access [Feature/Functionality].
-2. Clicking on [Element] opens [Page/Section], where [Feature/Functionality] is also available in [Location].
+#### Acceptence Criteria:
+By [Action/Trigger], the user can access [Feature/Functionality].  
+Clicking on [Element] opens [Page/Section], where [Feature/Functionality] is also available in [Location].
