@@ -5,7 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_create_freestyle_project_1(main_page):
+def test_create_freestyle_project_1(main_page, jenkins_reset):
     wait = WebDriverWait(main_page, 5)
     project_name = "Freestyle Project"
 
@@ -22,7 +22,7 @@ def test_create_freestyle_project_1(main_page):
     assert amount_of_projects == 1
     assert new_project_name == project_name
 
-def test_create_freestyle_project_2(main_page):
+def test_create_freestyle_project_2(main_page, jenkins_reset):
     wait = WebDriverWait(main_page, 5)
     project_name = "Freestyle Project"
 
