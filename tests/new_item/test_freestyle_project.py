@@ -17,6 +17,3 @@ def test_create_freestyle_project_1(main_page):
     new_project_name = main_page.find_element(By.CLASS_NAME, "inside").text
 
     assert new_project_name == project_name
-
-
-
