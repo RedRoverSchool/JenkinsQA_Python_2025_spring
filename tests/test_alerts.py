@@ -51,8 +51,9 @@ def test_timer_alert(alerts):
     waiter5.until(EC.visibility_of_element_located((By.ID, "timerAlertButton")))
     alerts.find_element(By.ID, "timerAlertButton").click()
     waiter10.until(EC.alert_is_present())
+    alert = alerts.switch_to.alert
 
-    assert alerts.switch_to.alert.text == "This alert appeared after 5 seconds", "Alert isn't present"
+    assert alert.text == "This alert appeared after 5 seconds", "Alert isn't present"
 
 def test_confirm_box_alert(alerts):
     waiter5 = WebDriverWait(alerts, 5)
