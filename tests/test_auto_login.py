@@ -15,7 +15,7 @@ def auto_login(driver):
 
 def test_register_user(auto_login):
 
-    # driver = webdriver.Chrome()
+
     auto_login.get("https://www.automationexercise.com/")
     newUserSignup = auto_login.find_element(By.CSS_SELECTOR,  '.nav a[href="/"]')
     assert newUserSignup.is_displayed() , "User signup display is not visible"
