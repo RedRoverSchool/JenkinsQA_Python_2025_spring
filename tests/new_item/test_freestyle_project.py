@@ -3,7 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_create_freestyle_project_1(main_page, jenkins_reset):
+def test_create_freestyle_project_1(main_page):
     wait = WebDriverWait(main_page, 5)
     project_name = "Freestyle Project"
 
