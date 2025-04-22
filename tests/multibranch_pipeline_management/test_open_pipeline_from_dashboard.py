@@ -11,20 +11,14 @@ def test_access_multibranch(main_page):
 
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "New Item"))).click()
     main_page.find_element(By.ID, "name").send_keys(item_name)
-
     item_type = main_page.find_element(By.CLASS_NAME,
                                        "org_jenkinsci_plugins_workflow_multibranch_WorkflowMultiBranchProject")
 
-    #  Прокручиваем к нему
     main_page.execute_script("arguments[0].scrollIntoView(true);", item_type)
-    #  Небольшая задержка — кнопки сдвинутся
     time.sleep(0.5)
-    # клик
     item_type.click()
-    #Далее обычный флоу
     main_page.find_element(By.ID, "ok-button").click()
-    wait.until(EC.presence_of_element_located((By.ID, "main-panel")))
-
+    wait.until(EC.presence_of_element_located((By.ID, "general")))
     wait.until(EC.presence_of_element_located((By.ID, "jenkins-home-link")))
     main_page.find_element(By.ID, "jenkins-home-link").click()
 
