@@ -64,6 +64,8 @@ jobs:
 
       - name: pytest run picked tests
         if: steps.scope_check.outputs.run_all_tests == 'false'
+        env:
+          PARENT_BRANCH: origin/${{ github.base_ref }}
         run: pytest --picked --mode=branch
 
       - name: Attach screenshots
