@@ -12,4 +12,4 @@ def freestyle(main_page, config):
     main_page.find_element(By.ID, 'ok-button').click()
     wait5.until(EC.url_changes(config.jenkins.base_url + "/view/all/newJob"))
 
-    return freestyle
+    return main_page
