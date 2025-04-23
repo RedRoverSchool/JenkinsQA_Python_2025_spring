@@ -41,11 +41,12 @@ def disabled_message(freestyle):
 def enable_automatically(disabled_message):
     is_warning_message_disappear = False
     is_project_enable = False
-    wait = WebDriverWait(disabled_message, 2)
+    wait = WebDriverWait(disabled_message, 10)
+    wait2 = WebDriverWait(disabled_message, 2)
     disabled_message.find_element(By.XPATH, '//button[@name="Submit"]').click()
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     try:
-        wait.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
+        wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
     except:
         is_warning_message_disappear = True
     disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
