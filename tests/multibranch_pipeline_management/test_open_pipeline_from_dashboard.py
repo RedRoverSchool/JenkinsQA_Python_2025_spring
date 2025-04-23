@@ -26,5 +26,3 @@ def test_access_multibranch(main_page):
 
     actual_item = main_page.find_element(By.CLASS_NAME, "inside").text
     assert actual_item == item_name
-
-
