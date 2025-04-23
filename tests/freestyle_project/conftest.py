@@ -64,6 +64,15 @@ def can_add_description(freestyle):
     return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
 
 @pytest.fixture()
+def empty_description(freestyle):
+    is_save_button_clickable = False
+    save_button = freestyle.find_element(By.XPATH, '//button[@name="Submit"]')
+    if save_button.is_enabled():
+        is_save_button_clickable = True
+
+    return is_save_button_clickable
+
+@pytest.fixture()
 def description_appears(freestyle):
     wait = WebDriverWait(freestyle, 10)
     freestyle.find_element(By.XPATH, '//textarea[@name="description"]').send_keys(Freestyle.description_text)
