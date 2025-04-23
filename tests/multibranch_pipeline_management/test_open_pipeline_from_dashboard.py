@@ -21,7 +21,6 @@ def test_access_multibranch(main_page):
     wait.until(EC.presence_of_element_located((By.ID, "general")))
     wait.until(EC.presence_of_element_located((By.ID, "jenkins-home-link")))
     main_page.find_element(By.ID, "jenkins-home-link").click()
-
     wait.until(EC.presence_of_element_located((By.ID, "projectstatus")))
 
     actual_item = main_page.find_element(By.CLASS_NAME, "inside").text
