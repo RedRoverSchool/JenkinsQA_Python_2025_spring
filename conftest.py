@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from components.new_item import NewItem
 from core.jenkins_utils import clear_data
 from core.settings import Config
 
@@ -91,3 +92,7 @@ def main_page(login_page, config):
     wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
     wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
     return login_page
+
+@pytest.fixture(scope="function")
+def new_item(main_page):
+    return NewItem(main_page)
