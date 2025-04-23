@@ -65,7 +65,7 @@ def can_add_description(freestyle):
     return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
 
 @pytest.fixture()
-def empty_description(freestyle):
+def empty_configure(freestyle):
     wait = WebDriverWait(freestyle, 10)
     freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
