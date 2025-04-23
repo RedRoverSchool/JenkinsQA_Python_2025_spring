@@ -14,8 +14,9 @@ class NewItem:
         self.main_page.find_element(By.ID, "ok-button").click()
         time.sleep(2)
         self.main_page.find_element(By.NAME, "Submit").click()
-        self.main_page.find_element(By.ID, "jenkins-home-link").click()
         time.sleep(2)
+        self.main_page.find_element(By.ID, "jenkins-home-link").click()
+
     def copy_from_option_exist(self):
         self.main_page.find_element(By.XPATH, "//a[@href ='/view/all/newJob']").click()
         time.sleep(2)
