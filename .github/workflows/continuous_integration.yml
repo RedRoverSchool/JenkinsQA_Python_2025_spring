@@ -9,6 +9,14 @@ jobs:
   run-pytest:
     name: 'run pytest tests'
     runs-on: ubuntu-latest
+    env:
+      JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+      JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      JENKINS_HOST: localhost
+      JENKINS_PORT: 8080
+      BROWSER_NAME: chrome
+      BROWSER_OPTIONS_CHROME: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
+
     steps:
       - name: git clone
         uses: actions/checkout@v4.2.2
@@ -46,13 +54,25 @@ jobs:
       - name: Wait for the Jenkins
         run: ./.github/wait-for-jenkins.sh
 
-      - name: run pytest tests
+      - name: check scope of changes
+        id: scope_check
+        run: ./.github/diff-checker.sh
+
+      - name: pytest run all tests
+        if: steps.scope_check.outputs.run_all_tests == 'true'
         run: pytest
+
+      - name: pytest run picked tests
+        if: steps.scope_check.outputs.run_all_tests == 'false'
         env:
-          JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-          JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          JENKINS_HOST: localhost
-          JENKINS_PORT: 8080
-          BROWSER_NAME: chrome
-          BROWSER_OPTIONS_CHROME: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
-          RUN_CI: true
+          PARENT_BRANCH: origin/${{ github.base_ref }}
+        #disabling the picked run for now, needs more testing
+        #run: pytest --picked --mode=branch
+        run: pytest
+
+      - name: Attach screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/screenshots
