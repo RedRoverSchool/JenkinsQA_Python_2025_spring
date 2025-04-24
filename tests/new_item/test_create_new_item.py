@@ -8,7 +8,7 @@ DEFAULT_TIMEOUT = 10
 
 def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
     return wait(driver, timeout).until(
-        EC.presence_of_element_located((by, selector))
+        EC.visibility_of_element_located((by, selector))
     )
 
 
@@ -18,8 +18,10 @@ def wait_for_clickable(driver, by, selector, timeout=DEFAULT_TIMEOUT):
     )
 
 
-def test_check_create_new_item(main_page, new_item_page):
-    wait_for(new_item_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
+def test_check_create_new_item(main_page):
+    new_item_button = wait_for(main_page, By.CSS_SELECTOR, "a[href='/view/all/newJob']")
+    new_item_button.click()
+    wait_for(main_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
