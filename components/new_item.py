@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class NewItem:
     def __init__(self, main_page):
         self.main_page = main_page
-        self.wait = WebDriverWait(self.main_page, 20)
+        self.wait = WebDriverWait(self.main_page, 100)
 
     def click_element(self, by, value):
         self.wait.until(EC.element_to_be_clickable((by, value))).click()
