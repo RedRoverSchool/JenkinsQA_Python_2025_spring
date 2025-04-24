@@ -1,4 +1,3 @@
-import time
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -20,7 +19,7 @@ def test_scm_to_none(empty_configure):
     (Freestyle.tooltip_scm_link[5], Freestyle.tooltip_scm_link_wait[5], Freestyle.tooltip_scm_expected_text[5], 4),
     (Freestyle.tooltip_scm_link[6], Freestyle.tooltip_scm_link_wait[6], Freestyle.tooltip_scm_expected_text[6], 5),
     (Freestyle.tooltip_scm_link[7], Freestyle.tooltip_scm_link_wait[7], Freestyle.tooltip_scm_expected_text[7], 5),
-    (Freestyle.tooltip_scm_link[8], Freestyle.tooltip_scm_link_wait[8], Freestyle.tooltip_scm_expected_text[8], 5)
+    (Freestyle.tooltip_scm_link[8], Freestyle.tooltip_scm_link_wait[8], Freestyle.tooltip_scm_expected_text[8], 6)
     ])
 def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     actions = ActionChains(freestyle)
@@ -33,8 +32,7 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     actions.scroll_by_amount(0, to_half).perform()
     git.click()
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
-    time.sleep(1)
-    actions.scroll_by_amount(0, to_dec * count).perform()
+    actions.pause(1).scroll_by_amount(0, to_dec * count).perform()
     if 3 < count < 5:
         advanced = freestyle.find_element(By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
         advanced.click()
