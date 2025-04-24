@@ -19,7 +19,7 @@ def test_scm_to_none(empty_configure):
     (Freestyle.tooltip_scm_link[5], Freestyle.tooltip_scm_link_wait[5], Freestyle.tooltip_scm_expected_text[5], 4),
     (Freestyle.tooltip_scm_link[6], Freestyle.tooltip_scm_link_wait[6], Freestyle.tooltip_scm_expected_text[6], 6),
     (Freestyle.tooltip_scm_link[7], Freestyle.tooltip_scm_link_wait[7], Freestyle.tooltip_scm_expected_text[7], 6),
-    (Freestyle.tooltip_scm_link[8], Freestyle.tooltip_scm_link_wait[8], Freestyle.tooltip_scm_expected_text[8], 6)
+    (Freestyle.tooltip_scm_link[8], Freestyle.tooltip_scm_link_wait[8], Freestyle.tooltip_scm_expected_text[8], 7)
     ])
 def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     actions = ActionChains(freestyle)
@@ -36,6 +36,7 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     actions.scroll_by_amount(0, to_half + to_dec * count).perform()
     if 3 < count < 6:
         advanced = freestyle.find_element(By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
+        actions.pause(1).scroll_to_element(advanced).perform()
         advanced.click()
         freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
     else:
