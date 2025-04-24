@@ -22,15 +22,13 @@ class NewItem:
         self.click_element(By.ID, "jenkins-home-link")
 
     def copy_from_option_exist(self):
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/view/all/newJob']"))).click()
+        self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
         copyFromBtn = self.wait.until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
         assert copyFromBtn.is_displayed(), "Autocomplete input field is not visible!"
 
     def copy_from_option_is_working(self):
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/view/all/newJob']"))).click()
-        copyFromBtn = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
-        copyFromBtn.send_keys("f")
-        self.wait.until(
+        self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
+        self.enter_text(By.CSS_SELECTOR, "input.jenkins-input.auto-complete", "f")
+        assert self.wait.until(
             EC.text_to_be_present_in_element_attribute((By.CSS_SELECTOR, "input.jenkins-input.auto-complete"), "aria-expanded", "true"))
-        assert copyFromBtn.is_displayed(), "Autocomplete input field is not visible!"
