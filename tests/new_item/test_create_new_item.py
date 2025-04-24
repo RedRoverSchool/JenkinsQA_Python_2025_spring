@@ -27,9 +27,10 @@ def test_check_create_new_item(main_page, config):
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
-    # jenkins_icon = wait_for_clickable(main_page, By.CSS_SELECTOR, "#jenkins-home-link")
-    # jenkins_icon.click()
-    main_page.get(config.jenkins.base_url)
-
-    assert wait_for(main_page, By.XPATH,f"//table[@id='projectstatus']/tbody/tr[contains(., '{new_folder_name}')]"), \
-        f"Folder '{new_folder_name}' NOT FOUND"
+    jenkins_icon = wait_for_clickable(main_page, By.ID, "#jenkins-home-link")
+    jenkins_icon.click()
+    # main_page.get(config.jenkins.base_url)
+    # print(main_page.page_source)
+    assert wait_for(main_page, By.XPATH,
+                    f"//table[@id='projectstatus']//a[contains(normalize-space(string()), '{new_folder_name}')]"
+                    ), f"Folder '{new_folder_name}' NOT FOUND"
