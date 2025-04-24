@@ -32,7 +32,7 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     actions.scroll_by_amount(0, to_half).perform()
     git.click()
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
-    actions.scroll_by_amount(0, (to_dec * count)//1).perform()
+    actions.scroll_by_amount(0, to_dec * count).perform()
     if count < 6:
         advanced = freestyle.find_element(By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
         advanced.click()
@@ -40,7 +40,8 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     else:
         wait.until(EC.visibility_of_element_located((By.XPATH, tp_link)))
     tooltip_link = freestyle.find_element(By.XPATH, tp_link)
-    actions.pause(2).move_to_element(tooltip_link).perform()
+    actions.scroll_to_element(tooltip_link).perform()
+    actions.move_to_element(tooltip_link).perform()
     wait.until(EC.presence_of_element_located((By.XPATH, tp_wait)))
     tp_text = freestyle.find_element(By.XPATH, '//div[@class="tippy-content"]').text
 
