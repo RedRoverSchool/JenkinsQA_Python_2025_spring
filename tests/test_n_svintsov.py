@@ -1,27 +1,24 @@
-import time
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webdriver import WebDriver
-import pytest
 
 
 
-@pytest.fixture
-def sauce_site(driver):
+def test_locked_out_user_error_message():
+    driver = webdriver.Chrome()
+
     driver.get("https://www.saucedemo.com/")
-    return driver
-
-
-def test_locked_out_user_error_message(driver: WebDriver, sauce_site):
     driver.find_element(By.ID, "user-name").send_keys("locked_out_user")
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.NAME, "login-button").click()
 
     error_message = driver.find_element(By.XPATH, "//h3[@data-test='error']")
     assert error_message.text == "Epic sadface: Sorry, this user has been locked out."
+    driver.quit()
 
+def test_locked_out_user_url_check():
+        driver = webdriver.Chrome()
 
-def test_locked_out_user_url_check(driver: WebDriver, sauce_site):
-
+        driver.get("https://www.saucedemo.com/")
         driver.find_element(By.ID, "user-name").send_keys("locked_out_user")
         driver.find_element(By.ID, "password").send_keys("secret_sauce")
         driver.find_element(By.NAME, "login-button").click()
@@ -29,6 +26,15 @@ def test_locked_out_user_url_check(driver: WebDriver, sauce_site):
         error_message = driver.find_element(By.XPATH, "//h3[@data-test='error']")
         assert error_message.text == "Epic sadface: Sorry, this user has been locked out."
 
+        assert driver.current_url == "https://www.saucedemo.com/","wrong url"
+        driver.quit()
 
 
+def test_locked_out_user_url_check():
+    with webdriver.Chrome() as driver:
+
+        driver.get("https://www.saucedemo.com/")
+        driver.find_element(By.ID, "user-name").send_keys("locked_out_user")
+        driver.find_element(By.ID, "password").send_keys("secret_sauce")
+        driver.find_element(By.NAME, "login-button").click()
 
