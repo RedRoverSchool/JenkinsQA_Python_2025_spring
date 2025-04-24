@@ -22,6 +22,7 @@ class NewItem:
         self.click_element(By.ID, "jenkins-home-link")
 
     def copy_from_option_exist(self):
+        self.click_element(By.ID, "jenkins-home-link")
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
         copyFromBtn = self.wait.until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
