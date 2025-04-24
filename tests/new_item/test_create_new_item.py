@@ -12,12 +12,18 @@ def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
     )
 
 
+def wait_for_clickable(driver, by, selector, timeout=DEFAULT_TIMEOUT):
+    return wait(driver, timeout).until(
+        EC.element_to_be_clickable((by, selector))
+    )
+
+
 def test_check_create_new_item(main_page, new_item_page):
     wait_for(new_item_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
-    wait_for(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
-    wait_for(main_page, By.CSS_SELECTOR, '#ok-button').click()
-    wait_for(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
-    wait_for(main_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
+    wait_for_clickable(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
+    wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button').click()
+    wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
+    wait_for_clickable(main_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
 
     assert main_page.find_elements(By.XPATH,
                                    f"//table[@id='projectstatus']//tbody//tr[contains(., '{new_folder_name}')]"), \
