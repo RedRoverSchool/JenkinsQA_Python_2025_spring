@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as wait
@@ -8,17 +10,19 @@ DEFAULT_TIMEOUT = 10
 
 def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
     return wait(driver, timeout).until(
-        EC.visibility_of_element_located((by, selector))
+        EC.presence_of_element_located((by, selector))
     )
 
 
-def test_check_create_new_item(new_item_page):
+def test_check_create_new_item(main_page, new_item_page):
     wait_for(new_item_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
-    wait_for(new_item_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
-    wait_for(new_item_page, By.CSS_SELECTOR, '#ok-button').click()
-    wait_for(new_item_page, By.CSS_SELECTOR, '[name=Submit]').click()
-    wait_for(new_item_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
+    wait_for(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
+    time.sleep(5)
+    wait_for(main_page, By.CSS_SELECTOR, '#ok-button').click()
+    time.sleep(5)
+    wait_for(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
+    wait_for(main_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
 
-    assert new_item_page.find_elements(By.XPATH,
+    assert main_page.find_elements(By.XPATH,
                                        f"//table[@id='projectstatus']//tbody//tr[contains(., '{new_folder_name}')]"), \
         f"Folder '{new_folder_name}' NOT FOUND"
