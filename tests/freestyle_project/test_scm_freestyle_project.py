@@ -26,15 +26,17 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
     wait = WebDriverWait(freestyle, 10)
     wait.until(EC.text_to_be_present_in_element((By.ID, 'general'), 'General'))
     git = freestyle.find_element(By.XPATH, '//label[@for="radio-block-1"]')
+    trigger = freestyle.find_element(By.ID, 'triggers')
     size =freestyle.get_window_size("current")
     to_half = size.get('height')//2
     to_dec = size.get('height')//10
-    actions.scroll_by_amount(0, to_half).perform()
+    actions.scroll_to_element(trigger).perform()
     git.click()
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
-    actions.scroll_by_amount(0, to_dec * count).perform()
-    if count < 6:
+    actions.scroll_by_amount(0, to_half + to_dec * count).perform()
+    if 3 < count < 6:
         advanced = freestyle.find_element(By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
+        actions.pause(1).scroll_to_element(advanced).perform()
         advanced.click()
         freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
     else:
