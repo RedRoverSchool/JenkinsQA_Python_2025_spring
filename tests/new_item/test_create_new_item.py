@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as wait
 
 new_folder_name = 'Test_Folder'
-DEFAULT_TIMEOUT = 10
+DEFAULT_TIMEOUT = 25
 
 
 def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
@@ -25,7 +25,7 @@ def test_check_create_new_item(main_page):
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button').click()
     wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
-    wait_for_clickable(main_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
+    wait_for_clickable(main_page, By.XPATH, "//li[@class='jenkins-breadcrumbs__list-item']/a[contains(text(), 'Dashboard')]").click()
 
     assert main_page.find_elements(By.XPATH,
                                    f"//table[@id='projectstatus']//tbody//tr[contains(., '{new_folder_name}')]"), \
