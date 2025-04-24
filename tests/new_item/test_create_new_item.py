@@ -20,14 +20,17 @@ def wait_for_clickable(driver, by, selector, timeout=DEFAULT_TIMEOUT):
     )
 
 
-def test_check_create_new_item(main_page, config):
-    new_item_button = wait_for(main_page, By.CSS_SELECTOR, "a[href='/view/all/newJob']")
-    new_item_button.click()
-    wait_for(main_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
-    wait_for_clickable(main_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
-    wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button').click()
-    wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]').click()
+def test_check_create_new_item(new_item_page, main_page, config):
+    new_item_field = wait_for(new_item_page, By.CSS_SELECTOR, '#name')
+    new_item_field.send_keys(new_folder_name)
+    folder_option = wait_for_clickable(new_item_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
+    folder_option.click()
+    button_ok = wait_for_clickable(main_page, By.CSS_SELECTOR, '#ok-button')
+    button_ok.click()
+    button_save = wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]')
+    button_save.click()
     main_page.get(config.jenkins.base_url)
+
     assert wait_for(main_page, By.XPATH,
                     f"//table[@id='projectstatus']//a[contains(normalize-space(string()), '{new_folder_name}')]"
                     ), f"Folder '{new_folder_name}' NOT FOUND"
