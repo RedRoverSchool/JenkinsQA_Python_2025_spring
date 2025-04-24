@@ -16,7 +16,7 @@ def test_scm_to_none(empty_configure):
     (Freestyle.tooltip_scm_link[2], Freestyle.tooltip_scm_link_wait[2], Freestyle.tooltip_scm_expected_text[2], 2),
     (Freestyle.tooltip_scm_link[3], Freestyle.tooltip_scm_link_wait[3], Freestyle.tooltip_scm_expected_text[3], 3),
     (Freestyle.tooltip_scm_link[4], Freestyle.tooltip_scm_link_wait[4], Freestyle.tooltip_scm_expected_text[4], 4),
-    (Freestyle.tooltip_scm_link[5], Freestyle.tooltip_scm_link_wait[5], Freestyle.tooltip_scm_expected_text[5], 5),
+    (Freestyle.tooltip_scm_link[5], Freestyle.tooltip_scm_link_wait[5], Freestyle.tooltip_scm_expected_text[5], 4),
     (Freestyle.tooltip_scm_link[6], Freestyle.tooltip_scm_link_wait[6], Freestyle.tooltip_scm_expected_text[6], 6),
     (Freestyle.tooltip_scm_link[7], Freestyle.tooltip_scm_link_wait[7], Freestyle.tooltip_scm_expected_text[7], 6),
     (Freestyle.tooltip_scm_link[8], Freestyle.tooltip_scm_link_wait[8], Freestyle.tooltip_scm_expected_text[8], 6)
