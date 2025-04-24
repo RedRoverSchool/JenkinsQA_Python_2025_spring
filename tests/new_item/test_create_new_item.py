@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as wait
@@ -16,12 +14,9 @@ def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
 
 def test_check_create_new_item(new_item_page, jenkins_reset):
     wait_for(new_item_page, By.CSS_SELECTOR, '#name').send_keys(new_folder_name)
-    folder_option = wait_for(new_item_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
-    folder_option.click()
-    button_ok = wait_for(new_item_page, By.CSS_SELECTOR, '#ok-button')
-    button_ok.click()
-    button_save = wait_for(new_item_page, By.CSS_SELECTOR, '[name=Submit]')
-    button_save.click()
+    wait_for(new_item_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]').click()
+    wait_for(new_item_page, By.CSS_SELECTOR, '#ok-button').click()
+    wait_for(new_item_page, By.CSS_SELECTOR, '[name=Submit]').click()
     wait_for(new_item_page, By.CSS_SELECTOR, "#jenkins-name-icon").click()
 
     assert new_item_page.find_elements(By.XPATH,
