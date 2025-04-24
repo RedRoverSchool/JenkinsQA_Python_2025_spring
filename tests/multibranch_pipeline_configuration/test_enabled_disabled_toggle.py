@@ -1,5 +1,3 @@
-import pytest
-
 from selenium.webdriver.common.by import By
 from conftest import logger
 from tests.multibranch_pipeline_configuration.mbp_data import Data
