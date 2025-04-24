@@ -41,7 +41,7 @@ def test_tooltips(freestyle, tp_link, tp_wait, tp_expected_text, count):
         wait.until(EC.visibility_of_element_located((By.XPATH, tp_link)))
     tooltip_link = freestyle.find_element(By.XPATH, tp_link)
     actions.scroll_to_element(tooltip_link).perform()
-    actions.move_to_element(tooltip_link).perform()
+    actions.pause(1).move_to_element(tooltip_link).perform()
     wait.until(EC.presence_of_element_located((By.XPATH, tp_wait)))
     tp_text = freestyle.find_element(By.XPATH, '//div[@class="tippy-content"]').text
 
