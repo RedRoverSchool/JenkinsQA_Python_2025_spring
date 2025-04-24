@@ -2,10 +2,9 @@ import pytest
 
 from selenium.webdriver.common.by import By
 from conftest import logger
-from tests.multibranch_pipeline_configuration.multibranch_pipeline_data import Data
+from tests.multibranch_pipeline_configuration.mbp_data import Data
 
 
-@pytest.mark.new
 def test_default_state_of_the_toggle(driver, main_page):
     driver.find_element(By.XPATH, "//a[@href='/view/all/newJob']").click()
     driver.find_element(By.ID, "name").send_keys(Data.PROJECT_NAME)
