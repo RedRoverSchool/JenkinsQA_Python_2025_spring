@@ -19,7 +19,6 @@ class NewItem:
         self.click_element(By.CLASS_NAME, "hudson_model_FreeStyleProject")
         self.click_element(By.ID, "ok-button")
         self.click_element(By.NAME, "Submit")
-        self.click_element(By.ID, "jenkins-home-link")
 
     def copy_from_option_exist(self):
         self.click_element(By.ID, "jenkins-home-link")
@@ -28,8 +27,11 @@ class NewItem:
             EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
         assert copyFromBtn.is_displayed(), "Autocomplete input field is not visible!"
 
-    def copy_from_option_is_working(self):
+    def copy_from_displays_existing_project(self):
+        self.click_element(By.ID, "jenkins-home-link")
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
         self.enter_text(By.CSS_SELECTOR, "input.jenkins-input.auto-complete", "f")
-        assert self.wait.until(
+        self.wait.until(
             EC.text_to_be_present_in_element_attribute((By.CSS_SELECTOR, "input.jenkins-input.auto-complete"), "aria-expanded", "true"))
+        self.click_element(By.CSS_SELECTOR, "a.jenkins-dropdown__item")
+        assert self.main_page.find_element(By.CSS_SELECTOR, "input.jenkins-input.auto-complete").get_attribute("value") == "freestyle1", "Copy from option is not working!"
