@@ -18,6 +18,7 @@ from core.settings import Config
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
+logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
