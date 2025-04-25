@@ -1,14 +1,23 @@
-from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
+
 from conftest import logger
 from tests.multibranch_pipeline_configuration.mbp_data import Data
 
 
-def test_default_state_of_the_toggle(driver, main_page):
-    driver.find_element(By.XPATH, "//a[@href='/view/all/newJob']").click()
-    driver.find_element(By.ID, "name").send_keys(Data.PROJECT_NAME)
-    driver.find_element(By.CLASS_NAME, "hudson_matrix_MatrixProject").click()
-    driver.find_element(By.ID, "ok-button").click()
+def test_default_state_of_the_toggle(driver, toggle):
+    assert toggle.text == Data.TOGGLE_ENABLED_TEXT, logger.error(Data.TOGGLE_ENABLED_ERROR_TEXT)
 
-    assert driver.find_element(
-        By.CLASS_NAME, "jenkins-toggle-switch__label__checked-title").text == "Enabled", \
-        logger.error("The wrong text of the found element!")
+
+def test_the_tooltip_appearance(driver, toggle, toggle_tooltip, span_general):
+    action = ActionChains(driver)
+    action.move_to_element(toggle_tooltip).perform()
+    first_hovering = (toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[0]),
+                      toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[1]))
+    toggle.click()
+    action.move_to_element(span_general).perform()
+    action.move_to_element(toggle_tooltip).perform()
+    second_hovering = (toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[0]),
+                       toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[1]))
+
+    assert Data.TOGGLE_TOOLTIP_PREFS == first_hovering == second_hovering, \
+           logger.error(Data.TOGGLE_TOOLTIP_ERROR_TEXT)
