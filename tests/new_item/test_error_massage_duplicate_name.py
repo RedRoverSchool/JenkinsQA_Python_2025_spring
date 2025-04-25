@@ -13,9 +13,10 @@ def test_check_error_message(new_item_page):
     name_field.send_keys(testjob)
     new_item_page.find_element(By.CLASS_NAME, "hudson_model_FreeStyleProject").click()
     new_item_page.find_element(By.CSS_SELECTOR, "#ok-button").click()
-    new_item_page.find_element(By.CSS_SELECTOR, '#breadcrumbBar  a[href="/"]').click()
+    dashboard = WebDriverWait(new_item_page, 5).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, '#breadcrumbBar  a[href="/"]')))
+    dashboard.click()
     new_item_page.find_element(By.CSS_SELECTOR, "a[href='/view/all/newJob']").click()
-    time.sleep(5)
     name_field = wait.until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "#name")))
     name_field.send_keys(testjob)
