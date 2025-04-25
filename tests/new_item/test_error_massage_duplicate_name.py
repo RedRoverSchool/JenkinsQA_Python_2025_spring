@@ -6,11 +6,12 @@ import random
 import time
 
 def test_check_error_message(new_item_page):
-    wait = WebDriverWait(new_item_page, timeout=5)
+    wait = WebDriverWait(new_item_page, 5)
     testjob = "job" + str(random.randint(1,100))
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#name"))).send_keys(testjob)
     new_item_page.find_element(By.CLASS_NAME, "hudson_model_FreeStyleProject").click()
     new_item_page.find_element(By.CSS_SELECTOR, "#ok-button").click()
+    time.sleep(5)
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#breadcrumbBar  a[href="/"]'))).click()
     new_item_page.find_element(By.CSS_SELECTOR, "a[href='/view/all/newJob']").click()
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#name"))).send_keys(testjob)
