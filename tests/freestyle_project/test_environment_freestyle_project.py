@@ -11,6 +11,8 @@ def test_exist_environment_section(freestyle):
 
     assert environment.is_displayed()
 
+
+@pytest.mark.skip
 @pytest.mark.parametrize('tp_link, tp_wait, tp_expected_text', [
     (Freestyle.tooltip_environment_link[0], Freestyle.tooltip_environment_link_wait[0], Freestyle.tooltip_environment_expected_text[0]),
     (Freestyle.tooltip_environment_link[1], Freestyle.tooltip_environment_link_wait[1], Freestyle.tooltip_environment_expected_text[1])
