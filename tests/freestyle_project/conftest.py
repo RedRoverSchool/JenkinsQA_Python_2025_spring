@@ -48,6 +48,7 @@ def enable_automatically(disabled_message):
     try:
         wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
     except Exception:
+        pass
         is_warning_message_disappear = True
     disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
     wait.until(EC.presence_of_element_located((By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')))
