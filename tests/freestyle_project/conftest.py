@@ -59,7 +59,9 @@ def enable_automatically(disabled_message):
 
 @pytest.fixture()
 def can_add_description(freestyle):
-    freestyle.find_element(By.XPATH, '//textarea[@name="description"]').send_keys(Freestyle.description_text)
+    wait = WebDriverWait(freestyle, 10)
+    (wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@name="description"]')))
+        .send_keys(Freestyle.description_text))
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
 
     return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
@@ -81,8 +83,6 @@ def description_appears(freestyle):
     wait.until(EC.presence_of_element_located((By.ID, 'description')))
 
     return freestyle.find_element(By.ID, 'description').text
-
-
 
 @pytest.fixture()
 def preview_hide(freestyle):
