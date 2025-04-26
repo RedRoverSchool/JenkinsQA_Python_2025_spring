@@ -47,7 +47,7 @@ def enable_automatically(disabled_message):
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     try:
         wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
-    except Warning:
+    except Exception:
         is_warning_message_disappear = True
     disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
     wait.until(EC.presence_of_element_located((By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')))
