@@ -2,9 +2,9 @@ from selenium.webdriver.common.by import By
 
 
 def test_profile_details_accessibility(main_page):
-    header_account = main_page.find_element(By.XPATH, '//a[@href="/user/assol"]')
+    header_account = main_page.find_element(By.CSS_SELECTOR, 'div.login.page-header__hyperlinks > a:first-of-type')
     header_account.click()
-    account_link = main_page.find_element(By.CSS_SELECTOR, '[href="/user/assol/account"]')
+    account_link = main_page.find_element(By.XPATH, "//div[@id='tasks']/div[4]")
     account_link.click()
     title_text = main_page.find_element(By.XPATH, '//*[@class="jenkins-form"]//h1')
 
