@@ -39,4 +39,4 @@ class TestNewItemSpecialCharacters:
 
         text = error_element.text.strip().lower()
         assert "unsafe character" in text, f"Expected 'unsafe character' in the error message, but got: '{text}'"
-
+#
