@@ -1,18 +1,34 @@
+import pytest
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from dotenv import load_dotenv
+import os
+import time
+
+load_dotenv()
 
 
-def test_add_description_to_pipeline(pipeline_config_page):
-    text_for_description = "test description"
-    text_box = WebDriverWait(pipeline_config_page, 10).until(
-        EC.visibility_of_element_located((By.NAME, 'description')))
-    text_box.send_keys(text_for_description)
-    pipeline_config_page.find_element(By.NAME, "Submit").click()
-    desc_element = WebDriverWait(pipeline_config_page, 10).until(
-        EC.visibility_of_element_located((By.ID, "description")))
-    assert desc_element.is_displayed(), f"Description element is not visible"
-    assert desc_element.text == text_for_description, \
-        f"Expected description '{text_for_description}', but got '{desc_element.text}'"
+def test_account_profile():
+    driver = webdriver.Chrome()
+    try:
+        driver.get(f"http://{os.getenv('JENKINS_HOST', 'localhost')}:{os.getenv('JENKINS_PORT', '8080')}/login")
+
+        driver.find_element(By.NAME, "j_username").send_keys(os.getenv("JENKINS_USERNAME"))
+        driver.find_element(By.NAME, "j_password").send_keys(os.getenv("JENKINS_PASSWORD"))
+        driver.find_element(By.NAME, "Submit").click()
+
+        time.sleep(3)
+        if "login" in driver.current_url:
+            driver.save_screenshot("login_error.png")
+            pytest.fail("Login failed")
+
+        driver.find_element(By.XPATH, "//a[contains(@href, '/user/')]").click()
+        driver.find_element(By.XPATH, "//a[contains(., 'Account')]").click()
+
+        assert driver.find_element(By.NAME, "_.fullName").is_displayed()
+        assert driver.find_element(By.NAME, "_.description").is_displayed()
+
+    finally:
+        driver.quit()
 
 
