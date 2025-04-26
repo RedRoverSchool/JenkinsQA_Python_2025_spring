@@ -8,7 +8,7 @@ from tests.freestyle_project.freestyle_data import Freestyle
 
 def test_scm_to_none(empty_configure):
 
-    assert empty_configure == True
+    assert empty_configure
 
 @pytest.mark.parametrize('tp_link, tp_wait, tp_expected_text, count', [
     (Freestyle.tooltip_scm_link[0], Freestyle.tooltip_scm_link_wait[0], Freestyle.tooltip_scm_expected_text[0], 0),
