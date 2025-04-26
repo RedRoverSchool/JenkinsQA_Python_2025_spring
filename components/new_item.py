@@ -1,20 +1,28 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
+
 
 class NewItem:
     def __init__(self, main_page):
         self.main_page = main_page
-        self.wait = WebDriverWait(self.main_page, 100)
-
-    def click_element(self, by, value):
-        self.wait.until(EC.element_to_be_clickable((by, value))).click()
+        self.wait = WebDriverWait(self.main_page, 20)
 
     def enter_text(self, by, value, text):
         self.wait.until(EC.element_to_be_clickable((by, value))).send_keys(text)
 
     def present_element(self, by, value):
         self.wait.until(EC.presence_of_element_located((by, value)))
+
+    def click_element(self, by, value):
+        for _ in range(3):
+            try:
+                element = self.wait.until(EC.element_to_be_clickable((by, value)))
+                element.click()
+                break
+            except StaleElementReferenceException:
+                pass
 
     def create_freestyle_project(self):
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
