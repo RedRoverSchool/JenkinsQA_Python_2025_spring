@@ -47,7 +47,8 @@ def enable_automatically(disabled_message):
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     try:
         wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
-    except:
+    except Exception:
+        pass
         is_warning_message_disappear = True
     disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
     wait.until(EC.presence_of_element_located((By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')))
@@ -72,8 +73,10 @@ def empty_configure(freestyle):
     freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     h1_txt = freestyle.find_element(By.CSS_SELECTOR, 'h1').text
-    if h1_txt == Freestyle.project_name: return True
-    else: return Freestyle
+    if h1_txt == Freestyle.project_name:
+        return True
+    else:
+        return Freestyle
 
 @pytest.fixture()
 def description_appears(freestyle):
