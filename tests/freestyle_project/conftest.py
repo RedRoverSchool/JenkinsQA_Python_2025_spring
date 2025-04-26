@@ -84,8 +84,6 @@ def description_appears(freestyle):
 
     return freestyle.find_element(By.ID, 'description').text
 
-
-
 @pytest.fixture()
 def preview_hide(freestyle):
     wait = WebDriverWait(freestyle, 10)
