@@ -6,6 +6,8 @@ from selenium.webdriver import ActionChains
 from tests.freestyle_project.freestyle_data import Freestyle
 
 
+
+
 @pytest.fixture(scope="function")
 def freestyle(main_page, config):
     wait5 = WebDriverWait(main_page, 5)
@@ -14,6 +16,7 @@ def freestyle(main_page, config):
     main_page.find_elements(By.CSS_SELECTOR, '.j-item-options>li[tabindex="0"]')[0].click()
     main_page.find_element(By.ID, 'ok-button').click()
     wait5.until(EC.url_changes(config.jenkins.base_url + "/view/all/newJob"))
+
 
     return main_page
 
