@@ -21,6 +21,7 @@ def wait_for_clickable(driver, by, selector, timeout=DEFAULT_TIMEOUT):
 
 
 def test_check_create_new_item(new_item_page, main_page, config):
+def test_check_create_new_item(new_item_page, main_page):
     new_item_field = wait_for(new_item_page, By.CSS_SELECTOR, '#name')
     new_item_field.send_keys(new_folder_name)
     folder_option = wait_for_clickable(new_item_page, By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
@@ -30,6 +31,8 @@ def test_check_create_new_item(new_item_page, main_page, config):
     button_save = wait_for_clickable(main_page, By.CSS_SELECTOR, '[name=Submit]')
     button_save.click()
     main_page.get(config.jenkins.base_url)
+    wait_for(main_page, By.ID, "general")
+    main_page.find_element(By.ID, "jenkins-home-link").click()
 
     assert wait_for(main_page, By.XPATH,
                     f"//table[@id='projectstatus']//a[contains(normalize-space(string()), '{new_folder_name}')]"
