@@ -15,6 +15,7 @@ def multi_config_project_page(main_page):
         (By.XPATH, '//*[@id="j-add-item-type-standalone-projects"]/ul/li[3]/div[2]/div'))).click()
     wait.until(EC.element_to_be_clickable((By.ID, "ok-button"))).click()
     wait.until(EC.presence_of_element_located((By.NAME, "description")))
+
     return main_page
 
 
