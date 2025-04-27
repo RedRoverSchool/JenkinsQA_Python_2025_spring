@@ -32,4 +32,5 @@ def multi_config_project_with_description_page(main_page):
     wait.until(EC.presence_of_element_located((By.NAME, "description"))).send_keys(description)
     main_page.find_element(By.NAME, "Submit").click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, project_name))).click()
+
     return main_page
