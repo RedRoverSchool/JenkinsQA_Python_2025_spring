@@ -78,8 +78,8 @@ jobs:
         env:
           PARENT_BRANCH: origin/${{ github.base_ref }}
         #disabling the picked run for now, needs more testing
-        #run: pytest --picked --mode=branch
-        run: pytest
+        run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
+        #run: pytest
 
       - name: Attach screenshots
         if: failure()
