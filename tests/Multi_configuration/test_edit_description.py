@@ -9,7 +9,7 @@ def test_edit_description_from_project_page(multi_config_project_with_descriptio
     wait = WebDriverWait(multi_config_project_with_description_page, 10)
     updated_text = "Updated project summary"
 
-    wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="description-link"]'))).click()
+    wait.until(EC.element_to_be_clickable((By.ID,"description-link"))).click()
     desc_input = wait.until(EC.presence_of_element_located((By.NAME, "description")))
     desc_input.clear()
     desc_input.send_keys(updated_text)
