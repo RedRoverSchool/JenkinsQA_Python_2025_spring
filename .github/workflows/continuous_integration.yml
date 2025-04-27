@@ -34,6 +34,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install the code linting and formatting tool Ruff
+        run: pip install ruff
+
+      - name: Lint code with Ruff
+        run: ruff check --output-format=github --target-version=py312
+        continue-on-error: true
+
+      - name: Check code formatting with Ruff
+        run: ruff format --diff --no-cache --target-version=py312
+        continue-on-error: true
+
       - name: prepare jenkins data
         run: |
           cat ${{ github.workspace }}/jenkins_data/jenkins_backup0* > ${{ github.workspace }}/jenkins_backup.tar
@@ -64,11 +75,8 @@ jobs:
 
       - name: pytest run picked tests
         if: steps.scope_check.outputs.run_all_tests == 'false'
-        env:
-          PARENT_BRANCH: origin/${{ github.base_ref }}
-        #disabling the picked run for now, needs more testing
-        #run: pytest --picked --mode=branch
-        run: pytest
+        run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
+        #run: pytest
 
       - name: Attach screenshots
         if: failure()
