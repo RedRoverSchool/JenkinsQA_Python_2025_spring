@@ -75,9 +75,6 @@ jobs:
 
       - name: pytest run picked tests
         if: steps.scope_check.outputs.run_all_tests == 'false'
-        env:
-          PARENT_BRANCH: origin/${{ github.base_ref }}
-        #disabling the picked run for now, needs more testing
         run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
         #run: pytest
 
