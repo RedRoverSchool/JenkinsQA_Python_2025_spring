@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-@pytest.mark.skip(reason="Тест временно отключён для стабилизации окружения")
+
 def test_edit_description_from_project_page(multi_config_project_with_description_page):
     wait = WebDriverWait(multi_config_project_with_description_page, 10)
     updated_text = "Updated project summary"
