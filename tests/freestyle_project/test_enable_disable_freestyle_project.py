@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from tests.freestyle_project.freestyle_data import Freestyle
 
 
 def test_enable_disable_switch(freestyle):
@@ -16,14 +17,13 @@ def test_enable_disable_switch(freestyle):
     assert is_disable.is_displayed()
 
 def test_tooltip(tooltip):
-    title = "Enable or disable the current project"
 
-    assert tooltip == title
+    assert tooltip == Freestyle.tooltip_disable
 
 def test_disabled_message(disabled_message):
-    warning_message = disabled_message.find_element(By.XPATH, '//div[@class="warning"]').text.splitlines()
+    warning_message = disabled_message.find_element(By.XPATH, '//div[@class="warning"]').text.splitlines()[0]
 
-    assert warning_message[0] == "This project is currently disabled"
+    assert warning_message == Freestyle.warning_message
 
 def test_enable_after_disabled(enable_automatically):
 
