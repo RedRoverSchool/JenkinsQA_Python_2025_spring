@@ -1,0 +1,17 @@
+name: cancel
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cancel:
+    name: 'cancel previous runs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          workflow_id: continuous_integration.yml
+          access_token: ${{ secrets.GITHUB_TOKEN }}

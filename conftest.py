@@ -1,8 +1,32 @@
+import os
+import sys
+import logging
+import datetime
+
 import pytest
 
-from core.settings import Config
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from components.new_item import NewItem
+from core.jenkins_utils import clear_data
+from core.settings import Config
+
+
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, project_root)
+
+logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    setattr(item, "rep_" + report.when, report)
 
 
 @pytest.fixture(scope="session")
@@ -10,8 +34,13 @@ def config():
     return Config.load()
 
 
+@pytest.fixture(scope="function", autouse=True)
+def jenkins_reset(config):
+    clear_data(config)
+
+
 @pytest.fixture(scope="function")
-def driver(config):
+def driver(request, config):
 
     match config.browser.NAME:
         case "chrome":
@@ -28,15 +57,43 @@ def driver(config):
             driver = webdriver.Edge(options=options)
         case _:
             raise RuntimeError(f"Browser {config.browser.NAME} is not supported.")
-    driver.implicitly_wait(3)
 
     yield driver
+
+    if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
+        logger.info(f"Test {request.node.name} failed, taking screenshot...")
+        try:
+            screenshots_dir = os.path.join(project_root, "screenshots")
+            os.makedirs(screenshots_dir, exist_ok=True)
+
+            test_name =  "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
+            now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
+
+            driver.save_screenshot(screenshot_file)
+            logger.info(f"Screenshot saved to: {screenshot_file}")
+
+        except Exception as e:
+            logger.error(f"Failed to take screenshot: {e}")
 
     driver.quit()
 
 
+@pytest.fixture(scope="function")
+def login_page(driver, config):
+    driver.get(config.jenkins.base_url + "/login?from=%2F")
+    return driver
 
 
+@pytest.fixture(scope="function")
+def main_page(login_page, config):
+    login_page.find_element(By.ID, "j_username").send_keys(config.jenkins.USERNAME)
+    login_page.find_element(By.ID, "j_password").send_keys(config.jenkins.PASSWORD)
+    login_page.find_element(By.NAME, "Submit").click()
+    wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
+    wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
+    return login_page
 
-
-
+@pytest.fixture(scope="function")
+def new_item(main_page):
+    return NewItem(main_page)
