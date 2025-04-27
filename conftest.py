@@ -18,7 +18,7 @@ from core.settings import Config
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
-logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.WARNING)
+logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -66,7 +66,7 @@ def driver(request, config):
             screenshots_dir = os.path.join(project_root, "screenshots")
             os.makedirs(screenshots_dir, exist_ok=True)
 
-            test_name = request.node.name.replace("[", "_").replace("]", "").replace(":", "_").replace("/", "_")
+            test_name =  "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
             now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
 
