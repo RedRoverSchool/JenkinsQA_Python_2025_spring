@@ -21,7 +21,7 @@ def test_tooltip_environment_items(freestyle, tp_link, tp_wait, tp_expected_text
     tooltip_link = freestyle.find_element(By.XPATH, tp_link)
     post_build_actions = freestyle.find_element(By.ID, 'post-build-actions')
     actions.move_to_element(post_build_actions).perform()
-    actions.pause(1).move_to_element(tooltip_link).perform()
+    actions.move_to_element(tooltip_link).perform()
     tp_text = wait.until(EC.visibility_of_element_located((By.XPATH, '//div[@class="tippy-content"]'))).text
 
     assert tp_text == tp_expected_text
