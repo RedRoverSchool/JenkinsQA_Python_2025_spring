@@ -70,7 +70,7 @@ def can_add_description(freestyle):
 @pytest.fixture()
 def empty_configure(freestyle):
     wait = WebDriverWait(freestyle, 10)
-    freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
+    wait.until(EC.presence_of_element_located((By.XPATH, '//button[@name="Submit"]'))).click()
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     h1_txt = freestyle.find_element(By.CSS_SELECTOR, 'h1').text
     if h1_txt == Freestyle.project_name:
