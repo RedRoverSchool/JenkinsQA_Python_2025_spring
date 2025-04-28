@@ -13,8 +13,7 @@ def test_preview_description(preview_hide):
     is_preview_available = preview_hide[0]
     is_hide_available = preview_hide[1]
 
-    assert is_preview_available
-    assert is_hide_available
+    assert is_preview_available and is_hide_available
 
 def test_description_appears(description_appears):
 

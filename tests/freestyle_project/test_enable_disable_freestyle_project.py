@@ -27,4 +27,4 @@ def test_disabled_message(disabled_message):
 
 def test_enable_after_disabled(enable_automatically):
 
-    assert enable_automatically == [True, True]
+    assert enable_automatically[0] and enable_automatically[1]

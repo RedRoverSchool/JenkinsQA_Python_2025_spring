@@ -19,6 +19,7 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
 logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.INFO)
+logging.getLogger('faker.factory').setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -48,12 +49,15 @@ def driver(request, config):
             options = Options()
             for argument in config.browser.OPTIONS_CHROME.split(';'):
                 options.add_argument(argument)
+                logger.debug(f"Argument {argument} added to the chrome")
             driver = webdriver.Chrome(options=options)
         case "edge":
             from selenium.webdriver.edge.options import Options
             options = Options()
             for argument in config.browser.OPTIONS_EDGE.split(';'):
                 options.add_argument(argument)
+                logger.debug(f"Argument {argument} added to the edge")
+
             driver = webdriver.Edge(options=options)
         case _:
             raise RuntimeError(f"Browser {config.browser.NAME} is not supported.")
@@ -93,6 +97,7 @@ def main_page(login_page, config):
     wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
     wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
     return login_page
+
 
 @pytest.fixture(scope="function")
 def new_item(main_page):
