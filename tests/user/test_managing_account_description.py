@@ -1,17 +1,19 @@
 from selenium.webdriver.common.by import By
 
 
-def test_profile_details_accessibility(main_page):
-    header_account = main_page.find_element(By.CSS_SELECTOR, 'div.login.page-header__hyperlinks > a:first-of-type')
-    header_account.click()
-    account_link = main_page.find_element(By.XPATH, "//div[@id='tasks']/div[4]")
-    account_link.click()
-    title_text = main_page.find_element(By.XPATH, '//*[@class="jenkins-form"]//h1')
+def test_account_fullname_fields(main_page):
 
-    assert title_text.is_displayed(), "title account page not found"
+    test_full_name = "newadmin"
+
+    header_account = main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]')
+    header_account.click()
+    account_link = main_page.find_element(By.XPATH, '//a[contains(@href, "account")]')
+    account_link.click()
 
     full_name_field = main_page.find_element(By.XPATH, '//input[@name="_.fullName"]')
-    description_field = main_page.find_element(By.XPATH, '//textarea[@name="_.description"]')
+    full_name_field.clear()
+    full_name_field.send_keys(test_full_name)
+    main_page.find_element(By.XPATH, '//button[@name="Submit"]').click()
+    account_h1_heading = main_page.find_element(By.XPATH, '//h1').text
 
-    assert full_name_field.is_displayed(), "Field not clickable"
-    assert description_field.is_enabled(), "Field not clickable"
+    assert account_h1_heading == test_full_name
