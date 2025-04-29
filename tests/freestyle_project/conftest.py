@@ -19,6 +19,7 @@ def freestyle(main_page, config):
 
     return main_page
 
+
 @pytest.fixture(scope="function")
 def tooltip(freestyle):
     wait = WebDriverWait(freestyle, 10)
@@ -29,6 +30,7 @@ def tooltip(freestyle):
 
     return freestyle.find_element(By.XPATH, '//div[@class="tippy-content"]').text
 
+
 @pytest.fixture(scope="function")
 def disabled_message(freestyle):
     wait = WebDriverWait(freestyle, 10)
@@ -38,6 +40,7 @@ def disabled_message(freestyle):
     wait.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
 
     return freestyle
+
 
 @pytest.fixture(scope="function")
 def enable_automatically(disabled_message):
@@ -60,14 +63,16 @@ def enable_automatically(disabled_message):
 
     return [is_warning_message_disappear, is_project_enable]
 
+
 @pytest.fixture()
 def can_add_description(freestyle):
     wait = WebDriverWait(freestyle, 10)
     (wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@name="description"]')))
-        .send_keys(Freestyle.description_text))
+     .send_keys(Freestyle.description_text))
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
 
     return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
+
 
 @pytest.fixture()
 def empty_configure(freestyle):
@@ -80,6 +85,7 @@ def empty_configure(freestyle):
     else:
         return Freestyle
 
+
 @pytest.fixture()
 def description_appears(freestyle):
     wait = WebDriverWait(freestyle, 10)
@@ -88,6 +94,7 @@ def description_appears(freestyle):
     wait.until(EC.presence_of_element_located((By.ID, 'description')))
 
     return freestyle.find_element(By.ID, 'description').text
+
 
 @pytest.fixture()
 def preview_hide(freestyle):
@@ -106,6 +113,7 @@ def preview_hide(freestyle):
 
     return [preview, hide]
 
+
 @pytest.fixture(scope="function")
 def freestyle_configs(freestyle, main_page, config):
     wait = WebDriverWait(freestyle, 10)
@@ -114,6 +122,7 @@ def freestyle_configs(freestyle, main_page, config):
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Configure"))).click()
 
     return main_page
+
 
 @pytest.fixture(scope="function")
 def auth_token(main_page, config):
@@ -126,7 +135,6 @@ def auth_token(main_page, config):
     )))
 
     if len(tokens_list):
-        print(len(tokens_list))
         values = [element.get_attribute("value") for element in tokens_list]
 
         if any(Freestyle.project_name in value for value in values):
@@ -144,7 +152,8 @@ def auth_token(main_page, config):
     (wait.until(EC.visibility_of_element_located(
         (By.CSS_SELECTOR, "input[placeholder='Default name']"))).send_keys(Freestyle.project_name))
     wait.until(EC.element_to_be_clickable((By.ID, "api-token-property-token-save"))).click()
-    token = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'"))).get_attribute("text")
+    token = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'"))).get_attribute(
+        "text")
     main_page.find_element(By.NAME, "Submit").click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
 
