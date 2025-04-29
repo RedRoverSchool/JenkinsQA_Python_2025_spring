@@ -1,15 +1,12 @@
 from selenium.webdriver.common.by import By
 
 
-def test_account_fullname_fields(main_page):
+def test_account_fullname_field(main_page):
 
     test_full_name = "newadmin"
 
-    header_account = main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]')
-    header_account.click()
-    account_link = main_page.find_element(By.XPATH, '//a[contains(@href, "account")]')
-    account_link.click()
-
+    main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]').click()
+    main_page.find_element(By.XPATH, '//a[contains(@href, "account")]').click()
     full_name_field = main_page.find_element(By.XPATH, '//input[@name="_.fullName"]')
     full_name_field.clear()
     full_name_field.send_keys(test_full_name)
