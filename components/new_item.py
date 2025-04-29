@@ -8,10 +8,13 @@ class NewItem:
         self.wait = WebDriverWait(self.main_page, 100)
 
     def click_element(self, by, value):
-        self.wait.until(EC.element_to_be_clickable((by, value))).click()
+       return self.wait.until(EC.element_to_be_clickable((by, value))).click()
 
     def enter_text(self, by, value, text):
-        self.wait.until(EC.element_to_be_clickable((by, value))).send_keys(text)
+        return self.wait.until(EC.element_to_be_clickable((by, value))).send_keys(text)
+
+    def wait_element(self, by, value):
+        return self.wait.until(EC.presence_of_element_located((by, value)))
 
     def create_freestyle_project(self):
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
@@ -22,11 +25,10 @@ class NewItem:
         self.click_element(By.ID, "jenkins-home-link")
 
     def copy_from_option_exist(self):
-        self.click_element(By.ID, "jenkins-home-link")
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
-        copyFromBtn = self.wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
-        assert copyFromBtn.is_displayed(), "Autocomplete input field is not visible!"
+        self.wait_element(By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
+        copy = self.main_page.find_element(By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
+        assert copy.is_displayed(), "Autocomplete input field is not visible!"
 
     def copy_from_option_is_working(self):
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
