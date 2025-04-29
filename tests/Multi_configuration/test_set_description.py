@@ -1,10 +1,8 @@
-import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.mark.skip(reason="Тест временно отключён для стабилизации окружения")
 def test_set_description_for_multi_config_project(multi_config_project_page):
     wait = WebDriverWait(multi_config_project_page, 10)
     description_text = "This is my overview"
