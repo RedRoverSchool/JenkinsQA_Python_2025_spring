@@ -36,3 +36,15 @@ class Freestyle:
         'Help for feature: Branch Specifier (blank for \'any\')',
         'Help for feature: Repository browser'
     )
+    tooltip_environment_link = (
+        '//a[@tooltip="Help for feature: Use secret text(s) or file(s)"]',
+        '//a[@tooltip="Help for feature: With Ant"]'
+    )
+    tooltip_environment_link_wait = (
+        '//a[@aria-describedby="tippy-62"]',
+        '//a[@aria-describedby="tippy-65"]'
+    )
+    tooltip_environment_expected_text = (
+        'Help for feature: Use secret text(s) or file(s)',
+        'Help for feature: With Ant'
+    )

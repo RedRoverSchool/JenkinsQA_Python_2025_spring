@@ -18,7 +18,8 @@ from core.settings import Config
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
-logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.WARNING)
+logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.INFO)
+logging.getLogger('faker.factory').setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -48,12 +49,15 @@ def driver(request, config):
             options = Options()
             for argument in config.browser.OPTIONS_CHROME.split(';'):
                 options.add_argument(argument)
+                logger.debug(f"Argument {argument} added to the chrome")
             driver = webdriver.Chrome(options=options)
         case "edge":
             from selenium.webdriver.edge.options import Options
             options = Options()
             for argument in config.browser.OPTIONS_EDGE.split(';'):
                 options.add_argument(argument)
+                logger.debug(f"Argument {argument} added to the edge")
+
             driver = webdriver.Edge(options=options)
         case _:
             raise RuntimeError(f"Browser {config.browser.NAME} is not supported.")
@@ -66,7 +70,7 @@ def driver(request, config):
             screenshots_dir = os.path.join(project_root, "screenshots")
             os.makedirs(screenshots_dir, exist_ok=True)
 
-            test_name = request.node.name.replace("[", "_").replace("]", "").replace(":", "_").replace("/", "_")
+            test_name =  "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
             now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
 
@@ -93,6 +97,7 @@ def main_page(login_page, config):
     wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
     wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
     return login_page
+
 
 @pytest.fixture(scope="function")
 def new_item(main_page):

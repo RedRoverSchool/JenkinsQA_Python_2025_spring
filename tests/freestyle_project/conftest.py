@@ -47,7 +47,8 @@ def enable_automatically(disabled_message):
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     try:
         wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
-    except:
+    except Exception:
+        pass
         is_warning_message_disappear = True
     disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
     wait.until(EC.presence_of_element_located((By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')))
@@ -59,7 +60,9 @@ def enable_automatically(disabled_message):
 
 @pytest.fixture()
 def can_add_description(freestyle):
-    freestyle.find_element(By.XPATH, '//textarea[@name="description"]').send_keys(Freestyle.description_text)
+    wait = WebDriverWait(freestyle, 10)
+    (wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@name="description"]')))
+        .send_keys(Freestyle.description_text))
     freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
 
     return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
@@ -67,11 +70,13 @@ def can_add_description(freestyle):
 @pytest.fixture()
 def empty_configure(freestyle):
     wait = WebDriverWait(freestyle, 10)
-    freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
+    wait.until(EC.presence_of_element_located((By.XPATH, '//button[@name="Submit"]'))).click()
     wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
     h1_txt = freestyle.find_element(By.CSS_SELECTOR, 'h1').text
-    if h1_txt == Freestyle.project_name: return True
-    else: return Freestyle
+    if h1_txt == Freestyle.project_name:
+        return True
+    else:
+        return Freestyle
 
 @pytest.fixture()
 def description_appears(freestyle):
@@ -81,8 +86,6 @@ def description_appears(freestyle):
     wait.until(EC.presence_of_element_located((By.ID, 'description')))
 
     return freestyle.find_element(By.ID, 'description').text
-
-
 
 @pytest.fixture()
 def preview_hide(freestyle):
