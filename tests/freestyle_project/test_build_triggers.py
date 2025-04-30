@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -40,6 +41,14 @@ def test_user_can_trigger_builds_remotely(auth_token, freestyle, config):
     logger.error(f"Switch to old window: {freestyle.current_url}")
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
     logger.error(f"On Dashboard: {freestyle.current_url}")
+
+    build_job_link = wait10.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#buildQueue a[href*='/job']")))
+
+    wait10.until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, "#buildQueue a[href*='/job']"),
+        Freestyle.project_name
+    ))
+
     wait60.until(EC.text_to_be_present_in_element(
         (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
         "No builds in the queue.")
