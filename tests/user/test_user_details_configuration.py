@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 def test_account_fullname_field(main_page):
 
@@ -26,3 +29,20 @@ def test_account_description_field(main_page):
     main_page.find_element(By.XPATH, '//button[@name="Submit"]').click()
 
     assert main_page.find_element(By.ID, "description").text == test_description_name
+
+def test_account_description_field_value(main_page):
+    wait = WebDriverWait(main_page, 5)
+    test_description_name = "test description"
+
+    main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]').click()
+    main_page.find_element(By.XPATH, '//a[contains(@href, "account")]').click()
+    description_field = main_page.find_element(By.XPATH, '//textarea[@name="_.description"]')
+    description_field.clear()
+    description_field.send_keys(test_description_name)
+    main_page.find_element(By.XPATH, '//button[@name="Submit"]').click()
+    wait.until(EC.element_to_be_clickable((By.XPATH, '//a[contains(@href, "account")]')))
+    main_page.find_element(By.XPATH, '//a[contains(@href, "account")]').click()
+    description_field = main_page.find_element(By.XPATH, '//textarea[@name="_.description"]')
+    description_field_value = description_field.get_attribute("value")
+
+    assert description_field_value == test_description_name
