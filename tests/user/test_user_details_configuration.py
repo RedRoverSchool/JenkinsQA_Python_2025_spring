@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-
 def test_account_fullname_field(main_page):
 
     test_full_name = "newadmin"
@@ -14,3 +13,16 @@ def test_account_fullname_field(main_page):
     account_h1_heading = main_page.find_element(By.XPATH, '//h1').text
 
     assert account_h1_heading == test_full_name
+
+def test_account_description_field(main_page):
+
+    test_description_name = "test description"
+
+    main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]').click()
+    main_page.find_element(By.XPATH, '//a[contains(@href, "account")]').click()
+    description_field = main_page.find_element(By.XPATH, '//textarea[@name="_.description"]')
+    description_field.clear()
+    description_field.send_keys(test_description_name)
+    main_page.find_element(By.XPATH, '//button[@name="Submit"]').click()
+
+    assert main_page.find_element(By.ID, "description").text == test_description_name
