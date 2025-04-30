@@ -84,3 +84,12 @@ class TestSystemInformationSection:
             assert page.is_visible(version_locator), f'Row {i}: {plugin_name} version is not displayed'
             assert page.is_visible(status_locator), f'Row {i}: {plugin_name} status is not displayed'
             assert page.get_element_text(status_locator) in ['true', 'false'], f'Row {i}: {plugin_name} status is not correct'
+
+    def test_memory_usage_tab_select_timespan(self, sys_info_page):
+        page = SIP(sys_info_page)
+        page.click(SI.MEMORY_USAGE_TAB)
+        for option in page.TIMESPAN_OPTIONS:
+            page.click(SI.TIMESPAN_DROPDOWN)
+            page.select_timespan(option)
+            graph = page.get_graph_locator(page.TIMESPAN_OPTIONS.get(option))
+            assert page.is_visible(graph), f"Graph for timespan option '{option}' is not displayed, or displayed incorrectly"
