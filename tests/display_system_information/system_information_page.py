@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from tests.display_system_information.base_methods import BaseMethods
+from tests.display_system_information.locators import SystemInformationPage as SI
 
 
 class SystemInformationPage(BaseMethods):
@@ -9,6 +11,7 @@ class SystemInformationPage(BaseMethods):
     TAB_TITLE = 'System Information [Jenkins]'
     TABS = ['System Properties', 'Environment Variables', 'Plugins', 'Memory Usage', 'Thread Dumps']
     SYS_ENV_TABS = TABS[:2]
+    TIMESPAN_OPTIONS = {'Short': 'sec10&width', 'Medium': 'min&width', 'Long': 'hour&width'}
 
     def __init__(self, sys_info_page: WebDriver):
         super().__init__(sys_info_page)
@@ -60,3 +63,10 @@ class SystemInformationPage(BaseMethods):
         enabled_locator = (By.XPATH, f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[3]")
         plugin_name = self.get_element_text(name_locator)
         return name_locator, version_locator, enabled_locator, plugin_name
+
+    def select_timespan(self, text: str):
+        element = self.get_element(SI.TIMESPAN_DROPDOWN)
+        Select(element).select_by_visible_text(text)
+
+    def get_graph_locator(self, flag_value: str):
+        return By.XPATH, f"//img[@alt='Memory usage graph' and contains(@src, '{flag_value}')]"

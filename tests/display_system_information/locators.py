@@ -21,3 +21,4 @@ class SystemInformationPage:
     HIDE_SYS_VALUES_BUTTON = (By.XPATH, "(//button[contains(normalize-space(text()), 'Hide values')])[1]")
     HIDE_ENV_VALUES_BUTTON = (By.XPATH, "(//button[contains(normalize-space(text()), 'Hide values')])[2]")
     PLUGINS_TABLE_BODY = (By.XPATH, "(//table[@class='jenkins-table sortable'])[3]/tbody")
+    TIMESPAN_DROPDOWN = (By.ID, 'timespan-select')
