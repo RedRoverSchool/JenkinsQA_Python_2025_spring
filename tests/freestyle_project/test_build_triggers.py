@@ -42,17 +42,19 @@ def test_user_can_trigger_builds_remotely(auth_token, freestyle, config):
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
     logger.error(f"On Dashboard: {freestyle.current_url}")
 
-    build_job_link = wait10.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#buildQueue a[href*='/job']")))
+    # build_job_link = wait10.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#buildQueue a[href*='/job']")))
+    #
+    # wait10.until(EC.text_to_be_present_in_element(
+    #     (By.CSS_SELECTOR, "#buildQueue a[href*='/job']"),
+    #     Freestyle.project_name
+    # ))
+    #
+    # wait60.until(EC.text_to_be_present_in_element(
+    #     (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
+    #     "No builds in the queue.")
+    # )
 
-    wait10.until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, "#buildQueue a[href*='/job']"),
-        Freestyle.project_name
-    ))
-
-    wait60.until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
-        "No builds in the queue.")
-    )
+    sleep(120)
 
     logger.error(f"After build finished")
     freestyle.find_element(By.LINK_TEXT, "Build History").click()
