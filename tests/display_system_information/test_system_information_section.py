@@ -93,3 +93,9 @@ class TestSystemInformationSection:
             page.select_timespan(option)
             graph = page.get_graph_locator(page.TIMESPAN_OPTIONS.get(option))
             assert page.is_visible(graph), f"Graph for timespan option '{option}' is not displayed, or displayed incorrectly"
+
+    def test_thread_dumps_tab_open_thread_dump_page(self, sys_info_page):
+        page = SIP(sys_info_page)
+        page.click(SI.THREAD_DUMPS_TAB)
+        page.click(SI.THREAD_DUMP_LINK)
+        assert page.driver.title == SIP.THREAD_DUMP_TITLE
