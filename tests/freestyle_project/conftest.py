@@ -115,24 +115,13 @@ def preview_hide(freestyle):
 
 
 @pytest.fixture(scope="function")
-def freestyle_configs(freestyle, main_page, config):
-    wait = WebDriverWait(freestyle, 10)
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, Freestyle.project_name))).click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Configure"))).click()
-
-    return main_page
-
-
-@pytest.fixture(scope="function")
 def auth_token(main_page, config):
     wait = WebDriverWait(main_page, 10)
+
     main_page.find_element(By.CSS_SELECTOR, '.login.page-header__hyperlinks>a[href*="/user/"]').click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Security'))).click()
-    tokens_list = wait.until(EC.visibility_of_all_elements_located((
-        By.CSS_SELECTOR,
-        '.token-list-existing-item>input[name="tokenName"]'
-    )))
+    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[tooltip*="Current token(s)"]')))
+    tokens_list = main_page.find_elements(By.CSS_SELECTOR, '.token-list-existing-item>input[name="tokenName"]')
 
     if len(tokens_list):
         values = [element.get_attribute("value") for element in tokens_list]
@@ -143,17 +132,19 @@ def auth_token(main_page, config):
                 f'input[value="{Freestyle.project_name}"] ~ span.to-right > a[data-target-url*="/revoke"]'
             )
             project_token_revoke_links = wait.until(EC.visibility_of_all_elements_located(revoke_css))
+
             if project_token_revoke_links:
                 for link in project_token_revoke_links:
                     wait.until(EC.element_to_be_clickable(link)).click()
                     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-id='ok']"))).click()
 
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.repeatable-add"))).click()
-    (wait.until(EC.visibility_of_element_located(
-        (By.CSS_SELECTOR, "input[placeholder='Default name']"))).send_keys(Freestyle.project_name))
+    wait.until(EC.visibility_of_element_located((
+        By.CSS_SELECTOR,
+        "input[placeholder='Default name']"))).send_keys(Freestyle.project_name)
     wait.until(EC.element_to_be_clickable((By.ID, "api-token-property-token-save"))).click()
-    token = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'"))).get_attribute(
-        "text")
+    token = (wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'")))
+             .get_attribute("text"))
     main_page.find_element(By.NAME, "Submit").click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
 
