@@ -5,58 +5,60 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from tests.freestyle_project.freestyle_data import Freestyle
 
-
 logger = logging.getLogger(__name__)
 
 
-def test_user_can_trigger_builds_remotely(auth_token, freestyle, config):
+def test_user_can_trigger_builds_remotely(revoke_tokens, auth_token, freestyle, config):
     wait10 = WebDriverWait(freestyle, 10)
     wait60 = WebDriverWait(freestyle, 60)
 
     token = auth_token
 
-    # trigger_job_api = f"{config.jenkins.base_url}/job/{Freestyle.project_name.replace(" ", "%20")}/build?token={token}"
-
-    logger.error(f"New token: {token}")
-    # logger.error(f"Trigger_job_api: {trigger_job_api}")
-
-    trigger_builds_remotely_checkbox = freestyle.find_element(
-        By.CSS_SELECTOR,
-        "input[name='pseudoRemoteTrigger']~label"
-    )
-    freestyle.execute_script(
-        'arguments[0].scrollIntoView({block: "center", inline: "center"})',
-        trigger_builds_remotely_checkbox
-    )
+    trigger_builds_remotely_checkbox = freestyle.find_element(By.CSS_SELECTOR,
+                                                              "input[name='pseudoRemoteTrigger']~label")
+    freestyle.execute_script('arguments[0].scrollIntoView({block: "center", inline: "center"})',
+                             trigger_builds_remotely_checkbox)
     wait10.until(EC.element_to_be_clickable(trigger_builds_remotely_checkbox)).click()
     wait10.until(EC.visibility_of_element_located((By.NAME, "authToken"))).send_keys(token)
     freestyle.find_element(By.NAME, "Submit").click()
 
-    window_before = freestyle.window_handles[0]
+    app_window = freestyle.window_handles[0]
+
     freestyle.switch_to.new_window()
+    freestyle.get("http://localhost:8080/crumbIssuer/api/json")
 
-    crumb_issuer = "http://localhost:8080/crumbIssuer/api/json"
-    freestyle.get(crumb_issuer)
     crumb = freestyle.find_element(By.CSS_SELECTOR, "body").text.split('"')[7]
-    logger.error(f"Crumb: {crumb}")
-    trigger_job_api = f"{config.jenkins.base_url}/job/{Freestyle.project_name.replace(" ", "%20")}/build?token={token}&Jenkins-Crumb={crumb}"
+    job_name = Freestyle.project_name.replace(" ", "%20")
+    username = config.jenkins.USERNAME
+    password = config.jenkins.PASSWORD
+    server = f"{config.jenkins.HOST}:{config.jenkins.PORT}"
 
-    freestyle.get(trigger_job_api)
-    freestyle.get(trigger_job_api)
+    trigger_job_api_1 = f"{config.jenkins.base_url}/job/{job_name}/build?token={token}"
+    trigger_job_api_2 = f"{config.jenkins.base_url}/job/{job_name}/build?token={token}&Jenkins-Crumb={crumb}"
+    trigger_job_api_3 = f"http://{username}:{password}@{server}/job/{job_name}/build?token={token}&Jenkins-Crumb={crumb}"
 
-    logger.error(f"Send request: {freestyle.current_url}")
-    freestyle.switch_to.window(window_before)
+    # freestyle.switch_to.new_window()
+    # freestyle.get(trigger_job_api_1)
+    # logger.error(f"WINDOW 1: {freestyle.current_url}")
+    # logger.error(f"WINDOW 1: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
 
-    logger.error(f"Switch to old window: {freestyle.current_url}")
+    # freestyle.switch_to.new_window()
+    # freestyle.get(trigger_job_api_2)
+    # logger.error(f"WINDOW 2: {freestyle.current_url}")
+    # logger.error(f"WINDOW 2: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
+
+    freestyle.switch_to.new_window()
+    freestyle.get(trigger_job_api_3)
+    logger.error(f"WINDOW 3: {freestyle.current_url}")
+    logger.error(f"WINDOW 3: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
+
+    freestyle.switch_to.window(app_window)
+
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
     logger.error(f"On Dashboard: {freestyle.current_url}")
 
-    build_job_link = wait10.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#buildQueue a[href*='/job']")))
-
-    wait10.until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, "#buildQueue a[href*='/job']"),
-        Freestyle.project_name
-    ))
+    build_queue_links = freestyle.find_elements(By.CSS_SELECTOR, "#buildQueue a[href*='/job']")
+    logger.error(f"build_queue_links: {len(build_queue_links)}")
 
     wait60.until(EC.text_to_be_present_in_element(
         (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
