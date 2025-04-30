@@ -39,10 +39,11 @@ def test_user_can_trigger_builds_remotely(auth_token, freestyle, config):
     freestyle.get(crumb_issuer)
     crumb = freestyle.find_element(By.CSS_SELECTOR, "body").text.split('"')[7]
     logger.error(f"Crumb: {crumb}")
-    trigger_job_api = \
-        f"{config.jenkins.base_url}/job/{Freestyle.project_name.replace(" ", "%20")}/build?token={token}&Jenkins-Crumb={crumb}"
+    trigger_job_api = f"{config.jenkins.base_url}/job/{Freestyle.project_name.replace(" ", "%20")}/build?token={token}&Jenkins-Crumb={crumb}"
 
     freestyle.get(trigger_job_api)
+    freestyle.get(trigger_job_api)
+
     logger.error(f"Send request: {freestyle.current_url}")
     freestyle.switch_to.window(window_before)
 
