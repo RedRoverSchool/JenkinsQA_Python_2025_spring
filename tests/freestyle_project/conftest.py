@@ -1,3 +1,5 @@
+import logging
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -6,6 +8,8 @@ from selenium.webdriver import ActionChains
 
 from conftest import main_page
 from tests.freestyle_project.freestyle_data import Freestyle
+
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="function")
@@ -122,8 +126,10 @@ def auth_token(main_page, config):
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Security'))).click()
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[tooltip*="Current token(s)"]')))
     tokens_list = main_page.find_elements(By.CSS_SELECTOR, '.token-list-existing-item>input[name="tokenName"]')
+    logger.error(f"len(tokens_list) {len(tokens_list)}")
 
     if len(tokens_list):
+        logger.error("Inside tokens_list")
         values = [element.get_attribute("value") for element in tokens_list]
 
         if any(Freestyle.project_name in value for value in values):
@@ -138,6 +144,7 @@ def auth_token(main_page, config):
                     wait.until(EC.element_to_be_clickable(link)).click()
                     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-id='ok']"))).click()
 
+    logger.error(f"Outside tokens_list, creating token")
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.repeatable-add"))).click()
     wait.until(EC.visibility_of_element_located((
         By.CSS_SELECTOR,
@@ -145,6 +152,9 @@ def auth_token(main_page, config):
     wait.until(EC.element_to_be_clickable((By.ID, "api-token-property-token-save"))).click()
     token = (wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'")))
              .get_attribute("text"))
+
+    logger.error(f"New token: {token}")
+
     main_page.find_element(By.NAME, "Submit").click()
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
 
