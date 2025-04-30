@@ -12,6 +12,8 @@ def driver():
     options.add_argument("--window-size=1440,900")
     options.add_argument("--window-position=0,0")
 
+    options.add_argument('--disable-features=PasswordLeakDetection')
+
     driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
@@ -51,12 +53,13 @@ def test_added_to_cart(sauce_site):
     sauce_site.find_element(By.ID, 'password').send_keys("secret_sauce")
     sauce_site.find_element(By.NAME, 'login-button').click()
 
-    try:
-        WebDriverWait(driver,10).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
-        alert.accept()
-    except:
-        print("Нет модального окна")
+    # try:
+    #     WebDriverWait(sauce_site,10).until(EC.alert_is_present())
+    #     alert: Alert = sauce_site.switch_to.alert
+    #     alert.accept()
+    #     print("Модальное окно закрыто")
+    # except:
+    #     print("Нет модального окна")
 
     sauce_site.find_element(By.ID,'item_4_title_link').click()
     assert sauce_site.current_url == "https://www.saucedemo.com/inventory-item.html?id=4", "wrong url"
