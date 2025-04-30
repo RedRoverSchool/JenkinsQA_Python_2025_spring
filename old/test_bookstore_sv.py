@@ -23,4 +23,4 @@ def test_open_a_book_page_for_testers(driver, base_url, book_number):
         EC.presence_of_element_located((By.ID, "title"))
     ).text
     print(f"Book title is {book}")
-    assert "Test" in book, f'It seems you have chosen a book that is not for testers.'
+    assert "Test" in book, 'It seems you have chosen a book that is not for testers.'

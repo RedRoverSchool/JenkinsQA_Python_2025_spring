@@ -18,4 +18,4 @@ def test_each_trigger_opt_disable(freestyle, t_name):
     el = freestyle.find_element(By.NAME, t_name)
     el.send_keys(Keys.SPACE)
     el.send_keys(Keys.SPACE)
-    assert el.is_selected() == False, f"{t_name} should be disable"
+    assert not el.is_selected(), f"{t_name} should be disable"

@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+
 
 @pytest.fixture(scope="module")
 def browser_options():
@@ -12,6 +14,7 @@ def browser_options():
     options.add_argument("--incognito")
     return options
 
+
 @pytest.fixture(scope="module")
 def driver(browser_options):
     driver = webdriver.Chrome(options=browser_options)
@@ -19,12 +22,14 @@ def driver(browser_options):
     yield driver
     driver.quit()
 
+
 @pytest.fixture(scope="module")
 def authorization(driver):
     driver.find_element(By.ID, "user-name").send_keys("standard_user")
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
     return driver
+
 
 @pytest.fixture(scope="function")
 def clean_cart(authorization):
@@ -34,19 +39,18 @@ def clean_cart(authorization):
         while True:
             remove_cart = driver.find_element(By.XPATH, "//button[text()='Remove']")
             remove_cart.click()
-    except:
+    except NoSuchElementException:
         pass
     driver.get("https://www.saucedemo.com/inventory.html")
     yield driver
 
 
-
 def test_add_to_cart(clean_cart):
-        clean_cart.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-        clean_cart.get("https://www.saucedemo.com/cart.html")
-        item = clean_cart.find_element(By.XPATH, "//div[contains(@class, 'inventory_item_name')]")
-        count = clean_cart.find_element(By.XPATH, "//div[@data-test='item-quantity']")
-        assert item.text == "Sauce Labs Backpack" and count.text == "1", "The product has not been added to the cart"
+    clean_cart.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    clean_cart.get("https://www.saucedemo.com/cart.html")
+    item = clean_cart.find_element(By.XPATH, "//div[contains(@class, 'inventory_item_name')]")
+    count = clean_cart.find_element(By.XPATH, "//div[@data-test='item-quantity']")
+    assert item.text == "Sauce Labs Backpack" and count.text == "1", "The product has not been added to the cart"
 
 
 def test_remove_from_cart(clean_cart):

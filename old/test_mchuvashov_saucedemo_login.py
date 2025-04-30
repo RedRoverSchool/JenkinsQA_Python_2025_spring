@@ -1,5 +1,5 @@
 from selenium import webdriver
-import pytest
+
 from selenium.webdriver.common.by import By
 
 
@@ -11,4 +11,3 @@ def test_saucedemo_user_able_to_login():
     driver.find_element(By.ID, "login-button").click()
     assert driver.current_url == "https://www.saucedemo.com/inventory.html"
     driver.quit()
-

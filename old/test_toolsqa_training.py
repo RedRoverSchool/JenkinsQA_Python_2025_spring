@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from time import sleep
+
 
 DEMO_URL = "https://demoqa.com"
 TRAINING_URL = "https://www.toolsqa.com/selenium-training/"

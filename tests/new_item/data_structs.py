@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
 
 class NewItem:
@@ -12,6 +11,7 @@ class NewItem:
     any_enabled_error = (By.CSS_SELECTOR, ".input-validation-message:not(.input-message-disabled)")
     special_chars = ["@", "#", "$", "%", "^", "&", "*", "<", "/", "\\"]
     ok_button_selector = (By.ID, "ok-button")
+
 
 class FreestyleItem:
     freestyle_selector = (By.CSS_SELECTOR, ".hudson_model_FreeStyleProject")

@@ -11,7 +11,7 @@ def test_add_description_to_pipeline(pipeline_config_page):
     pipeline_config_page.find_element(By.NAME, "Submit").click()
     desc_element = WebDriverWait(pipeline_config_page, 10).until(
         EC.visibility_of_element_located((By.ID, "description")))
-    assert desc_element.is_displayed(), f"Description element is not visible"
+    assert desc_element.is_displayed(), "Description element is not visible"
     assert desc_element.text == text_for_description, \
         f"Expected description '{text_for_description}', but got '{desc_element.text}'"
 

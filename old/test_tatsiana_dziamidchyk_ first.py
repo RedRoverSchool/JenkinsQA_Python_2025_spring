@@ -1,7 +1,7 @@
-import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
+
+from selenium.webdriver.common.by import By
+
 
 def test_sort_products_by_price(driver):
     driver.get("https://www.saucedemo.com/")
@@ -9,7 +9,6 @@ def test_sort_products_by_price(driver):
     driver.find_element(By.ID, "user-name").send_keys("standard_user")
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
-
 
     sort_dropdown = driver.find_element(By.CLASS_NAME, "product_sort_container")
     sort_dropdown.click()
