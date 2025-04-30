@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-from freestyle_project.freestyle_data import Freestyle
+from tests.freestyle_project.freestyle_data import Freestyle
 
 
 def test_user_can_trigger_builds_remotely(auth_token, freestyle_configs, config):
