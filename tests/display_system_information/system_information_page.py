@@ -8,9 +8,7 @@ from tests.display_system_information.locators import SystemInformationPage as S
 
 class SystemInformationPage(BaseMethods):
     ENDPOINT_URL = '/manage/systemInfo'
-    TAB_TITLE = 'System Information [Jenkins]'
-    TABS = ['System Properties', 'Environment Variables', 'Plugins', 'Memory Usage', 'Thread Dumps']
-    SYS_ENV_TABS = TABS[:2]
+    THREAD_DUMP_TITLE = 'Thread dump [Jenkins]'
     TIMESPAN_OPTIONS = {'Short': 'sec10&width', 'Medium': 'min&width', 'Long': 'hour&width'}
 
     def __init__(self, sys_info_page: WebDriver):
