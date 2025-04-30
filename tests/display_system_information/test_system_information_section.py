@@ -70,3 +70,17 @@ class TestSystemInformationSection:
             hide_button = page.define_hide_single_value_button_locator(element_name)
             page.click(hide_button)
             assert page.is_clickable(show_button), f'Button for {element_name} is not clickable'
+
+    def test_plugins_tab_display_plugins_info(self, sys_info_page):
+        page = SIP(sys_info_page)
+        page.click(SI.PLUGINS_TAB)
+        number_of_plugins = page.number_of_plugins_in_table(SI.PLUGINS_TABLE_BODY)
+        assert number_of_plugins > 0
+
+        for i in range(1, number_of_plugins+1):
+            name_locator, version_locator, status_locator, plugin_name = page.get_plugin_info(i)
+            assert page.is_visible(name_locator), f'Row {i}: Plugin name is not displayed'
+            assert page.is_link_clickable(name_locator), f'Row {i}: {plugin_name} is not clickable'
+            assert page.is_visible(version_locator), f'Row {i}: {plugin_name} version is not displayed'
+            assert page.is_visible(status_locator), f'Row {i}: {plugin_name} status is not displayed'
+            assert page.get_element_text(status_locator) in ['true', 'false'], f'Row {i}: {plugin_name} status is not correct'
