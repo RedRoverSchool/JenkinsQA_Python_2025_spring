@@ -42,7 +42,7 @@ def test_account_description_field_value(main_page):
     main_page.find_element(By.XPATH, '//button[@name="Submit"]').click()
     account_link = wait.until(EC.presence_of_element_located((By.XPATH, '//a[contains(@href, "account")]')))
     account_link.click()
-    description_field = main_page.find_element(By.XPATH, '//textarea[@name="_.description"]')
+    description_field = wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@name="_.description"]')))
     description_field_value = description_field.get_attribute("value")
 
     assert description_field_value == test_description_name
