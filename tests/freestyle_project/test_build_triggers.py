@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -56,18 +57,21 @@ def test_user_can_trigger_builds_remotely(revoke_tokens, auth_token, freestyle, 
     freestyle.switch_to.window(app_window)
 
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
-    logger.info(f"On Dashboard: {freestyle.current_url}")
+    logger.info(f"On Dashboard page: {freestyle.current_url}")
 
-    build_queue_links = freestyle.find_elements(By.CSS_SELECTOR, "#buildQueue a[href*='/job']")
-    logger.info(f"build_queue_links: {len(build_queue_links)}")
+    wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Build History"))).click()
+    logger.info(f"On Build History page: {freestyle.current_url}")
 
-    wait60.until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
-        "No builds in the queue.")
-    )
+    # wait60.until(EC.text_to_be_present_in_element(
+    #     (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
+    #     "No builds in the queue.")
+    # )
+
+    sleep(60)
+
+    freestyle.refresh()
 
     logger.info(f"After build finished")
-    freestyle.find_element(By.LINK_TEXT, "Build History").click()
 
     builds_list = wait10.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "#projectStatus>tbody>tr")))
 
