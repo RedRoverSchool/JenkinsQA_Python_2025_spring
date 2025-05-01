@@ -41,7 +41,7 @@ def test_user_can_trigger_builds_remotely(revoke_project_tokens, auth_token, fre
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Build History"))).click()
 
     logger.info("Waiting for the build to finish...")
-    sleep(5)
+    sleep(10)
     logger.info("Refreshing status.")
     freestyle.refresh()
 
