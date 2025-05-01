@@ -39,7 +39,7 @@ def test_user_can_trigger_builds_remotely(revoke_project_tokens, auth_token, fre
     }
 
     freestyle.switch_to.new_window()
-    freestyle.get(api_urls["api_1"])
+    freestyle.get(api_urls["api_3"])
     # freestyle.refresh()
     logger.info(f"Triggered build at: {freestyle.current_url}")
     logger.info(f"Build response: {freestyle.find_element(By.CSS_SELECTOR, 'body').text}")
