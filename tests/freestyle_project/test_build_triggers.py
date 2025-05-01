@@ -34,22 +34,16 @@ def test_user_can_trigger_builds_remotely(revoke_project_tokens, auth_token, fre
 
     freestyle.switch_to.new_window()
     freestyle.get(api_url)
-    # freestyle.refresh()
     logger.info(f"Triggered build at: {freestyle.current_url}")
 
     freestyle.switch_to.window(app_window)
-
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
-    logger.info(f"Returned to Dashboard: {freestyle.current_url}")
-
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Build History"))).click()
-    logger.info(f"Viewing Build History: {freestyle.current_url}")
 
-    sleep(30)
     logger.info("Waiting for the build to finish...")
-
-    freestyle.refresh()
+    sleep(20)
     logger.info("Refreshing status.")
+    freestyle.refresh()
 
     builds = wait10.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "#projectStatus>tbody>tr")))
 
