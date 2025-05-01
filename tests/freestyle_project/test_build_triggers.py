@@ -74,6 +74,7 @@ def test_user_can_trigger_builds_remotely(revoke_tokens, auth_token, freestyle, 
     logger.info(f"After build finished")
 
     builds_list = wait10.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "#projectStatus>tbody>tr")))
+    logger.info(f"{len(builds_list)}")
 
     assert len(builds_list) == 1, f"Unexpected numbers of builds created {len(builds_list)}"
     assert freestyle.find_element(By.LINK_TEXT, f"{Freestyle.project_name}").is_displayed(), \
