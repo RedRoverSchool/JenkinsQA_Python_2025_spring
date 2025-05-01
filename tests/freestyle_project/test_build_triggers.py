@@ -23,7 +23,7 @@ def test_user_can_trigger_builds_remotely(revoke_project_tokens, auth_token, fre
     app_window = freestyle.window_handles[0]
 
     freestyle.switch_to.new_window()
-    freestyle.get("http://localhost:8080/crumbIssuer/api/json")
+    freestyle.get(f"{config.jenkins.base_url}/crumbIssuer/api/json")
 
     crumb = freestyle.find_element(By.CSS_SELECTOR, "body").text.split('"')[7]
     job_name = Freestyle.encoded_project_name
