@@ -1,6 +1,5 @@
 import logging
 from time import sleep
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -35,7 +34,7 @@ def test_user_can_trigger_builds_remotely(revoke_project_tokens, auth_token, fre
 
     freestyle.switch_to.new_window()
     freestyle.get(api_url)
-    freestyle.refresh()
+    # freestyle.refresh()
     logger.info(f"Triggered build at: {freestyle.current_url}")
 
     freestyle.switch_to.window(app_window)
