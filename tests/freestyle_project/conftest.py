@@ -9,8 +9,6 @@ from selenium.webdriver import ActionChains
 from conftest import main_page
 from tests.freestyle_project.freestyle_data import Freestyle
 
-logger = logging.getLogger(__name__)
-
 
 @pytest.fixture(scope="function")
 def freestyle(main_page, config):

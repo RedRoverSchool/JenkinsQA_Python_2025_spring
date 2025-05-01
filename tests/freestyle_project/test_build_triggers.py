@@ -39,33 +39,34 @@ def test_user_can_trigger_builds_remotely(revoke_tokens, auth_token, freestyle, 
 
     # freestyle.switch_to.new_window()
     # freestyle.get(trigger_job_api_1)
-    # logger.error(f"WINDOW 1: {freestyle.current_url}")
-    # logger.error(f"WINDOW 1: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
+    # logger.info(f"WINDOW 1: {freestyle.current_url}")
+    # logger.info(f"WINDOW 1: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
 
     # freestyle.switch_to.new_window()
     # freestyle.get(trigger_job_api_2)
-    # logger.error(f"WINDOW 2: {freestyle.current_url}")
-    # logger.error(f"WINDOW 2: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
+    # logger.info(f"WINDOW 2: {freestyle.current_url}")
+    # logger.info(f"WINDOW 2: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
 
     freestyle.switch_to.new_window()
     freestyle.get(trigger_job_api_3)
-    logger.error(f"WINDOW 3: {freestyle.current_url}")
-    logger.error(f"WINDOW 3: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
+    freestyle.refresh()
+    logger.info(f"WINDOW 3: {freestyle.current_url}")
+    logger.info(f"WINDOW 3: {freestyle.find_element(By.CSS_SELECTOR, "body").text}")
 
     freestyle.switch_to.window(app_window)
 
     wait10.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
-    logger.error(f"On Dashboard: {freestyle.current_url}")
+    logger.info(f"On Dashboard: {freestyle.current_url}")
 
     build_queue_links = freestyle.find_elements(By.CSS_SELECTOR, "#buildQueue a[href*='/job']")
-    logger.error(f"build_queue_links: {len(build_queue_links)}")
+    logger.info(f"build_queue_links: {len(build_queue_links)}")
 
     wait60.until(EC.text_to_be_present_in_element(
         (By.CSS_SELECTOR, "#buildQueue>.pane-content tbody>tr>td"),
         "No builds in the queue.")
     )
 
-    logger.error(f"After build finished")
+    logger.info(f"After build finished")
     freestyle.find_element(By.LINK_TEXT, "Build History").click()
 
     builds_list = wait10.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "#projectStatus>tbody>tr")))
