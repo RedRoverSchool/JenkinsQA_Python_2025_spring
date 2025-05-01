@@ -20,11 +20,14 @@ def test_build_steps_availability(freestyle: webdriver.Chrome):
     wait.until(EC.element_to_be_clickable(build_steps_we[-1]))
     build_steps_items = {el.text for el in build_steps_we}
 
-    # all 7 asserts are located here purposely because creating separate test for each dropdown's item is redundant
-    assert "Execute Windows batch command" in build_steps_items
-    assert "Execute shell" in build_steps_items
-    assert "Invoke Ant" in build_steps_items
-    assert "Invoke Gradle script" in build_steps_items
-    assert "Invoke top-level Maven targets" in build_steps_items
-    assert "Run with timeout" in build_steps_items
-    assert 'Set build status to "pending" on GitHub commit' in build_steps_items
+    expected_items = {
+        "Execute Windows batch command",
+        "Execute shell",
+        "Invoke Ant",
+        "Invoke Gradle script",
+        "Invoke top-level Maven targets",
+        "Run with timeout",
+        'Set build status to "pending" on GitHub commit'
+    }
+
+    assert expected_items == build_steps_items
