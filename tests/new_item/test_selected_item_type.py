@@ -12,7 +12,8 @@ def test_item_type_selection_sets_active_class(new_item_page):
         selected_type.click()
 
         items = new_item_page.find_elements(By.CSS_SELECTOR, ".j-item-options li")
-        assert (selected_type.get_attribute("aria-checked") == "true" and "active" in selected_type.get_attribute("class")) and not any(
+        assert (selected_type.get_attribute("aria-checked") == "true" and "active" in selected_type.get_attribute("class"))
+        assert  not any(
                 item != selected_type and item.get_attribute("aria-checked") == "true" and "active" not in item.get_attribute("class")
                 for item in items
         )
