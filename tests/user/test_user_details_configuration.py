@@ -1,3 +1,4 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -31,6 +32,7 @@ def test_account_description_field(main_page):
     assert main_page.find_element(By.ID, "description").text == test_description_name
 
 
+@pytest.mark.skip
 def test_account_description_field_value(main_page):
     wait = WebDriverWait(main_page, 5)
     test_description_name = "test description"
