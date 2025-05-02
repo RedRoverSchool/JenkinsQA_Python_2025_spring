@@ -14,7 +14,7 @@ def test_edit_description_from_project_page(multi_config_project_with_descriptio
     desc_input.clear()
     desc_input.send_keys(updated_text)
     multi_config_project_with_description_page.find_element(By.NAME, "Submit").click()
-    text_actual = wait30.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#description>div:first-child"))).text
+    text_actual = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#description>div:first-child"))).text
     assert text_actual == updated_text
 
 
