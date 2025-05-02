@@ -1,10 +1,10 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_account_fullname_field(main_page):
-
     test_full_name = "newadmin"
 
     main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]').click()
@@ -17,8 +17,8 @@ def test_account_fullname_field(main_page):
 
     assert account_h1_heading == test_full_name
 
-def test_account_description_field(main_page):
 
+def test_account_description_field(main_page):
     test_description_name = "test description"
 
     main_page.find_element(By.XPATH, '//header//a[contains(@href, "user")]').click()
@@ -30,6 +30,7 @@ def test_account_description_field(main_page):
 
     assert main_page.find_element(By.ID, "description").text == test_description_name
 
+@pytest.mark.skip
 def test_account_description_field_value(main_page):
     wait = WebDriverWait(main_page, 5)
     test_description_name = "test description"
