@@ -26,12 +26,12 @@ def multi_config_project_with_description_page(main_page):
     description = "This is my overview"
 
     wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "New Item"))).click()
-    wait.until(EC.presence_of_element_located((By.ID, "name"))).send_keys(project_name)
+    wait.until(EC.visibility_of_element_located((By.ID, "name"))).send_keys(project_name)
     wait.until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="j-add-item-type-standalone-projects"]/ul/li[3]/div[2]/div'))).click()
-    wait.until(EC.element_to_be_clickable((By.ID, "ok-button"))).click()
-    wait.until(EC.presence_of_element_located((By.NAME, "description"))).send_keys(description)
+        (By.XPATH, "//li[@class = 'hudson_matrix_MatrixProject']"))).click()
+    main_page.find_element(By.ID, "ok-button").click()
+    wait.until(EC.visibility_of_element_located((By.NAME, "description"))).send_keys(description)
     main_page.find_element(By.NAME, "Submit").click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, project_name))).click()
+    # wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Dashboard"))).click()
 
     return main_page
