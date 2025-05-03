@@ -1,21 +1,17 @@
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
 
-from .data_structs import FreestyleItem, NewItem
-from .new_item_steps import create_freestyle_item
+from .data_structs import NewItem, CopyFrom
 
 
-def test_copy_from_dropdown_shows_existing_item(new_item_page, config):
-    wait = WebDriverWait(new_item_page, 10)
-    new_item_page = create_freestyle_item(new_item_page, config)
-    new_item_page.find_element(*FreestyleItem.copy_from_field_selector).send_keys(
-        FreestyleItem.get_first_letter_of_project_name()
+def test_display_existing_item(prepare_new_item, config, wait5):
+    prepare_new_item.find_element(*CopyFrom.copy_from_selector).send_keys(
+        CopyFrom.first_letter_of_name()
     )
-    existing_item = wait.until(EC.visibility_of_element_located((
-        By.XPATH, "//a[contains(@class, 'jenkins-dropdown__item')]"
-    )))
-    actual_item_text = existing_item.text.strip()
-    assert actual_item_text == NewItem.positive_name, (
-        f"Expected item '{NewItem.positive_name}', but found '{actual_item_text}'"
+    item_element = wait5.until(EC.visibility_of_element_located(
+        CopyFrom.dropdown_item_selector)
+    )
+    actual_text = item_element.text.strip()
+
+    assert actual_text == NewItem.positive_name, (
+        f"Expected item '{NewItem.positive_name}', but found '{actual_text}'"
     )
