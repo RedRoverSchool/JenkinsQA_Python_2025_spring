@@ -1,9 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 import random
-from conftest import main_page
 
 
 def test_empty_description(main_page):

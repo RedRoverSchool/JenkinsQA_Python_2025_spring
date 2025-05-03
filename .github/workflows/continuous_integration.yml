@@ -39,11 +39,6 @@ jobs:
 
       - name: Lint code with Ruff
         run: ruff check --output-format=github --target-version=py312
-        continue-on-error: true
-
-      - name: Check code formatting with Ruff
-        run: ruff format --diff --no-cache --target-version=py312
-        continue-on-error: true
 
       - name: prepare jenkins data
         run: |
