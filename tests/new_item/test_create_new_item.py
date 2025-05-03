@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as wait
 
 new_folder_name = 'Test_Folder'
-DEFAULT_TIMEOUT = 15
+DEFAULT_TIMEOUT = 10
 
 
 def wait_for(driver, by, selector, timeout=DEFAULT_TIMEOUT):
@@ -33,7 +33,8 @@ def test_check_create_new_item(new_item_page, main_page):
     main_page.get(config.jenkins.base_url)
     wait_for(main_page, By.ID, "general")
     main_page.find_element(By.ID, "jenkins-home-link").click()
+    folder_elements = main_page.find_elements(
+        By.XPATH, f"//table[@id='projectstatus']//a[contains(normalize-space(string()), '{new_folder_name}')]"
+    )
 
-    assert wait_for(main_page, By.XPATH,
-                    f"//table[@id='projectstatus']//a[contains(normalize-space(string()), '{new_folder_name}')]"
-                    ), f"Folder '{new_folder_name}' NOT FOUND"
+    assert folder_elements, f"Folder '{new_folder_name}' NOT FOUND"

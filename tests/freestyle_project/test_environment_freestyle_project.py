@@ -19,7 +19,7 @@ def test_tooltip_environment_items(freestyle, tp_link, tp_wait, tp_expected_text
     actions = ActionChains(freestyle)
     wait = WebDriverWait(freestyle, 10)
     tooltip_link = freestyle.find_element(By.XPATH, tp_link)
-    post_build_actions = freestyle.find_element(By.ID, 'build-steps')
+    post_build_actions = freestyle.find_element(By.ID, 'post-build-actions')
     actions.move_to_element(post_build_actions).perform()
     actions.pause(1).move_to_element(tooltip_link).perform()
     build_steps = freestyle.find_element(By.ID, 'build-steps')

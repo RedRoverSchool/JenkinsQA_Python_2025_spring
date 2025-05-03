@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from tests.new_item.new_item_page import NewItemPage
 
 
 def test_display_project_type_list(main_page):
@@ -24,3 +25,16 @@ def test_display_description_of_type_item(main_page):
 
     assert len(valid_descriptions) == len(project_types), \
         "Количество описаний не совпадает с количеством типов проектов!"
+
+
+def test_only_one_project_can_be_selected(main_page):
+    page = NewItemPage(main_page)
+    page.select_pipeline_project()
+    page.select_freestyle_project()
+    selected_items = page.get_selected_items()
+    highlighted_items = page.get_highlighted_items()
+    highlighted_title = page.get_highlighted_item_title()
+
+    assert len(selected_items) == 1
+    assert selected_items == highlighted_items
+    assert highlighted_title == "Freestyle project"
