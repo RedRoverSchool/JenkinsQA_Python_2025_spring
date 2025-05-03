@@ -1,8 +1,8 @@
+from selenium.common import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.common import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class BaseMethods:
@@ -27,3 +27,30 @@ class BaseMethods:
 
     def is_visible(self, locator: tuple[str, str]) -> bool:
         return self.safe_wait(EC.visibility_of_element_located(locator))
+
+    def is_clickable(self, locator: tuple[str, str]) -> bool:
+        return self.safe_wait(EC.element_to_be_clickable(locator))
+
+    def is_link_clickable(self, locator: tuple[str, str]) -> bool:
+        element = self.get_element(locator)
+        if not element:
+            return False
+        if element.tag_name.lower() != 'a':
+            return False
+        href = element.get_attribute('href')
+        return element.is_displayed() and bool(href)
+
+    def find_element(self, locator: tuple[str, str]) -> WebElement:
+        return self.safe_wait(EC.visibility_of_element_located(locator), element_flag=True)
+
+    def get_attribute(self,  attribute: str, locator: tuple[str, str]) -> str:
+        element = self.safe_wait(EC.presence_of_element_located(locator), element_flag=True)
+        return element.get_attribute(attribute)
+
+    def get_element(self, locator: tuple[str, str]) -> WebElement | None:
+        return self.safe_wait(EC.presence_of_element_located(locator), element_flag=True)
+
+    def get_element_text(self, locator: tuple[str, str]) -> str:
+        element = self.safe_wait(EC.visibility_of_element_located(locator), element_flag=True)
+        return element.text.strip() if element else ''
+

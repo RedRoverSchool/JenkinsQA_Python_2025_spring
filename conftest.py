@@ -2,7 +2,7 @@ import os
 import sys
 import logging
 import datetime
-
+import subprocess
 import pytest
 
 from selenium import webdriver
@@ -32,6 +32,11 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="session")
 def config():
+    parent_branch = f"origin/{os.getenv('github.base_ref', 'main')}"
+    output = subprocess.run(["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
+                            stdout=subprocess.PIPE)
+    for line in output.stdout.decode("utf-8").expandtabs().splitlines():
+        logger.warning(line)
     return Config.load()
 
 
