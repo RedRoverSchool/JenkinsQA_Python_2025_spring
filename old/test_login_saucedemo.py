@@ -4,7 +4,6 @@ import time
 
 
 class TestSauceDemo:
-
     def setup_method(self):
         self.driver = webdriver.Chrome()
         self.driver.get("https://www.saucedemo.com/")
@@ -21,7 +20,6 @@ class TestSauceDemo:
         assert "inventory" in self.driver.current_url
 
     def test_add_to_cart(self):
-
         self.driver.find_element(By.CLASS_NAME, "btn_inventory").click()
         time.sleep(1)
 

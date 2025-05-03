@@ -1,26 +1,25 @@
+import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
-
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.support.ui import WebDriverWait
 
 
 @pytest.fixture()
 def driver():
-
     driver = webdriver.Chrome()
     driver.maximize_window()
     yield driver
     driver.quit()
 
+
 def test_login_page(driver):
-    userName = "rahulshettyacademy"
+    user_name = "rahulshettyacademy"
     pw = "learning"
 
     driver.get("https://rahulshettyacademy.com/loginpagePractise/")
-    driver.find_element(By.ID, "username").send_keys(userName)
+    driver.find_element(By.ID, "username").send_keys(user_name)
     driver.find_element(By.ID, "password").send_keys(pw)
 
     dropdown = Select(driver.find_element(By.XPATH, "//select[@class='form-control']"))

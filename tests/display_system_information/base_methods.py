@@ -12,10 +12,20 @@ class BaseMethods:
     def __init__(self, main_page: WebDriver):
         self.driver = main_page
         self.base_url = main_page.current_url
-        self.wait = WebDriverWait(main_page, BaseMethods.TIMEOUT, poll_frequency=BaseMethods.POLL_FREQUENCY)
+        self.wait = WebDriverWait(
+            main_page, BaseMethods.TIMEOUT, poll_frequency=BaseMethods.POLL_FREQUENCY
+        )
 
-    def safe_wait(self, condition: callable, timeout: int = None, element_flag: bool = False) -> bool | WebElement | None:
-        wait = self.wait if timeout is None else WebDriverWait(self.driver, timeout, poll_frequency=BaseMethods.POLL_FREQUENCY)
+    def safe_wait(
+        self, condition: callable, timeout: int = None, element_flag: bool = False
+    ) -> bool | WebElement | None:
+        wait = (
+            self.wait
+            if timeout is None
+            else WebDriverWait(
+                self.driver, timeout, poll_frequency=BaseMethods.POLL_FREQUENCY
+            )
+        )
         try:
             result = wait.until(condition)
             return result if element_flag else True
@@ -35,22 +45,29 @@ class BaseMethods:
         element = self.get_element(locator)
         if not element:
             return False
-        if element.tag_name.lower() != 'a':
+        if element.tag_name.lower() != "a":
             return False
-        href = element.get_attribute('href')
+        href = element.get_attribute("href")
         return element.is_displayed() and bool(href)
 
     def find_element(self, locator: tuple[str, str]) -> WebElement:
-        return self.safe_wait(EC.visibility_of_element_located(locator), element_flag=True)
+        return self.safe_wait(
+            EC.visibility_of_element_located(locator), element_flag=True
+        )
 
-    def get_attribute(self,  attribute: str, locator: tuple[str, str]) -> str:
-        element = self.safe_wait(EC.presence_of_element_located(locator), element_flag=True)
+    def get_attribute(self, attribute: str, locator: tuple[str, str]) -> str:
+        element = self.safe_wait(
+            EC.presence_of_element_located(locator), element_flag=True
+        )
         return element.get_attribute(attribute)
 
     def get_element(self, locator: tuple[str, str]) -> WebElement | None:
-        return self.safe_wait(EC.presence_of_element_located(locator), element_flag=True)
+        return self.safe_wait(
+            EC.presence_of_element_located(locator), element_flag=True
+        )
 
     def get_element_text(self, locator: tuple[str, str]) -> str:
-        element = self.safe_wait(EC.visibility_of_element_located(locator), element_flag=True)
-        return element.text.strip() if element else ''
-
+        element = self.safe_wait(
+            EC.visibility_of_element_located(locator), element_flag=True
+        )
+        return element.text.strip() if element else ""

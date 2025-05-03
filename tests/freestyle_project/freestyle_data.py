@@ -12,8 +12,8 @@ class Freestyle:
         '//a[@tooltip="Help for feature: Name"]',
         '//a[@tooltip="Help for feature: Refspec"]',
         '//a[@tooltip="Help for feature: Branches to build"]',
-        '//a[@tooltip="Help for feature: Branch Specifier (blank for \'any\')"]',
-        '//a[@tooltip="Help for feature: Repository browser"]'
+        "//a[@tooltip=\"Help for feature: Branch Specifier (blank for 'any')\"]",
+        '//a[@tooltip="Help for feature: Repository browser"]',
     )
     tooltip_scm_link_wait = (
         '//a[@aria-describedby="tippy-34"]',
@@ -24,28 +24,28 @@ class Freestyle:
         '//a[@aria-describedby="tippy-40"]',
         '//a[@aria-describedby="tippy-42"]',
         '//a[@aria-describedby="tippy-43"]',
-        '//a[@aria-describedby="tippy-45"]'
+        '//a[@aria-describedby="tippy-45"]',
     )
     tooltip_scm_expected_text = (
-        'Help for feature: Git',
-        'Help for feature: Repositories',
-        'Help for feature: Repository URL',
-        'Help for feature: Credentials',
-        'Help for feature: Name',
-        'Help for feature: Refspec',
-        'Help for feature: Branches to build',
-        'Help for feature: Branch Specifier (blank for \'any\')',
-        'Help for feature: Repository browser'
+        "Help for feature: Git",
+        "Help for feature: Repositories",
+        "Help for feature: Repository URL",
+        "Help for feature: Credentials",
+        "Help for feature: Name",
+        "Help for feature: Refspec",
+        "Help for feature: Branches to build",
+        "Help for feature: Branch Specifier (blank for 'any')",
+        "Help for feature: Repository browser",
     )
     tooltip_environment_link = (
         '//a[@tooltip="Help for feature: Use secret text(s) or file(s)"]',
-        '//a[@tooltip="Help for feature: With Ant"]'
+        '//a[@tooltip="Help for feature: With Ant"]',
     )
     tooltip_environment_link_wait = (
         '//a[@aria-describedby="tippy-62"]',
-        '//a[@aria-describedby="tippy-65"]'
+        '//a[@aria-describedby="tippy-65"]',
     )
     tooltip_environment_expected_text = (
-        'Help for feature: Use secret text(s) or file(s)',
-        'Help for feature: With Ant'
+        "Help for feature: Use secret text(s) or file(s)",
+        "Help for feature: With Ant",
     )

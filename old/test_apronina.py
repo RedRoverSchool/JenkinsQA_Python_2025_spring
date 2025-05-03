@@ -2,12 +2,12 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 @pytest.fixture(scope="session")
 def browser(request):
     """Фикстура для управления браузером"""
     driver = webdriver.Chrome()
     driver.implicitly_wait(5)
-
 
     yield driver
 
@@ -26,17 +26,9 @@ def authorized_user(browser):
 
 
 def test_add_to_cart(authorized_user):
-
-    authorized_user.find_element(By.XPATH, "//button[contains(text(),'Add to cart')]").click()
+    authorized_user.find_element(
+        By.XPATH, "//button[contains(text(),'Add to cart')]"
+    ).click()
     authorized_user.find_element(By.CLASS_NAME, "shopping_cart_link").click()
 
     assert "cart" in authorized_user.current_url
-
-
-
-
-
-
-
-
-

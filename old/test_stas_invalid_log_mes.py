@@ -12,16 +12,19 @@ options = EdgeOptions()
 service = EdgeService(EdgeChromiumDriverManager().install())
 driver = webdriver.Edge(service=service, options=options)
 
+
 def test_positive():
     try:
         driver.get(URL)
-        driver.find_element(By.ID, 'username').send_keys("student")
-        driver.find_element(By.ID, 'password').send_keys("Password123")
-        driver.find_element(By.ID, 'submit').click()
+        driver.find_element(By.ID, "username").send_keys("student")
+        driver.find_element(By.ID, "password").send_keys("Password123")
+        driver.find_element(By.ID, "submit").click()
 
         current_url = driver.current_url
 
-        assert current_url == "https://practicetestautomation.com/logged-in-successfully/"
+        assert (
+            current_url == "https://practicetestautomation.com/logged-in-successfully/"
+        )
     finally:
         driver.quit()
 
@@ -29,9 +32,9 @@ def test_positive():
 def test_incorrect_user():
     try:
         driver.get(URL)
-        driver.find_element(By.ID, 'username').send_keys("IncorrectUser")
-        driver.find_element(By.ID, 'password').send_keys("Password123")
-        driver.find_element(By.ID, 'submit').click()
+        driver.find_element(By.ID, "username").send_keys("IncorrectUser")
+        driver.find_element(By.ID, "password").send_keys("Password123")
+        driver.find_element(By.ID, "submit").click()
 
         wait = WebDriverWait(driver, 10)
         error_message = wait.until(EC.visibility_of_element_located((By.ID, "error")))
@@ -39,4 +42,3 @@ def test_incorrect_user():
         assert error_message.text == "Your username is invalid!"
     finally:
         driver.quit()
-

@@ -1,4 +1,3 @@
-
 from pages.authorizationpage import Authorization
 from pages.homepage import Homepage
 import time
@@ -26,7 +25,9 @@ def test_locked_out_user(driver):
 
     time.sleep(2)
 
-    authorization_page.check_title_is_locked_out_user_login("Epic sadface: Sorry, this user has been locked out.")
+    authorization_page.check_title_is_locked_out_user_login(
+        "Epic sadface: Sorry, this user has been locked out."
+    )
     driver.quit()
 
 

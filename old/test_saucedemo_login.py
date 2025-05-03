@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-def test_login_standard() :
+
+def test_login_standard():
     driver = webdriver.Chrome()
 
     driver.get("https://www.saucedemo.com")

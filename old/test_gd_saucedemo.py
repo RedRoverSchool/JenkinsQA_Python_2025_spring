@@ -23,9 +23,12 @@ def test_wrong_username():
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
 
-    error = driver.find_element(By.XPATH, "//*[contains(text(),'Username and password do not match any user')]")
+    error = driver.find_element(
+        By.XPATH, "//*[contains(text(),'Username and password do not match any user')]"
+    )
     assert "Username and password do not match any user in this service" in error.text
     driver.quit()
+
 
 def test_wrong_password():
     driver = webdriver.Chrome()
@@ -35,10 +38,11 @@ def test_wrong_password():
     driver.find_element(By.ID, "password").send_keys("non-secret_sauce")
     driver.find_element(By.ID, "login-button").click()
 
-    error = driver.find_element(By.XPATH, "//*[contains(text(),'Username and password do not match any user')]")
+    error = driver.find_element(
+        By.XPATH, "//*[contains(text(),'Username and password do not match any user')]"
+    )
     assert "Username and password do not match any user in this service" in error.text
     driver.quit()
-
 
 
 def test_empty_username():
@@ -49,7 +53,9 @@ def test_empty_username():
     driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
 
-    error = driver.find_element(By.XPATH, "//*[contains(text(),'Username is required')]")
+    error = driver.find_element(
+        By.XPATH, "//*[contains(text(),'Username is required')]"
+    )
     assert "Username is required" in error.text
     driver.quit()
 
@@ -62,6 +68,8 @@ def test_empty_password():
     driver.find_element(By.ID, "password").send_keys("")
     driver.find_element(By.ID, "login-button").click()
 
-    error = driver.find_element(By.XPATH, "//*[contains(text(),'Password is required')]")
+    error = driver.find_element(
+        By.XPATH, "//*[contains(text(),'Password is required')]"
+    )
     assert "Password is required" in error.text
     driver.quit()

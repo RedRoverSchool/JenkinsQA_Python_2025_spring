@@ -1,6 +1,6 @@
 import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 
 @pytest.fixture
 def sauce(driver):
@@ -9,8 +9,8 @@ def sauce(driver):
 
 
 def test_locked_out_user_url_check(sauce):
-    sauce.find_element(By.ID, 'user-name').send_keys("error_user")
-    sauce.find_element(By.ID, 'password').send_keys("secret_sauce")
-    sauce.find_element(By.NAME, 'login-button').click()
+    sauce.find_element(By.ID, "user-name").send_keys("error_user")
+    sauce.find_element(By.ID, "password").send_keys("secret_sauce")
+    sauce.find_element(By.NAME, "login-button").click()
 
     assert sauce.current_url == "https://www.saucedemo.com/inventory.html", "wrong url"

@@ -14,7 +14,9 @@ def test_disabled_input():
 
     driver.get(BASE_URL)
     driver.find_element(By.ID, "enableButton").click()
-    waiter10.until(EC.text_to_be_present_in_element((By.ID, "opstatus"), "Input Enabled..."))
+    waiter10.until(
+        EC.text_to_be_present_in_element((By.ID, "opstatus"), "Input Enabled...")
+    )
     driver.find_element(By.ID, "inputField").send_keys(my_text)
     driver.find_element(By.ID, "opstatus").click()
     actual_text = driver.find_element(By.ID, "opstatus").text

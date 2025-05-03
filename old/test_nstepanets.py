@@ -9,6 +9,7 @@ def login_page(driver):
     driver.get("https://practicetestautomation.com/practice-test-login/")
     return driver
 
+
 @pytest.fixture(scope="function")
 def wait(driver):
     driver_wait = WebDriverWait(driver, 1)
@@ -19,11 +20,15 @@ def test_login_page_opens(login_page):
     header = login_page.find_element(By.XPATH, '//*[@id="login"]/h2')
     assert header.text == "Test login"
 
+
 def test_login_successful(login_page):
     login_page.find_element(By.ID, "username").send_keys("student")
     login_page.find_element(By.ID, "password").send_keys("Password123")
     login_page.find_element(By.XPATH, '//button[@id="submit"]').click()
-    assert "practicetestautomation.com/logged-in-successfully/" in login_page.current_url
+    assert (
+        "practicetestautomation.com/logged-in-successfully/" in login_page.current_url
+    )
+
 
 def test_login_with_invalid_password(login_page, wait):
     login_page.find_element(By.ID, "username").send_keys("student")
@@ -32,6 +37,7 @@ def test_login_with_invalid_password(login_page, wait):
     error_message = login_page.find_element(By.XPATH, '//div[@id="error"]')
     wait.until(EC.visibility_of(error_message), "Error message not displayed")
     assert error_message.text == "Your password is invalid!"
+
 
 def test_login_with_invalid_username(login_page, wait):
     login_page.find_element(By.ID, "username").send_keys("incorrectUser")

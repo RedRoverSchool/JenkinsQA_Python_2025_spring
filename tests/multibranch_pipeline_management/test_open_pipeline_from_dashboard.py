@@ -11,8 +11,10 @@ def test_access_multibranch(main_page):
 
     wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "New Item"))).click()
     main_page.find_element(By.ID, "name").send_keys(item_name)
-    item_type = main_page.find_element(By.CLASS_NAME,
-                                       "org_jenkinsci_plugins_workflow_multibranch_WorkflowMultiBranchProject")
+    item_type = main_page.find_element(
+        By.CLASS_NAME,
+        "org_jenkinsci_plugins_workflow_multibranch_WorkflowMultiBranchProject",
+    )
 
     main_page.execute_script("arguments[0].scrollIntoView(true);", item_type)
     time.sleep(0.5)

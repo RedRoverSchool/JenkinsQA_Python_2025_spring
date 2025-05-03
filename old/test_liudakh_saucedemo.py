@@ -19,7 +19,6 @@ def test_locked_out_user():
     driver.quit()
 
 
-
 def test_standard_user():
     driver = webdriver.Chrome()
 
@@ -32,7 +31,6 @@ def test_standard_user():
 
     assert driver.current_url == "https://www.saucedemo.com/inventory.html"
     driver.quit()
-
 
 
 def test_empty_password():
@@ -49,7 +47,6 @@ def test_empty_password():
     assert error_message.text == "Epic sadface: Password is required"
 
     driver.quit()
-
 
 
 def test_empty_username():

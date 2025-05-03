@@ -19,7 +19,9 @@ def test_open_homepage(driver):
 
 def test_element_with_text(driver):
     driver.get("https://www.wikipedia.org/")
-    strong_text = driver.find_element("xpath", '//strong[text()="The Free Encyclopedia"]')
+    strong_text = driver.find_element(
+        "xpath", '//strong[text()="The Free Encyclopedia"]'
+    )
     time.sleep(3)
     assert strong_text.text == "The Free Encyclopedia"
 

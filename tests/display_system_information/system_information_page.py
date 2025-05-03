@@ -7,17 +7,27 @@ from tests.display_system_information.locators import SystemInformationPage as S
 
 
 class SystemInformationPage(BaseMethods):
-    ENDPOINT_URL = '/manage/systemInfo'
-    TAB_TITLE = 'System Information [Jenkins]'
-    TABS = ['System Properties', 'Environment Variables', 'Plugins', 'Memory Usage', 'Thread Dumps']
+    ENDPOINT_URL = "/manage/systemInfo"
+    TAB_TITLE = "System Information [Jenkins]"
+    TABS = [
+        "System Properties",
+        "Environment Variables",
+        "Plugins",
+        "Memory Usage",
+        "Thread Dumps",
+    ]
     SYS_ENV_TABS = TABS[:2]
-    TIMESPAN_OPTIONS = {'Short': 'sec10&width', 'Medium': 'min&width', 'Long': 'hour&width'}
+    TIMESPAN_OPTIONS = {
+        "Short": "sec10&width",
+        "Medium": "min&width",
+        "Long": "hour&width",
+    }
 
     def __init__(self, sys_info_page: WebDriver):
         super().__init__(sys_info_page)
 
     def get_data_table_id(self, anchor_locator) -> str:
-        return self.get_attribute('data-table-id', anchor_locator)
+        return self.get_attribute("data-table-id", anchor_locator)
 
     def get_table_td_values(self, table_id: str) -> list[str]:
         table = self.driver.find_element(By.ID, table_id)
@@ -36,11 +46,21 @@ class SystemInformationPage(BaseMethods):
         data_table_id = self.get_data_table_id(anchor_locator)
         return self.get_table_td_values(data_table_id)
 
-    def define_show_single_value_button_locator(self, element_name: str) -> tuple[str, str]:
-        return By.XPATH, f"//tr[td[normalize-space(text())='{element_name}']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"
+    def define_show_single_value_button_locator(
+        self, element_name: str
+    ) -> tuple[str, str]:
+        return (
+            By.XPATH,
+            f"//tr[td[normalize-space(text())='{element_name}']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]",
+        )
 
-    def define_hide_single_value_button_locator(self, element_name: str) -> tuple[str, str]:
-        return By.XPATH, f"//tr[td[normalize-space(text())='{element_name}']]//div[contains(@class, 'app-hidden-info-hide')]//button"
+    def define_hide_single_value_button_locator(
+        self, element_name: str
+    ) -> tuple[str, str]:
+        return (
+            By.XPATH,
+            f"//tr[td[normalize-space(text())='{element_name}']]//div[contains(@class, 'app-hidden-info-hide')]//button",
+        )
 
     def is_value_displayed(self, element_name: str) -> bool:
         locator = self.define_hide_single_value_button_locator(element_name)
@@ -57,10 +77,21 @@ class SystemInformationPage(BaseMethods):
         table = self.find_element(table_body_locator)
         return len(table.find_elements(By.TAG_NAME, "tr"))
 
-    def get_plugin_info(self, number: int) -> tuple[tuple[str, str], tuple[str, str], tuple[str, str], str]:
-        name_locator = (By.XPATH, f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[1]//a")
-        version_locator = (By.XPATH, f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[2]")
-        enabled_locator = (By.XPATH, f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[3]")
+    def get_plugin_info(
+        self, number: int
+    ) -> tuple[tuple[str, str], tuple[str, str], tuple[str, str], str]:
+        name_locator = (
+            By.XPATH,
+            f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[1]//a",
+        )
+        version_locator = (
+            By.XPATH,
+            f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[2]",
+        )
+        enabled_locator = (
+            By.XPATH,
+            f"(//table[@class='jenkins-table sortable'])[3]/tbody/tr[{number}]/td[3]",
+        )
         plugin_name = self.get_element_text(name_locator)
         return name_locator, version_locator, enabled_locator, plugin_name
 
@@ -69,4 +100,7 @@ class SystemInformationPage(BaseMethods):
         Select(element).select_by_visible_text(text)
 
     def get_graph_locator(self, flag_value: str):
-        return By.XPATH, f"//img[@alt='Memory usage graph' and contains(@src, '{flag_value}')]"
+        return (
+            By.XPATH,
+            f"//img[@alt='Memory usage graph' and contains(@src, '{flag_value}')]",
+        )

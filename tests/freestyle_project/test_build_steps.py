@@ -27,7 +27,7 @@ def test_build_steps_availability(freestyle: webdriver.Chrome):
         "Invoke Gradle script",
         "Invoke top-level Maven targets",
         "Run with timeout",
-        'Set build status to "pending" on GitHub commit'
+        'Set build status to "pending" on GitHub commit',
     }
 
     assert expected_items == build_steps_items

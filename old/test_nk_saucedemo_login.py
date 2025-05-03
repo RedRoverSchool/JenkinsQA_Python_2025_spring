@@ -1,6 +1,7 @@
-from selenium import  webdriver
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+
 
 def test_login():
     driver = webdriver.Chrome()
@@ -16,6 +17,3 @@ def test_login():
 
     assert driver.current_url == "https://www.saucedemo.com/inventory.html"
     driver.quit()
-
-
-

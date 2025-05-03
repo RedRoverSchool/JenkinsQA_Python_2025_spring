@@ -9,5 +9,5 @@ def test_login():
     driver.find_element(By.NAME, "j_password").send_keys("admin")
     driver.find_element(By.XPATH, "//*[@id='main-panel']/div/form/button").click()
 
-    assert driver.find_element(By.ID,"jenkins-name-icon")
+    assert driver.find_element(By.ID, "jenkins-name-icon")
     driver.quit()

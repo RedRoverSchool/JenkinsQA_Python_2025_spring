@@ -2,6 +2,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 def test_login_to_jenkins():
     driver = webdriver.Chrome()
     driver.get("http://localhost:8080/")
@@ -11,6 +12,7 @@ def test_login_to_jenkins():
     assert driver.find_element(By.ID, "jenkins-head-icon")
     driver.quit()
 
+
 def test_wrong_username_login():
     driver = webdriver.Chrome()
     driver.get("http://localhost:8080/")
@@ -19,6 +21,7 @@ def test_wrong_username_login():
     driver.find_element(By.NAME, "Submit").click()
     assert driver.current_url == "http://localhost:8080/loginError"
     driver.quit()
+
 
 def test_wrong_password_login():
     driver = webdriver.Chrome()

@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class NewItem:
     def __init__(self, main_page):
         self.main_page = main_page
@@ -25,11 +26,19 @@ class NewItem:
         self.click_element(By.ID, "jenkins-home-link")
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
         copyFromBtn = self.wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input.jenkins-input.auto-complete")))
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
+            )
+        )
         assert copyFromBtn.is_displayed(), "Autocomplete input field is not visible!"
 
     def copy_from_option_is_working(self):
         self.click_element(By.XPATH, "//a[@href='/view/all/newJob']")
         self.enter_text(By.CSS_SELECTOR, "input.jenkins-input.auto-complete", "f")
         assert self.wait.until(
-            EC.text_to_be_present_in_element_attribute((By.CSS_SELECTOR, "input.jenkins-input.auto-complete"), "aria-expanded", "true"))
+            EC.text_to_be_present_in_element_attribute(
+                (By.CSS_SELECTOR, "input.jenkins-input.auto-complete"),
+                "aria-expanded",
+                "true",
+            )
+        )

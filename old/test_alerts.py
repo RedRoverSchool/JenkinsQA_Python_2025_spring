@@ -10,20 +10,23 @@ from selenium.webdriver.support import expected_conditions as EC
 def config():
     return Config.load()
 
+
 @pytest.fixture(scope="function")
 def driver(config):
     match config.browser.NAME:
         case "chrome":
             from selenium.webdriver.chrome.options import Options
+
             options = Options()
-            options.page_load_strategy="eager"
-            for argument in config.browser.OPTIONS_CHROME.split(';'):
+            options.page_load_strategy = "eager"
+            for argument in config.browser.OPTIONS_CHROME.split(";"):
                 options.add_argument(argument)
             driver = webdriver.Chrome(options=options)
         case "edge":
             from selenium.webdriver.edge.options import Options
+
             options = Options()
-            for argument in config.browser.OPTIONS_EDGE.split(';'):
+            for argument in config.browser.OPTIONS_EDGE.split(";"):
                 options.add_argument(argument)
             driver = webdriver.Edge(options=options)
         case _:
@@ -32,10 +35,12 @@ def driver(config):
     yield driver
     driver.quit()
 
+
 @pytest.fixture
 def alerts(driver):
     driver.get("https://demoqa.com/alerts")
     return driver
+
 
 @pytest.mark.xfail(strick=False)
 def test_see_alert(alerts):
@@ -45,6 +50,7 @@ def test_see_alert(alerts):
 
     assert alerts.switch_to.alert.text == "You clicked a button", "Alert isn't present"
 
+
 @pytest.mark.xfail(strick=False)
 def test_timer_alert(alerts):
     waiter10 = WebDriverWait(alerts, 10)
@@ -53,7 +59,10 @@ def test_timer_alert(alerts):
     alerts.find_element(By.ID, "timerAlertButton").click()
     waiter10.until(EC.alert_is_present())
 
-    assert alerts.switch_to.alert.text == "This alert appeared after 5 seconds", "Alert isn't present"
+    assert alerts.switch_to.alert.text == "This alert appeared after 5 seconds", (
+        "Alert isn't present"
+    )
+
 
 @pytest.mark.xfail(sstrick=False)
 def test_confirm_box_alert(alerts):
@@ -69,6 +78,7 @@ def test_confirm_box_alert(alerts):
 
     assert confirm_text == "You selected Ok"
 
+
 @pytest.mark.xfail(strick=False)
 def test_prompt_box(alerts):
     waiter5 = WebDriverWait(alerts, 5)
@@ -76,7 +86,9 @@ def test_prompt_box(alerts):
     test_text = "Testing prompt box..."
     alerts.find_element(By.ID, "promtButton").click()
 
-    assert alerts.switch_to.alert.text == "Please enter your name", "Prompt box isn't present"
+    assert alerts.switch_to.alert.text == "Please enter your name", (
+        "Prompt box isn't present"
+    )
 
     alert = alerts.switch_to.alert
     alert.send_keys(test_text)

@@ -17,7 +17,8 @@ def test_incorrect_password(demoblaze_page):
     element_login = demoblaze_page.find_element(By.ID, "login2")
     element_login.click()
     element_modal = wait.until(
-        expected_conditions.visibility_of_element_located((By.ID, "logInModal")))
+        expected_conditions.visibility_of_element_located((By.ID, "logInModal"))
+    )
 
     assert element_modal.is_displayed(), "Element is not displayed"
 
@@ -26,4 +27,6 @@ def test_incorrect_password(demoblaze_page):
     demoblaze_page.find_element(By.XPATH, "//button[text()='Log in']").click()
     wait.until(expected_conditions.alert_is_present())
 
-    assert Alert(demoblaze_page).text == "Wrong password.", "Incorrect alert message, expected 'Wrong password.'"
+    assert Alert(demoblaze_page).text == "Wrong password.", (
+        "Incorrect alert message, expected 'Wrong password.'"
+    )

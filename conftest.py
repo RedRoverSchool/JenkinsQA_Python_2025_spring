@@ -18,8 +18,8 @@ from core.settings import Config
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
-logging.getLogger('selenium.webdriver.remote.remote_connection').setLevel(logging.INFO)
-logging.getLogger('faker.factory').setLevel(logging.INFO)
+logging.getLogger("selenium.webdriver.remote.remote_connection").setLevel(logging.INFO)
+logging.getLogger("faker.factory").setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -33,8 +33,10 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(scope="session")
 def config():
     parent_branch = f"origin/{os.getenv('github.base_ref', 'main')}"
-    output = subprocess.run(["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
-                            stdout=subprocess.PIPE)
+    output = subprocess.run(
+        ["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
+        stdout=subprocess.PIPE,
+    )
     for line in output.stdout.decode("utf-8").expandtabs().splitlines():
         logger.warning(line)
     return Config.load()
@@ -47,19 +49,20 @@ def jenkins_reset(config):
 
 @pytest.fixture(scope="function")
 def driver(request, config):
-
     match config.browser.NAME:
         case "chrome":
             from selenium.webdriver.chrome.options import Options
+
             options = Options()
-            for argument in config.browser.OPTIONS_CHROME.split(';'):
+            for argument in config.browser.OPTIONS_CHROME.split(";"):
                 options.add_argument(argument)
                 logger.debug(f"Argument {argument} added to the chrome")
             driver = webdriver.Chrome(options=options)
         case "edge":
             from selenium.webdriver.edge.options import Options
+
             options = Options()
-            for argument in config.browser.OPTIONS_EDGE.split(';'):
+            for argument in config.browser.OPTIONS_EDGE.split(";"):
                 options.add_argument(argument)
                 logger.debug(f"Argument {argument} added to the edge")
 
@@ -75,9 +78,13 @@ def driver(request, config):
             screenshots_dir = os.path.join(project_root, "screenshots")
             os.makedirs(screenshots_dir, exist_ok=True)
 
-            test_name =  "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
-            now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
+            test_name = "".join(
+                ch for ch in request.node.name if ch not in r'\/:*?<>|"'
+            )
+            now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            screenshot_file = os.path.join(
+                screenshots_dir, f"{test_name}_failure_{now}.png"
+            )
 
             driver.save_screenshot(screenshot_file)
             logger.info(f"Screenshot saved to: {screenshot_file}")

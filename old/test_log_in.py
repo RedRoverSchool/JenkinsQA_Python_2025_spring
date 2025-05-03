@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_login():
     driver = webdriver.Chrome()
     wait = WebDriverWait(driver, 3)
-    base_url = 'https://www.saucedemo.com/'
+    base_url = "https://www.saucedemo.com/"
 
     driver.get(base_url)
 
@@ -21,9 +21,10 @@ def test_login():
     login_button.click()
 
     wait.until(EC.url_to_be("https://www.saucedemo.com/inventory.html"))
-    products = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[data-test="title"]')))
+    products = wait.until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, '[data-test="title"]'))
+    )
     title = "Products"
-    assert title == products.text, 'ОШИБКА, заголовок не совпадает'
+    assert title == products.text, "ОШИБКА, заголовок не совпадает"
 
     driver.quit()
-

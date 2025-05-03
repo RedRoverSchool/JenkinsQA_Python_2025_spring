@@ -1,4 +1,3 @@
-
 from selenium.webdriver.common.by import By
 
 
@@ -12,7 +11,8 @@ class Homepage:
 
     def add_product_to_cart(self, cnt=1):
         self.driver.find_element(By.ID, "add-to-cart-sauce-labs-onesie").click()
-        self.driver.find_element(By.CSS_SELECTOR, "#shopping_cart_container > a").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#shopping_cart_container > a"
+        ).click()
         value = self.driver.find_elements(By.CLASS_NAME, "cart_item_label")
         assert len(value) == cnt
-
