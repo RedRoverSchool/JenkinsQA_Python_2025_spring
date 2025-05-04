@@ -9,9 +9,9 @@ class FreestyleConfigPage(BasePage):
         SAVE_BUTTON = (By.NAME, "Submit")
 
 
-    def __init__(self, driver, project_name,  timeout=5):
+    def __init__(self, driver, name,  timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url + f"/job/{project_name}/configure"
+        self.url = self.base_url + f"/job/{name}/configure"
 
     def set_trigger_builds_remotely(self, token, name):
         from pages.freestyle_project_page import FreestyleProjectPage
