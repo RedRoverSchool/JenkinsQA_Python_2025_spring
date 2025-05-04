@@ -25,4 +25,4 @@ class NewItemPage(BasePage):
         self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
         self.wait_to_be_clickable(self.Locator.FREESTYLE_PROJECT_BUTTON).click()
         self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
-        return FreestyleProjectConfigPage(self.driver, name)
+        return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
