@@ -13,7 +13,6 @@ class BasePage:
         HEADER_LOGO = (By.ID, "jenkins-home-link")
         USER_PAGE_LINK = (By.CSS_SELECTOR, "a[href*='/user/']")
 
-
     def __init__(self, driver: WebDriver, timeout = 5):
         self.config = Config.load()
         self.base_url = self.config.jenkins.base_url
@@ -53,6 +52,9 @@ class BasePage:
     def wait_to_be_visible_all(self, locator, timeout = 5) -> [WebElement]:
         return self._wait_for(locator, EC.visibility_of_all_elements_located, timeout)
 
+    def wait_text_to_be_present(self, locator, text, timeout = 5) -> bool:
+        return WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
         self.wait_to_be_clickable(self.Locators.HEADER_LOGO).click()
@@ -61,7 +63,7 @@ class BasePage:
     def go_to_the_user_page(self):
         from pages.user_page import UserPage
         self.wait_to_be_clickable(self.Locators.USER_PAGE_LINK).click()
-        return UserPage(self.driver, self.get_username())
+        return UserPage(self.driver, self.config.jenkins.USERNAME)
 
     def scroll_into_view(self, element):
         self.driver.execute_script(
@@ -77,12 +79,3 @@ class BasePage:
 
     def switch_to(self, page_window):
         self.driver.switch_to.window(page_window)
-
-    def get_username(self):
-        return self.config.jenkins.USERNAME
-
-    def get_password(self):
-        return self.config.jenkins.PASSWORD
-
-    def get_server(self):
-        return f"{self.config.jenkins.HOST}:{self.config.jenkins.PORT}"

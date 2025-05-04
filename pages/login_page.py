@@ -21,7 +21,8 @@ class LoginPage(BasePage):
         self.find_element(*self.Locator.LOGIN_FIELD).send_keys(login)
         self.find_element(*self.Locator.PASSWORD_FIELD).send_keys(password)
         self.find_element(*self.Locator.SUBMIT_BUTTON).click()
+        main_page = MainPage(self.driver).wait_for_url()
         crumb = update_crumb(self.driver, self.config)
         self.logger.info(f"login crumb: {crumb}")
-        return MainPage(self.driver).wait_for_url()
+        return main_page
 
