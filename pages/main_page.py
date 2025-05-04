@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 class MainPage(BasePage):
     class Locator:
         NEW_ITEM_BUTTON = (By.LINK_TEXT, "New Item")
+        BUILD_HISTORY_BUTTON = (By.LINK_TEXT, "Build History")
         TABLE_ITEM = (By.CSS_SELECTOR, "a.inside")
 
     def __init__(self, driver, timeout=5):
@@ -17,3 +18,8 @@ class MainPage(BasePage):
         from pages.new_item_page import NewItemPage
         self.wait_to_be_clickable(self.Locator.NEW_ITEM_BUTTON).click()
         return NewItemPage(self.driver)
+
+    def go_to_build_history_page(self):
+        from pages.build_history_page import BuildHistoryPage
+        self.wait_to_be_clickable(self.Locator.BUILD_HISTORY_BUTTON).click()
+        return BuildHistoryPage(self.driver)

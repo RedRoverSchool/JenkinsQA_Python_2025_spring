@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 class NewItemPage(BasePage):
     class Locator:
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
+        FREESTYLE_BUTTON = (By.CSS_SELECTOR, ".hudson_model_FreeStyleProject")
         FOLDER_BUTTON = (By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
         OK_BUTTON = (By.CSS_SELECTOR, '#ok-button')
 
@@ -17,3 +18,10 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locator.FOLDER_BUTTON).click()
         self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
         return FolderConfigPage(self.driver, name)
+
+    def create_freestyle_project(self, name):
+        from pages.freestyle_config_page import FreestyleConfigPage
+        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
+        self.wait_to_be_clickable(self.Locator.FREESTYLE_BUTTON).click()
+        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        return FreestyleConfigPage(self.driver, name)

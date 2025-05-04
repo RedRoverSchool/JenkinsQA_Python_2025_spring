@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
-from tests.freestyle_project.freestyle_data import Freestyle
+from tests_to_refactor.freestyle_project.freestyle_data import Freestyle
 
 
 @pytest.fixture(scope="function")
@@ -103,54 +103,3 @@ def preview_hide(freestyle):
         hide = True
 
     return [preview, hide]
-
-@pytest.fixture(scope="function")
-def revoke_project_tokens(main_page, config):
-    """
-    Fixture to revoke project-specific tokens from the user's security settings
-    if they match the current project name defined in Freestyle.project_name.
-    """
-    wait = WebDriverWait(main_page, 10)
-
-    main_page.find_element(By.CSS_SELECTOR, 'a[href*="/user/"]').click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Security'))).click()
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[tooltip*="Current token(s)"]')))
-
-    existing_tokens = main_page.find_elements(By.CSS_SELECTOR, '.token-list-existing-item > input[name="tokenName"]')
-
-    if existing_tokens:
-        token_names = [token.get_attribute('value') for token in existing_tokens]
-
-        if any(Freestyle.project_name in name for name in token_names):
-            revoke_selector = (
-                By.CSS_SELECTOR,
-                f'input[value="{Freestyle.project_name}"] ~ span.to-right > a[data-target-url*="/revoke"]'
-            )
-
-            revoke_links = wait.until(EC.visibility_of_all_elements_located(revoke_selector))
-
-            for link in revoke_links:
-                wait.until(EC.element_to_be_clickable(link)).click()
-                wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-id='ok']"))).click()
-
-
-@pytest.fixture(scope="function")
-def auth_token(main_page, config):
-    """
-    Fixture to generate a new authentication token for the current project
-    and return its value for use in tests.
-    """
-    wait = WebDriverWait(main_page, 10)
-
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.repeatable-add"))).click()
-    token_name_input = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"input[placeholder='Default name']")))
-    token_name_input.send_keys(Freestyle.project_name)
-    wait.until(EC.element_to_be_clickable((By.ID, "api-token-property-token-save"))).click()
-    token_element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[title='Copy this token'")))
-
-    token = token_element.get_attribute("text")
-
-    main_page.find_element(By.NAME, "Submit").click()
-    wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Dashboard"))).click()
-
-    return token
