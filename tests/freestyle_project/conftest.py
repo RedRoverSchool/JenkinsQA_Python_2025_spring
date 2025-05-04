@@ -22,7 +22,6 @@ def generate_token(main_page):
     token = security_page.generate_project_token(project_name)
 
     user_page = security_page.save_token(security_page.get_username())
-    user_page.wait_for_url()
     user_page.go_to_the_main_page()
 
     return token
