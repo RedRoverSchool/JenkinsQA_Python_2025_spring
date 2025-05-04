@@ -1,7 +1,5 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-from pages.freestyle_project_page import FreestyleProjectPage
 
 
 class FreestyleProjectConfigPage(BasePage):
@@ -10,8 +8,7 @@ class FreestyleProjectConfigPage(BasePage):
         is_enable = (By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')
         is_disable = (By.CLASS_NAME, 'jenkins-toggle-switch__label__unchecked-title')
         is_enable_text = (By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')
-        tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
-        tooltip_enable_text = (By.XPATH, '//span[@aria-describedby="tippy-15"]')
+        tooltip_content = (By.XPATH, '//div[@class="tippy-content"]')
         SAVE_BUTTON = (By.XPATH, '//button[@name="Submit"]')
 
 
@@ -19,6 +16,7 @@ class FreestyleProjectConfigPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/job/{project_name}/configure"
         self.name = project_name
+
 
     def is_enable(self):
         return self.wait_to_be_visible(self.Locator.is_enable, 5)
@@ -36,11 +34,13 @@ class FreestyleProjectConfigPage(BasePage):
         return FreestyleProjectPage(self.driver, project_name=self.name)
 
     def is_enable_text(self):
-        return self.wait_for_element(self.Locator.tooltip_enable_text).text
+        return self.wait_for_element(self.Locator.is_enable_text).text
 
-    def get_tooltip(self, tooltip_link, tooltip_text):
+    def get_tooltip(self, tooltip_link, tooltip_wait):
+        from selenium.webdriver import ActionChains
         actions = ActionChains(self.driver)
-        return actions.move_to_element(self.wait_for_element(tooltip_link)).perform()
+        tooltip = self.find_element(*tooltip_link)
+        actions.move_to_element(tooltip).perform()
+        self.wait_for_element(tooltip_wait)
 
-    def get_tooltip_enable(self):
-        return self.get_tooltip(self.Locator.tooltip_enable, self.Locator.tooltip_enable_text)
+        return self.wait_for_element(self.Locator.tooltip_content).text

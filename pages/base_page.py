@@ -49,6 +49,9 @@ class BasePage:
     def wait_to_be_visible(self, locator, timeout = 5) -> WebElement:
         return self._wait_for(locator, EC.visibility_of_element_located, timeout)
 
+    def wait_text_to_be_present(self, locator, text, timeout = 5) -> bool:
+        return WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
         self.wait_to_be_clickable(self.Locators.HEADER_LOGO).click()

@@ -1,21 +1,21 @@
 import pytest
+from selenium.webdriver.common.by import By
 
 from tests.freestyle_project.freestyle_data import Freestyle
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-from pages.main_page import MainPage
-# from pages.freestyle_project_page import FreestyleProjectPage
 
 
 @pytest.fixture
 def freestyle(main_page):
-    freestyle_config_page = MainPage(main_page).go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
+    freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
     freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2, 10)
-
     return freestyle_config_page
 
-# @pytest.fixture
-# def tooltip(freestyle):
-#     return freestyle.get_tooltip_enable().text
+@pytest.fixture
+def tooltip(freestyle: FreestyleProjectConfigPage):
+    tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
+    tooltip_enable_wait = (By.XPATH, '//span[@aria-describedby="tippy-15"]')
+    return freestyle.get_tooltip(tooltip_enable, tooltip_enable_wait)
 
 @pytest.fixture
 def disabled_message(freestyle):
@@ -23,17 +23,17 @@ def disabled_message(freestyle):
     return freestyle.click_save_button().get_warning_message().splitlines()[0]
 
 @pytest.fixture
-def enable_automatically(freestyle):
-    is_warning_message_disappear = False
-    is_project_enable = False
+def enable_automatically(freestyle: FreestyleProjectConfigPage):
     freestyle.switch_to_disable()
     project_page = freestyle.click_save_button()
     project_page.click_enable_button()
     if project_page.get_warning_message() == '':
         is_warning_message_disappear = True
-    config_page = project_page.go_to_configure()
-    if config_page.is_enable_text() == "Enabled":
+    else:
+        is_warning_message_disappear = False
+    project_config = project_page.go_to_configure()
+    if project_config.is_enable().is_displayed():
         is_project_enable = True
-
+    else:
+        is_project_enable = False
     return [is_warning_message_disappear, is_project_enable]
-
