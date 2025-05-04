@@ -1,11 +1,12 @@
+import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 from core.settings import Config
-
 
 class BasePage:
     class Locators:
@@ -17,14 +18,18 @@ class BasePage:
         self.base_url = self.config.jenkins.base_url
         self.driver = driver
         self.wait = WebDriverWait(driver, timeout=timeout)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def open(self):
         self.driver.get(self.url)
-        self.wait_for_url()
-        return self
+        return self.wait_for_url()
 
     def wait_for_url(self):
-        self.wait.until(EC.url_to_be(self.url))
+        try:
+            self.wait.until(EC.url_to_be(self.url))
+        except TimeoutException:
+            self.logger.error(f"Timeout when waiting for url {self.url}, current url: {self.driver.current_url}")
+        return self
 
     def find_element(self, by, selector):
         return self.driver.find_element(by, selector)

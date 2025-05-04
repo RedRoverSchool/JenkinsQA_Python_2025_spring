@@ -16,4 +16,4 @@ class MainPage(BasePage):
     def go_to_new_item_page(self):
         from pages.new_item_page import NewItemPage
         self.wait_to_be_clickable(self.Locator.NEW_ITEM_BUTTON).click()
-        return NewItemPage(self.driver)
+        return NewItemPage(self.driver).wait_for_url()
