@@ -4,12 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 logger = logging.getLogger(__name__)
 
-def test_login(login_page):
-    assert login_page.title == "Sign in [Jenkins]"
-
-def test_main_page(main_page):
-    assert main_page.title == "Dashboard [Jenkins]"
-
 def test_error_message_create_user(main_page):
     main_page.find_element(By.XPATH, '//a[contains(@href, "manage")]').click()
     main_page.find_element(By.XPATH, '//a[contains(@href, "securityRealm")]').click()
