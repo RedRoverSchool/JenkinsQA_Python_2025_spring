@@ -21,10 +21,13 @@ def get_session(driver):
 def update_crumb(driver, config):
     session = get_session(driver)
     response = session.get(config.jenkins.base_url + "/crumbIssuer/api/json")
-    crumb = response.json().get("crumb", "")
-    logger.debug(f"update_crumb: {crumb}")
-    config.jenkins.update_crumb(crumb)
-    return crumb
+    if response.ok:
+        crumb = response.json().get("crumb", "")
+        logger.debug(f"update_crumb: {crumb}")
+        config.jenkins.update_crumb(crumb)
+        return crumb
+    else:
+        logger.error(f"failed to update crumb, {response.status_code} {response.text}")
 
 
 def remote_build_trigger(driver, job_name, token, config):
@@ -33,7 +36,6 @@ def remote_build_trigger(driver, job_name, token, config):
     cred_url = config.jenkins.get_url_with_credentials()
     url = f"{cred_url}/job/{job_name}/build?token={token}&Jenkins-Crumb={config.jenkins.crumb}"
     session.get(url)
-
 
 
 def get_substrings(response, from_string, to_string):
