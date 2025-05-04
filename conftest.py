@@ -11,6 +11,7 @@ from core.jenkins_utils import clear_data
 from core.settings import Config
 
 from pages.login_page import LoginPage
+from pages.main_page import MainPage
 from pages.new_item_page import NewItemPage
 
 project_root = os.path.dirname(os.path.abspath(__file__))
@@ -87,12 +88,12 @@ def driver(request, config):
 
 
 @pytest.fixture(scope="function")
-def login_page(driver):
+def login_page(driver) -> LoginPage:
     return LoginPage(driver).open()
 
 
 @pytest.fixture(scope="function")
-def main_page(login_page, config):
+def main_page(login_page, config) -> MainPage:
     main_page = login_page.login(config.jenkins.USERNAME, config.jenkins.PASSWORD)
     return main_page
 
