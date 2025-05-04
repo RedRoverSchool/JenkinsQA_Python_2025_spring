@@ -9,7 +9,7 @@ class MainPage(BasePage):
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url
+        self.url = self.base_url + "/"
 
     def get_item_list(self):
         return [item.text for item in self.find_elements(*self.Locator.TABLE_ITEM)]
