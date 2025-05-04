@@ -20,11 +20,11 @@ class BasePage:
 
     def open(self):
         self.driver.get(self.url)
-        self.wait_for_url()
-        return self
+        return self.wait_for_url()
 
     def wait_for_url(self):
         self.wait.until(EC.url_to_be(self.url))
+        return self
 
     def find_element(self, by, selector):
         return self.driver.find_element(by, selector)
