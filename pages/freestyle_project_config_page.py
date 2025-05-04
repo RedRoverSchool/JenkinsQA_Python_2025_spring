@@ -4,7 +4,6 @@ from pages.base_page import BasePage
 
 class FreestyleProjectConfigPage(BasePage):
     class Locator:
-        H2 = (By.ID, "general")
         is_enable = (By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')
         is_disable = (By.CLASS_NAME, 'jenkins-toggle-switch__label__unchecked-title')
         is_enable_text = (By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')
