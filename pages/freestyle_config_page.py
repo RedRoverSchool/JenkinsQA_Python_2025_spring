@@ -15,10 +15,9 @@ class FreestyleConfigPage(BasePage):
 
     def set_trigger_builds_remotely(self, token, name):
         from pages.freestyle_project_page import FreestyleProjectPage
-        self.wait_for_url()
         checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)
         self.scroll_into_view(checkbox)
         self.wait_to_be_clickable(checkbox).click()
         self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
         self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
-        return FreestyleProjectPage(self.driver, name)
+        return FreestyleProjectPage(self.driver, name).wait_for_url()

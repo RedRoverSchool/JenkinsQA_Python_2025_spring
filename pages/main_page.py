@@ -22,4 +22,4 @@ class MainPage(BasePage):
     def go_to_build_history_page(self):
         from pages.build_history_page import BuildHistoryPage
         self.wait_to_be_clickable(self.Locator.BUILD_HISTORY_BUTTON).click()
-        return BuildHistoryPage(self.driver)
+        return BuildHistoryPage(self.driver).wait_for_url()

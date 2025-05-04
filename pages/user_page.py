@@ -13,4 +13,4 @@ class UserPage(BasePage):
     def go_to_security_page(self):
         from pages.security_page import SecurityPage
         self.wait_to_be_clickable(self.Locator.SECURITY_BUTTON).click()
-        return SecurityPage(self.driver, self.get_username())
+        return SecurityPage(self.driver, self.get_username()).wait_for_url()

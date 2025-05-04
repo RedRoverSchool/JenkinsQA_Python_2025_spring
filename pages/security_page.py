@@ -40,4 +40,4 @@ class SecurityPage(BasePage):
     def save_token(self, user_name):
         from pages.user_page import UserPage
         self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
-        return UserPage(self.driver, user_name)
+        return UserPage(self.driver, user_name).wait_for_url()
