@@ -13,9 +13,9 @@ class SecurityPage(BasePage):
         SAVE_BUTTON = (By.NAME, "Submit")
 
 
-    def __init__(self, driver, user_name,  timeout=5):
+    def __init__(self, driver, username,  timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url + f"/user/{user_name}/security/"
+        self.url = self.base_url + f"/user/{username}/security/"
 
     def get_existing_token_list(self):
         self.wait_to_be_visible(self.Locator.TOKEN_LIST)

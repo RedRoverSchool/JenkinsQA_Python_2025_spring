@@ -24,7 +24,7 @@ def test_user_can_trigger_builds_remotely(main_page, generate_token, get_crumb):
     logger.info(f"Triggered build at: {new_window.current_url}")
 
     logger.info("Waiting for the build to finish...")
-    sleep(10)
+    sleep(13)
 
     main_page.switch_to(main_page_window)
 
