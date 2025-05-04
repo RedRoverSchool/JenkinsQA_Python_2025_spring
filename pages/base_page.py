@@ -50,7 +50,6 @@ class BasePage:
 
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
-        self.wait_for_url()
         self.wait_to_be_clickable(self.Locators.HEADER_LOGO).click()
         return MainPage(self.driver)
 
