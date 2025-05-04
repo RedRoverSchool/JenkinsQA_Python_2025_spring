@@ -41,6 +41,9 @@ class BasePage:
     def wait_to_be_clickable(self, locator, timeout = 5) -> WebElement:
         return self._wait_for(locator, EC.element_to_be_clickable, timeout)
 
+    def wait_to_be_visible(self, locator, timeout = 5) -> WebElement:
+        return self._wait_for(locator, EC.visibility_of_element_located, timeout)
+
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
         self.wait_to_be_clickable(self.Locators.HEADER_LOGO).click()
