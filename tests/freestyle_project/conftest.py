@@ -1,5 +1,4 @@
 import pytest
-from selenium.webdriver.common.by import By
 
 from tests.freestyle_project.freestyle_data import Freestyle
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
@@ -8,14 +7,12 @@ from pages.freestyle_project_config_page import FreestyleProjectConfigPage
 @pytest.fixture
 def freestyle(main_page):
     freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
-    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2, 10)
+    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2_LOCATOR, 10)
     return freestyle_config_page
 
 @pytest.fixture
 def tooltip(freestyle: FreestyleProjectConfigPage):
-    tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
-    tooltip_enable_wait = (By.XPATH, '//span[@aria-describedby="tippy-15"]')
-    return freestyle.get_tooltip(tooltip_enable, tooltip_enable_wait)
+    return freestyle.get_tooltip(Freestyle.tooltip_enable, Freestyle.tooltip_enable_wait)
 
 @pytest.fixture
 def disabled_message(freestyle):
@@ -24,8 +21,10 @@ def disabled_message(freestyle):
 
 @pytest.fixture
 def enable_automatically(freestyle: FreestyleProjectConfigPage):
+    from pages.freestyle_project_page import FreestyleProjectPage
     freestyle.switch_to_disable()
-    project_page = freestyle.click_save_button()
+    project_page: FreestyleProjectPage = freestyle.click_save_button()
+    project_page.wait_text_to_be_present(FreestyleProjectPage.Locator.H1, Freestyle.project_name)
     project_page.click_enable_button()
     if project_page.get_warning_message() == '':
         is_warning_message_disappear = True
