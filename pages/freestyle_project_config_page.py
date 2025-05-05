@@ -29,13 +29,13 @@ class FreestyleProjectConfigPage(BasePage):
         return f"/job/{new_name}/configure"
 
     def is_enable(self):
-        return self.wait_to_be_visible(self.Locator.ENABLE, 5)
+        return self.wait_to_be_visible(self.Locator.ENABLE, 10)
 
     def is_disable(self):
-        return self.wait_to_be_visible(self.Locator.DISABLE, 5)
+        return self.wait_to_be_visible(self.Locator.DISABLE, 10)
 
     def switch_to_disable(self):
-        self.wait_to_be_clickable(self.Locator.ENABLE, 5).click()
+        self.wait_to_be_clickable(self.Locator.ENABLE, 10).click()
         return self.is_disable()
 
     def click_save_button(self):
