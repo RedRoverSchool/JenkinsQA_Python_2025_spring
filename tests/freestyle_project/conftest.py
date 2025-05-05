@@ -24,7 +24,6 @@ def enable_automatically(freestyle: FreestyleProjectConfigPage):
     from pages.freestyle_project_page import FreestyleProjectPage
     freestyle.switch_to_disable()
     project_page: FreestyleProjectPage = freestyle.click_save_button()
-    project_page.wait_text_to_be_present(FreestyleProjectPage.Locator.H1, Freestyle.project_name)
     project_page.click_enable_button()
     if project_page.get_warning_message() == '':
         is_warning_message_disappear = True

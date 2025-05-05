@@ -18,8 +18,15 @@ class FreestyleProjectConfigPage(BasePage):
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url + f"/job/{project_name}/configure"
+        self.url = self.base_url + self.get_part_url(project_name)
         self.name = project_name
+
+    def get_part_url(self, name: str):
+        if len(name.split(' ')) > 1:
+            new_name = name.replace(" ", "%20")
+        else:
+            new_name = name
+        return f"/job/{new_name}/configure"
 
     def is_enable(self):
         return self.wait_to_be_visible(self.Locator.ENABLE, 5)

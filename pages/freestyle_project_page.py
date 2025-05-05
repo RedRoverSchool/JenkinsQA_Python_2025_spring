@@ -15,8 +15,15 @@ class FreestyleProjectPage(BasePage):
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url + f"/job/{project_name}"
+        self.url = self.base_url + self.get_part_url(project_name)
         self.name = project_name
+
+    def get_part_url(self, name: str):
+        if len(name.split(' ')) > 1:
+            new_name = name.replace(" ", "%20")
+        else:
+            new_name = name
+        return f"/job/{new_name}"
 
     def get_warning_message(self):
         self.wait_text_to_be_present(self.Locator.H1, f"{self.name}")
