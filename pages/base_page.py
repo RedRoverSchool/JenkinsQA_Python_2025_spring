@@ -69,3 +69,6 @@ class BasePage:
         self.driver.execute_script(
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',
             element)
+
+    def click_on(self, locator, timeout=5):
+        self._wait_for(locator, EC.element_to_be_clickable, timeout).click()
