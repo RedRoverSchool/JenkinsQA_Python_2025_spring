@@ -58,12 +58,12 @@ class BasePage:
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
         self.wait_to_be_clickable(self.Locators.HEADER_LOGO).click()
-        return MainPage(self.driver)
+        return MainPage(self.driver).wait_for_url()
 
     def go_to_the_user_page(self):
         from pages.user_page import UserPage
         self.wait_to_be_clickable(self.Locators.USER_PAGE_LINK).click()
-        return UserPage(self.driver, self.config.jenkins.USERNAME)
+        return UserPage(self.driver, self.config.jenkins.USERNAME).wait_for_url()
 
     def scroll_into_view(self, element):
         self.driver.execute_script(
