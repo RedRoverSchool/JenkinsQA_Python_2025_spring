@@ -36,3 +36,30 @@ def enable_automatically(freestyle: FreestyleProjectConfigPage):
     else:
         is_project_enable = False
     return [is_warning_message_disappear, is_project_enable]
+
+@pytest.fixture()
+def can_add_description(freestyle):
+    freestyle.add_description(Freestyle.description_text)
+    freestyle.click_apply_button()
+    return freestyle.get_description()
+
+@pytest.fixture()
+def empty_configure(freestyle):
+    project_page = freestyle.click_save_button()
+    return project_page.get_h1_value()
+
+@pytest.fixture()
+def preview_hide(freestyle):
+    freestyle.add_description(Freestyle.description_text)
+    preview = freestyle.is_preview_visible()
+    freestyle.click_preview()
+    hide = freestyle.is_hide_preview_visible()
+    return [preview, hide]
+
+@pytest.fixture()
+def description_appears(freestyle):
+    freestyle.add_description(Freestyle.description_text)
+    project_page = freestyle.click_save_button()
+    return project_page.get_description()
+
+
