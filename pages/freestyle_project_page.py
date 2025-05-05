@@ -11,10 +11,9 @@ class FreestyleProjectPage(BasePage):
         ENABLE_BUTTON = (By.XPATH, '//button[@name="Submit"]')
         CONFIGURE_MENU_ITEM = (By.LINK_TEXT, 'Configure')
 
-
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
-        self.url = self.base_url + f"/job/{project_name}"
+        self.url = self.base_url + f"/job/{project_name}/"
         self.name = project_name
 
     def get_name(self):

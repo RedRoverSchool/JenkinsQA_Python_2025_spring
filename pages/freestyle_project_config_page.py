@@ -10,6 +10,8 @@ class FreestyleProjectConfigPage(BasePage):
         ENABLE_TEXT = (By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')
         TOOLTIP_CONTENT = (By.XPATH, '//div[@class="tippy-content"]')
         SAVE_BUTTON = (By.XPATH, '//button[@name="Submit"]')
+        BUILDS_REMOTELY_CHECKBOX = (By.CSS_SELECTOR, "input[name='pseudoRemoteTrigger']~label")
+        AUTH_TOKEN = (By.NAME, "authToken")
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -29,7 +31,7 @@ class FreestyleProjectConfigPage(BasePage):
     def click_save_button(self):
         from pages.freestyle_project_page import FreestyleProjectPage
         self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
-        return FreestyleProjectPage(self.driver, project_name=self.name)
+        return FreestyleProjectPage(self.driver, project_name=self.name).wait_for_url()
 
     def is_enable_text(self):
         return self.wait_for_element(self.Locator.ENABLE_TEXT).text
@@ -41,3 +43,10 @@ class FreestyleProjectConfigPage(BasePage):
         actions.move_to_element(tooltip).perform()
         self.wait_for_element(tooltip_wait)
         return self.wait_for_element(self.Locator.TOOLTIP_CONTENT).text
+
+    def set_trigger_builds_remotely(self, token):
+        checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)
+        self.scroll_into_view(checkbox)
+        self.wait_to_be_clickable(checkbox).click()
+        self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
+        return self.click_save_button()

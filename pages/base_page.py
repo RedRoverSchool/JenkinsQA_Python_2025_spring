@@ -49,7 +49,7 @@ class BasePage:
     def wait_to_be_visible(self, locator, timeout = 5) -> WebElement:
         return self._wait_for(locator, EC.visibility_of_element_located, timeout)
 
-    def wait_to_be_visible_all(self, locator, timeout = 5) -> [WebElement]:
+    def wait_to_be_visible_all(self, locator, timeout = 5) ->  list[WebElement]:
         return self._wait_for(locator, EC.visibility_of_all_elements_located, timeout)
 
     def wait_text_to_be_present(self, locator, text, timeout = 5) -> bool:
@@ -69,13 +69,3 @@ class BasePage:
         self.driver.execute_script(
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',
             element)
-
-    def get_current_window_handle(self):
-        return self.driver.window_handles[0]
-
-    def switch_to_new_window(self):
-        self.driver.switch_to.new_window()
-        return self.driver
-
-    def switch_to(self, page_window):
-        self.driver.switch_to.window(page_window)
