@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 
 class FreestyleProjectConfigPage(BasePage):
     class Locator:
+        H1 = (By.CSS_SELECTOR, '.jenkins-app-bar__content>h1')
         H2_LOCATOR = (By.ID, "general")
         ENABLE = (By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')
         DISABLE = (By.CLASS_NAME, 'jenkins-toggle-switch__label__unchecked-title')
@@ -14,6 +15,7 @@ class FreestyleProjectConfigPage(BasePage):
         APPLY_BUTTON = (By.XPATH, '//button[@name="Apply"]')
         PREVIEW = (By.LINK_TEXT, 'Preview')
         HIDE_PREVIEW = (By.LINK_TEXT, 'Hide preview')
+        NOTIFICATION = (By.ID, 'notification-bar')
 
 
     def __init__(self, driver, project_name, timeout=5):
@@ -28,6 +30,9 @@ class FreestyleProjectConfigPage(BasePage):
             new_name = name
         return f"/job/{new_name}/configure"
 
+    def get_h1_text(self):
+        return self.wait_for_element(self.Locator.H1).text
+
     def is_enable(self):
         return self.wait_to_be_visible(self.Locator.ENABLE, 10)
 
@@ -38,10 +43,16 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_clickable(self.Locator.ENABLE, 10).click()
         return self.is_disable()
 
+    def is_save_button_available(self):
+        return self.wait_to_be_clickable(self.Locator.SAVE_BUTTON)
+
     def click_save_button(self):
         from pages.freestyle_project_page import FreestyleProjectPage
         self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
         return FreestyleProjectPage(self.driver, project_name=self.name)
+
+    def is_apply_button_available(self):
+        return self.wait_to_be_clickable(self.Locator.APPLY_BUTTON)
 
     def click_apply_button(self):
         self.wait_to_be_clickable(self.Locator.APPLY_BUTTON).click()
@@ -81,3 +92,6 @@ class FreestyleProjectConfigPage(BasePage):
             return True
         else:
             return False
+
+    def is_notification_was_visible(self):
+        return self.wait_to_be_visible(self.Locator.NOTIFICATION)
