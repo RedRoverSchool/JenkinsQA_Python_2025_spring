@@ -1,105 +1,38 @@
 import pytest
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver import ActionChains
+
 from tests.freestyle_project.freestyle_data import Freestyle
+from pages.freestyle_project_config_page import FreestyleProjectConfigPage
 
 
-@pytest.fixture(scope="function")
-def freestyle(main_page, config):
-    wait5 = WebDriverWait(main_page, 5)
-    wait5.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href="/view/all/newJob"]'))).click()
-    wait5.until(EC.presence_of_element_located((By.ID, 'name'))).send_keys(Freestyle.project_name)
-    main_page.find_elements(By.CSS_SELECTOR, '.j-item-options>li[tabindex="0"]')[0].click()
-    main_page.find_element(By.ID, 'ok-button').click()
-    wait5.until(EC.url_changes(config.jenkins.base_url + "/view/all/newJob"))
+@pytest.fixture
+def freestyle(main_page):
+    freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
+    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2_LOCATOR, 10)
+    return freestyle_config_page
 
-    return main_page
+@pytest.fixture
+def tooltip(freestyle: FreestyleProjectConfigPage):
+    return freestyle.get_tooltip(Freestyle.tooltip_enable, Freestyle.tooltip_enable_wait)
 
-@pytest.fixture(scope="function")
-def tooltip(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    actions = ActionChains(freestyle)
-    tooltip_link = freestyle.find_element(By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
-    actions.move_to_element(tooltip_link).perform()
-    wait.until(EC.presence_of_element_located((By.XPATH, '//span[@aria-describedby="tippy-15"]')))
-
-    return freestyle.find_element(By.XPATH, '//div[@class="tippy-content"]').text
-
-@pytest.fixture(scope="function")
+@pytest.fixture
 def disabled_message(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')))
-    freestyle.find_element(By.XPATH, '//label[@data-title="Disabled"]').click()
-    freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
-    wait.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
+    freestyle.switch_to_disable()
+    return freestyle.click_save_button().get_warning_message().splitlines()[0]
 
-    return freestyle
-
-@pytest.fixture(scope="function")
-def enable_automatically(disabled_message):
-    is_warning_message_disappear = False
-    is_project_enable = False
-    wait = WebDriverWait(disabled_message, 10)
-    wait2 = WebDriverWait(disabled_message, 2)
-    disabled_message.find_element(By.XPATH, '//button[@name="Submit"]').click()
-    wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
-    try:
-        wait2.until(EC.presence_of_element_located((By.XPATH, '//form[@action="enable"]')))
-    except Exception:
-        pass
+@pytest.fixture
+def enable_automatically(freestyle: FreestyleProjectConfigPage):
+    from pages.freestyle_project_page import FreestyleProjectPage
+    freestyle.switch_to_disable()
+    project_page: FreestyleProjectPage = freestyle.click_save_button()
+    project_page.wait_text_to_be_present(FreestyleProjectPage.Locator.H1, Freestyle.project_name)
+    project_page.click_enable_button()
+    if project_page.get_warning_message() == '':
         is_warning_message_disappear = True
-    disabled_message.find_element(By.LINK_TEXT, 'Configure').click()
-    wait.until(EC.presence_of_element_located((By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')))
-    is_enable_text = disabled_message.find_element(By.XPATH, '//label[@class="jenkins-toggle-switch__label "]').text
-    if is_enable_text == "Enabled":
-        is_project_enable = True
-
-    return [is_warning_message_disappear, is_project_enable]
-
-@pytest.fixture()
-def can_add_description(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    (wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@name="description"]')))
-        .send_keys(Freestyle.description_text))
-    freestyle.find_element(By.XPATH, '//button[@name="Apply"]').click()
-
-    return freestyle.find_element(By.XPATH, '//textarea[@name="description"]').get_attribute("value")
-
-@pytest.fixture()
-def empty_configure(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    wait.until(EC.presence_of_element_located((By.XPATH, '//button[@name="Submit"]'))).click()
-    wait.until(EC.presence_of_element_located((By.LINK_TEXT, 'Build Now')))
-    h1_txt = freestyle.find_element(By.CSS_SELECTOR, 'h1').text
-    if h1_txt == Freestyle.project_name:
-        return True
     else:
-        return Freestyle
-
-@pytest.fixture()
-def description_appears(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    freestyle.find_element(By.XPATH, '//textarea[@name="description"]').send_keys(Freestyle.description_text)
-    freestyle.find_element(By.XPATH, '//button[@name="Submit"]').click()
-    wait.until(EC.presence_of_element_located((By.ID, 'description')))
-
-    return freestyle.find_element(By.ID, 'description').text
-
-@pytest.fixture()
-def preview_hide(freestyle):
-    wait = WebDriverWait(freestyle, 10)
-    preview = False
-    hide = False
-    freestyle.find_element(By.XPATH, '//textarea[@name="description"]').send_keys(Freestyle.description_text)
-    preview_webelement = freestyle.find_element(By.LINK_TEXT, 'Preview')
-    if preview_webelement.is_enabled():
-        preview = True
-    preview_webelement.click()
-    wait.until(EC.element_to_be_clickable((By.LINK_TEXT, 'Hide preview')))
-    hide_preview_webelement = freestyle.find_element(By.LINK_TEXT, 'Hide preview')
-    if hide_preview_webelement.is_enabled():
-        hide = True
-
-    return [preview, hide]
+        is_warning_message_disappear = False
+    project_config = project_page.go_to_configure()
+    if project_config.is_enable().is_displayed():
+        is_project_enable = True
+    else:
+        is_project_enable = False
+    return [is_warning_message_disappear, is_project_enable]

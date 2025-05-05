@@ -2,18 +2,17 @@ import os
 import sys
 import logging
 import datetime
-
+import subprocess
 import pytest
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-from components.new_item import NewItem
 from core.jenkins_utils import clear_data
 from core.settings import Config
 
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
+from pages.new_item_page import NewItemPage
 
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
@@ -32,6 +31,11 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="session")
 def config():
+    parent_branch = f"origin/{os.getenv('github.base_ref', 'main')}"
+    output = subprocess.run(["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
+                            stdout=subprocess.PIPE)
+    for line in output.stdout.decode("utf-8").expandtabs().splitlines():
+        logger.warning(line)
     return Config.load()
 
 
@@ -84,21 +88,16 @@ def driver(request, config):
 
 
 @pytest.fixture(scope="function")
-def login_page(driver, config):
-    driver.get(config.jenkins.base_url + "/login?from=%2F")
-    return driver
+def login_page(driver) -> LoginPage:
+    return LoginPage(driver).open()
 
 
 @pytest.fixture(scope="function")
-def main_page(login_page, config):
-    login_page.find_element(By.ID, "j_username").send_keys(config.jenkins.USERNAME)
-    login_page.find_element(By.ID, "j_password").send_keys(config.jenkins.PASSWORD)
-    login_page.find_element(By.NAME, "Submit").click()
-    wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
-    wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
-    return login_page
+def main_page(login_page, config) -> MainPage:
+    main_page = login_page.login(config.jenkins.USERNAME, config.jenkins.PASSWORD)
+    return main_page
 
 
 @pytest.fixture(scope="function")
-def new_item(main_page):
-    return NewItem(main_page)
+def new_item_page(main_page) -> NewItemPage:
+    return main_page.go_to_new_item_page()
