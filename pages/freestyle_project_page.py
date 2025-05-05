@@ -22,7 +22,7 @@ class FreestyleProjectPage(BasePage):
             new_name = name.replace(" ", "%20")
         else:
             new_name = name
-        return f"/job/{new_name}"
+        return f"/job/{new_name}/"
 
     def get_warning_message(self):
         self.wait_text_to_be_present(self.Locator.H1, f"{self.name}")
