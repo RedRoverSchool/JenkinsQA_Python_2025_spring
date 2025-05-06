@@ -18,6 +18,9 @@ class FreestyleProjectConfigPage(BasePage):
         NOTIFICATION = (By.ID, 'notification-bar')
         BUILDS_REMOTELY_CHECKBOX = (By.CSS_SELECTOR, "input[name='pseudoRemoteTrigger']~label")
         AUTH_TOKEN = (By.NAME, "authToken")
+        BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
+        POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
+
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -103,3 +106,16 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_clickable(checkbox).click()
         self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
         return self.click_save_button()
+
+    def scroll_to_post_build_actions(self):
+        self.scroll_to_element(*self.Locator.POST_BUILD_ACTIONS)
+        self.wait_for_element(self.Locator.BUILD_STEPS)
+        return self
+
+    def click_on_checkbox_environment_options(self, item_name):
+        locator = (
+            By.XPATH, f'//label[text()="{item_name}"]/ancestor::span[@class="jenkins-checkbox"]')
+        self.find_element(*locator).click()
+
+    def is_checkbox_environment_options_selected(self, id_check):
+        return self.wait_for_element((By.XPATH, f'//input[@id="{id_check}"]')).is_selected()

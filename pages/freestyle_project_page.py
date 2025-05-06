@@ -25,7 +25,7 @@ class FreestyleProjectPage(BasePage):
         return f"/job/{new_name}/"
 
     def get_warning_message(self):
-        self.wait_text_to_be_present(self.Locator.H1, f"{self.name}")
+        self.wait_text_to_be_present(self.Locator.H1, self.name)
         if len(self.find_elements(*self.Locator.FORM)) > 0:
             return self.wait_to_be_visible(self.Locator.WARNING_MESSAGE).text
         else:

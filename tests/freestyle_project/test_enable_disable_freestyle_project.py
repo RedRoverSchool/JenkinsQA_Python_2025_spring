@@ -1,5 +1,3 @@
-import pytest
-
 from tests.freestyle_project.freestyle_data import Freestyle
 
 
@@ -14,6 +12,5 @@ def test_tooltip(tooltip):
 def test_disabled_message(disabled_message):
     assert disabled_message == Freestyle.warning_message
 
-@pytest.mark.xfail(strick=False)
 def test_enable_after_disabled(enable_automatically):
     assert enable_automatically[0] and enable_automatically[1]

@@ -8,6 +8,14 @@ class Freestyle:
     description_text = "Jenkins freestyle project is the general purpose job that will clone the projects from the Source Code Management (SCM) like Github, Gitlab, and Bit Bucket."
     tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
     tooltip_enable_wait = (By.XPATH, '//span[@aria-describedby="tippy-15"]')
+    environmet_options = ([
+        ("Delete workspace before build starts", "cb18"),
+        ("Use secret text(s) or file(s)", "cb19"),
+        ("Add timestamps to the Console Output", "cb20"),
+        ("Inspect build log for published build scans", "cb21"),
+        ("Terminate a build if it's stuck", "cb22"),
+        ("With Ant", "cb23")
+    ])
     tooltip_scm_link = (
         '//a[@tooltip="Help for feature: Git"]',
         '//a[@tooltip="Help for feature: Repositories"]',
