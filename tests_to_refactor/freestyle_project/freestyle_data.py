@@ -1,13 +1,8 @@
-from selenium.webdriver.common.by import By
-
-
 class Freestyle:
-    project_name = "NewFreestyleProject"
+    project_name = "New Freestyle Project"
     tooltip_disable = "Enable or disable the current project"
     warning_message = "This project is currently disabled"
     description_text = "Jenkins freestyle project is the general purpose job that will clone the projects from the Source Code Management (SCM) like Github, Gitlab, and Bit Bucket."
-    tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
-    tooltip_enable_wait = (By.XPATH, '//span[@aria-describedby="tippy-15"]')
     tooltip_scm_link = (
         '//a[@tooltip="Help for feature: Git"]',
         '//a[@tooltip="Help for feature: Repositories"]',
