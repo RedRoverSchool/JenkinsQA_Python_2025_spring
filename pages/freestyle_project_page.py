@@ -17,6 +17,10 @@ class FreestyleProjectPage(BasePage):
         self.url = self.base_url + self.get_part_url(project_name)
         self.name = project_name
 
+    def click_enable_button(self):
+        self.wait_for_element(self.Locator.ENABLE_BUTTON).click()
+        return self
+
     def get_part_url(self, name: str):
         if len(name.split(' ')) > 1:
             new_name = name.replace(" ", "%20")
@@ -31,19 +35,19 @@ class FreestyleProjectPage(BasePage):
         else:
             return ''
 
-    def click_enable_button(self):
-        self.wait_for_element(self.Locator.ENABLE_BUTTON).click()
-        return self
-
-    def go_to_configure(self):
-        from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-        self.wait_for_element(self.Locator.BUILD_NOW)
-        self.wait_to_be_clickable(self.Locator.CONFIGURE_MENU_ITEM).click()
-        return FreestyleProjectConfigPage(self.driver, self.name)
-
     def get_h1_value(self):
         self.wait_to_be_clickable(self.Locator.BUILD_NOW)
         return self.wait_for_element(self.Locator.H1).text
 
     def get_description(self):
         return self.wait_for_element(self.Locator.DESCRIPTION).text
+
+    def get_title(self):
+        self.wait_for_element(self.Locator.BUILD_NOW)
+        return self.driver.title
+
+    def go_to_configure(self):
+        from pages.freestyle_project_config_page import FreestyleProjectConfigPage
+        self.wait_for_element(self.Locator.BUILD_NOW)
+        self.wait_to_be_clickable(self.Locator.CONFIGURE_MENU_ITEM).click()
+        return FreestyleProjectConfigPage(self.driver, self.name)

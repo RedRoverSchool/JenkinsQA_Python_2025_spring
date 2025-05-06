@@ -17,7 +17,7 @@ def freestyle(main_page):
 
 @pytest.fixture
 def tooltip(freestyle: FreestyleProjectConfigPage):
-    return freestyle.get_tooltip(Freestyle.tooltip_enable, Freestyle.tooltip_enable_wait)
+    return freestyle.get_tooltip(Freestyle.tooltip_enable)
 
 @pytest.fixture
 def disabled_message(freestyle):
