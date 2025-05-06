@@ -38,7 +38,7 @@ class MainPage(BasePage):
         self.click_on(self.Locator.MANAGE_JENKINS_BUTTON)
         return ManageJenkinsPage(self.driver).wait_for_url()
 
-    def wait_for_build_queue_empty(self):
+    def wait_for_build_queue_executed(self):
         if self.wait_to_be_visible(self.Locator.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
             self.wait_for_element(self.Locator.BUILD_QUEUE_TOGGLE).click()
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_HEADER, "Build Queue (1)", 10)
