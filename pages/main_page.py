@@ -38,10 +38,10 @@ class MainPage(BasePage):
 
     def wait_for_build_queue_empty(self):
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_HEADER, "Build Queue (1)", 10)
-        logger.info(f"Build Queue (1)")
+        logger.info("Build Queue (1)")
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_HEADER, "Build Queue", 10)
-        logger.info(f"Build Queue")
+        logger.info("Build Queue")
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
-        logger.info(f"No builds in the queue.")
+        logger.info("No builds in the queue.")
         return self
 

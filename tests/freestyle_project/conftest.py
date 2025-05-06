@@ -96,4 +96,4 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle, config, dr
 
     remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
     logger.info(f"Triggered build at: {driver.current_url}")
-    logger.info(f"Waiting for the build to finish ...")
+    logger.info("Waiting for the build to finish ...")
