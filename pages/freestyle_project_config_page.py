@@ -20,12 +20,36 @@ class FreestyleProjectConfigPage(BasePage):
         AUTH_TOKEN = (By.NAME, "authToken")
         BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
         POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
+        ENVIRONMENT = (By.ID, 'environment')
 
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + self.get_part_url(project_name)
         self.name = project_name
+
+    def add_description(self, description_text):
+        self.wait_for_element(self.Locator.DESCRIPTION_FIELD).send_keys(description_text)
+        return self
+
+    def click_save_button(self):
+        from pages.freestyle_project_page import FreestyleProjectPage
+        self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
+        return FreestyleProjectPage(self.driver, project_name=self.name).wait_for_url()
+
+    def click_apply_button(self):
+        self.wait_to_be_clickable(self.Locator.APPLY_BUTTON).click()
+        return self
+
+    def click_preview(self):
+        if self.is_preview_visible():
+            self.find_element(*self.Locator.PREVIEW).click()
+        return self
+
+    def click_on_checkbox_environment_options(self, item_name):
+        locator = (
+            By.XPATH, f'//label[text()="{item_name}"]/ancestor::span[@class="jenkins-checkbox"]')
+        self.find_element(*locator).click()
 
     def get_part_url(self, name: str):
         if len(name.split(' ')) > 1:
@@ -34,8 +58,30 @@ class FreestyleProjectConfigPage(BasePage):
             new_name = name
         return f"/job/{new_name}/configure"
 
+    def get_tooltip(self, tooltip_link):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        tooltip = self.find_element(*tooltip_link)
+        actions.move_to_element(tooltip).perform()
+        return self.wait_for_element(self.Locator.TOOLTIP_CONTENT).text
+
+    def get_description(self):
+        return self.find_element(*self.Locator.DESCRIPTION_FIELD).get_attribute("value")
+
+    def get_environment_element(self):
+        return self.wait_for_element(self.Locator.ENVIRONMENT)
+
     def get_h1_text(self):
         return self.wait_for_element(self.Locator.H1).text
+
+    def is_checkbox_environment_options_selected(self, id_check):
+        return self.wait_for_element((By.XPATH, f'//input[@id="{id_check}"]')).is_selected()
+
+    def is_save_button_available(self):
+        return self.wait_to_be_clickable(self.Locator.SAVE_BUTTON)
+
+    def is_apply_button_available(self):
+        return self.wait_to_be_clickable(self.Locator.APPLY_BUTTON)
 
     def is_enable(self):
         return self.wait_to_be_visible(self.Locator.ENABLE, 10)
@@ -43,53 +89,14 @@ class FreestyleProjectConfigPage(BasePage):
     def is_disable(self):
         return self.wait_to_be_visible(self.Locator.DISABLE, 10)
 
-    def switch_to_disable(self):
-        self.wait_to_be_clickable(self.Locator.ENABLE, 10).click()
-        return self.is_disable()
-
-    def is_save_button_available(self):
-        return self.wait_to_be_clickable(self.Locator.SAVE_BUTTON)
-
-    def click_save_button(self):
-        from pages.freestyle_project_page import FreestyleProjectPage
-        self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
-        return FreestyleProjectPage(self.driver, project_name=self.name).wait_for_url()
-
-    def is_apply_button_available(self):
-        return self.wait_to_be_clickable(self.Locator.APPLY_BUTTON)
-
-    def click_apply_button(self):
-        self.wait_to_be_clickable(self.Locator.APPLY_BUTTON).click()
-        return self
-
     def is_enable_text(self):
         return self.wait_for_element(self.Locator.ENABLE_TEXT).text
-
-    def get_tooltip(self, tooltip_link, tooltip_wait):
-        from selenium.webdriver import ActionChains
-        actions = ActionChains(self.driver)
-        tooltip = self.find_element(*tooltip_link)
-        actions.move_to_element(tooltip).perform()
-        self.wait_for_element(tooltip_wait)
-        return self.wait_for_element(self.Locator.TOOLTIP_CONTENT).text
-
-    def add_description(self, description_text):
-        self.wait_for_element(self.Locator.DESCRIPTION_FIELD).send_keys(description_text)
-        return self
-
-    def get_description(self):
-        return self.find_element(*self.Locator.DESCRIPTION_FIELD).get_attribute("value")
 
     def is_preview_visible(self):
         if self.wait_to_be_clickable(self.Locator.PREVIEW):
             return True
         else:
             return False
-
-    def click_preview(self):
-        if self.is_preview_visible():
-            self.find_element(*self.Locator.PREVIEW).click()
-        return self
 
     def is_hide_preview_visible(self):
         if self.wait_to_be_clickable(self.Locator.HIDE_PREVIEW, 2):
@@ -100,6 +107,11 @@ class FreestyleProjectConfigPage(BasePage):
     def is_notification_was_visible(self):
         return self.wait_to_be_visible(self.Locator.NOTIFICATION)
 
+    def scroll_to_post_build_actions(self):
+        self.scroll_to_element(*self.Locator.POST_BUILD_ACTIONS)
+        self.wait_for_element(self.Locator.BUILD_STEPS)
+        return self
+
     def set_trigger_builds_remotely(self, token):
         checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)
         self.scroll_into_view(checkbox)
@@ -107,15 +119,6 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
         return self.click_save_button()
 
-    def scroll_to_post_build_actions(self):
-        self.scroll_to_element(*self.Locator.POST_BUILD_ACTIONS)
-        self.wait_for_element(self.Locator.BUILD_STEPS)
-        return self
-
-    def click_on_checkbox_environment_options(self, item_name):
-        locator = (
-            By.XPATH, f'//label[text()="{item_name}"]/ancestor::span[@class="jenkins-checkbox"]')
-        self.find_element(*locator).click()
-
-    def is_checkbox_environment_options_selected(self, id_check):
-        return self.wait_for_element((By.XPATH, f'//input[@id="{id_check}"]')).is_selected()
+    def switch_to_disable(self):
+        self.wait_to_be_clickable(self.Locator.ENABLE, 10).click()
+        return self.is_disable()
