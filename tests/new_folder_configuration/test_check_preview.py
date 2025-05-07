@@ -1,19 +1,14 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from tests.new_folder_configuration.variables import FolderNames
 
 
-def test_check_description_preview(main_page, create_folder):
-    wait = WebDriverWait(main_page, 10)
-    item_name = "Folder one"
-    item_description = "This is a sanity test"
-    create_folder(item_name)
-    wait.until(EC.visibility_of_element_located((By.ID, "general")))
-    main_page.find_element(By.CSS_SELECTOR, "div.setting-main> textarea").send_keys(item_description)
-    main_page.find_element(By.CLASS_NAME, "textarea-show-preview").click()
-    tested_description = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "textarea-preview"))).text
-    main_page.find_element(By.CLASS_NAME, "textarea-hide-preview").click()
-    style = main_page.find_element(By.CLASS_NAME, "textarea-preview").get_attribute("style")
+def test_check_description_preview(folder_config_page):
+    item_description = FolderNames.item_description
 
-    assert tested_description == item_description, "Preview doesn't work"
+    folder_config_page.set_description(item_description)
+    folder_config_page.click_preview()
+    tested_description = folder_config_page.get_preview_text()
+    folder_config_page.hide_preview()
+    style = folder_config_page.get_preview_style()
+
+    assert tested_description == item_description, "Preview doesn't match"
     assert "display: none" in style, "Preview still visible"
