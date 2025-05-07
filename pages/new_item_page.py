@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
-
 class NewItemPage(BasePage):
     class Locator:
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
@@ -12,6 +11,7 @@ class NewItemPage(BasePage):
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
         ERROR_MESSAGE = (By.ID, "itemname-required")
+        ITEM_MULTI_CONFIG_PROJECT = (By.CLASS_NAME, "hudson_matrix_MatrixProject")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -52,3 +52,12 @@ class NewItemPage(BasePage):
     def get_error_message(self):
         self.wait_for_element(self.Locator.OK_BUTTON).click()
         return self.wait_for_element(self.Locator.ERROR_MESSAGE).text.strip()
+
+    def create_new_multi_config_project(self, name):
+        from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
+        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
+        item_multi_config_project = self.wait_to_be_clickable(self.Locator.ITEM_MULTI_CONFIG_PROJECT)
+        self.scroll_into_view(item_multi_config_project)
+        item_multi_config_project.click()
+        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
