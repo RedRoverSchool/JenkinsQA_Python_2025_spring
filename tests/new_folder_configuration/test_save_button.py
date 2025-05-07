@@ -1,9 +1,8 @@
-from tests.new_item.data_structs import NewItem
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import random
-import pytest
+
 
 # @pytest.mark.skip(reason="AssertionError: Expected name text to be 'folder23', but got 'Configuration'")
 def test_save_on_folder_configurator(main_page):
