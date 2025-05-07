@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-
+from time import sleep
 
 class NewItemPage(BasePage):
     class Locator:
@@ -13,6 +13,8 @@ class NewItemPage(BasePage):
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
         ERROR_MESSAGE = (By.ID, "itemname-required")
         ITEM_TYPES = (By.CSS_SELECTOR, ".label")
+        NEW_ITEM = (By.XPATH, "//a[@href='/view/all/newJob']")
+        COPY_FROM = (By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -57,3 +59,9 @@ class NewItemPage(BasePage):
     def get_item_types_text(self):
         elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
         return [element.text for element in elements]
+
+    def click_new_item_button(self):
+        return self.wait_to_be_clickable(self.Locator.NEW_ITEM).click()
+
+    def copy_from_option_is_displayed(self):
+        return self.wait_to_be_visible(self.Locator.COPY_FROM).is_displayed()
