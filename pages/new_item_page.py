@@ -11,6 +11,12 @@ class NewItemPage(BasePage):
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
+        ERROR_MESSAGE = (By.ID, "itemname-required")
+        ITEM_MULTI_CONFIG_PROJECT = (By.CLASS_NAME, "hudson_matrix_MatrixProject")
+        ITEM_TYPES = (By.CSS_SELECTOR, ".label")
+        ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
+        COPY_FROM = (By.ID, "from")
+        DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -47,3 +53,38 @@ class NewItemPage(BasePage):
 
     def get_highlighted_items(self):
         return self.find_elements(*self.Locator.ACTIVE_ITEM)
+
+    def get_error_message(self):
+        self.wait_for_element(self.Locator.OK_BUTTON).click()
+        return self.wait_for_element(self.Locator.ERROR_MESSAGE).text.strip()
+
+    def create_new_multi_config_project(self, name):
+        from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
+        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
+        item_multi_config_project = self.wait_to_be_clickable(self.Locator.ITEM_MULTI_CONFIG_PROJECT)
+        self.scroll_into_view(item_multi_config_project)
+        item_multi_config_project.click()
+        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
+
+    def get_item_type_names(self):
+        elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
+        return [element.text for element in elements]
+
+    def get_item_type_descriptions(self):
+        return [desc.text.strip() for desc in self.find_elements(*self.Locator.ITEM_DESCRIPTIONS)]
+
+    def get_dropdown_text(self):
+        try:
+            return self.wait_to_be_visible(self.Locator.DROPDOWN_COPY).text.splitlines()
+        except TimeoutException:
+            self.logger.error("Dropdown did not open and is not present in the DOM.")
+            return []
+
+    def create_folder_and_open_page(self, name):
+        self.create_new_folder(name)
+        return self.go_to_the_main_page().go_to_new_item_page()
+
+    def enter_first_letter_in_copy_from(self, name):
+        self.enter_text_in_field(self.Locator.COPY_FROM, name[0])
+        return self
