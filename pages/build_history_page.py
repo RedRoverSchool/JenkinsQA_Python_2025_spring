@@ -11,4 +11,5 @@ class BuildHistoryPage(BasePage):
         self.url = self.base_url + "/view/all/builds"
 
     def get_build_list(self):
+        self.wait_to_be_visible_all(self.Locator.TABLE_ITEM, 10)
         return [item.text for item in self.find_elements(*self.Locator.TABLE_ITEM)]

@@ -21,6 +21,9 @@ class FreestyleProjectConfigPage(BasePage):
         BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
         POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
         ENVIRONMENT = (By.ID, 'environment')
+        GIT = (By.XPATH, '//label[@for="radio-block-1"]')
+        GIT_ADVANCED = (By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
+        TRIGGER = (By.ID, 'triggers')
 
 
     def __init__(self, driver, project_name, timeout=5):
@@ -40,6 +43,12 @@ class FreestyleProjectConfigPage(BasePage):
     def click_apply_button(self):
         self.wait_to_be_clickable(self.Locator.APPLY_BUTTON).click()
         return self
+
+    def click_git(self):
+        self.wait_for_element(self.Locator.GIT).click()
+
+    def click_git_advanced(self):
+        self.wait_for_element(self.Locator.GIT_ADVANCED).click()
 
     def click_preview(self):
         if self.is_preview_visible():
@@ -111,6 +120,20 @@ class FreestyleProjectConfigPage(BasePage):
         self.scroll_to_element(*self.Locator.POST_BUILD_ACTIONS)
         self.wait_for_element(self.Locator.BUILD_STEPS)
         return self
+
+    def scroll_to_trigger(self):
+        self.wait_text_to_be_present(self.Locator.H2_LOCATOR, 'General')
+        self.scroll_to_element(*self.Locator.TRIGGER)
+        self.wait_for_element(self.Locator.GIT)
+        return self
+
+    def scroll_down(self, count):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        window_size = self.driver.get_window_size("current")
+        to_half = window_size.get('height')//2
+        to_dec = window_size.get('height')//10
+        actions.pause(1).scroll_by_amount(0, to_half + to_dec * count).perform()
 
     def set_trigger_builds_remotely(self, token):
         checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)

@@ -1,5 +1,3 @@
-from time import sleep
-
 import pytest
 import logging
 
@@ -93,12 +91,10 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle, config, dr
     triggers the build using the Jenkins remote API, and waits for the build to complete.
     """
     auth_token = get_token
-    job_name = Freestyle.project_name
-    wait_time = 13
 
-    freestyle.set_trigger_builds_remotely(auth_token).go_to_the_main_page()
+    main_page = freestyle.set_trigger_builds_remotely(auth_token).go_to_the_main_page()
 
-    remote_build_trigger(driver, job_name, auth_token, config)
-    logger.info(f"Triggered build at: {driver.current_url}")
-    logger.info(f"Waiting {wait_time}sec for the build to finish ...")
-    sleep(wait_time)
+    remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
+    logger.info("Triggered build via api")
+    logger.info("Waiting for the build to finish ...")
+    main_page.wait_for_build_queue_executed()

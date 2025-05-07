@@ -15,39 +15,17 @@ class Freestyle:
         ("Terminate a build if it's stuck", "cb22"),
         ("With Ant", "cb23")
     ])
-    tooltip_scm_link = (
-        '//a[@tooltip="Help for feature: Git"]',
-        '//a[@tooltip="Help for feature: Repositories"]',
-        '//a[@tooltip="Help for feature: Repository URL"]',
-        '//a[@tooltip="Help for feature: Credentials"]',
-        '//a[@tooltip="Help for feature: Name"]',
-        '//a[@tooltip="Help for feature: Refspec"]',
-        '//a[@tooltip="Help for feature: Branches to build"]',
-        '//a[@tooltip="Help for feature: Branch Specifier (blank for \'any\')"]',
-        '//a[@tooltip="Help for feature: Repository browser"]'
-    )
-    tooltip_scm_link_wait = (
-        '//a[@aria-describedby="tippy-34"]',
-        '//a[@aria-describedby="tippy-35"]',
-        '//a[@aria-describedby="tippy-36"]',
-        '//a[@aria-describedby="tippy-37"]',
-        '//a[@aria-describedby="tippy-39"]',
-        '//a[@aria-describedby="tippy-40"]',
-        '//a[@aria-describedby="tippy-42"]',
-        '//a[@aria-describedby="tippy-43"]',
-        '//a[@aria-describedby="tippy-45"]'
-    )
-    tooltip_scm_expected_text = (
-        'Help for feature: Git',
-        'Help for feature: Repositories',
-        'Help for feature: Repository URL',
-        'Help for feature: Credentials',
-        'Help for feature: Name',
-        'Help for feature: Refspec',
-        'Help for feature: Branches to build',
-        'Help for feature: Branch Specifier (blank for \'any\')',
-        'Help for feature: Repository browser'
-    )
+    tooltip_scm = [
+        ((By.XPATH, '//a[@tooltip="Help for feature: Git"]'), 'Help for feature: Git', 0),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Repositories"]'), 'Help for feature: Repositories', 1),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Repository URL"]'), 'Help for feature: Repository URL', 2),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Credentials"]'), 'Help for feature: Credentials', 3),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Name"]'), 'Help for feature: Name', 4),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Refspec"]'), 'Help for feature: Refspec', 4),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Branches to build"]'), 'Help for feature: Branches to build', 6),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Branch Specifier (blank for \'any\')"]'), 'Help for feature: Branch Specifier (blank for \'any\')', 6),
+        ((By.XPATH, '//a[@tooltip="Help for feature: Repository browser"]'), 'Help for feature: Repository browser', 7)
+    ]
     tooltip_environment = [
         ((By.XPATH, '//a[@tooltip="Help for feature: Use secret text(s) or file(s)"]'), 'Help for feature: Use secret text(s) or file(s)'),
         ((By.XPATH, '//a[@tooltip="Help for feature: With Ant"]'), 'Help for feature: With Ant')
