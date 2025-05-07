@@ -1,17 +1,11 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.login_page import LoginPage
+from tests.sign_in_sign_out.data import sign_in_form_header
 
 
-def test_signin_fields(login_page):
-    wait5 = WebDriverWait(login_page, 5)
-    wait5.until(EC.visibility_of_element_located((By.ID, "main-panel")))
-    signin_form = login_page.find_element(By.XPATH, "//main//h1")
-    username_field = login_page.find_element(By.ID, "j_username")
-    password_field = login_page.find_element(By.ID, "j_password")
-    keep_me_signed_checkbox = login_page.find_element(By.XPATH, "//input[@type='checkbox']")
+def test_signin_fields(login_page: LoginPage):
+    actual_sign_in_form_header = login_page.get_sign_in_form_header()
 
-    assert signin_form.text == "Sign in to Jenkins"
-    assert username_field.is_displayed(), "Username field is not displayed"
-    assert password_field.is_displayed(), "Password field is not displayed"
-    assert keep_me_signed_checkbox.is_displayed(), "Keep me signed checkbox is not displayed"
+    assert actual_sign_in_form_header == sign_in_form_header, f"expected: '{sign_in_form_header}', actual: '{actual_sign_in_form_header}'"
+    assert login_page.login_field_is_displayed(), "Username field is not displayed"
+    assert login_page.password_field_is_displayed(), "Password field is not displayed"
+    assert login_page.keep_me_signed_checkbox_is_displayed(), "Keep me signed checkbox is not displayed"
