@@ -12,6 +12,7 @@ class NewItemPage(BasePage):
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
         ERROR_MESSAGE = (By.ID, "itemname-required")
+        ITEM_TYPES = (By.CSS_SELECTOR, ".label")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -52,3 +53,7 @@ class NewItemPage(BasePage):
     def get_error_message(self):
         self.wait_for_element(self.Locator.OK_BUTTON).click()
         return self.wait_for_element(self.Locator.ERROR_MESSAGE).text.strip()
+
+    def get_item_types_text(self):
+        elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
+        return [element.text for element in elements]
