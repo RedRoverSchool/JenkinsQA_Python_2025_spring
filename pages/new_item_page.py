@@ -11,8 +11,6 @@ class NewItemPage(BasePage):
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
-        COPY_FROM = (By.ID, "from")
-        DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -49,18 +47,3 @@ class NewItemPage(BasePage):
 
     def get_highlighted_items(self):
         return self.find_elements(*self.Locator.ACTIVE_ITEM)
-
-    def get_dropdown_text(self):
-        try:
-            return self.wait_to_be_visible(self.Locator.DROPDOWN_COPY).text.splitlines()
-        except TimeoutException:
-            self.logger.error("Dropdown did not open and is not present in the DOM.")
-            return []
-
-    def create_folder_and_open_page(self, name):
-        self.create_new_folder(name)
-        return self.go_to_the_main_page().go_to_new_item_page()
-
-    def enter_first_letter_in_copy_from(self, name):
-        self.enter_text_in_field(self.Locator.COPY_FROM, name[0])
-        return self
