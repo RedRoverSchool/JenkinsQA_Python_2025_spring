@@ -13,6 +13,7 @@ class NewItemPage(BasePage):
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
         ERROR_MESSAGE = (By.ID, "itemname-required")
         ITEM_TYPES = (By.CSS_SELECTOR, ".label")
+        NEW_ITEM_FIELD_NAME = (By.XPATH, '//*[@id="createItem"]/div[1]/div/label')
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -57,3 +58,10 @@ class NewItemPage(BasePage):
     def get_item_types_text(self):
         elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
         return [element.text for element in elements]
+
+    def get_input_field_name(self):
+        input_field_name = self.wait_for_element(self.Locator.NEW_ITEM_FIELD_NAME)
+        return input_field_name
+
+    def get_button_status(self):
+        return self.wait_to_be_clickable(self.Locator.OK_BUTTON).is_enabled()
