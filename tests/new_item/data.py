@@ -18,3 +18,5 @@ expected_item_descriptions = [
     "Creates a set of Pipeline projects according to detected branches in one SCM repository.",
     "Creates a set of multibranch project subfolders by scanning for repositories."
 ]
+invalid_folder_name = 'Folder_does_not_exist'
+copy_from_placeholder = 'No items'

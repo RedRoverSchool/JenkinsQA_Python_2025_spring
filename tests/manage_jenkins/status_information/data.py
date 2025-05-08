@@ -6,3 +6,4 @@ class SystemInformationData:
         "Memory Usage",
         "Thread Dumps"
     ]
+    SHOW_SINGLE_VALUE_BUTTON_TEXT = "Hidden value, click to show this value"
