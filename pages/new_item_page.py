@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
+
 
 class NewItemPage(BasePage):
     class Locator:
@@ -14,6 +16,7 @@ class NewItemPage(BasePage):
         ITEM_MULTI_CONFIG_PROJECT = (By.CLASS_NAME, "hudson_matrix_MatrixProject")
         ITEM_TYPES = (By.CSS_SELECTOR, ".label")
         COPY_FROM = (By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
+        ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -64,9 +67,12 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
         return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
 
-    def get_item_types_text(self):
+    def get_item_type_names(self):
         elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
         return [element.text for element in elements]
 
     def copy_from_option_is_displayed(self):
         return self.wait_to_be_visible(self.Locator.COPY_FROM).is_displayed()
+
+    def get_item_type_descriptions(self):
+        return [desc.text.strip() for desc in self.find_elements(*self.Locator.ITEM_DESCRIPTIONS)]
