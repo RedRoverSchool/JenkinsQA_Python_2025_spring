@@ -1,9 +1,10 @@
 import pytest
-from tests.new_item.data import new_folder_name
+from tests.new_item.data import new_folder_name, invalid_folder_name, copy_from_placeholder
 
 
 @pytest.mark.parametrize("folder_name, expected_result", [
-        (new_folder_name, [new_folder_name])
+        (new_folder_name, [new_folder_name]),
+        (invalid_folder_name, [copy_from_placeholder])
 ])
 def test_display_dropdown_text(new_item_page_for_copy, folder_name, expected_result):
     text = new_item_page_for_copy.enter_first_letter_in_copy_from(folder_name).get_dropdown_text()

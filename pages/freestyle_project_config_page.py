@@ -17,14 +17,15 @@ class FreestyleProjectConfigPage(BasePage):
         HIDE_PREVIEW = (By.LINK_TEXT, 'Hide preview')
         NOTIFICATION = (By.ID, 'notification-bar')
         BUILDS_REMOTELY_CHECKBOX = (By.CSS_SELECTOR, "input[name='pseudoRemoteTrigger']~label")
+        BUILDS_PERIODICALLY_CHECKBOX = (By.CSS_SELECTOR, "input[name='hudson-triggers-TimerTrigger']~label")
         AUTH_TOKEN = (By.NAME, "authToken")
+        SCHEDULE = (By.NAME, "_.spec")
         BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
         POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
         ENVIRONMENT = (By.ID, 'environment')
         GIT = (By.XPATH, '//label[@for="radio-block-1"]')
         GIT_ADVANCED = (By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
         TRIGGER = (By.ID, 'triggers')
-
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -135,11 +136,18 @@ class FreestyleProjectConfigPage(BasePage):
         to_dec = window_size.get('height')//10
         actions.pause(1).scroll_by_amount(0, to_half + to_dec * count).perform()
 
+    def check_builds_trigger(self, trigger_checkbox):
+        self.scroll_into_view(trigger_checkbox)
+        self.wait_to_be_clickable(trigger_checkbox).click()
+
     def set_trigger_builds_remotely(self, token):
-        checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)
-        self.scroll_into_view(checkbox)
-        self.wait_to_be_clickable(checkbox).click()
+        self.check_builds_trigger(self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX))
         self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
+        return self.click_save_button()
+
+    def set_trigger_builds_periodically(self, schedule):
+        self.check_builds_trigger(self.wait_for_element(self.Locator.BUILDS_PERIODICALLY_CHECKBOX))
+        self.wait_to_be_visible(self.Locator.SCHEDULE).send_keys(schedule)
         return self.click_save_button()
 
     def switch_to_disable(self):
