@@ -78,3 +78,6 @@ class BasePage:
         actions = ActionChains(self.driver)
         actions.move_to_element(self.find_element(By, Selector)).perform()
         return self
+
+    def enter_text_in_field(self, locator, text):
+        return self.wait_to_be_clickable(locator).send_keys(text)
