@@ -113,3 +113,9 @@ def manage_jenkins_page(main_page) -> ManageJenkinsPage:
 @pytest.fixture(scope="function")
 def system_information_page(manage_jenkins_page) -> SystemInformationPage:
     return manage_jenkins_page.go_to_system_information_page()
+
+
+@pytest.fixture(scope="function")
+def environment_variables_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_environment_variables_tab()
+    return system_information_page
