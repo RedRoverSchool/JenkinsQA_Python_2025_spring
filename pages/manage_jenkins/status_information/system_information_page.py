@@ -81,3 +81,6 @@ class SystemInformationPage(ManageJenkinsPage):
 
     def click_on_environment_variables_tab(self) -> None:
         self.click_on_tab(SI.TABS_BAR_HEADERS[1])
+
+    def click_on_plugins_tab(self) -> None:
+        self.click_on_tab(SI.TABS_BAR_HEADERS[2])
