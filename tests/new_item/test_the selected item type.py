@@ -1,6 +1,6 @@
 def test_the_selected_item_type(new_item_page):
         freestyle_element = new_item_page.get_freestyle_element()
-        freestyle_element.click()
+        new_item_page.select_freestyle_project()
 
         selected_items = new_item_page.get_selected_items()
 
