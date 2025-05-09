@@ -66,3 +66,17 @@ def test_environment_variables_tab_show_hide_each_single_value(environment_varia
 
         value = environment_variables_tab.click_hide_single_value_button(name)
         assert value == SI.SHOW_SINGLE_VALUE_BUTTON_TEXT, f"{name} - value is not hidden"
+
+
+def test_plugins_tab_display_plugins_info(plugins_tab):
+    table = plugins_tab.get_table_content()
+    assert len(table) > 0, "List of plugins is empty"
+
+    for row in table:
+        name = row[0]
+        version = row[1]
+        enabled_status = row[2]
+
+        assert name, f"Plugin name is empty - {row}"
+        assert version, f"Plugin version is empty - {row}"
+        assert enabled_status in ["true", "false"], f"Plugin status is incorrect or empty - {row}"
