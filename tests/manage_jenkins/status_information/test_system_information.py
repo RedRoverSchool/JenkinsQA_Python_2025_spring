@@ -52,3 +52,37 @@ def test_environment_variables_tab_show_hide_all_values(environment_variables_ta
     for row in table:
         name, value = row[0], row[1]
         assert value == SI.SHOW_SINGLE_VALUE_BUTTON_TEXT, f"{name} - value is not hidden"
+
+
+def test_environment_variables_tab_show_hide_each_single_value(environment_variables_tab):
+    table = environment_variables_tab.get_table_content()
+    assert len(table) > 0, "List of environment variables is empty"
+
+    for row in table:
+        name = row[0]
+
+        value = environment_variables_tab.click_show_single_value_button(name)
+        assert value != SI.SHOW_SINGLE_VALUE_BUTTON_TEXT, f"{name} - value is still hidden"
+
+        value = environment_variables_tab.click_hide_single_value_button(name)
+        assert value == SI.SHOW_SINGLE_VALUE_BUTTON_TEXT, f"{name} - value is not hidden"
+
+
+def test_plugins_tab_display_plugins_info(plugins_tab):
+    table = plugins_tab.get_table_content()
+    assert len(table) > 0, "List of plugins is empty"
+
+    for row in table:
+        name = row[0]
+        version = row[1]
+        enabled_status = row[2]
+
+        assert name, f"Plugin name is empty - {row}"
+        assert version, f"Plugin version is empty - {row}"
+        assert enabled_status in ["true", "false"], f"Plugin status is incorrect or empty - {row}"
+
+
+def test_memory_usage_tab_select_timespan(memory_usage_tab):
+    for option in SI.TIMESPAN_OPTIONS:
+        assert memory_usage_tab.get_graph_for_selected_timespan_option(option), \
+            f"Graph for timespan option '{option}' is not displayed, or displayed incorrectly"
