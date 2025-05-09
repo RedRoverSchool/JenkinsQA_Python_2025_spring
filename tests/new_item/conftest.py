@@ -1,14 +1,9 @@
 import pytest
-from tests.new_item.data_structs import NewItem
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
+from pages.new_item_page import NewItemPage
+from tests.new_item.data import new_folder_name
 
 
-@pytest.fixture()
-def new_item_page(main_page, config):
-    new_item_button = main_page.find_element(*NewItem.new_item_button_selector)
-    new_item_button.click()
-    wait = WebDriverWait(main_page, 5)
-    wait.until(EC.url_matches(config.jenkins.base_url + NewItem.url))
-
-    return main_page
+@pytest.fixture(scope="function")
+def new_item_page_for_copy(new_item_page: NewItemPage):
+    return new_item_page.create_folder_and_open_page(new_folder_name)
