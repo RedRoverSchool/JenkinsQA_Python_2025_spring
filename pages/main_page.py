@@ -43,9 +43,6 @@ class MainPage(BasePage):
             self.wait_for_element(self.Locator.BUILD_QUEUE_TOGGLE).click()
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_HEADER, "Build Queue (1)", 10)
         logger.info("Build Queue (1)")
-        self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_HEADER, "Build Queue", 10)
-        logger.info("Build Queue")
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
         logger.info("No builds in the queue.")
         return self
-
