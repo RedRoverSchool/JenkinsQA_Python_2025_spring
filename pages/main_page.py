@@ -16,6 +16,7 @@ class MainPage(BasePage):
         BUILD_QUEUE_STATUS_MESSAGE = (By.CLASS_NAME, "pane")
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
 
+
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/"
@@ -48,4 +49,7 @@ class MainPage(BasePage):
         self.wait_text_to_be_present(self.Locator.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
         logger.info("No builds in the queue.")
         return self
+
+    def click_on_folder_item(self):
+        self.click_on(self.Locator.TABLE_ITEM)
 
