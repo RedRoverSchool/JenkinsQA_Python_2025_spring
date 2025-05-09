@@ -1,4 +1,5 @@
 new_folder_name = 'Test_Folder'
+new_pipeline_name = 'Pipeline_one'
 new_freestyle_project_name = "Freestyle_Project"
 expected_error = '» This field cannot be empty, please enter a valid name'
 expected_item_types = [
@@ -17,3 +18,5 @@ expected_item_descriptions = [
     "Creates a set of Pipeline projects according to detected branches in one SCM repository.",
     "Creates a set of multibranch project subfolders by scanning for repositories."
 ]
+invalid_folder_name = 'Folder_does_not_exist'
+copy_from_placeholder = 'No items'

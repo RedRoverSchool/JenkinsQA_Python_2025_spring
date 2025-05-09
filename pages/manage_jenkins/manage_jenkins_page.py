@@ -11,7 +11,7 @@ class ManageJenkinsPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/manage/"
 
-    def go_to_sys_info_page(self):
+    def go_to_system_information_page(self):
         from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
         self.click_on(self.Locator.StatusInformation.SYSTEM_INFORMATION)
         return SystemInformationPage(self.driver).wait_for_url()
