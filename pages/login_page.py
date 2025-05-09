@@ -31,11 +31,11 @@ class LoginPage(BasePage):
     def get_sign_in_form_header(self):
         return self.find_element(*self.Locator.SIGN_IN_FORM_HEADER).text
 
-    def login_field_is_displayed(self):
+    def is_login_field_displayed(self):
         return self.find_element(*self.Locator.LOGIN_FIELD).is_displayed()
 
-    def password_field_is_displayed(self):
+    def is_password_field_displayed(self):
         return self.find_element(*self.Locator.PASSWORD_FIELD).is_displayed()
 
-    def keep_me_signed_checkbox_is_displayed(self):
+    def is_keep_me_signed_checkbox_displayed(self):
         return self.find_element(*self.Locator.KEEP_ME_SIGNED_CHECKBOX).is_displayed()
