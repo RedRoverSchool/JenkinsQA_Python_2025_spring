@@ -13,6 +13,7 @@ from core.settings import Config
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.manage_jenkins.manage_jenkins_page import ManageJenkinsPage
+from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
 from pages.new_item_page import NewItemPage
 
 project_root = os.path.dirname(os.path.abspath(__file__))
@@ -107,3 +108,14 @@ def new_item_page(main_page) -> NewItemPage:
 @pytest.fixture(scope="function")
 def manage_jenkins_page(main_page) -> ManageJenkinsPage:
     return main_page.go_to_manage_jenkins_page()
+
+
+@pytest.fixture(scope="function")
+def system_information_page(manage_jenkins_page) -> SystemInformationPage:
+    return manage_jenkins_page.go_to_system_information_page()
+
+
+@pytest.fixture(scope="function")
+def environment_variables_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_environment_variables_tab()
+    return system_information_page
