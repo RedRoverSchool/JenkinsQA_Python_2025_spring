@@ -8,12 +8,13 @@ from selenium.common.exceptions import TimeoutException
 
 from core.settings import Config
 
+
 class BasePage:
     class Locators:
         HEADER_LOGO = (By.ID, "jenkins-home-link")
         USER_PAGE_LINK = (By.CSS_SELECTOR, "a[href*='/user/']")
 
-    def __init__(self, driver: WebDriver, timeout = 5):
+    def __init__(self, driver: WebDriver, timeout=5):
         self.config = Config.load()
         self.base_url = self.config.jenkins.base_url
         self.driver = driver
@@ -40,20 +41,27 @@ class BasePage:
     def _wait_for(self, locator, condition, timeout):
         return WebDriverWait(self.driver, timeout).until(condition(locator))
 
-    def wait_for_element(self, locator, timeout = 5) -> WebElement:
+    def wait_for_element(self, locator, timeout=5) -> WebElement:
         return self._wait_for(locator, EC.presence_of_element_located, timeout)
 
-    def wait_to_be_clickable(self, locator, timeout = 5) -> WebElement:
+    def wait_to_be_clickable(self, locator, timeout=5) -> WebElement:
         return self._wait_for(locator, EC.element_to_be_clickable, timeout)
 
-    def wait_to_be_visible(self, locator, timeout = 5) -> WebElement:
+    def wait_to_be_visible(self, locator, timeout=5) -> WebElement:
         return self._wait_for(locator, EC.visibility_of_element_located, timeout)
 
-    def wait_to_be_visible_all(self, locator, timeout = 5) ->  list[WebElement]:
+    def wait_to_be_visible_all(self, locator, timeout=5) -> list[WebElement]:
         return self._wait_for(locator, EC.visibility_of_all_elements_located, timeout)
 
-    def wait_text_to_be_present(self, locator, text, timeout = 5) -> bool:
-        return WebDriverWait(self.driver, timeout).until(EC.text_to_be_present_in_element(locator, text))
+    def wait_text_to_be_present(self, locator, text, timeout=5, message="") -> bool:
+        return (
+            WebDriverWait(self.driver, timeout).until(
+                EC.text_to_be_present_in_element(locator, text),
+                message=message)
+        )
+
+    def get_value(self, locator) -> str | None:
+        return self.wait_to_be_visible(locator).get_attribute("value")
 
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
