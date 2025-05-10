@@ -3,7 +3,7 @@ from pages.base_page import BasePage
 
 
 class FreestyleProjectConfigPage(BasePage):
-    class Locator:
+    class Locators:
         H1 = (By.CSS_SELECTOR, '.jenkins-app-bar__content>h1')
         H2_LOCATOR = (By.ID, "general")
         ENABLE = (By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')
@@ -34,27 +34,27 @@ class FreestyleProjectConfigPage(BasePage):
         self.name = project_name
 
     def add_description(self, description_text):
-        self.wait_for_element(self.Locator.DESCRIPTION_FIELD).send_keys(description_text)
+        self.wait_for_element(self.Locators.DESCRIPTION_FIELD).send_keys(description_text)
         return self
 
     def click_save_button(self):
         from pages.freestyle_project_page import FreestyleProjectPage
-        self.wait_to_be_clickable(self.Locator.SAVE_BUTTON).click()
+        self.wait_to_be_clickable(self.Locators.SAVE_BUTTON).click()
         return FreestyleProjectPage(self.driver, project_name=self.name).wait_for_url()
 
     def click_apply_button(self):
-        self.wait_to_be_clickable(self.Locator.APPLY_BUTTON).click()
+        self.wait_to_be_clickable(self.Locators.APPLY_BUTTON).click()
         return self
 
     def click_git(self):
-        self.wait_for_element(self.Locator.GIT).click()
+        self.wait_for_element(self.Locators.GIT).click()
 
     def click_git_advanced(self):
-        self.wait_for_element(self.Locator.GIT_ADVANCED).click()
+        self.wait_for_element(self.Locators.GIT_ADVANCED).click()
 
     def click_preview(self):
         if self.is_preview_visible():
-            self.find_element(*self.Locator.PREVIEW).click()
+            self.find_element(*self.Locators.PREVIEW).click()
         return self
 
     def click_on_checkbox_environment_options(self, item_name):
@@ -65,7 +65,7 @@ class FreestyleProjectConfigPage(BasePage):
     def click_add_post_build_actions(self):
         from selenium.webdriver import ActionChains
         actions = ActionChains(self.driver)
-        actions.move_to_element(self.find_element(*self.Locator.ADD_POST_BUILD_ACTIONS)).click().perform()
+        actions.move_to_element(self.find_element(*self.Locators.ADD_POST_BUILD_ACTIONS)).click().perform()
         return self
 
     def get_part_url(self, name: str):
@@ -80,26 +80,26 @@ class FreestyleProjectConfigPage(BasePage):
         actions = ActionChains(self.driver)
         tooltip = self.find_element(*tooltip_link)
         actions.move_to_element(tooltip).perform()
-        return self.wait_for_element(self.Locator.TOOLTIP_CONTENT).text
+        return self.wait_for_element(self.Locators.TOOLTIP_CONTENT).text
 
     def get_description(self):
-        return self.find_element(*self.Locator.DESCRIPTION_FIELD).get_attribute("value")
+        return self.find_element(*self.Locators.DESCRIPTION_FIELD).get_attribute("value")
 
     def get_environment_element(self):
-        return self.wait_for_element(self.Locator.ENVIRONMENT)
+        return self.wait_for_element(self.Locators.ENVIRONMENT)
 
     def get_h1_text(self):
-        return self.wait_for_element(self.Locator.H1).text
+        return self.wait_for_element(self.Locators.H1).text
 
     def get_items_post_build_actions(self):
-        list_post_build_actions = self.wait_to_be_visible_all(self.Locator.LIST_POST_BUILD_ACTIONS)
+        list_post_build_actions = self.wait_to_be_visible_all(self.Locators.LIST_POST_BUILD_ACTIONS)
         items_post_build_action = []
         for item in list_post_build_actions:
             items_post_build_action.append(item.text)
         return items_post_build_action
 
     def get_port_build_actions_element(self):
-        return self.wait_for_element(self.Locator.POST_BUILD_ACTIONS)
+        return self.wait_for_element(self.Locators.POST_BUILD_ACTIONS)
 
     def get_windows_size(self, handle):
         return self.driver.get_window_size(handle)
@@ -108,44 +108,44 @@ class FreestyleProjectConfigPage(BasePage):
         return self.wait_for_element((By.XPATH, f'//input[@id="{id_check}"]')).is_selected()
 
     def is_save_button_available(self):
-        return self.wait_to_be_clickable(self.Locator.SAVE_BUTTON)
+        return self.wait_to_be_clickable(self.Locators.SAVE_BUTTON)
 
     def is_apply_button_available(self):
-        return self.wait_to_be_clickable(self.Locator.APPLY_BUTTON)
+        return self.wait_to_be_clickable(self.Locators.APPLY_BUTTON)
 
     def is_enable(self):
-        return self.wait_to_be_visible(self.Locator.ENABLE, 10)
+        return self.wait_to_be_visible(self.Locators.ENABLE, 10)
 
     def is_disable(self):
-        return self.wait_to_be_visible(self.Locator.DISABLE, 10)
+        return self.wait_to_be_visible(self.Locators.DISABLE, 10)
 
     def is_enable_text(self):
-        return self.wait_for_element(self.Locator.ENABLE_TEXT).text
+        return self.wait_for_element(self.Locators.ENABLE_TEXT).text
 
     def is_preview_visible(self):
-        if self.wait_to_be_clickable(self.Locator.PREVIEW):
+        if self.wait_to_be_clickable(self.Locators.PREVIEW):
             return True
         else:
             return False
 
     def is_hide_preview_visible(self):
-        if self.wait_to_be_clickable(self.Locator.HIDE_PREVIEW, 2):
+        if self.wait_to_be_clickable(self.Locators.HIDE_PREVIEW, 2):
             return True
         else:
             return False
 
     def is_notification_was_visible(self):
-        return self.wait_to_be_visible(self.Locator.NOTIFICATION)
+        return self.wait_to_be_visible(self.Locators.NOTIFICATION)
 
     def scroll_to_post_build_actions(self):
-        self.scroll_to_element(*self.Locator.POST_BUILD_ACTIONS)
-        self.wait_for_element(self.Locator.BUILD_STEPS)
+        self.scroll_to_element(*self.Locators.POST_BUILD_ACTIONS)
+        self.wait_for_element(self.Locators.BUILD_STEPS)
         return self
 
     def scroll_to_trigger(self):
-        self.wait_text_to_be_present(self.Locator.H2_LOCATOR, 'General')
-        self.scroll_to_element(*self.Locator.TRIGGER)
-        self.wait_for_element(self.Locator.GIT)
+        self.wait_text_to_be_present(self.Locators.H2_LOCATOR, 'General')
+        self.scroll_to_element(*self.Locators.TRIGGER)
+        self.wait_for_element(self.Locators.GIT)
         return self
 
     def scroll_down(self, count):
@@ -161,16 +161,16 @@ class FreestyleProjectConfigPage(BasePage):
         actions = ActionChains(self.driver)
         window_size = self.get_windows_size("current")
         actions.pause(1).scroll_by_amount(0, window_size.get('height')).perform()
-        self.wait_to_be_clickable(self.Locator.ADD_POST_BUILD_ACTIONS)
+        self.wait_to_be_clickable(self.Locators.ADD_POST_BUILD_ACTIONS)
         return self
 
     def set_trigger_builds_remotely(self, token):
-        checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)
+        checkbox = self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX)
         self.scroll_into_view(checkbox)
         self.wait_to_be_clickable(checkbox).click()
-        self.wait_to_be_visible(self.Locator.AUTH_TOKEN).send_keys(token)
+        self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
         return self.click_save_button()
 
     def switch_to_disable(self):
-        self.wait_to_be_clickable(self.Locator.ENABLE, 10).click()
+        self.wait_to_be_clickable(self.Locators.ENABLE, 10).click()
         return self.is_disable()

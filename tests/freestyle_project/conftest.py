@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 @pytest.fixture
 def freestyle(main_page):
     freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
-    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2_LOCATOR, 10)
+    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locators.H2_LOCATOR, 10)
     return freestyle_config_page
 
 @pytest.fixture
@@ -76,10 +76,10 @@ def get_token(main_page, config):
     Returns:
         str: The newly generated project-specific token.
     """
-    security_page = main_page.go_to_the_user_page().go_to_security_page()
+    security_page = main_page.header.go_to_the_user_page().go_to_security_page()
     token = security_page.generate_token(Freestyle.project_name)
     user_page = security_page.save_settings(config.jenkins.USERNAME)
-    user_page.go_to_the_main_page()
+    user_page.header.go_to_the_main_page()
 
     return token
 
@@ -92,7 +92,7 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle, config, dr
     """
     auth_token = get_token
 
-    main_page = freestyle.set_trigger_builds_remotely(auth_token).go_to_the_main_page()
+    main_page = freestyle.set_trigger_builds_remotely(auth_token).header.go_to_the_main_page()
 
     remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
     logger.info("Triggered build via api")

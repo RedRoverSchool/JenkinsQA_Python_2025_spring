@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 class PipelineConfigPage(BasePage):
-    class Locator:
+    class Locators:
         GENERAL_BUTTON = (By.ID, "general")
 
     def __init__(self, driver, pipeline_name,  timeout=5):

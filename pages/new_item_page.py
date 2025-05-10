@@ -5,7 +5,7 @@ from pages.base_page import BasePage
 
 
 class NewItemPage(BasePage):
-    class Locator:
+    class Locators:
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
         ITEM_FOLDER = (By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
         OK_BUTTON = (By.CSS_SELECTOR, '#ok-button')
@@ -26,84 +26,84 @@ class NewItemPage(BasePage):
 
     def create_new_folder(self, name):
         from pages.folder_config_page import FolderConfigPage
-        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locator.ITEM_FOLDER).click()
-        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        self.wait_to_be_clickable(self.Locators.ITEM_FOLDER).click()
+        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return FolderConfigPage(self.driver, name).wait_for_url()
 
     def create_new_freestyle_project(self, name):
         from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locator.ITEM_FREESTYLE_PROJECT).click()
-        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        self.wait_to_be_clickable(self.Locators.ITEM_FREESTYLE_PROJECT).click()
+        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
 
     def get_pipeline_element(self):
-        return self.find_element(*self.Locator.ITEM_PIPELINE_PROJECT)
+        return self.find_element(*self.Locators.ITEM_PIPELINE_PROJECT)
 
     def get_freestyle_element(self):
-        return self.find_element(*self.Locator.ITEM_FREESTYLE_PROJECT)
+        return self.find_element(*self.Locators.ITEM_FREESTYLE_PROJECT)
 
     def click_element(self, element):
         self.wait_to_be_clickable(element).click()
 
     def get_active_element(self):
-        return self.wait_for_element(self.Locator.ACTIVE_ITEM)
+        return self.wait_for_element(self.Locators.ACTIVE_ITEM)
 
     def get_selected_items(self):
-        return self.find_elements(*self.Locator.SELECTED_ITEM)
+        return self.find_elements(*self.Locators.SELECTED_ITEM)
 
     def get_highlighted_items(self):
-        return self.find_elements(*self.Locator.ACTIVE_ITEM)
+        return self.find_elements(*self.Locators.ACTIVE_ITEM)
 
     def get_error_message(self):
-        self.wait_for_element(self.Locator.OK_BUTTON).click()
-        return self.wait_for_element(self.Locator.ERROR_MESSAGE).text.strip()
+        self.wait_for_element(self.Locators.OK_BUTTON).click()
+        return self.wait_for_element(self.Locators.ERROR_MESSAGE).text.strip()
 
     def create_new_multi_config_project(self, name):
         from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
-        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
-        item_multi_config_project = self.wait_to_be_clickable(self.Locator.ITEM_MULTI_CONFIG_PROJECT)
+        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        item_multi_config_project = self.wait_to_be_clickable(self.Locators.ITEM_MULTI_CONFIG_PROJECT)
         self.scroll_into_view(item_multi_config_project)
         item_multi_config_project.click()
-        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
 
     def get_item_type_names(self):
-        elements = self.wait_to_be_visible_all(self.Locator.ITEM_TYPES)
+        elements = self.wait_to_be_visible_all(self.Locators.ITEM_TYPES)
         return [element.text for element in elements]
 
     def copy_from_option_is_displayed(self):
-        return self.wait_to_be_visible(self.Locator.COPY_FROM).is_displayed()
+        return self.wait_to_be_visible(self.Locators.COPY_FROM).is_displayed()
 
     def get_item_type_descriptions(self):
-        return [desc.text.strip() for desc in self.find_elements(*self.Locator.ITEM_DESCRIPTIONS)]
+        return [desc.text.strip() for desc in self.find_elements(*self.Locators.ITEM_DESCRIPTIONS)]
 
     def create_new_pipeline(self, name):
         from pages.pipeline_config_page import PipelineConfigPage
-        self.wait_for_element(self.Locator.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locator.ITEM_PIPELINE_PROJECT).click()
-        self.wait_to_be_clickable(self.Locator.OK_BUTTON).click()
+        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        self.wait_to_be_clickable(self.Locators.ITEM_PIPELINE_PROJECT).click()
+        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return PipelineConfigPage(self.driver, name).wait_for_url()
 
     def get_dropdown_text(self):
         try:
-            return self.wait_to_be_visible(self.Locator.DROPDOWN_COPY).text.splitlines()
+            return self.wait_to_be_visible(self.Locators.DROPDOWN_COPY).text.splitlines()
         except TimeoutException:
             self.logger.error("Dropdown did not open and is not present in the DOM.")
             return []
 
     def create_folder_and_open_page(self, name):
-        return self.create_new_folder(name).go_to_the_main_page().go_to_new_item_page()
+        return self.create_new_folder(name).header.go_to_the_main_page().go_to_new_item_page()
 
     def enter_first_letter_in_copy_from(self, name):
-        self.enter_text(self.Locator.COPY_FROM, name[0])
+        self.enter_text(self.Locators.COPY_FROM, name[0])
         return self
 
     def get_error_page_copy(self, name_folder, name, copy_name):
         from pages.error_page_copy_from import ErrorPageCopyFrom
         self.create_folder_and_open_page(name_folder)
-        self.enter_text(self.Locator.ITEM_NAME, name)
-        self.enter_text(self.Locator.COPY_FROM, copy_name)
-        self.click_on(self.Locator.OK_BUTTON)
+        self.enter_text(self.Locators.ITEM_NAME, name)
+        self.enter_text(self.Locators.COPY_FROM, copy_name)
+        self.click_on(self.Locators.OK_BUTTON)
         return ErrorPageCopyFrom(self.driver).wait_for_url()
