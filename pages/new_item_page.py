@@ -44,6 +44,9 @@ class NewItemPage(BasePage):
     def get_freestyle_element(self):
         return self.find_element(*self.Locator.ITEM_FREESTYLE_PROJECT)
 
+    def click_ok_button(self):
+        return self.click_on(self.Locator.OK_BUTTON)
+
     def click_element(self, element):
         self.wait_to_be_clickable(element).click()
 
@@ -96,7 +99,7 @@ class NewItemPage(BasePage):
     def create_folder_and_open_page(self, name):
         return self.create_new_folder(name).go_to_the_main_page().go_to_new_item_page()
 
-    def enter_first_letter_in_copy_from(self, name):
+    def enter_first_character_in_copy_from(self, name):
         self.enter_text(self.Locator.COPY_FROM, name[0])
         return self
 
@@ -105,5 +108,5 @@ class NewItemPage(BasePage):
         self.create_folder_and_open_page(name_folder)
         self.enter_text(self.Locator.ITEM_NAME, name)
         self.enter_text(self.Locator.COPY_FROM, copy_name)
-        self.click_on(self.Locator.OK_BUTTON)
+        self.click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()

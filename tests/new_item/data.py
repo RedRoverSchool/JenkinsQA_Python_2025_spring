@@ -18,8 +18,10 @@ expected_item_descriptions = [
     "Creates a set of Pipeline projects according to detected branches in one SCM repository.",
     "Creates a set of multibranch project subfolders by scanning for repositories."
 ]
-invalid_folder_name = 'Folder_does_not_exist'
-copy_from_placeholder = 'No items'
-new_folder_copy = 'Test_Folder_copy'
+folder_name_to_copy = 'Folder_for_copy'
+non_existent_folder_name = 'Invalid_folder_name'
+item_not_found_message = 'No items'
+copy_name = 'Copy_existing_item'
 header_error = 'Error'
-message_error = f'No such job: {invalid_folder_name}'
+message_error = f'No such job: {non_existent_folder_name}'
+error_page_title = 'Jenkins [Jenkins]'
