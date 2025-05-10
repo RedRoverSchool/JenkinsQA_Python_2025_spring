@@ -1,4 +1,8 @@
+from typing import Self
 from selenium.webdriver.common.by import By
+from selenium.common import TimeoutException
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.remote.webelement import WebElement
 from pages.manage_jenkins.manage_jenkins_page import ManageJenkinsPage
 from tests.manage_jenkins.status_information.data import SystemInformationData as SI
 
@@ -7,6 +11,10 @@ class SystemInformationPage(ManageJenkinsPage):
     class Locator:
         TABS_BAR = (By.CSS_SELECTOR, ".tabBar .tab a")
         ACTIVE_TAB = (By.XPATH, "//div[@class='jenkins-tab-pane'][@style='display: block;']/h2")
+        TABLE_ROWS = (By.TAG_NAME, "tr")
+        TABLE_CELLS = (By.TAG_NAME, "td")
+        TIMESPAN_DROPDOWN = (By.ID, "timespan-select")
+        THREAD_DUMP_PAGE_LINK = (By.XPATH, "//a[@href='threadDump']")
 
         @staticmethod
         def tab_table(tab_number: int) -> tuple[str, str]:
@@ -32,6 +40,10 @@ class SystemInformationPage(ManageJenkinsPage):
         def tab_by_name(tab_name: str) -> tuple[str, str]:
             return By.XPATH, f"//a[@href='#'][text()='{tab_name}']/.."
 
+        @staticmethod
+        def memory_usage_graph(flag_value: str) -> tuple[str, str]:
+            return By.XPATH, f"//img[@alt='Memory usage graph' and contains(@src, '{flag_value}')]"
+
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/manage/systemInfo"
@@ -48,10 +60,10 @@ class SystemInformationPage(ManageJenkinsPage):
     def get_table_content(self) -> list[list[str]]:
         tab_number = self.get_active_tab_number()
         table = self.find_element(*self.Locator.tab_table(tab_number))
-        raw_rows = table.find_elements(By.TAG_NAME, "tr")
+        raw_rows = table.find_elements(*self.Locator.TABLE_ROWS)
         processed_rows = []
         for row in raw_rows:
-            cells = row.find_elements(By.TAG_NAME, "td")
+            cells = row.find_elements(*self.Locator.TABLE_CELLS)
             row_text = [cell.text for cell in cells]
             processed_rows.append(row_text)
         return processed_rows
@@ -81,3 +93,28 @@ class SystemInformationPage(ManageJenkinsPage):
 
     def click_on_environment_variables_tab(self) -> None:
         self.click_on_tab(SI.TABS_BAR_HEADERS[1])
+
+    def click_on_plugins_tab(self) -> None:
+        self.click_on_tab(SI.TABS_BAR_HEADERS[2])
+
+    def click_on_memory_usage_tab(self) -> None:
+        self.click_on_tab(SI.TABS_BAR_HEADERS[3])
+
+    def click_on_thread_dumps_tab(self) -> None:
+        self.click_on_tab(SI.TABS_BAR_HEADERS[4])
+
+    def select_timespan(self, option: str) -> None:
+        element = self.wait_to_be_visible(self.Locator.TIMESPAN_DROPDOWN, timeout=5)
+        Select(element).select_by_visible_text(option)
+
+    def get_graph_for_selected_timespan_option(self, option: str) -> WebElement | bool:
+        self.select_timespan(option)
+        graph_locator = self.Locator.memory_usage_graph(SI.TIMESPAN_OPTIONS.get(option))
+        try:
+            return self.wait_to_be_visible(graph_locator, timeout=5)
+        except TimeoutException:
+            return False
+
+    def click_on_thread_dump_page_link(self) -> Self:
+        self.click_on(self.Locator.THREAD_DUMP_PAGE_LINK)
+        return self

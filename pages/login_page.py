@@ -6,9 +6,11 @@ from core.jenkins_utils import update_crumb
 
 class LoginPage(BasePage):
     class Locator:
+        SIGN_IN_FORM_HEADER = (By.XPATH, "//main//h1")
         LOGIN_FIELD = (By.ID, "j_username")
         PASSWORD_FIELD = (By.ID, "j_password")
         SUBMIT_BUTTON = (By.NAME, "Submit")
+        KEEP_ME_SIGNED_CHECKBOX = (By.XPATH, "//input[@type='checkbox']")
 
 
     def __init__(self, driver: WebDriver):
@@ -26,3 +28,14 @@ class LoginPage(BasePage):
         self.logger.info(f"login crumb: {crumb}")
         return main_page
 
+    def get_sign_in_form_header(self):
+        return self.find_element(*self.Locator.SIGN_IN_FORM_HEADER).text
+
+    def is_login_field_displayed(self):
+        return self.find_element(*self.Locator.LOGIN_FIELD).is_displayed()
+
+    def is_password_field_displayed(self):
+        return self.find_element(*self.Locator.PASSWORD_FIELD).is_displayed()
+
+    def is_keep_me_signed_checkbox_displayed(self):
+        return self.find_element(*self.Locator.KEEP_ME_SIGNED_CHECKBOX).is_displayed()

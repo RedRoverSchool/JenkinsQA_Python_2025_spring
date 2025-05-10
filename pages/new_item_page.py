@@ -16,7 +16,6 @@ class NewItemPage(BasePage):
         ERROR_MESSAGE = (By.ID, "itemname-required")
         ITEM_MULTI_CONFIG_PROJECT = (By.CLASS_NAME, "hudson_matrix_MatrixProject")
         ITEM_TYPES = (By.CSS_SELECTOR, ".label")
-        COPY_FROM = (By.CSS_SELECTOR, "input.jenkins-input.auto-complete")
         ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
         COPY_FROM = (By.ID, "from")
         DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
@@ -98,5 +97,13 @@ class NewItemPage(BasePage):
         return self.create_new_folder(name).go_to_the_main_page().go_to_new_item_page()
 
     def enter_first_letter_in_copy_from(self, name):
-        self.enter_text_in_field(self.Locator.COPY_FROM, name[0])
+        self.enter_text(self.Locator.COPY_FROM, name[0])
         return self
+
+    def get_error_page_copy(self, name_folder, name, copy_name):
+        from pages.error_page_copy_from import ErrorPageCopyFrom
+        self.create_folder_and_open_page(name_folder)
+        self.enter_text(self.Locator.ITEM_NAME, name)
+        self.enter_text(self.Locator.COPY_FROM, copy_name)
+        self.click_on(self.Locator.OK_BUTTON)
+        return ErrorPageCopyFrom(self.driver).wait_for_url()
