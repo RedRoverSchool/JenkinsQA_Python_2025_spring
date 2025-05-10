@@ -24,6 +24,8 @@ class FreestyleProjectConfigPage(BasePage):
         GIT = (By.XPATH, '//label[@for="radio-block-1"]')
         GIT_ADVANCED = (By.XPATH, '//div[@class="form-container tr"]//div[@class="jenkins-form-item tr"]//button')
         TRIGGER = (By.ID, 'triggers')
+        ADD_POST_BUILD_ACTIONS = (By.XPATH, '//button[@class="jenkins-button hetero-list-add" and @suffix="publisher"]')
+        LIST_POST_BUILD_ACTIONS = (By.CLASS_NAME, 'jenkins-dropdown__item ')
 
 
     def __init__(self, driver, project_name, timeout=5):
@@ -60,6 +62,12 @@ class FreestyleProjectConfigPage(BasePage):
             By.XPATH, f'//label[text()="{item_name}"]/ancestor::span[@class="jenkins-checkbox"]')
         self.find_element(*locator).click()
 
+    def click_add_post_build_actions(self):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_element(*self.Locator.ADD_POST_BUILD_ACTIONS)).click().perform()
+        return self
+
     def get_part_url(self, name: str):
         if len(name.split(' ')) > 1:
             new_name = name.replace(" ", "%20")
@@ -82,6 +90,19 @@ class FreestyleProjectConfigPage(BasePage):
 
     def get_h1_text(self):
         return self.wait_for_element(self.Locator.H1).text
+
+    def get_items_post_build_actions(self):
+        list_post_build_actions = self.wait_to_be_visible_all(self.Locator.LIST_POST_BUILD_ACTIONS)
+        items_post_build_action = []
+        for item in list_post_build_actions:
+            items_post_build_action.append(item.text)
+        return items_post_build_action
+
+    def get_port_build_actions_element(self):
+        return self.wait_for_element(self.Locator.POST_BUILD_ACTIONS)
+
+    def get_windows_size(self, handle):
+        return self.driver.get_window_size(handle)
 
     def is_checkbox_environment_options_selected(self, id_check):
         return self.wait_for_element((By.XPATH, f'//input[@id="{id_check}"]')).is_selected()
@@ -130,10 +151,18 @@ class FreestyleProjectConfigPage(BasePage):
     def scroll_down(self, count):
         from selenium.webdriver import ActionChains
         actions = ActionChains(self.driver)
-        window_size = self.driver.get_window_size("current")
+        window_size = self.get_windows_size("current")
         to_half = window_size.get('height')//2
         to_dec = window_size.get('height')//10
         actions.pause(1).scroll_by_amount(0, to_half + to_dec * count).perform()
+
+    def scroll_to_bottom_screen(self):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        window_size = self.get_windows_size("current")
+        actions.pause(1).scroll_by_amount(0, window_size.get('height')).perform()
+        self.wait_to_be_clickable(self.Locator.ADD_POST_BUILD_ACTIONS)
+        return self
 
     def set_trigger_builds_remotely(self, token):
         checkbox = self.wait_for_element(self.Locator.BUILDS_REMOTELY_CHECKBOX)

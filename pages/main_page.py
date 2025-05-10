@@ -39,6 +39,11 @@ class MainPage(BasePage):
         self.click_on(self.Locator.MANAGE_JENKINS_BUTTON)
         return ManageJenkinsPage(self.driver).wait_for_url()
 
+    def go_to_folder_page(self, name):
+        from pages.folder_page import FolderPage
+        self.wait_to_be_clickable(self.Locator.TABLE_ITEM).click()
+        return FolderPage(self.driver, name).wait_for_url()
+
     def wait_for_build_queue_executed(self):
         if self.wait_to_be_visible(self.Locator.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
             self.wait_for_element(self.Locator.BUILD_QUEUE_TOGGLE).click()
