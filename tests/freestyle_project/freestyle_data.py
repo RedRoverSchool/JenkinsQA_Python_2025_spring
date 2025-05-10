@@ -30,3 +30,16 @@ class Freestyle:
         ((By.XPATH, '//a[@tooltip="Help for feature: Use secret text(s) or file(s)"]'), 'Help for feature: Use secret text(s) or file(s)'),
         ((By.XPATH, '//a[@tooltip="Help for feature: With Ant"]'), 'Help for feature: With Ant')
     ]
+    ITEMS_POST_BUILD_ACTION = [
+        "Aggregate downstream test results",
+        "Archive the artifacts",
+        "Build other projects",
+        "Publish JUnit test result report",
+        "Record fingerprints of files to track usage",
+        "Git Publisher",
+        "E-mail Notification",
+        "Editable Email Notification",
+        "Set GitHub commit status (universal)",
+        "Set build status on GitHub commit [deprecated]",
+        "Delete workspace when build is done"
+    ]
