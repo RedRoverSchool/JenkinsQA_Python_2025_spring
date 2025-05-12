@@ -27,6 +27,7 @@ class JenkinsConfig(ConfigBase):
     login_url: str = ""
     login_data: dict = {}
     crumb: str = ""
+    current_username: str = ""
 
     def model_post_init(self, context: Any, /) -> None:
         self.base_url = f"http://{self.HOST}:{self.PORT}"

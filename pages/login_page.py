@@ -24,8 +24,9 @@ class LoginPage(BasePage):
         self.find_element(*self.Locators.PASSWORD_FIELD).send_keys(password)
         self.find_element(*self.Locators.SUBMIT_BUTTON).click()
         main_page = MainPage(self.driver).wait_for_url()
+        self.config.jenkins.current_username = login
         crumb = update_crumb(self.driver, self.config)
-        self.logger.info(f"login crumb: {crumb}")
+        self.logger.debug(f"login crumb: {crumb}")
         return main_page
 
     def get_sign_in_form_header(self):

@@ -66,14 +66,12 @@ class UIElementMixin:
 
     def navigate_to(self, page_class, *args):
         self.logger.info(f"Navigating to {page_class.__name__} with click on {args}")
-        self.logger.info(f" page class {page_class}, args: {args}")
         if len(args) == 1:
             locator = args[0]
         elif len(args) > 1:
             locator, args = args
         else:
             raise ValueError("Not enough arguments")
-        self.logger.info(f" locator  {locator}, args: {args}")
         self.wait_to_be_clickable(locator).click()
         if not isinstance(args, str):
             return page_class(self.driver, *args).wait_for_url()
