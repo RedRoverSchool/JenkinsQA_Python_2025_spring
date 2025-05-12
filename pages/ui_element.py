@@ -51,6 +51,9 @@ class UIElementMixin:
     def enter_text(self, locator, text):
         return self.wait_for_element(locator).send_keys(text)
 
+    def get_value(self, locator) -> str | None:
+        return self.wait_to_be_visible(locator).get_attribute("value")
+
     def scroll_into_view(self, element):
         self.driver.execute_script(
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',

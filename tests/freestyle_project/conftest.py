@@ -4,6 +4,7 @@ import logging
 from tests.freestyle_project.freestyle_data import Freestyle
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
 from core.jenkins_utils import remote_build_trigger
+from pages.freestyle_project_config_options_page import FreestylePJConfOptPage
 
 
 logger = logging.getLogger(__name__)
@@ -98,3 +99,8 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle, config, dr
     logger.info("Triggered build via api")
     logger.info("Waiting for the build to finish ...")
     main_page.wait_for_build_queue_executed()
+
+
+@pytest.fixture
+def freestyle_pj_conf_page(freestyle):
+    return FreestylePJConfOptPage(freestyle)

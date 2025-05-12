@@ -1,6 +1,10 @@
 new_folder_name = 'Test_Folder'
 new_pipeline_name = 'Pipeline_one'
 new_freestyle_project_name = "Freestyle_Project"
+positive_name = "TC_01.001.04-PositiveName"
+
+special_chars = ["@", "#", "$", "%", "^", "&", "*", "<", "/", "\\"]
+
 expected_error = '» This field cannot be empty, please enter a valid name'
 expected_item_types = [
     "Freestyle project",
