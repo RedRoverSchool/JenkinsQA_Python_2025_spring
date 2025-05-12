@@ -1,19 +1,28 @@
+import time
+
+from typing import List
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-
+from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 
 
 class NewItemPage(BasePage):
     class Locators:
+        PAGE_NAME = (By.XPATH, "//h1[text()='New Item']")
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
         ITEM_FOLDER = (By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
         OK_BUTTON = (By.CSS_SELECTOR, '#ok-button')
+
         ITEM_PIPELINE_PROJECT = (By.CLASS_NAME, "org_jenkinsci_plugins_workflow_job_WorkflowJob")
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
+
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
+
         ERROR_MESSAGE = (By.ID, "itemname-required")
+        ANY_ENABLED_ERROR = (By.CSS_SELECTOR, ".input-validation-message:not(.input-message-disabled)")
+
         ITEM_MULTI_CONFIG_PROJECT = (By.CLASS_NAME, "hudson_matrix_MatrixProject")
         ITEM_TYPES = (By.CSS_SELECTOR, ".label")
         ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
@@ -66,6 +75,12 @@ class NewItemPage(BasePage):
     def get_error_message(self):
         self.wait_for_element(self.Locators.OK_BUTTON).click()
         return self.wait_for_element(self.Locators.ERROR_MESSAGE).text.strip()
+
+    def get_any_validation_errors(self) -> List[WebElement]:
+        time.sleep(1)  # sleep is needed for cases when errors should not appear
+        return self.find_elements(
+            *self.Locators.ANY_ENABLED_ERROR
+        )
 
     def create_new_multi_config_project(self, name):
         from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
