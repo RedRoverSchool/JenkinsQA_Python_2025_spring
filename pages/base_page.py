@@ -19,7 +19,7 @@ class BasePage(UIElementMixin):
 
     def wait_for_url(self):
         try:
-            self.wait.until(EC.url_to_be(self.url))
+            self.wait.until(EC.url_to_be(self.url.replace(" ", "%20")))
         except TimeoutException:
             self.logger.error(f"Timeout when waiting for url {self.url}, current url: {self.driver.current_url}")
         return self

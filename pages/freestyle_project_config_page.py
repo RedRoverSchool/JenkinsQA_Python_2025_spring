@@ -26,7 +26,8 @@ class FreestyleProjectConfigPage(BasePage):
         TRIGGER = (By.ID, 'triggers')
         ADD_POST_BUILD_ACTIONS = (By.XPATH, '//button[@class="jenkins-button hetero-list-add" and @suffix="publisher"]')
         LIST_POST_BUILD_ACTIONS = (By.CLASS_NAME, 'jenkins-dropdown__item ')
-
+        GITHUB_PROJECT_OPTION = (By.CSS_SELECTOR, 'input[name="githubProject"]')
+        PROJECT_URL_FIELD = (By.XPATH, '//*[contains(text(),"Project url")]//following-sibling::div/input')
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -152,8 +153,8 @@ class FreestyleProjectConfigPage(BasePage):
         from selenium.webdriver import ActionChains
         actions = ActionChains(self.driver)
         window_size = self.get_windows_size("current")
-        to_half = window_size.get('height')//2
-        to_dec = window_size.get('height')//10
+        to_half = window_size.get('height') // 2
+        to_dec = window_size.get('height') // 10
         actions.pause(1).scroll_by_amount(0, to_half + to_dec * count).perform()
 
     def scroll_to_bottom_screen(self):
@@ -174,3 +175,15 @@ class FreestyleProjectConfigPage(BasePage):
     def switch_to_disable(self):
         self.wait_to_be_clickable(self.Locators.ENABLE, 10).click()
         return self.is_disable()
+
+    def check_github_project_option(self):
+        checkbox = self.wait_to_be_visible(self.Locators.GITHUB_PROJECT_OPTION)
+        self.driver.execute_script("arguments[0].click();", checkbox)
+
+    def is_github_project_option_enabled(self):
+        checkbox = self.wait_to_be_visible(self.Locators.GITHUB_PROJECT_OPTION)
+        return self.driver.execute_script("return arguments[0].checked;", checkbox)
+
+    def add_project_url(self, github_project_url):
+        self.wait_to_be_visible(self.Locators.PROJECT_URL_FIELD).send_keys(github_project_url)
+        return self
