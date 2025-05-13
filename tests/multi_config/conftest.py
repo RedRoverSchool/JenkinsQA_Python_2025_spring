@@ -1,7 +1,5 @@
 import pytest
 from tests.multi_config.data import project_name
-from dotenv import load_dotenv
-load_dotenv()
 
 
 @pytest.fixture
