@@ -1,7 +1,7 @@
 pipeline {
-agent any
-stages {
-    stage('Step 1 Test') {
+    agent any
+    stages {
+        stage('Step 1 Test') {
             steps {
                 sh 'echo "Step 1"'
                 sh 'exit 0'
