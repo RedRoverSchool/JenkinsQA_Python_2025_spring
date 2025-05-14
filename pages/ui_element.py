@@ -44,6 +44,9 @@ class UIElementMixin:
     def wait_text_to_be_present(self, locator, text, timeout=5) -> bool:
         return self._wait_for(timeout, EC.text_to_be_present_in_element, locator, text)
 
+    def wait_for_new_window(self, num_windows = 2):
+        return self.wait.until(EC.number_of_windows_to_be(num_windows))
+
     def click_on(self, locator, timeout=5) -> None:
         self.logger.debug(f"Click on locator {locator}")
         self._wait_for(timeout, EC.element_to_be_clickable, locator).click()
