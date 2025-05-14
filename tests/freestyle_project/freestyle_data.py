@@ -7,6 +7,7 @@ class Freestyle:
     warning_message = "This project is currently disabled"
     description_text = "Jenkins freestyle project is the general purpose job that will clone the projects from the Source Code Management (SCM) like Github, Gitlab, and Bit Bucket."
     tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
+    github_project_url = "https://github.com/RedRoverSchool/OpenWeatherPython_06"
     environmet_options = ([
         ("Delete workspace before build starts", "cb18"),
         ("Use secret text(s) or file(s)", "cb19"),

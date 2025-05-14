@@ -58,3 +58,8 @@ class MainPage(BasePage):
     def click_on_folder_item(self):
         self.click_on(self.Locators.TABLE_ITEM)
 
+    def open_dashboard_in_new_window(self):
+        self.driver.execute_script(f"window.open('{self.url}');")
+        self.wait_for_new_window()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        return MainPage(self.driver)

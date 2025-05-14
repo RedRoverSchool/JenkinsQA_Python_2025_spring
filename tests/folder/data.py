@@ -1,2 +1,4 @@
-folder_name = 'Test_Folder'
-empty_state_message = "This folder is empty"
+
+class Folder:
+    FOLDER_NAME = 'Test_Folder'
+    EMPTY_STATE_MESSAGE = "This folder is empty"

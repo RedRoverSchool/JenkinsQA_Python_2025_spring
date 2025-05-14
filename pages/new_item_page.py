@@ -16,6 +16,9 @@ class NewItemPage(BasePage):
 
         ITEM_PIPELINE_PROJECT = (By.CLASS_NAME, "org_jenkinsci_plugins_workflow_job_WorkflowJob")
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
+        ITEM_MULTIBRANCH_PIPELINE_PROJECT = (
+            By.CLASS_NAME, "org_jenkinsci_plugins_workflow_multibranch_WorkflowMultiBranchProject"
+        )
 
         SELECTED_ITEM = (By.XPATH, "//li[@aria-checked='true']")
         ACTIVE_ITEM = (By.CLASS_NAME, "active")
@@ -53,6 +56,13 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.ITEM_PIPELINE_PROJECT).click()
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return PipelineConfigPage(self.driver, name).wait_for_url()
+
+    def create_new_multibranch_pipeline_project(self, name):
+        from pages.multibranch_pipeline_config_page import MultibranchPipelineConfigPage
+        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        self.wait_to_be_clickable(self.Locators.ITEM_MULTIBRANCH_PIPELINE_PROJECT).click()
+        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
+        return MultibranchPipelineConfigPage(self.driver, name)
 
     def get_pipeline_element(self):
         return self.find_element(*self.Locators.ITEM_PIPELINE_PROJECT)

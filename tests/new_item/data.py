@@ -27,3 +27,5 @@ copy_from_placeholder = 'No items'
 new_folder_copy = 'Test_Folder_copy'
 header_error = 'Error'
 message_error = f'No such job: {invalid_folder_name}'
+
+title_fragment = "new item"

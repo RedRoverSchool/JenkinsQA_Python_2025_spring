@@ -58,9 +58,12 @@ def get_page(session, url, config):
 
 def delete_by_link(session, url, names, crumb):
     for name in names:
-        response = session.post(url=url.format(name),
-            headers={"Jenkins-Crumb": crumb, "Content-Type": "application/x-www-form-urlencoded"})
-        logger.debug(f"delete_by_link {name=}, {response.status_code=}")
+        response = session.post(
+            url=url.format(name),
+            headers={"Jenkins-Crumb": crumb, "Content-Type": "application/x-www-form-urlencoded"}
+        )
+        if not response.ok:
+            logger.error(f"delete_by_link, {url=} {response.status_code=} {name=}")
 
 
 def reset_theme_description(session, config):
@@ -77,14 +80,26 @@ def reset_theme_description(session, config):
                                           }}}
     theme_payload = f"Jenkins-Crumb={crumb}&json={json.dumps(theme_json)}&Submit=Submit&core:apply=true"
 
-    session.post(url=f"{config.jenkins.base_url}/submitDescription",
-                 headers=headers, data=desc_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/submitDescription",
+            headers=headers,
+            data=desc_payload
+    ).ok:
+        logger.error(f"Description cleanup failed: {desc_payload}")
 
-    session.post(url=f"{config.jenkins.base_url}/me/my-views/view/all/submitDescription",
-                 headers=headers, data=desc_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/me/my-views/view/all/submitDescription",
+            headers=headers,
+            data=desc_payload
+    ).ok:
+        logger.error(f"View description cleanup failed: {desc_payload}")
 
-    session.post(url=f"{config.jenkins.base_url}/user/{config.jenkins.USERNAME}/appearance/configSubmit",
-                            headers=headers, data=theme_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/user/{config.jenkins.USERNAME}/appearance/configSubmit",
+            headers=headers,
+            data=theme_payload
+    ).ok:
+        logger.error(f"Theme cleanup failed: {theme_payload}")
 
 
 def delete_jobs_views(session, config):
@@ -101,7 +116,7 @@ def delete_jobs_views(session, config):
     delete_by_link(session, url, names, crumb)
 
     url = config.jenkins.base_url + "/job/{}/doDelete"
-    names = get_substrings(main_page, 'href="job/', '/"')
+    names = get_substrings(main_page, 'href="job/', '/(?:"|build|last)')
     delete_by_link(session, url, names, crumb)
 
 
@@ -143,6 +158,7 @@ def delete_tokens(session, config):
 
 def clear_data(config):
     session = requests.Session()
+    logger.info("running cleanup")
     delete_jobs_views(session, config)
     delete_users(session, config)
     delete_nodes(session, config)

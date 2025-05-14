@@ -16,3 +16,11 @@ class MultiConfigProjectConfigPage(BasePage):
         self.wait_to_be_visible(self.Locators.DESCRIPTION).send_keys(text)
         self.wait_to_be_clickable(self.Locators.SUBMIT).click()
         return MultiConfigProjectPage(self.driver, name).wait_for_url()
+
+    def edit_description(self, new_text, name):
+        from pages.multi_config_project_page import MultiConfigProjectPage
+        input_field = self.wait_to_be_visible(self.Locators.DESCRIPTION)
+        input_field.clear()
+        input_field.send_keys(new_text)
+        self.wait_to_be_clickable(self.Locators.SUBMIT).click()
+        return MultiConfigProjectPage(self.driver, name).wait_for_url()
