@@ -86,3 +86,8 @@ def test_memory_usage_tab_select_timespan(memory_usage_tab):
     for option in SI.TIMESPAN_OPTIONS:
         assert memory_usage_tab.get_graph_for_selected_timespan_option(option), \
             f"Graph for timespan option '{option}' is not displayed, or displayed incorrectly"
+
+
+def test_thread_dumps_tab_open_thread_dump_page(thread_dumps_tab):
+    thread_dump_page = thread_dumps_tab.click_on_thread_dump_page_link()
+    assert thread_dump_page.get_title() == "Thread dump [Jenkins]", "Thread dump page title is incorrect"

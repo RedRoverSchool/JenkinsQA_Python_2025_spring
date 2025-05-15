@@ -8,6 +8,8 @@ from pages.new_item_page import NewItemPage
 from tests.freestyle_project.freestyle_data import Freestyle
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
 from core.jenkins_utils import remote_build_trigger
+from pages.freestyle_project_config_options_page import FreestylePJConfOptPage
+
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +17,7 @@ logger = logging.getLogger(__name__)
 @pytest.fixture
 def freestyle(main_page):
     freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
-    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locator.H2_LOCATOR, 10)
+    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locators.H2_LOCATOR, 10)
     return freestyle_config_page
 
 
@@ -86,10 +88,10 @@ def get_token(main_page: MainPage, config):
     Returns:
         str: The newly generated project-specific token.
     """
-    security_page = main_page.go_to_the_user_page().go_to_security_page()
+    security_page = main_page.header.go_to_the_user_page().go_to_security_page()
     token = security_page.generate_token(Freestyle.project_name)
     user_page = security_page.save_settings(config.jenkins.USERNAME)
-    user_page.go_to_the_main_page()
+    user_page.header.go_to_the_main_page()
 
     return token
 
@@ -117,8 +119,6 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page
     logger.info(f"Triggered build for project '{project_name}' via API.")
     logger.info("Waiting for the build to finish ...")
     main_page.wait_for_build_queue_executed()
-    return project_name
-
 
 @pytest.fixture(scope="function")
 def create_freestyle_project_and_build_periodically(freestyle_config_page: FreestyleProjectConfigPage):
@@ -136,4 +136,9 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
     logger.info(f"Triggered build for project '{project_name}' by schedule '{cron_schedule}'.")
     logger.info(f"Waiting for the build to finish (up to {timeout} sec)...")
     freestyle_project_page.wait_for_build_executed(timeout).go_to_the_main_page()
+    return project_name
+
+@pytest.fixture
+def freestyle_pj_conf_page(freestyle):
+    return FreestylePJConfOptPage(freestyle)
     return project_name

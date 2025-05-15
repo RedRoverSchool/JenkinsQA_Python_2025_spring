@@ -7,6 +7,7 @@ class Freestyle:
     warning_message = "This project is currently disabled"
     description_text = "Jenkins freestyle project is the general purpose job that will clone the projects from the Source Code Management (SCM) like Github, Gitlab, and Bit Bucket."
     tooltip_enable = (By.XPATH, '//span[@tooltip="Enable or disable the current project"]')
+    github_project_url = "https://github.com/RedRoverSchool/OpenWeatherPython_06"
     environmet_options = ([
         ("Delete workspace before build starts", "cb18"),
         ("Use secret text(s) or file(s)", "cb19"),
@@ -30,9 +31,33 @@ class Freestyle:
         ((By.XPATH, '//a[@tooltip="Help for feature: Use secret text(s) or file(s)"]'), 'Help for feature: Use secret text(s) or file(s)'),
         ((By.XPATH, '//a[@tooltip="Help for feature: With Ant"]'), 'Help for feature: With Ant')
     ]
-    cron_schedule_every_minute = "*/1 * * * *"
-    cron_schedule_every_two_minutes = "H/2 * * * *"
-    timeout = {
-        "*/1 * * * *": 60,
-        "H/2 * * * *": 120
-    }
+    ITEMS_POST_BUILD_ACTION = [
+        "Aggregate downstream test results",
+        "Archive the artifacts",
+        "Build other projects",
+        "Publish JUnit test result report",
+        "Record fingerprints of files to track usage",
+        "Git Publisher",
+        "E-mail Notification",
+        "Editable Email Notification",
+        "Set GitHub commit status (universal)",
+        "Set build status on GitHub commit [deprecated]",
+        "Delete workspace when build is done"
+    ]
+
+class FreestyleConfigOptTriggers:
+
+    TRIGGER_OPT_NAMES = [
+        'pseudoRemoteTrigger',
+        'jenkins-triggers-ReverseBuildTrigger',
+        'hudson-triggers-TimerTrigger',
+        'com-cloudbees-jenkins-GitHubPushTrigger',
+        'hudson-triggers-SCMTrigger'
+    ]
+
+cron_schedule_every_minute = "*/1 * * * *"
+cron_schedule_every_two_minutes = "H/2 * * * *"
+timeout = {
+    "*/1 * * * *": 60,
+    "H/2 * * * *": 120
+}

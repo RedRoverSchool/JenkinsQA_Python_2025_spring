@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class UserPage(BasePage):
-    class Locator:
+    class Locators:
         SECURITY_BUTTON = (By.LINK_TEXT, 'Security')
 
     def __init__(self, driver, username,  timeout=5):
@@ -12,5 +12,5 @@ class UserPage(BasePage):
 
     def go_to_security_page(self):
         from pages.security_page import SecurityPage
-        self.wait_to_be_clickable(self.Locator.SECURITY_BUTTON).click()
+        self.wait_to_be_clickable(self.Locators.SECURITY_BUTTON).click()
         return SecurityPage(self.driver, self.config.jenkins.USERNAME).wait_for_url()

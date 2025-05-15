@@ -1,3 +1,4 @@
+from typing import Self
 from selenium.webdriver.common.by import By
 from selenium.common import TimeoutException
 from selenium.webdriver.support.select import Select
@@ -13,6 +14,7 @@ class SystemInformationPage(ManageJenkinsPage):
         TABLE_ROWS = (By.TAG_NAME, "tr")
         TABLE_CELLS = (By.TAG_NAME, "td")
         TIMESPAN_DROPDOWN = (By.ID, "timespan-select")
+        THREAD_DUMP_PAGE_LINK = (By.XPATH, "//a[@href='threadDump']")
 
         @staticmethod
         def tab_table(tab_number: int) -> tuple[str, str]:
@@ -98,6 +100,9 @@ class SystemInformationPage(ManageJenkinsPage):
     def click_on_memory_usage_tab(self) -> None:
         self.click_on_tab(SI.TABS_BAR_HEADERS[3])
 
+    def click_on_thread_dumps_tab(self) -> None:
+        self.click_on_tab(SI.TABS_BAR_HEADERS[4])
+
     def select_timespan(self, option: str) -> None:
         element = self.wait_to_be_visible(self.Locator.TIMESPAN_DROPDOWN, timeout=5)
         Select(element).select_by_visible_text(option)
@@ -109,3 +114,7 @@ class SystemInformationPage(ManageJenkinsPage):
             return self.wait_to_be_visible(graph_locator, timeout=5)
         except TimeoutException:
             return False
+
+    def click_on_thread_dump_page_link(self) -> Self:
+        self.click_on(self.Locator.THREAD_DUMP_PAGE_LINK)
+        return self

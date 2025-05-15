@@ -1,6 +1,10 @@
 new_folder_name = 'Test_Folder'
 new_pipeline_name = 'Pipeline_one'
 new_freestyle_project_name = "Freestyle_Project"
+positive_name = "TC_01.001.04-PositiveName"
+
+special_chars = ["@", "#", "$", "%", "^", "&", "*", "<", "/", "\\"]
+
 expected_error = '» This field cannot be empty, please enter a valid name'
 expected_item_types = [
     "Freestyle project",
@@ -23,3 +27,5 @@ copy_from_placeholder = 'No items'
 new_folder_copy = 'Test_Folder_copy'
 header_error = 'Error'
 message_error = f'No such job: {invalid_folder_name}'
+
+title_fragment = "new item"
