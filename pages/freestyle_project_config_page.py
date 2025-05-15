@@ -167,17 +167,13 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_clickable(self.Locators.ADD_POST_BUILD_ACTIONS)
         return self
 
-    def check_builds_trigger(self, trigger_checkbox):
-        self.scroll_into_view(trigger_checkbox)
-        self.wait_to_be_clickable(trigger_checkbox).click()
-
     def set_trigger_builds_remotely(self, token):
-        self.check_builds_trigger(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
+        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
         self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
         return self.click_save_button()
 
     def set_trigger_builds_periodically(self, schedule):
-        self.check_builds_trigger(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
+        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
         self.wait_to_be_visible(self.Locators.SCHEDULE).send_keys(schedule)
         return self.click_save_button()
 
