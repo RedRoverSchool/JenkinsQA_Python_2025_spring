@@ -5,7 +5,7 @@ import logging
 
 from pages.main_page import MainPage
 from pages.new_item_page import NewItemPage
-from tests.freestyle_project.freestyle_data import Freestyle
+from tests.freestyle_project.freestyle_data import Freestyle, CronTimer
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
 from core.jenkins_utils import remote_build_trigger
 from pages.freestyle_project_config_options_page import FreestylePJConfOptPage
@@ -19,6 +19,13 @@ def freestyle(main_page):
     freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
     freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locators.H2_LOCATOR, 10)
     return freestyle_config_page
+
+
+@pytest.fixture
+def freestyle_config_page(new_item_page: NewItemPage):
+    project_name: str = f"freestyle-{uuid.uuid4().hex[:8]}"
+    freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(project_name)
+    return freestyle_config_page, project_name
 
 
 @pytest.fixture
@@ -96,13 +103,6 @@ def get_token(main_page: MainPage, config):
     return token
 
 
-@pytest.fixture
-def freestyle_config_page(new_item_page: NewItemPage):
-    project_name: str = f"freestyle-{uuid.uuid4().hex[:8]}"
-    freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(project_name)
-    return freestyle_config_page, project_name
-
-
 @pytest.fixture(scope="function")
 def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config, driver):
     """
@@ -114,11 +114,18 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page
     auth_token = get_token
     freestyle_config_page, project_name = freestyle_config_page
 
-    main_page: MainPage = freestyle_config_page.set_trigger_builds_remotely(auth_token).go_to_the_main_page()
+    logger.info(f"Getting auth token: {auth_token}")
+    logger.info(f"Getting unique project name: {project_name}")
+
+    main_page: MainPage = freestyle_config_page.set_trigger_builds_remotely(auth_token).header.go_to_the_main_page()
+
     remote_build_trigger(driver, project_name, auth_token, config)
-    logger.info(f"Triggered build for project '{project_name}' via API.")
+    logger.info(f"Triggering build for the project '{project_name}' via API.")
     logger.info("Waiting for the build to finish ...")
     main_page.wait_for_build_queue_executed()
+
+    return project_name
+
 
 @pytest.fixture(scope="function")
 def create_freestyle_project_and_build_periodically(freestyle_config_page: FreestyleProjectConfigPage):
@@ -129,16 +136,21 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
         project_name
     """
     freestyle_config_page, project_name = freestyle_config_page
-    cron_schedule = Freestyle.cron_schedule_every_minute
-    timeout = Freestyle.timeout[cron_schedule]
+    cron_schedule = CronTimer.cron_schedule_every_minute
+    timeout = CronTimer.timeout[cron_schedule]
+
+    logger.info(f"Getting unique project name: {project_name}")
+    logger.info(f"Getting cron schedule: {cron_schedule}")
+    logger.info(f"Getting timeout for the cron schedule: {timeout}")
 
     freestyle_project_page = freestyle_config_page.set_trigger_builds_periodically(cron_schedule)
-    logger.info(f"Triggered build for project '{project_name}' by schedule '{cron_schedule}'.")
+
+    logger.info(f"Triggering build for the project '{project_name}' by schedule '{cron_schedule}'.")
     logger.info(f"Waiting for the build to finish (up to {timeout} sec)...")
-    freestyle_project_page.wait_for_build_executed(timeout).go_to_the_main_page()
+    freestyle_project_page.wait_for_build_executed(timeout).header.go_to_the_main_page()
+
     return project_name
 
 @pytest.fixture
 def freestyle_pj_conf_page(freestyle):
     return FreestylePJConfOptPage(freestyle)
-    return project_name

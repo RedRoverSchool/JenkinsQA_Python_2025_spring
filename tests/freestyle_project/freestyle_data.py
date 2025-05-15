@@ -55,9 +55,10 @@ class FreestyleConfigOptTriggers:
         'hudson-triggers-SCMTrigger'
     ]
 
-cron_schedule_every_minute = "*/1 * * * *"
-cron_schedule_every_two_minutes = "H/2 * * * *"
-timeout = {
-    "*/1 * * * *": 60,
-    "H/2 * * * *": 120
-}
+class CronTimer:
+    cron_schedule_every_minute = "*/1 * * * *"
+    cron_schedule_every_two_minutes = "H/2 * * * *"
+    timeout = {
+        "*/1 * * * *": 60,
+        "H/2 * * * *": 120
+    }
