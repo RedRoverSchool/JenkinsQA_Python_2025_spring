@@ -24,9 +24,18 @@ class PipelineConfigPage(BasePage):
         self.wait_to_be_clickable(self.Locators.SAVE_BUTTON).click()
         return PipelinePage(self.driver, pipeline_project_name=self.pipeline_name).wait_for_url()
 
+    # def type_script(self, script):
+    #     script_textarea = self.wait_for_element(self.Locators.SCRIPT_TEXTAREA)
+    #     self.scroll_into_view(script_textarea)
+    #     self.wait_for_element(self.Locators.SCRIPT_TEXTAREA).send_keys(script)
+    #     return self
+
     def type_script(self, script):
         script_textarea = self.wait_for_element(self.Locators.SCRIPT_TEXTAREA)
         self.scroll_into_view(script_textarea)
-        self.wait_for_element(self.Locators.SCRIPT_TEXTAREA).send_keys(script)
+        self.driver.execute_script("""
+            arguments[0].value = arguments[1];
+            arguments[0].dispatchEvent(new Event('input'));
+        """, script_textarea, script)
         return self
 
