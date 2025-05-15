@@ -22,10 +22,20 @@ expected_item_descriptions = [
     "Creates a set of Pipeline projects according to detected branches in one SCM repository.",
     "Creates a set of multibranch project subfolders by scanning for repositories."
 ]
-invalid_folder_name = 'Folder_does_not_exist'
-copy_from_placeholder = 'No items'
-new_folder_copy = 'Test_Folder_copy'
-header_error = 'Error'
-message_error = f'No such job: {invalid_folder_name}'
+
+
+class Copy:
+    FOLDER_NAME_TO_COPY = 'Folder_for_copy'
+    NON_EXISTENT_FOLDER_NAME = 'Invalid_folder_name'
+    ITEM_NOT_FOUND_MESSAGE = 'No items'
+    COPY_NAME = 'Copy_existing_item'
+    HEADER_ERROR = 'Error'
+    MESSAGE_ERROR = f'No such job: {NON_EXISTENT_FOLDER_NAME}'
+
+    PARAMS = [
+        (FOLDER_NAME_TO_COPY, [FOLDER_NAME_TO_COPY]),
+        (NON_EXISTENT_FOLDER_NAME, [ITEM_NOT_FOUND_MESSAGE])
+    ]
+
 
 title_fragment = "new item"
