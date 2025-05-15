@@ -9,6 +9,7 @@ class PipelineConfigPage(BasePage):
         DESCRIPTION_FIELD = (By.NAME, 'description')
         SAVE_BUTTON = (By.NAME, "Submit")
         SCRIPT_TEXTAREA = (By.CSS_SELECTOR, "[samplesurl]>textarea")
+        TEXTAREA = (By.NAME, "_.script")
 
     def __init__(self, driver, pipeline_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -25,8 +26,9 @@ class PipelineConfigPage(BasePage):
         return PipelinePage(self.driver, pipeline_project_name=self.pipeline_name).wait_for_url()
 
     def type_script(self, script):
-        script_textarea = self.wait_for_element(self.Locators.SCRIPT_TEXTAREA)
-        self.scroll_into_view(script_textarea)
-        self.wait_for_element(self.Locators.SCRIPT_TEXTAREA).send_keys(script)
+        textarea = self.wait_for_element(self.Locators.TEXTAREA)
+        self.scroll_into_view(textarea)
+        self.driver.execute_script("arguments[0].value = arguments[1];", textarea, script)
+
         return self
 

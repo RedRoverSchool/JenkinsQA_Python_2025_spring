@@ -1,5 +1,5 @@
 import pytest
-from tests.pipeline.pipeline_data import pipeline_project_name, script
+from tests.pipeline.pipeline_data import pipeline_project_name, script, script1
 from pages.pipeline_config_page import PipelineConfigPage
 
 
@@ -12,4 +12,5 @@ def pipeline_config_page(main_page):
 
 @pytest.fixture(scope="function")
 def create_pipeline_with_script(pipeline_config_page):
-    return pipeline_config_page.type_script(script).click_save_button()
+    pipeline_config_page.type_script(script1)
+    return pipeline_config_page.click_save_button()
