@@ -1,15 +1,15 @@
 import uuid
-
 import pytest
 import logging
 
+from core.jenkins_utils import remote_build_trigger
+
 from pages.main_page import MainPage
 from pages.new_item_page import NewItemPage
-from tests.freestyle_project.freestyle_data import Freestyle, CronTimer
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-from core.jenkins_utils import remote_build_trigger
 from pages.freestyle_project_config_options_page import FreestylePJConfOptPage
 
+from tests.freestyle_project.freestyle_data import Freestyle, CronTimer
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +104,8 @@ def get_token(main_page: MainPage, config):
 
 
 @pytest.fixture(scope="function")
-def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config, driver):
+def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config,
+                                                driver):
     """
     Fixture that configures a Freestyle project to allow remote builds,
     triggers the build using the Jenkins remote API, and waits for the build to complete.
@@ -150,6 +151,7 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
     freestyle_project_page.wait_for_build_execution(timeout).header.go_to_the_main_page()
 
     return project_name
+
 
 @pytest.fixture(params=["remote", "periodically"])
 def create_and_build_project_fixture(request):
