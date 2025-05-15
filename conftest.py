@@ -1,19 +1,19 @@
-import os
-import sys
-import logging
 import datetime
+import logging
+import os
 import subprocess
+import sys
+
 import pytest
-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-from components.new_item import NewItem
 from core.jenkins_utils import clear_data
 from core.settings import Config
-
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
+from pages.manage_jenkins.manage_jenkins_page import ManageJenkinsPage
+from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
+from pages.new_item_page import NewItemPage
 
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
@@ -47,7 +47,6 @@ def jenkins_reset(config):
 
 @pytest.fixture(scope="function")
 def driver(request, config):
-
     match config.browser.NAME:
         case "chrome":
             from selenium.webdriver.chrome.options import Options
@@ -75,7 +74,7 @@ def driver(request, config):
             screenshots_dir = os.path.join(project_root, "screenshots")
             os.makedirs(screenshots_dir, exist_ok=True)
 
-            test_name =  "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
+            test_name = "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
             now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
 
@@ -89,21 +88,50 @@ def driver(request, config):
 
 
 @pytest.fixture(scope="function")
-def login_page(driver, config):
-    driver.get(config.jenkins.base_url + "/login?from=%2F")
-    return driver
+def login_page(driver) -> LoginPage:
+    return LoginPage(driver).open()
 
 
 @pytest.fixture(scope="function")
-def main_page(login_page, config):
-    login_page.find_element(By.ID, "j_username").send_keys(config.jenkins.USERNAME)
-    login_page.find_element(By.ID, "j_password").send_keys(config.jenkins.PASSWORD)
-    login_page.find_element(By.NAME, "Submit").click()
-    wait5 = WebDriverWait(login_page, 5, poll_frequency=0.5)
-    wait5.until(EC.url_changes(config.jenkins.base_url + "/login?from=%2F"))
-    return login_page
+def main_page(login_page, config) -> MainPage:
+    main_page = login_page.login(config.jenkins.USERNAME, config.jenkins.PASSWORD)
+    return main_page
 
 
 @pytest.fixture(scope="function")
-def new_item(main_page):
-    return NewItem(main_page)
+def new_item_page(main_page) -> NewItemPage:
+    return main_page.go_to_new_item_page()
+
+
+@pytest.fixture(scope="function")
+def manage_jenkins_page(main_page) -> ManageJenkinsPage:
+    return main_page.go_to_manage_jenkins_page()
+
+
+@pytest.fixture(scope="function")
+def system_information_page(manage_jenkins_page) -> SystemInformationPage:
+    return manage_jenkins_page.go_to_system_information_page()
+
+
+@pytest.fixture(scope="function")
+def environment_variables_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_environment_variables_tab()
+    return system_information_page
+
+
+@pytest.fixture(scope="function")
+def plugins_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_plugins_tab()
+    return system_information_page
+
+
+@pytest.fixture(scope="function")
+def memory_usage_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_memory_usage_tab()
+    return system_information_page
+
+
+@pytest.fixture(scope="function")
+def thread_dumps_tab(system_information_page) -> SystemInformationPage:
+    system_information_page.click_on_thread_dumps_tab()
+    return system_information_page

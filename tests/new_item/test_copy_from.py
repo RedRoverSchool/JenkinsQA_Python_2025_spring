@@ -1,21 +1,25 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
+import pytest
 
-from .data_structs import FreestyleItem, NewItem
-from .new_item_steps import create_freestyle_item
+from pages.new_item_page import NewItemPage
+from tests.new_item.data import (
+    new_folder_name,
+    invalid_folder_name,
+    copy_from_placeholder,
+    new_folder_copy,
+    header_error,
+    message_error
+)
 
 
-def test_copy_from_dropdown_shows_existing_item(new_item_page, config):
-    wait = WebDriverWait(new_item_page, 10)
-    new_item_page = create_freestyle_item(new_item_page, config)
-    new_item_page.find_element(*FreestyleItem.copy_from_field_selector).send_keys(
-        FreestyleItem.get_first_letter_of_project_name()
-    )
-    existing_item = wait.until(EC.visibility_of_element_located((
-        By.XPATH, "//a[contains(@class, 'jenkins-dropdown__item')]"
-    )))
-    actual_item_text = existing_item.text.strip()
-    assert actual_item_text == NewItem.positive_name, (
-        f"Expected item '{NewItem.positive_name}', but found '{actual_item_text}'"
-    )
+@pytest.mark.parametrize("folder_name, expected_result", [
+    (new_folder_name, [new_folder_name]),
+    (invalid_folder_name, [copy_from_placeholder])
+])
+def test_display_dropdown_text(new_item_page_for_copy, folder_name, expected_result):
+    text = new_item_page_for_copy.enter_first_letter_in_copy_from(folder_name).get_dropdown_text()
+    assert text == expected_result, f"Expected text '{expected_result}' NOT FOUND"
+
+def test_error_message(new_item_page: NewItemPage):
+    error_page = new_item_page.get_error_page_copy(new_folder_name, new_folder_copy, invalid_folder_name)
+    assert error_page.get_header_error() == header_error, f"Expected header '{header_error}' NOT FOUND"
+    assert error_page.get_message_error() == message_error, f"Expected message '{message_error}' NOT FOUND"

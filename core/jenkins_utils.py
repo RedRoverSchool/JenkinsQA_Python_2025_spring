@@ -1,13 +1,41 @@
-import requests
 import re
 import json
 import logging
+import requests
 
 logger = logging.getLogger(__name__)
 
 
 def get_crumb(response):
     return re.findall(r'data-crumb-value="([a-z0-9]{64})"', response.text)[0]
+
+
+def get_session(driver):
+    session = requests.Session()
+    cookies = driver.get_cookies()
+    for cookie in cookies:
+        session.cookies.set(cookie['name'], cookie['value'])
+    return session
+
+
+def update_crumb(driver, config):
+    session = get_session(driver)
+    response = session.get(config.jenkins.base_url + "/crumbIssuer/api/json")
+    if response.ok:
+        crumb = response.json().get("crumb", "")
+        logger.debug(f"update_crumb: {crumb}")
+        config.jenkins.update_crumb(crumb)
+        return crumb
+    else:
+        logger.error(f"failed to update crumb, {response.status_code} {response.text}")
+
+
+def remote_build_trigger(driver, job_name, token, config):
+    update_crumb(driver, config)
+    session = get_session(driver)
+    cred_url = config.jenkins.get_url_with_credentials()
+    url = f"{cred_url}/job/{job_name}/build?token={token}&Jenkins-Crumb={config.jenkins.crumb}"
+    session.get(url)
 
 
 def get_substrings(response, from_string, to_string):
@@ -30,9 +58,12 @@ def get_page(session, url, config):
 
 def delete_by_link(session, url, names, crumb):
     for name in names:
-        response = session.post(url=url.format(name),
-            headers={"Jenkins-Crumb": crumb, "Content-Type": "application/x-www-form-urlencoded"})
-        logger.debug(f"delete_by_link {name=}, {response.status_code=}")
+        response = session.post(
+            url=url.format(name),
+            headers={"Jenkins-Crumb": crumb, "Content-Type": "application/x-www-form-urlencoded"}
+        )
+        if not response.ok:
+            logger.error(f"delete_by_link, {url=} {response.status_code=} {name=}")
 
 
 def reset_theme_description(session, config):
@@ -49,14 +80,26 @@ def reset_theme_description(session, config):
                                           }}}
     theme_payload = f"Jenkins-Crumb={crumb}&json={json.dumps(theme_json)}&Submit=Submit&core:apply=true"
 
-    session.post(url=f"{config.jenkins.base_url}/submitDescription",
-                 headers=headers, data=desc_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/submitDescription",
+            headers=headers,
+            data=desc_payload
+    ).ok:
+        logger.error(f"Description cleanup failed: {desc_payload}")
 
-    session.post(url=f"{config.jenkins.base_url}/me/my-views/view/all/submitDescription",
-                 headers=headers, data=desc_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/me/my-views/view/all/submitDescription",
+            headers=headers,
+            data=desc_payload
+    ).ok:
+        logger.error(f"View description cleanup failed: {desc_payload}")
 
-    session.post(url=f"{config.jenkins.base_url}/user/{config.jenkins.USERNAME}/appearance/configSubmit",
-                            headers=headers, data=theme_payload)
+    if not session.post(
+            url=f"{config.jenkins.base_url}/user/{config.jenkins.USERNAME}/appearance/configSubmit",
+            headers=headers,
+            data=theme_payload
+    ).ok:
+        logger.error(f"Theme cleanup failed: {theme_payload}")
 
 
 def delete_jobs_views(session, config):
@@ -73,7 +116,7 @@ def delete_jobs_views(session, config):
     delete_by_link(session, url, names, crumb)
 
     url = config.jenkins.base_url + "/job/{}/doDelete"
-    names = get_substrings(main_page, 'href="job/', '/"')
+    names = get_substrings(main_page, 'href="job/', '/(?:"|build|last)')
     delete_by_link(session, url, names, crumb)
 
 
@@ -101,12 +144,26 @@ def delete_domains(session, config):
     delete_by_link(session, url, names, crumb)
 
 
+def delete_tokens(session, config):
+    security_page = get_page(session, config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/security/", config)
+    url = config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/descriptorByName/jenkins.security.ApiTokenProperty/revoke"
+    uuids = get_substrings(security_page, 'class="token-uuid-input" value="', '">')
+    headers = {"Content-Type": "application/x-www-form-urlencoded", "Jenkins-Crumb": get_crumb(security_page)}
+    for uuid in uuids:
+        logger.info(f"deleting token with uuid {uuid}")
+        response = session.post(url=url, headers=headers, data=f"tokenUuid={uuid}")
+        if not response.ok:
+            logger.error(f"failed to delete token with uuid={uuid}, response code: {response.status_code}")
+
+
 def clear_data(config):
     session = requests.Session()
+    logger.info("running cleanup")
     delete_jobs_views(session, config)
     delete_users(session, config)
     delete_nodes(session, config)
     delete_domains(session, config)
     reset_theme_description(session, config)
+    delete_tokens(session, config)
 
 
