@@ -58,6 +58,6 @@ class FreestyleProjectPage(BasePage):
     def get_menu_items_texts(self):
         return [item.text for item in self.wait_to_be_visible_all(self.Locators.MENU_ITEMS)]
 
-    def wait_for_build_executed(self, timeout):
+    def wait_for_build_execution(self, timeout):
         self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
         return self

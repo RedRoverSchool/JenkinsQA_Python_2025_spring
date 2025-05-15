@@ -147,9 +147,19 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
 
     logger.info(f"Triggering build for the project '{project_name}' by schedule '{cron_schedule}'.")
     logger.info(f"Waiting for the build to finish (up to {timeout} sec)...")
-    freestyle_project_page.wait_for_build_executed(timeout).header.go_to_the_main_page()
+    freestyle_project_page.wait_for_build_execution(timeout).header.go_to_the_main_page()
 
     return project_name
+
+@pytest.fixture(params=["remote", "periodically"])
+def create_and_build_project_fixture(request):
+    if request.param == "remote":
+        return request.getfixturevalue("create_freestyle_project_and_build_remotely")
+    elif request.param == "periodically":
+        return request.getfixturevalue("create_freestyle_project_and_build_periodically")
+    else:
+        raise ValueError(f"Unknown param value: {request.param}")
+
 
 @pytest.fixture
 def freestyle_pj_conf_page(freestyle):
