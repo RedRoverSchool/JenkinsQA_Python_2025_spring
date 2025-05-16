@@ -1,5 +1,8 @@
 import logging
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 from pages.base_page import BasePage
 
@@ -16,6 +19,7 @@ class MainPage(BasePage):
         BUILD_QUEUE_STATUS_MESSAGE = (By.CLASS_NAME, "pane")
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
 
+    JOB_NAME_LOCATOR = "//a[contains(@href, '/job/') and contains(text(), '{}')]"
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -58,3 +62,23 @@ class MainPage(BasePage):
     def click_on_folder_item(self):
         self.click_on(self.Locators.TABLE_ITEM)
 
+    def wait_for_url(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: driver.current_url.startswith(self.url)
+        )
+        return self
+
+    def is_job_with_name_displayed(self, job_name, timeout=10):
+        locator = (By.XPATH, self.JOB_NAME_LOCATOR.format(job_name))
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_element_located(locator)
+            )
+            return True
+        except TimeoutException:
+            self.logger.warning(f"Job with name '{job_name}' not found on dashboard after {timeout} seconds.")
+            return False
+
+    def click_on_folder_item(self, folder_name):
+        locator = (By.XPATH, f"//a[@href and text()='{folder_name}']")
+        self.click_on(locator)
