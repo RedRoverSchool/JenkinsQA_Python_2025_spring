@@ -10,6 +10,8 @@ class PipelinePage(BasePage):
         BUILD_NOW_BUTTON = (By.LINK_TEXT, "Build Now")
         BUILDS_NEXT_PAGE_BUTTON = (By.ID, "down")
         BUILDS_PREV_PAGE_BUTTON = (By.ID, "up")
+        BUILDS_LINKS = (By.CSS_SELECTOR, "#jenkins-build-history .app-builds-container__item__inner a[href*='job/']")
+        BUILDS_LINKS_INNER = (By.CSS_SELECTOR, ".app-builds-container__item__inner__link")
 
 
     def __init__(self, driver, pipeline_project_name, timeout=10):
@@ -26,10 +28,18 @@ class PipelinePage(BasePage):
         self.wait_to_be_clickable(self.Locators.BUILD_NOW_BUTTON).click()
         return self
 
-    def create_multiple_builds(self, amount):
-        for _ in range(amount):
-            self.wait_to_be_clickable(self.Locators.BUILD_NOW_BUTTON).click()
-        return self
+    def get_builds_inner_links(self):
+        return self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS_INNER)
+
+    def get_builds_list(self, count):
+        self.wait_to_be_visible((By.CSS_SELECTOR, f"#jenkins-builds .app-builds-container__item__inner a[href*='/{count}/']"), 25)
+        return self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
+
+    # def get_next_page_button(self, count):
+    #     self.wait_to_be_visible((By.CSS_SELECTOR, f"#jenkins-builds .app-builds-container__item__inner a[href*='/{count}/']"))
+    #
+    #     return self.Locators.BUILDS_NEXT_PAGE_BUTTON
+
 
     # def click_builds_next_page_button(self):
     #     import time
