@@ -79,6 +79,6 @@ class MainPage(BasePage):
             self.logger.warning(f"Job with name '{job_name}' not found on dashboard after {timeout} seconds.")
             return False
 
-    def click_on_folder_item(self, folder_name):
+    def click_on_folder_by_name(self, folder_name):
         locator = (By.XPATH, f"//a[@href and text()='{folder_name}']")
         self.click_on(locator)

@@ -35,7 +35,7 @@ def test_create_folder_from_dashboard(driver):
     assert main_page.is_job_with_name_displayed(folder_name, timeout=10), \
         f"Папка '{folder_name}' не отображается на дашборде"
 
-    main_page.click_on_folder_item(folder_name)
+    main_page.click_on_folder_by_name(folder_name)
 
     assert main_page.is_header_contains(folder_name), \
         f"Имя папки '{folder_name}' не отображается в заголовке страницы"
