@@ -80,3 +80,5 @@ class UIElementMixin:
             return page_class(self.driver, *args).wait_for_url()
         else:
             return page_class(self.driver, args).wait_for_url()
+
+
