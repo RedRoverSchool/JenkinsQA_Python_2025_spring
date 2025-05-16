@@ -70,6 +70,9 @@ class NewItemPage(BasePage):
     def get_freestyle_element(self):
         return self.find_element(*self.Locators.ITEM_FREESTYLE_PROJECT)
 
+    def click_ok_button(self):
+        return self.click_on(self.Locators.OK_BUTTON)
+
     def click_element(self, element):
         self.wait_to_be_clickable(element).click()
 
@@ -125,19 +128,21 @@ class NewItemPage(BasePage):
             self.logger.error("Dropdown did not open and is not present in the DOM.")
             return []
 
-    def create_folder_and_open_page(self, name):
-        return self.create_new_folder(name).header.go_to_the_main_page().go_to_new_item_page()
-
-    def enter_first_letter_in_copy_from(self, name):
-        self.enter_text(self.Locators.COPY_FROM, name[0])
+    def enter_item_name(self, name):
+        self.enter_text(self.Locators.ITEM_NAME, name)
         return self
 
-    def get_error_page_copy(self, name_folder, name, copy_name):
+    def enter_copy_from(self, name):
+        self.enter_text(self.Locators.COPY_FROM, name)
+        return self
+
+    def enter_first_character_in_copy_from(self, name):
+        self.enter_copy_from(name[0])
+        return self
+
+    def go_to_error_page_copy(self, name, copy_name):
         from pages.error_page_copy_from import ErrorPageCopyFrom
-        self.create_folder_and_open_page(name_folder)
-        self.enter_text(self.Locators.ITEM_NAME, name)
-        self.enter_text(self.Locators.COPY_FROM, copy_name)
-        self.click_on(self.Locators.OK_BUTTON)
+        self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
 
     def is_name_input_displayed(self):
