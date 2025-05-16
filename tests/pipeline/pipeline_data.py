@@ -1,40 +1,80 @@
 description_text = "Test description"
 pipeline_project_name = "First Pipeline Project"
-script = [
-    "pipeline {\n",
-    # "agent any\n",
-    # "stages {\n",
-    # "stage('Test') {\n",
-    # "steps {\n",
-    # "sh 'echo \"Step 1\"'\n",
-    # "sh 'exit 0'",
-    # "steps {\n",
-    # "sh 'echo \"Step 1\"'\n",
-    # "sh 'exit 0'",
-    # "}\n",
-    # "}\n",
-    # "stage('Step 2 Message') {\n",
-    # "steps {\n",
-    # "sh 'echo \"Step 1\"'\n",
-    # "sh 'exit 0'\n",
-    # "}\n",
-    # "}\n",
-]
+# script = """
+# pipeline {
+# agent any
+# stages {
+# stage('Step 1 Test') {
+# steps {
+# sh 'echo "Step 1"'
+# sh 'exit 0'
+# }
+# }
+# stage('Step 2 Message') {
+# steps {
+# sh 'echo "Step 2"'
+# sh 'echo "Success!"'
+# }
+# }
+# }
+# }
+# """
 
-script1 = """
-pipeline {
+# script = """ pipeline {
+#     agent any
+#     stages {
+#         stage('Step 1 Test') {
+#             steps {
+#                 sh 'echo "Success!"; exit 0'
+#             }
+#         }
+#     }
+#     post {
+#         always {
+#             echo 'This will always run'
+#         }
+#         success {
+#             echo 'This will run only if successful'
+#         }
+#         failure {
+#             echo 'This will run only if failed'
+#         }
+#         unstable {
+#             echo 'This will run only if the run was marked as unstable'
+#         }
+#         changed {
+#             echo 'This will run only if the state of the Pipeline has changed'
+#             echo 'For example, if the Pipeline was previously failing but is now successful'
+#         }
+#     }
+# }
+# """
+
+script = """pipeline {
     agent any
     stages {
         stage('Step 1 Test') {
             steps {
-                sh 'echo "Step 1"'
-                sh 'exit 0'
+                script {
+                    if (isUnix()) {
+                        sh 'echo Step 1'
+                    } else {
+                        bat 'echo Step 1'
+                    }
+                }
             }
         }
         stage('Step 2 Message') {
             steps {
-                sh 'echo "Step 2"'
-                sh 'echo "Success!"'
+                script {
+                    if (isUnix()) {
+                        sh 'echo Step 2'
+                        sh 'echo Success!'
+                    } else {
+                        bat 'echo Step 2'
+                        bat 'echo Success!'
+                    }
+                }
             }
         }
     }
@@ -49,10 +89,10 @@ pipeline {
             echo 'This will run only if failed'
         }
         unstable {
-            echo 'This will run only if the run was marked as unstable'
+            echo 'This will run only if marked as unstable'
         }
         changed {
-            echo 'This will run only if the Pipeline was previously failing but is now successful'
+            echo 'This will run only if changed'
         }
     }
 }
