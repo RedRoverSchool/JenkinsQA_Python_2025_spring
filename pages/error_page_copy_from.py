@@ -5,7 +5,7 @@ from pages.base_page import BasePage
 
 class ErrorPageCopyFrom(BasePage):
     class Locators:
-        HEADER_ERROR= (By.CSS_SELECTOR, "#main-panel > h1")
+        HEADER_ERROR = (By.CSS_SELECTOR, "#main-panel > h1")
         MESSAGE_ERROR = (By.CSS_SELECTOR, "#main-panel > p")
 
     def __init__(self, driver, timeout=5):

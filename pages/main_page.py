@@ -62,6 +62,7 @@ class MainPage(BasePage):
     def click_on_folder_item(self):
         self.click_on(self.Locators.TABLE_ITEM)
 
+
     def wait_for_url(self, timeout=10):
         WebDriverWait(self.driver, timeout).until(
             lambda driver: driver.current_url.startswith(self.url)
@@ -82,3 +83,10 @@ class MainPage(BasePage):
     def click_on_folder_item(self, folder_name):
         locator = (By.XPATH, f"//a[@href and text()='{folder_name}']")
         self.click_on(locator)
+
+    def open_dashboard_in_new_window(self):
+        self.driver.execute_script(f"window.open('{self.url}');")
+        self.wait_for_new_window()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        return MainPage(self.driver)
+

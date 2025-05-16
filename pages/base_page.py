@@ -27,7 +27,6 @@ class BasePage(UIElementMixin):
             self.logger.error(f"Timeout when waiting for url {self.url}, current url: {self.driver.current_url}")
         return self
 
-
     def get_title(self) -> str:
         return self.driver.title
 
@@ -50,3 +49,14 @@ class BasePage(UIElementMixin):
     def get_text(self, locator, timeout=10):
         element = self.wait_for_element(locator, timeout)
         return element.text
+
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def get_all_windows_handles(self):
+        return self.driver.window_handles
+
+    def switch_to_window(self, handle):
+        self.driver.switch_to.window(handle)
+        return self.driver
+

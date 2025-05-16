@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 
+
 from pages.base_page import BasePage
 from core.jenkins_utils import update_crumb
 
@@ -40,3 +41,6 @@ class LoginPage(BasePage):
 
     def is_keep_me_signed_checkbox_displayed(self):
         return self.find_element(*self.Locators.KEEP_ME_SIGNED_CHECKBOX).is_displayed()
+
+    def is_login_page(self):
+        return self.wait_text_to_be_present(self.Locators.SIGN_IN_FORM_HEADER, "Sign in to Jenkins")
