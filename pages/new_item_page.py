@@ -144,3 +144,10 @@ class NewItemPage(BasePage):
         from pages.error_page_copy_from import ErrorPageCopyFrom
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
+
+    def is_name_input_displayed(self):
+        try:
+            self.wait_to_be_visible(self.Locators.ITEM_NAME)
+            return True
+        except TimeoutException:
+            return False
