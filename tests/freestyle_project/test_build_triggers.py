@@ -3,12 +3,7 @@ from pages.main_page import MainPage
 
 
 @pytest.mark.parametrize(
-    "create_and_build_project_fixture",
-    [
-        "remote",
-        pytest.param("periodically",
-                     marks=pytest.mark.xfail(reason="May fail due to non-reproducible concurrent builds locally."))
-    ],
+    "create_and_build_project_fixture", ["remote", "periodically"],
     indirect=True
 )
 def test_user_can_trigger_build(main_page: MainPage, create_and_build_project_fixture):
