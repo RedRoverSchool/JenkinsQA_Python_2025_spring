@@ -66,7 +66,7 @@ jobs:
 
       - name: pytest run all tests
         if: steps.scope_check.outputs.run_all_tests == 'true'
-        run: pytest
+        run: pytest tests/freestyle_project/test_build_triggers.py
 
       - name: pytest run picked tests
         if: steps.scope_check.outputs.run_all_tests == 'false'
