@@ -1,7 +1,9 @@
+from urllib.parse import quote
+
+
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
 
 from pages.ui_element import UIElementMixin
 from pages.components.components import Header
@@ -36,3 +38,16 @@ class BasePage(UIElementMixin):
     def switch_to_window(self, handle):
         self.driver.switch_to.window(handle)
         return self.driver
+
+    def normalize_path_parts(self, *path):
+        parts = []
+        for part in path:
+            if isinstance(part, str):
+                parts.extend(part.strip("/").split("/"))
+            elif isinstance(part, list):
+                parts.extend(part)
+        return [p for p in parts if p]
+
+    def build_path(self, *names):
+        normalized = self.normalize_path_parts(*names)
+        return "/".join(f"job/{quote(n)}" for n in normalized)

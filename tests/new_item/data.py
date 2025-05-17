@@ -1,6 +1,7 @@
 new_folder_name = 'Test_Folder'
 new_pipeline_name = 'Pipeline_one'
 new_freestyle_project_name = "Freestyle_Project"
+new_multi_config_project_name = "My_Multi_Project"
 positive_name = "TC_01.001.04-PositiveName"
 
 special_chars = ["@", "#", "$", "%", "^", "&", "*", "<", "/", "\\"]

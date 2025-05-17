@@ -1,8 +1,8 @@
-from tests.pipeline.pipeline_data import description_text
+from tests.pipeline.pipeline_data import description_text, pipeline_project_name
 
 
 def test_add_description_to_pipeline(pipeline_config_page):
-    pipeline_page = pipeline_config_page.add_description(description_text).click_save_button()
+    pipeline_page = pipeline_config_page.add_description(description_text).click_save_button(pipeline_project_name)
     assert pipeline_page.is_description_element_displayed, "Description is not visible"
 
     desc_element_text = pipeline_page.get_description_text()
