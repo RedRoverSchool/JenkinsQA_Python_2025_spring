@@ -73,31 +73,29 @@ jobs:
         if: steps.scope_check.outputs.run_all_tests == 'false'
         run: pytest --alluredir=allure-results
 
-      - name: Upload Allure results
+      - name: Load test report history
+        uses: actions/checkout@v4.2.2
         if: always()
-        uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
-          name: allure-results
-          path: allure-results
+          ref: gh-pages
+          path: gh-pages
 
-      - name: Install Allure commandline
-        run: |
-          wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
-          tar -zxvf allure-2.27.0.tgz
-          sudo mv allure-2.27.0 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-
-      - name: Generate Allure report
+      - name: Build test report
+        uses: simple-elf/allure-report-action@master
         if: always()
-        run: |
-          allure generate allure-results --clean -o allure-report
-
-      - name: Upload Allure report
-        if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: build/allure-results
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
       - name: Attach screenshots
         if: failure()
