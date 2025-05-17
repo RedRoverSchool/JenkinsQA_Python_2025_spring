@@ -9,6 +9,8 @@ jobs:
   run-pytest:
     name: 'run pytest tests'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -72,6 +74,34 @@ jobs:
         if: steps.scope_check.outputs.run_all_tests == 'false'
         run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
         #run: pytest
+
+      - name: Get Allure history
+        uses: actions/checkout@v4.2.2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate allure report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          allure-results: build/allure-results
+          allure_history: allure-history
+          allure_report: allure-report
+          gh_pages: gh-pages
+          ref: gh-pages
+          path: gh-pages
+          keep_reports: 30
+
+      - name: Commit allure_report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
       - name: Attach screenshots
         if: failure()
