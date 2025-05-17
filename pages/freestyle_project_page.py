@@ -20,6 +20,7 @@ class FreestyleProjectPage(BasePage):
 
     def click_enable_button(self):
         self.wait_for_element(self.Locators.ENABLE_BUTTON).click()
+        self.wait_for_element(self.Locators.BUILD_NOW)
         return self
 
     def get_part_url(self, name: str):
@@ -55,4 +56,3 @@ class FreestyleProjectPage(BasePage):
 
     def get_menu_items_texts(self):
         return [item.text for item in self.wait_to_be_visible_all(self.Locators.MENU_ITEMS)]
-

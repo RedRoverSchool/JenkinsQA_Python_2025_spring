@@ -1,5 +1,8 @@
 import logging
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 from pages.base_page import BasePage
 
@@ -16,6 +19,8 @@ class MainPage(BasePage):
         BUILD_QUEUE_STATUS_MESSAGE = (By.CLASS_NAME, "pane")
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
 
+    JOB_NAME_LOCATOR = "//*[@id='job_{}']/td[3]/a"
+    FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -58,3 +63,31 @@ class MainPage(BasePage):
     def click_on_folder_item(self):
         self.click_on(self.Locators.TABLE_ITEM)
 
+    def open_dashboard_in_new_window(self):
+        self.driver.execute_script(f"window.open('{self.url}');")
+        self.wait_for_new_window()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        return MainPage(self.driver)
+
+    def wait_for_url(self, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            lambda driver: driver.current_url.startswith(self.url)
+        )
+        return self
+
+    def is_job_with_name_displayed(self, job_name, timeout=20):
+        locator = (By.XPATH, self.JOB_NAME_LOCATOR.format(job_name))
+        self.logger.info(f"Looking for job with locator: {locator}")
+        try:
+            WebDriverWait(self.driver, timeout).until(
+                EC.visibility_of_element_located(locator)
+            )
+            return True
+        except TimeoutException:
+            self.logger.warning(f"Job with name '{job_name}' not found on dashboard after {timeout} seconds.")
+            return False
+
+    def click_on_folder_by_name(self, folder_name, timeout=10):
+        locator = (By.XPATH, self.FOLDER_LINK_LOCATOR.format(folder_name))
+        self.logger.info(f"Clicking on folder with locator: {locator}")
+        self.click_on(locator, timeout)
