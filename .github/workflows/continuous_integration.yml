@@ -75,8 +75,6 @@ jobs:
         if: steps.scope_check.outputs.run_all_tests == 'false'
         run: pytest --alluredir=allure-results
 
-      - uses: actions/checkout@v4
-
       - name: Ensure gh-pages branch exists
         run: |
           git fetch origin gh-pages || echo "gh-pages does not exist"
