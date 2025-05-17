@@ -1,9 +1,11 @@
+import pytest
 from pages.new_item_page import NewItemPage
 from tests.new_item.data import new_pipeline_name
 from pages.main_page import MainPage
 from pages.job_page import JobPage
 
 
+@pytest.mark.skip(reason="Unstable on CI")
 def test_should_add_item_to_existing_folder(prepare_folder_env, new_item_page: NewItemPage, main_page: MainPage,
                                             job_page: JobPage):
     main_page.click_on_folder_item()

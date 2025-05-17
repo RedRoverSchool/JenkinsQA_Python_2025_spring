@@ -38,6 +38,42 @@ def remote_build_trigger(driver, job_name, token, config):
     session.get(url)
 
 
+def get_job_info(driver, job_name, config):
+    update_crumb(driver, config)
+    session = get_session(driver)
+    url = f"{config.jenkins.base_url}/job/{job_name}/config.xml"
+    try:
+        response = session.get(url)
+        logger.debug(f"{job_name} config: {response.text}")
+    except Exception as e:
+        logger.error(f"get_job_info: {str(e)}")
+
+def get_build_info(driver, job_name, config):
+    update_crumb(driver, config)
+    session = get_session(driver)
+    url = f"{config.jenkins.base_url}/job/{job_name}/api/json?tree=builds[number,url]"
+    logger.debug(f"Getting information on the {job_name}'s builds")
+    try:
+        response = session.get(url)
+        logger.debug(f"{job_name} builds: {response.text}")
+        if not response.ok:
+            logger.error("Getting build's info failed")
+            return
+        response_json = response.json()
+        for build in response_json["builds"]:
+            url = f"{config.jenkins.base_url}/job/{job_name}/{build["number"]}/api/json?tree=actions[causes[*]]"
+            response = session.get(url)
+            if not response.ok:
+                logger.error("Getting build's info failed")
+                return
+            descriptions = [cause.get("shortDescription", "failed to get description")
+                           for act in response.json().get("actions", [])
+                           for cause in act.get("causes", [])]
+            logger.info(f"Builds {job_name}/#{build["number"]} cause: {descriptions}")
+    except Exception as e:
+        logger.error(f"get_build_info: {str(e)}")
+
+
 def get_substrings(response, from_string, to_string):
     # В Java коде длину ограничивали в 255 символов, я пока не делал. Если возникнут проблемы тогда будем смотреть.
     return set(re.findall(rf'{from_string}(.+?){to_string}', response.text))

@@ -61,6 +61,7 @@ class UIElementMixin:
         self.driver.execute_script(
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',
             element)
+        return self
 
     def scroll_to_element(self, By, Selector):
         actions = ActionChains(self.driver)
@@ -80,3 +81,8 @@ class UIElementMixin:
             return page_class(self.driver, *args).wait_for_url()
         else:
             return page_class(self.driver, args).wait_for_url()
+
+    def check_checkbox(self, checkbox):
+        self.scroll_into_view(checkbox)
+        self.wait_to_be_clickable(checkbox).click()
+        return self
