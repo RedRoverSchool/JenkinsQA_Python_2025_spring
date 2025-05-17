@@ -75,6 +75,17 @@ jobs:
         if: steps.scope_check.outputs.run_all_tests == 'false'
         run: pytest --alluredir=allure-results
 
+      - uses: actions/checkout@v4
+
+      - name: Ensure gh-pages branch exists
+        run: |
+          git fetch origin gh-pages || echo "gh-pages does not exist"
+          if ! git ls-remote --exit-code origin gh-pages; then
+            git checkout --orphan gh-pages
+            git commit --allow-empty -m "Init gh-pages"
+            git push origin gh-pages
+          fi
+
       - name: Load test report history
         uses: actions/checkout@v4.2.2
         if: always()
