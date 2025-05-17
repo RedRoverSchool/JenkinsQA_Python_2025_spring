@@ -42,10 +42,9 @@ def get_job_info(driver, job_name, config):
     update_crumb(driver, config)
     session = get_session(driver)
     url = f"{config.jenkins.base_url}/job/{job_name}/config.xml"
-    logging.info(f"Getting information on {job_name}'s config")
     try:
         response = session.get(url)
-        logging.info(f"{job_name} config: {response.text}")
+        logger.debug(f"{job_name} config: {response.text}")
     except Exception as e:
         logger.error(f"get_job_info: {str(e)}")
 
@@ -53,10 +52,10 @@ def get_build_info(driver, job_name, config):
     update_crumb(driver, config)
     session = get_session(driver)
     url = f"{config.jenkins.base_url}/job/{job_name}/api/json?tree=builds[number,url]"
-    logging.info(f"Getting information on the {job_name}'s builds")
+    logger.debug(f"Getting information on the {job_name}'s builds")
     try:
         response = session.get(url)
-        logging.info(f"{job_name} builds: {response.text}")
+        logger.debug(f"{job_name} builds: {response.text}")
         if not response.ok:
             logger.error("Getting build's info failed")
             return
@@ -64,12 +63,13 @@ def get_build_info(driver, job_name, config):
         for build in response_json["builds"]:
             url = f"{config.jenkins.base_url}/job/{job_name}/{build["number"]}/api/json?tree=actions[causes[*]]"
             response = session.get(url)
-            logging.debug(f"Builds #{build["number"]} info: {response.text}")
             if not response.ok:
                 logger.error("Getting build's info failed")
                 return
-            #causes = [response.json()["actions"]["causes"]]
-            logging.info(f"Builds #{build["number"]} info: {json.dumps(response.json(), indent=4)}")
+            descriptions = [cause.get("shortDescription", "failed to get description")
+                           for act in response.json().get("actions", [])
+                           for cause in act.get("causes", [])]
+            logger.info(f"Builds {job_name}/#{build["number"]} cause: {descriptions}")
     except Exception as e:
         logger.error(f"get_build_info: {str(e)}")
 

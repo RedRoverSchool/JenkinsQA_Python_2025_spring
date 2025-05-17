@@ -10,14 +10,14 @@ from pages.components.components import Header
 class BasePage(UIElementMixin):
     def __init__(self, driver: WebDriver, timeout = 5):
         super().__init__(driver)
-        self.logger.info(f"{self.__class__.__name__} is being initialized")
+        self.logger.debug(f"{self.__class__.__name__} is being initialized")
         self.base_url = self.config.jenkins.base_url
         self.header = Header(driver)
 
     def open(self):
         old_url = self.driver.current_url
         self.driver.get(self.url)
-        self.logger.info(f"{self.__class__.__name__} moves to {self.url} from {old_url}")
+        self.logger.debug(f"{self.__class__.__name__} moves to {self.url} from {old_url}")
         return self.wait_for_url()
 
     def wait_for_url(self):
