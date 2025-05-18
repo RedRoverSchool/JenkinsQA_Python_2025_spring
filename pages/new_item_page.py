@@ -149,3 +149,7 @@ class NewItemPage(BasePage):
         from pages.error_page_copy_from import ErrorPageCopyFrom
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
+
+    def select_freestyle_project(self):
+        self.wait_to_be_clickable(self.Locator.ITEM_FREESTYLE_PROJECT).click()
+
