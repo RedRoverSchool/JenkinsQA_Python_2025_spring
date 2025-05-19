@@ -40,3 +40,6 @@ class FolderConfigPage(BasePage):
         element = self.find_element(*self.Locators.HEALTH_METRICS)
         return element is not None and element.is_displayed() and element.is_enabled()
 
+    def get_folder_header_text(self):
+        header = self.find_element(*self.Locators.DISPLAY_NAME)
+        return header.text.strip()

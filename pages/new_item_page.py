@@ -1,13 +1,16 @@
 import time
-
 from typing import List
-from selenium.webdriver.common.by import By
+
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+
 from pages.base_page import BasePage
 
 
 class NewItemPage(BasePage):
+    WAIT_FOR_PAGE = True
+
     class Locators:
         PAGE_NAME = (By.XPATH, "//h1[text()='New Item']")
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
@@ -31,6 +34,8 @@ class NewItemPage(BasePage):
         ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
         COPY_FROM = (By.ID, "from")
         DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
+
+    PAGE_READY_LOCATOR = Locators.PAGE_NAME
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
