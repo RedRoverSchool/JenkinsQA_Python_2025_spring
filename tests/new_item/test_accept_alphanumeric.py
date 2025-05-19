@@ -1,27 +1,17 @@
-from tests.new_item.data_structs import NewItem
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.new_item_page import NewItemPage
+from tests.new_item.data import positive_name
 
 
-def test_name_alphanumeric(new_item_page):
-    wait = WebDriverWait(new_item_page, timeout=5)
-    name_field = wait.until(
-        EC.visibility_of_element_located(NewItem.name_field_selector)
-    )
-    all_validation_errors_before = new_item_page.find_elements(
-        *NewItem.common_validation_error_selector
-    )
-
-    name_field.send_keys(NewItem.positive_name)
-    page_name = new_item_page.find_element(*NewItem.page_name_selector)
-    page_name.click()
-    all_validation_errors_after = new_item_page.find_elements(
-        *NewItem.common_validation_error_selector
-    )
+def test_name_alphanumeric(new_item_page: NewItemPage):
+    page = new_item_page
+    all_validation_errors_before = page.get_any_validation_errors()
+    page.enter_text(page.Locators.ITEM_NAME, positive_name)
+    page.click_element(page.Locators.PAGE_NAME)
+    all_validation_errors_after = page.get_any_validation_errors()
 
     assert len(all_validation_errors_before) == len(all_validation_errors_after), (
-        "Not all validation errors were disabled."
+        "Not all validation errors were disabled before inserting any item name."
     )
-    assert name_field.get_attribute("value") == NewItem.positive_name, (
-        "The positive Item name did not stay in the field."
+    assert page.get_value(page.Locators.ITEM_NAME) == positive_name, (
+        "The positive Item name did not stay in the field after clicking outside of the field."
     )

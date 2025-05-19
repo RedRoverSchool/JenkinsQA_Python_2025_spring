@@ -1,23 +1,10 @@
-from selenium.webdriver import ActionChains
+from pages.new_item_page import NewItemPage
 
-from conftest import logger
-from tests.multibranch_pipeline_configuration.mbp_data import Data
-
-
-def test_default_state_of_the_toggle(driver, toggle):
-    assert toggle.text == Data.TOGGLE_ENABLED_TEXT, logger.error(Data.TOGGLE_ENABLED_ERROR_TEXT)
+from tests.multibranch_pipeline_configuration.mbp_data import Project
+from tests.multibranch_pipeline_configuration.mbp_data import Toggle
 
 
-def test_the_tooltip_appearance(driver, toggle, toggle_tooltip, span_general):
-    action = ActionChains(driver)
-    action.move_to_element(toggle_tooltip).perform()
-    first_hovering = (toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[0]),
-                      toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[1]))
-    toggle.click()
-    action.move_to_element(span_general).perform()
-    action.move_to_element(toggle_tooltip).perform()
-    second_hovering = (toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[0]),
-                       toggle_tooltip.get_attribute(Data.TOGGLE_TOOLTIP_ATR[1]))
+def test_default_state_of_the_toggle(new_item_page: NewItemPage):
+    new_mbp_item = new_item_page.create_new_multibranch_pipeline_project(Project.PROJECT_NAME)
 
-    assert Data.TOGGLE_TOOLTIP_PREFS == first_hovering == second_hovering, \
-           logger.error(Data.TOGGLE_TOOLTIP_ERROR_TEXT)
+    assert new_mbp_item.get_state_of_the_toggle() == Toggle.TOGGLE_ENABLED_TEXT

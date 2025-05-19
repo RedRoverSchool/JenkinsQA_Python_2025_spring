@@ -1,18 +1,10 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from tests.pipeline.pipeline_data import description_text, pipeline_project_name
 
 
 def test_add_description_to_pipeline(pipeline_config_page):
-    text_for_description = "test description"
-    text_box = WebDriverWait(pipeline_config_page, 10).until(
-        EC.visibility_of_element_located((By.NAME, 'description')))
-    text_box.send_keys(text_for_description)
-    pipeline_config_page.find_element(By.NAME, "Submit").click()
-    desc_element = WebDriverWait(pipeline_config_page, 10).until(
-        EC.visibility_of_element_located((By.ID, "description")))
-    assert desc_element.is_displayed(), f"Description element with text {text_for_description} is not visible"
-    assert desc_element.text == text_for_description, \
-        f"Expected description '{text_for_description}', but got '{desc_element.text}'"
+    pipeline_page = pipeline_config_page.add_description(description_text).click_save_button(pipeline_project_name)
+    assert pipeline_page.is_description_element_displayed, "Description is not visible"
 
-
+    desc_element_text = pipeline_page.get_description_text()
+    assert desc_element_text == description_text, \
+        f"Expected description '{description_text}', but got '{desc_element_text}'"

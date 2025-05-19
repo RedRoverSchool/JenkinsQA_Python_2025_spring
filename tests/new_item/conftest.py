@@ -1,14 +1,20 @@
+import allure
 import pytest
-from tests.new_item.data_structs import NewItem
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
+from pages.new_item_page import NewItemPage
+from tests.new_item.data import Copy
+from tests.new_item.data import new_folder_name
 
 
-@pytest.fixture()
-def new_item_page(main_page, config):
-    new_item_button = main_page.find_element(*NewItem.new_item_button_selector)
-    new_item_button.click()
-    wait = WebDriverWait(main_page, 5)
-    wait.until(EC.url_matches(config.jenkins.base_url + NewItem.url))
+@pytest.fixture(scope="function")
+@allure.title("Prepare for page for copy")
+def prepare_page_for_copy(new_item_page: NewItemPage):
+    new_item_page.create_new_folder(Copy.FOLDER_NAME_TO_COPY)
+    return new_item_page.header.go_to_the_main_page().go_to_new_item_page()
 
-    return main_page
+
+@pytest.fixture(scope="function")
+def prepare_folder_env(new_item_page: NewItemPage):
+    return new_item_page.create_new_folder(new_folder_name).header.go_to_the_main_page()
+
+

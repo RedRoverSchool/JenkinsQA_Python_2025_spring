@@ -1,12 +1,9 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.main_page import MainPage
+from tests.new_item.data import title_fragment
 
 
-def test_new_item_page_is_available(main_page):
-    wait = WebDriverWait(main_page, 5)
+def test_new_item_page_is_available(main_page: MainPage):
+    main_page.go_to_new_item_page()
+    title = main_page.get_title()
 
-    main_page.find_element(By.LINK_TEXT, "New Item").click()
-    wait.until(EC.visibility_of_element_located((By.XPATH, "//li[contains(text(),'New Item')]")))
-
-    assert "new item" in main_page.title.lower()
+    assert title_fragment in title.lower()
