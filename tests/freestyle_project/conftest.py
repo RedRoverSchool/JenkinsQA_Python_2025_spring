@@ -3,10 +3,10 @@ import pytest
 import logging
 
 from core.jenkins_utils import remote_build_trigger
-
 from pages.main_page import MainPage
 from pages.new_item_page import NewItemPage
 from pages.freestyle_project_config_page import FreestyleProjectConfigPage
+from pages.freestyle_project_page import FreestyleProjectPage
 from pages.freestyle_project_config_options_page import FreestylePJConfOptPage
 
 from tests.freestyle_project.freestyle_data import Freestyle, CronTimer
@@ -23,9 +23,13 @@ def freestyle(main_page):
 
 @pytest.fixture
 def freestyle_config_page(new_item_page: NewItemPage):
-    project_name: str = f"freestyle-{uuid.uuid4().hex[:8]}"
-    freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(project_name)
-    return freestyle_config_page, project_name
+    freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(Freestyle.project_name)
+    return freestyle_config_page
+
+
+@pytest.fixture(scope="function")
+def generate_unique_project_name() -> str:
+    return f"freestyle-{uuid.uuid4().hex[:8]}"
 
 
 @pytest.fixture
@@ -105,7 +109,7 @@ def get_token(main_page: MainPage, config):
 
 @pytest.fixture(scope="function")
 def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config,
-                                                driver):
+                                                driver) -> MainPage:
     """
     Fixture that configures a Freestyle project to allow remote builds,
     triggers the build using the Jenkins remote API, and waits for the build to complete.
@@ -113,19 +117,16 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page
         project_name
     """
     auth_token = get_token
-    freestyle_config_page, project_name = freestyle_config_page
-
     logger.info(f"Getting auth token: {auth_token}")
-    logger.info(f"Getting unique project name: {project_name}")
 
     main_page: MainPage = freestyle_config_page.set_trigger_builds_remotely(auth_token).header.go_to_the_main_page()
 
-    remote_build_trigger(driver, project_name, auth_token, config)
-    logger.info(f"Triggering build for the project '{project_name}' via API.")
+    remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
+    logger.info(f"Triggering build for the project '{Freestyle.project_name}' via API.")
     logger.info("Waiting for the build to finish ...")
     main_page.wait_for_build_queue_executed()
 
-    return project_name
+    return main_page
 
 
 @pytest.fixture(scope="function")
@@ -136,31 +137,19 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
     Returns:
         project_name
     """
-    freestyle_config_page, project_name = freestyle_config_page
     cron_schedule = CronTimer.cron_schedule_every_minute
     timeout = CronTimer.timeout[cron_schedule]
 
-    logger.info(f"Getting unique project name: {project_name}")
     logger.info(f"Getting cron schedule: {cron_schedule}")
     logger.info(f"Getting timeout for the cron schedule: {timeout}")
 
-    freestyle_project_page = freestyle_config_page.set_trigger_builds_periodically(cron_schedule)
+    freestyle_project_page: FreestyleProjectPage = freestyle_config_page.set_trigger_builds_periodically(cron_schedule)
 
-    logger.info(f"Triggering build for the project '{project_name}' by schedule '{cron_schedule}'.")
+    logger.info(f"Triggering build for the project '{Freestyle.project_name}' by schedule '{cron_schedule}'.")
     logger.info(f"Waiting for the build to finish (up to {timeout} sec)...")
-    freestyle_project_page.wait_for_build_execution(timeout).header.go_to_the_main_page()
+    main_page: MainPage = freestyle_project_page.wait_for_build_execution(timeout).header.go_to_the_main_page()
 
-    return project_name
-
-
-@pytest.fixture(params=["remote", "periodically"])
-def create_and_build_project_fixture(request):
-    if request.param == "remote":
-        return request.getfixturevalue("create_freestyle_project_and_build_remotely")
-    elif request.param == "periodically":
-        return request.getfixturevalue("create_freestyle_project_and_build_periodically")
-    else:
-        raise ValueError(f"Unknown param value: {request.param}")
+    return main_page
 
 
 @pytest.fixture

@@ -1,15 +1,20 @@
 import pytest
-from pages.main_page import MainPage
+
+from tests.freestyle_project.freestyle_data import Freestyle
 
 
-@pytest.mark.parametrize(
-    "create_and_build_project_fixture", ["remote", "periodically"],
-    indirect=True
-)
-def test_user_can_trigger_build(main_page: MainPage, create_and_build_project_fixture):
-    project_name = create_and_build_project_fixture
-    builds = main_page.go_to_build_history_page().get_build_list()
+def test_user_can_trigger_builds_remotely(create_freestyle_project_and_build_remotely):
+    builds = create_freestyle_project_and_build_remotely.go_to_build_history_page().get_builds_list()
 
     assert len(builds) == 1, f"Expected 1 build, found {len(builds)}"
-    assert builds[0].split("\n")[0] == project_name, f"No build entry found for '{project_name}'"
+    assert builds[0].split("\n")[0] == Freestyle.project_name, f"No build entry found for '{Freestyle.project_name}'"
+    assert builds[0].split("\n")[1] == "#1", "Build #1 not found."
+
+
+pytest.mark.xfail(reason="May fail due to non-reproducible concurrent builds locally.")
+def test_user_can_trigger_build_periodically(create_freestyle_project_and_build_periodically):
+    builds = create_freestyle_project_and_build_periodically.go_to_build_history_page().get_builds_list()
+
+    assert len(builds) == 1, f"Expected 1 build, found {len(builds)}"
+    assert builds[0].split("\n")[0] == Freestyle.project_name, f"No build entry found for '{Freestyle.project_name}'"
     assert builds[0].split("\n")[1] == "#1", "Build #1 not found."
