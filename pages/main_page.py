@@ -1,12 +1,22 @@
 import logging
+from urllib.parse import quote
+
+import allure
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
+from pages.ui_element import UIElementMixin
+from pages.folder_page import FolderPage
+
 
 logger = logging.getLogger(__name__)
 
-class MainPage(BasePage):
+
+class MainPage(BasePage, UIElementMixin):
+    WAIT_FOR_PAGE = True
+
     class Locators:
+        PAGE_NAME = (By.XPATH, "//a[text()='Dashboard']")
         NEW_ITEM_BUTTON = (By.LINK_TEXT, "New Item")
         BUILD_HISTORY_BUTTON = (By.LINK_TEXT, "Build History")
         MANAGE_JENKINS_BUTTON = (By.LINK_TEXT, "Manage Jenkins")
@@ -15,7 +25,13 @@ class MainPage(BasePage):
         BUILD_QUEUE_HEADER = (By.CLASS_NAME, "pane-header-title")
         BUILD_QUEUE_STATUS_MESSAGE = (By.CLASS_NAME, "pane")
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
+        FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
 
+        @staticmethod
+        def get_table_item_locator(name: str) -> tuple[By, str]:
+            return (By.CSS_SELECTOR, f'a[href="job/{quote(name)}/"]')
+
+    PAGE_READY_LOCATOR = Locators.MANAGE_JENKINS_BUTTON
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -39,10 +55,9 @@ class MainPage(BasePage):
         self.click_on(self.Locators.MANAGE_JENKINS_BUTTON)
         return ManageJenkinsPage(self.driver).wait_for_url()
 
-    def go_to_folder_page(self, name):
+    def go_to_the_folder_page(self, name):
         from pages.folder_page import FolderPage
-        self.wait_to_be_clickable(self.Locators.TABLE_ITEM).click()
-        return FolderPage(self.driver, name).wait_for_url()
+        return self.navigate_to(FolderPage, self.Locators.get_table_item_locator(name), name)
 
     def show_build_queue_info_block(self):
         if self.wait_to_be_visible(self.Locators.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
@@ -58,11 +73,15 @@ class MainPage(BasePage):
         self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
         return self
 
-    def click_on_folder_item(self):
-        self.click_on(self.Locators.TABLE_ITEM)
-
     def open_dashboard_in_new_window(self):
         self.driver.execute_script(f"window.open('{self.url}');")
         self.wait_for_new_window()
         self.driver.switch_to.window(self.driver.window_handles[-1])
         return MainPage(self.driver)
+
+    @allure.step("Click on folder by name")
+    def click_on_folder_by_name(self, folder_name, timeout=10):
+        locator = (By.XPATH, self.Locators.FOLDER_LINK_LOCATOR.format(folder_name))
+        self.logger.info(f"Clicking on folder with locator: {locator}")
+        self.click_on(locator, timeout=timeout)
+        return FolderPage(self.driver, folder_name).wait_for_url()

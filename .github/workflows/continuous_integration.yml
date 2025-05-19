@@ -9,6 +9,8 @@ jobs:
   run-pytest:
     name: 'run pytest tests'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -55,23 +57,41 @@ jobs:
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Docker start
-        run: docker run --rm --detach --name jenkins_ci_container -p 8080:8080 -v ${{ github.workspace }}/jenkins_backup/var/jenkins_home:/var/jenkins_home jenkins/jenkins:2.492.2-lts-jdk17
+        run: docker run --rm --detach -p 8080:8080 -v ${{ github.workspace }}/jenkins_backup/var/jenkins_home:/var/jenkins_home jenkins/jenkins:2.492.2-lts-jdk17
 
       - name: Wait for the Jenkins
         run: ./.github/wait-for-jenkins.sh
 
-      - name: check scope of changes
-        id: scope_check
-        run: ./.github/diff-checker.sh
-
       - name: pytest run all tests
-        if: steps.scope_check.outputs.run_all_tests == 'true'
-        run: pytest
+        run: pytest --alluredir=build/allure-results
 
-      - name: pytest run picked tests
-        if: steps.scope_check.outputs.run_all_tests == 'false'
-        #run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
-        run: pytest
+      - name: Get Allure history
+        uses: actions/checkout@v4.2.2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate allure report
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
+        with:
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_history: allure-history
+          #allure_report: allure-report
+          #ref: gh-pages
+          #path: gh-pages
+          keep_reports: 30
+
+      - name: Commit allure_report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
       - name: Attach screenshots
         if: failure()
