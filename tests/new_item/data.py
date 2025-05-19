@@ -1,6 +1,7 @@
 new_folder_name = 'Test_Folder'
 new_pipeline_name = 'Pipeline_one'
 new_freestyle_project_name = "Freestyle_Project"
+new_multi_config_project_name = "My_Multi_Project"
 positive_name = "TC_01.001.04-PositiveName"
 
 special_chars = ["@", "#", "$", "%", "^", "&", "*", "<", "/", "\\"]
@@ -26,7 +27,7 @@ expected_item_descriptions = [
 
 class Copy:
     FOLDER_NAME_TO_COPY = 'Folder_for_copy'
-    NON_EXISTENT_FOLDER_NAME = 'Invalid_folder_name'
+    NON_EXISTENT_FOLDER_NAME = 'Non_existent_folder_name'
     ITEM_NOT_FOUND_MESSAGE = 'No items'
     COPY_NAME = 'Copy_existing_item'
     HEADER_ERROR = 'Error'
@@ -34,6 +35,7 @@ class Copy:
 
     PARAMS = [
         (FOLDER_NAME_TO_COPY, [FOLDER_NAME_TO_COPY]),
+        (FOLDER_NAME_TO_COPY.lower(), [FOLDER_NAME_TO_COPY]),
         (NON_EXISTENT_FOLDER_NAME, [ITEM_NOT_FOUND_MESSAGE])
     ]
 
