@@ -3,9 +3,6 @@ from selenium.webdriver.common.by import By
 
 from core.settings import Config
 from pages.login_page import LoginPage
-from pages.main_page import MainPage
-from pages.new_item_page import NewItemPage
-
 
 @pytest.fixture
 def new_project(driver):
