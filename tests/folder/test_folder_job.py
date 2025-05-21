@@ -17,8 +17,8 @@ def test_should_add_item_to_existing_folder(prepare_folder_env, main_page: MainP
         .header.go_to_the_main_page() \
         .go_to_the_folder_page(new_folder_name) \
         .get_item_list()
-
-    assert [new_pipeline_name] == item_in_folder_list, f"{new_pipeline_name} was not created inside the folder"
+    with allure.step('Verify that the new item was created inside the folder'):
+        assert [new_pipeline_name] == item_in_folder_list, f"{new_pipeline_name} was not created inside the folder"
 
 
 @allure.epic("New Item")
