@@ -1,3 +1,4 @@
+import allure
 import uuid
 import pytest
 import logging
@@ -15,10 +16,14 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.fixture
+@allure.title("Create Freestyle Project")
 def freestyle(main_page):
-    freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
-    freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locators.H2_LOCATOR, 10)
-    return freestyle_config_page
+    with allure.step("Create Freestyle Project"):
+        freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
+    with allure.step("Wait for title FreestyleProjectConfigPage"):
+        freestyle_config_page.wait_for_element(FreestyleProjectConfigPage.Locators.H2_LOCATOR, 10)
+    with allure.step("Return FreestyleProjectConfigPage"):
+        return freestyle_config_page
 
 
 @pytest.fixture
@@ -33,31 +38,43 @@ def generate_unique_project_name() -> str:
 
 
 @pytest.fixture
+@allure.title("tooltip fixture")
 def tooltip(freestyle: FreestyleProjectConfigPage):
-    return freestyle.get_tooltip(Freestyle.tooltip_enable)
+    with allure.step("Get tooltip"):
+        return freestyle.get_tooltip(Freestyle.tooltip_enable)
 
 
 @pytest.fixture
+@allure.title("disabled_message fixture")
 def disabled_message(freestyle):
-    freestyle.switch_to_disable()
-    return freestyle.click_save_button().get_warning_message().splitlines()[0]
+    with allure.step("Click Disable button"):
+        freestyle.switch_to_disable()
+    with allure.step("Return warning message"):
+        return freestyle.click_save_button().get_warning_message().splitlines()[0]
 
 
 @pytest.fixture
+@allure.title("enable_automatically fixture")
 def enable_automatically(freestyle: FreestyleProjectConfigPage):
     from pages.freestyle_project_page import FreestyleProjectPage
-    freestyle.switch_to_disable()
-    project_page: FreestyleProjectPage = freestyle.click_save_button()
-    project_page.click_enable_button()
-    if project_page.get_warning_message() == '':
-        is_warning_message_disappear = True
-    else:
-        is_warning_message_disappear = False
-    project_config = project_page.go_to_configure()
-    if project_config.is_enable().is_displayed():
-        is_project_enable = True
-    else:
-        is_project_enable = False
+    with allure.step("Make Freestyle project is disable"):
+        freestyle.switch_to_disable()
+    with allure.step("Save Freestyle Project as disabled"):
+        project_page: FreestyleProjectPage = freestyle.click_save_button()
+    with allure.step("On Freestyle Project Page click Enable button"):
+        project_page.click_enable_button()
+    with allure.step("Return is visible warning_message: True or False"):
+        if project_page.get_warning_message() == '':
+            is_warning_message_disappear = True
+        else:
+            is_warning_message_disappear = False
+    with allure.step("Go to Freestyle Project Config Page"):
+        project_config = project_page.go_to_configure()
+    with allure.step("Return is Freestyle Project is enable: True or False"):
+        if project_config.is_enable().is_displayed():
+            is_project_enable = True
+        else:
+            is_project_enable = False
     return [is_warning_message_disappear, is_project_enable]
 
 
