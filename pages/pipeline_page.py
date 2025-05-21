@@ -15,7 +15,7 @@ class PipelinePage(BasePage):
         DESCRIPTION_ELEMENT = (By.ID, "description")
         MOVE_LINK = (By.XPATH, '//a[contains(@href, "/move")]')
         MOVE_BTN = (By.XPATH, "//button[@name='Submit']")
-        SETTING_INPUT = (By.CSS_SELECTOR, ".select.setting-input")
+        SETTING_INPUT = (By.XPATH, "//select[@name='destination']")
 
     def __init__(self, driver, pipeline_project_name, timeout=10):
         super().__init__(driver, timeout=timeout)
