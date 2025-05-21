@@ -1,4 +1,6 @@
 import logging
+
+import allure
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -69,18 +71,19 @@ class UIElementMixin:
         return self
 
     def navigate_to(self, page_class, *args):
-        self.logger.info(f"Navigating to {page_class.__name__} with click on {args}")
-        if len(args) == 1:
-            locator = args[0]
-        elif len(args) > 1:
-            locator, args = args
-        else:
-            raise ValueError("Not enough arguments")
-        self.wait_to_be_clickable(locator).click()
-        if not isinstance(args, str):
-            return page_class(self.driver, *args).wait_for_url()
-        else:
-            return page_class(self.driver, args).wait_for_url()
+        with allure.step(f"Navigate to \"{page_class.__name__}\""):
+            self.logger.debug(f"Navigating to {page_class.__name__} with click on {args}")
+            if len(args) == 1:
+                locator = args[0]
+            elif len(args) > 1:
+                locator, args = args
+            else:
+                raise ValueError("Not enough arguments")
+            self.wait_to_be_clickable(locator).click()
+            if not isinstance(args, str):
+                return page_class(self.driver, *args).wait_for_url()
+            else:
+                return page_class(self.driver, args).wait_for_url()
 
     def get_header_text(self, locator):
         header = self.wait_to_be_visible(locator)

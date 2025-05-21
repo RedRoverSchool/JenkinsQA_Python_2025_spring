@@ -8,13 +8,10 @@ from pages.base_page import BasePage
 from pages.ui_element import UIElementMixin
 from pages.folder_page import FolderPage
 
-
 logger = logging.getLogger(__name__)
 
 
 class MainPage(BasePage, UIElementMixin):
-    WAIT_FOR_PAGE = True
-
     class Locators:
         PAGE_NAME = (By.XPATH, "//a[text()='Dashboard']")
         NEW_ITEM_BUTTON = (By.LINK_TEXT, "New Item")
@@ -27,23 +24,20 @@ class MainPage(BasePage, UIElementMixin):
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
         FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
 
-        @staticmethod
-        def get_table_item_locator(name: str) -> tuple[By, str]:
-            return (By.CSS_SELECTOR, f'a[href="job/{quote(name)}/"]')
-
-    PAGE_READY_LOCATOR = Locators.MANAGE_JENKINS_BUTTON
-
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/"
 
+    def get_table_item_locator(self, name: str):
+        return (By.LINK_TEXT, quote(name))
+
+    @allure.step("Get list of items from \"Dashboard\"")
     def get_item_list(self):
         return [item.text for item in self.find_elements(*self.Locators.TABLE_ITEM)]
 
     def go_to_new_item_page(self):
         from pages.new_item_page import NewItemPage
-        self.wait_to_be_clickable(self.Locators.NEW_ITEM_BUTTON).click()
-        return NewItemPage(self.driver).wait_for_url()
+        return self.navigate_to(NewItemPage, self.Locators.NEW_ITEM_BUTTON)
 
     def go_to_build_history_page(self):
         from pages.build_history_page import BuildHistoryPage
@@ -55,9 +49,10 @@ class MainPage(BasePage, UIElementMixin):
         self.click_on(self.Locators.MANAGE_JENKINS_BUTTON)
         return ManageJenkinsPage(self.driver).wait_for_url()
 
+    @allure.step("Go to the folder page: \"{name}\"")
     def go_to_the_folder_page(self, name):
         from pages.folder_page import FolderPage
-        return self.navigate_to(FolderPage, self.Locators.get_table_item_locator(name), name)
+        return self.navigate_to(FolderPage, self.get_table_item_locator(name), name)
 
     def show_build_queue_info_block(self):
         if self.wait_to_be_visible(self.Locators.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
