@@ -35,7 +35,7 @@ class PipelinePage(BasePage):
         return self
 
     def open_move_destination_list(self):
-        self.wait_to_be_clickable(self.Locator.SETTING_INPUT, timeout=5).click()
+        self.wait_to_be_visible(self.Locator.SETTING_INPUT, timeout=10).click()
         return self
 
     def choose_move_location(self):
@@ -51,5 +51,4 @@ class PipelinePage(BasePage):
         self.open_move_destination_list()
         self.choose_move_location()
         self.click_submit_btn()
-        self.header.go_to_the_main_page()
         return MainPage(self.driver)
