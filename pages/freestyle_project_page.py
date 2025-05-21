@@ -12,6 +12,7 @@ class FreestyleProjectPage(BasePage):
         CONFIGURE_MENU_ITEM = (By.LINK_TEXT, 'Configure')
         DESCRIPTION = (By.ID, 'description')
         MENU_ITEMS = (By.XPATH, '//div[@class="task "]')
+        BUILDS_LINK = (By.CSS_SELECTOR, "#jenkins-build-history>div>span~div a")
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -56,3 +57,7 @@ class FreestyleProjectPage(BasePage):
 
     def get_menu_items_texts(self):
         return [item.text for item in self.wait_to_be_visible_all(self.Locators.MENU_ITEMS)]
+
+    def wait_for_build_execution(self, timeout):
+        self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+        return self

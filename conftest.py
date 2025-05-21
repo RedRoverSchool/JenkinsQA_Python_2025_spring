@@ -12,6 +12,7 @@ from core.settings import Config
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.manage_jenkins.manage_jenkins_page import ManageJenkinsPage
+from pages.manage_jenkins.status_information.load_statistics_page import LoadStatisticsPage
 from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
 from pages.new_item_page import NewItemPage
 
@@ -135,3 +136,8 @@ def memory_usage_tab(system_information_page) -> SystemInformationPage:
 def thread_dumps_tab(system_information_page) -> SystemInformationPage:
     system_information_page.click_on_thread_dumps_tab()
     return system_information_page
+
+
+@pytest.fixture(scope="function")
+def load_statistics_page(manage_jenkins_page) -> LoadStatisticsPage:
+    return manage_jenkins_page.go_to_load_statistics_page()

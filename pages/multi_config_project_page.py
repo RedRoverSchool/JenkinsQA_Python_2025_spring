@@ -8,6 +8,7 @@ class MultiConfigProjectPage(BasePage):
         EDIT_LINK = (By.ID, "description-link")
         DESCRIPTION_INPUT = (By.NAME, "description")
         SUBMIT = (By.NAME, "Submit")
+        WARNING_MESSAGE = (By.ID, "enable-project")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -23,3 +24,6 @@ class MultiConfigProjectPage(BasePage):
         input_field.send_keys(new_text)
         self.click_on(self.Locators.SUBMIT)
         return self.wait_for_url()
+
+    def get_text_warning_message(self):
+        return self.get_text(self.Locators.WARNING_MESSAGE).splitlines()[0]

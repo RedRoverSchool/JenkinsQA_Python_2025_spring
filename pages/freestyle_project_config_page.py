@@ -17,7 +17,9 @@ class FreestyleProjectConfigPage(BasePage):
         HIDE_PREVIEW = (By.LINK_TEXT, 'Hide preview')
         NOTIFICATION = (By.ID, 'notification-bar')
         BUILDS_REMOTELY_CHECKBOX = (By.CSS_SELECTOR, "input[name='pseudoRemoteTrigger']~label")
+        BUILDS_PERIODICALLY_CHECKBOX = (By.CSS_SELECTOR, "input[name='hudson-triggers-TimerTrigger']~label")
         AUTH_TOKEN = (By.NAME, "authToken")
+        SCHEDULE = (By.NAME, "_.spec")
         BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
         POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
         ENVIRONMENT = (By.ID, 'environment')
@@ -166,10 +168,13 @@ class FreestyleProjectConfigPage(BasePage):
         return self
 
     def set_trigger_builds_remotely(self, token):
-        checkbox = self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX)
-        self.scroll_into_view(checkbox)
-        self.wait_to_be_clickable(checkbox).click()
+        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
         self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
+        return self.click_save_button()
+
+    def set_trigger_builds_periodically(self, schedule):
+        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
+        self.wait_to_be_visible(self.Locators.SCHEDULE).send_keys(schedule)
         return self.click_save_button()
 
     def switch_to_disable(self):
