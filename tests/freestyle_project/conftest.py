@@ -79,31 +79,43 @@ def enable_automatically(freestyle: FreestyleProjectConfigPage):
 
 
 @pytest.fixture()
+@allure.title("Prepare: add description")
 def can_add_description(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    freestyle.click_apply_button()
+    with allure.step("Add description to Freestyle Projet"):
+        freestyle.add_description(Freestyle.description_text)
+        freestyle.click_apply_button()
     return freestyle.get_description()
 
 
 @pytest.fixture()
+@allure.title("Prepare: save Freestyle Project without description")
 def empty_configure(freestyle):
-    project_page = freestyle.click_save_button()
+    with allure.step("Saving Freestyle Project without description and/or scm"):
+        project_page = freestyle.click_save_button()
     return project_page.get_h1_value()
 
 
 @pytest.fixture()
+@allure.title("Prepare for testing \"preview\" and \"hide\"")
 def preview_hide(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    preview = freestyle.is_preview_visible()
-    freestyle.click_preview()
-    hide = freestyle.is_hide_preview_visible()
-    return [preview, hide]
+    with allure.step("Type text to the description field"):
+        freestyle.add_description(Freestyle.description_text)
+    with allure.step("Is \"preview\" button is visible"):
+        preview = freestyle.is_preview_visible()
+    with allure.step("Click \"preview\" button"):
+        freestyle.click_preview()
+    with allure.step("Is \"hide\" button is visible"):
+        hide = freestyle.is_hide_preview_visible()
+    with allure.step("Return list [preview, hide]"):
+        return [preview, hide]
 
 
 @pytest.fixture()
+@allure.title("Prepare to testing is Description text appears on the Project General page")
 def description_appears(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    project_page = freestyle.click_save_button()
+    with allure.step("Add description to the Freestyle Project"):
+        freestyle.add_description(Freestyle.description_text)
+        project_page = freestyle.click_save_button()
     return project_page.get_description()
 
 
