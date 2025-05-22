@@ -30,3 +30,4 @@ def test_tooltips(freestyle, tp_link, tp_expected_text, count):
 #allure.dynamic.parameter("tp_expected_text", tp_expected_text)
     with allure.step(f"Assert current tooltip equal to \"{tp_expected_text}\""):
         assert freestyle.get_tooltip(tp_link) == tp_expected_text
+
