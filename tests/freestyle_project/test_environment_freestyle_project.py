@@ -35,4 +35,3 @@ def test_create_freestyle_without_environment(freestyle):
         freestyle_page = freestyle.click_save_button()
     with allure.step("Assert thet Freestyle Project is created"):
         assert freestyle_page.get_title() == f"{Freestyle.project_name} [Jenkins]"
-
