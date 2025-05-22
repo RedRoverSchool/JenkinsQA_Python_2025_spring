@@ -9,6 +9,8 @@ class MultiConfigProjectPage(BasePage):
         DESCRIPTION_INPUT = (By.NAME, "description")
         SUBMIT = (By.NAME, "Submit")
         WARNING_MESSAGE = (By.ID, "enable-project")
+        ENABLE_BUTTON = (By.XPATH, "//form[@id='enable-project']//button")
+        PROJECT_STATUS_ICON = (By.CSS_SELECTOR, "#matrix svg.icon-md")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -26,4 +28,14 @@ class MultiConfigProjectPage(BasePage):
         return self.wait_for_url()
 
     def get_text_warning_message(self):
-        return self.get_text(self.Locators.WARNING_MESSAGE).splitlines()[0]
+        return self.get_visible_text_lines(self.Locators.WARNING_MESSAGE)[0]
+
+    def enable_project(self):
+        self.click_on(self.Locators.ENABLE_BUTTON)
+        return self
+
+    def wait_warning_message_to_disappear(self, timeout=5) -> bool:
+        return self.wait_element_to_disappear(self.Locators.WARNING_MESSAGE, timeout)
+
+    def get_project_status_title(self) -> str:
+        return self.wait_and_get_attribute(self.Locators.PROJECT_STATUS_ICON, "title")

@@ -1,5 +1,7 @@
-from pages.base_page import BasePage
+import allure
 from selenium.webdriver.common.by import By
+
+from pages.base_page import BasePage
 
 
 class MultiConfigProjectConfigPage(BasePage):
@@ -32,6 +34,7 @@ class MultiConfigProjectConfigPage(BasePage):
     def click_submit_button(self):
         return self.click_on(self.Locators.SUBMIT)
 
+    @allure.step("Save \"{name}\" project and go to project page")
     def submit_and_open_project_page(self, name):
         from pages.multi_config_project_page import MultiConfigProjectPage
         self.click_submit_button()
