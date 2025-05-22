@@ -80,3 +80,8 @@ class MainPage(BasePage, UIElementMixin):
         self.logger.info(f"Clicking on folder with locator: {locator}")
         self.click_on(locator, timeout=timeout)
         return FolderPage(self.driver, folder_name).wait_for_url()
+
+    @allure.step('Go to the pipeline page: \"{name}\"')
+    def go_to_the_pipeline_page(self, name):
+        from pages.pipeline_page import PipelinePage
+        return self.navigate_to(PipelinePage, self.get_table_item_locator(name), name)

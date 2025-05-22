@@ -18,7 +18,7 @@ def multi_config_project_with_description(new_item_page):
 
 
 @pytest.fixture(scope="function")
-@allure.title("Prepare configuration page of enabled Multi-configuration project")
+@allure.title("Create Multi-configuration project")
 def multi_config_project_enabled(new_item_page) -> MultiConfigProjectConfigPage:
     return new_item_page.create_new_multi_config_project(Project.PROJECT_NAME)
 

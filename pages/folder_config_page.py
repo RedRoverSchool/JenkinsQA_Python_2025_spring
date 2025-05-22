@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pages.base_page import BasePage
 from pages.folder_page import FolderPage
 
@@ -14,6 +13,7 @@ class FolderConfigPage(BasePage):
         TEXT_PREVIEW = (By.CLASS_NAME, "textarea-preview")
         HIDE_PREVIEW = (By.CLASS_NAME, "textarea-hide-preview")
         HEALTH_METRICS = (By.ID, "health-metrics")
+        FOLDER_NAME = (By.CSS_SELECTOR, "#main-panel> h1")
 
     def __init__(self, driver, folder_name,  timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -46,3 +46,7 @@ class FolderConfigPage(BasePage):
     def click_save_button(self):
         self.click_on(self.Locators.SAVE_BUTTON)
         return FolderPage(self.driver, folder_name = self.name).wait_for_url()
+
+    def get_folder_name_after_click_save(self):
+        name = self.wait_to_be_visible(self.Locators.FOLDER_NAME).text
+        return name
