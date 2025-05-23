@@ -4,7 +4,7 @@ from tests.freestyle_project.freestyle_data import Freestyle
 
 @allure.epic("Freestyle Project Configuration")
 @allure.story("Project Description")
-@allure.title("add description to the Freestyle Project")
+@allure.title("Add description to the Freestyle Project")
 @allure.testcase("TC_02.002.02")
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/366", name="Github issue")
 def test_user_can_add_description(can_add_description):
