@@ -33,5 +33,5 @@ def test_tooltip_environment_items(freestyle, tp_link, tp_expected_text):
 def test_create_freestyle_without_environment(freestyle):
     with allure.step("Saving Freestyle Project without environment settings"):
         freestyle_page = freestyle.click_save_button()
-    with allure.step("Assert thet Freestyle Project is created"):
+    with allure.step("Assert that Freestyle Project is created"):
         assert freestyle_page.get_title() == f"{Freestyle.project_name} [Jenkins]"

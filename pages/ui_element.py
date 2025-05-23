@@ -109,3 +109,6 @@ class UIElementMixin:
 
     def get_visible_text_lines(self, locator, timeout=10) -> list[str]:
         return self.get_visible_text(locator, timeout).splitlines()
+
+    def is_element_selected(self, locator) -> bool:
+        return self.wait_for_element(locator).is_selected()

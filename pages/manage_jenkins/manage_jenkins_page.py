@@ -1,3 +1,4 @@
+import allure
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -22,20 +23,24 @@ class ManageJenkinsPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/manage/"
 
+    @allure.step("Go to System Information page")
     def go_to_system_information_page(self):
         from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
         self.click_on(self.Locator.StatusInformation.SYSTEM_INFORMATION)
         return SystemInformationPage(self.driver).wait_for_url()
 
+    @allure.step("Go to Load Statistics page")
     def go_to_load_statistics_page(self):
         from pages.manage_jenkins.status_information.load_statistics_page import LoadStatisticsPage
         self.click_on(self.Locator.StatusInformation.LOAD_STATISTICS)
         return LoadStatisticsPage(self.driver).wait_for_url()
 
+    @allure.step("Select timespan option")
     def select_timespan(self, option: str) -> None:
         element = self.wait_to_be_visible(self.Locator.TIMESPAN_DROPDOWN, timeout=5)
         Select(element).select_by_visible_text(option)
 
+    @allure.step("Get graph for selected timespan option")
     def get_graph_for_selected_timespan_option(self, option: str) -> WebElement | bool:
         self.select_timespan(option)
         graph_locator = self.Locator.get_timespan_graph(MJ.TIMESPAN_OPTIONS.get(option))

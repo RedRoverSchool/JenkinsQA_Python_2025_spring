@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.fixture
-@allure.title("Create Freestyle Project")
+@allure.title("Prepare: Create Freestyle Project")
 def freestyle(main_page):
     with allure.step("Create Freestyle Project"):
         freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
@@ -38,14 +38,14 @@ def generate_unique_project_name() -> str:
 
 
 @pytest.fixture
-@allure.title("tooltip fixture")
+@allure.title("Prepare: Get tooltip")
 def tooltip(freestyle: FreestyleProjectConfigPage):
     with allure.step("Get tooltip"):
         return freestyle.get_tooltip(Freestyle.tooltip_enable)
 
 
 @pytest.fixture
-@allure.title("disabled_message fixture")
+@allure.title("Prepare: make Freestyle Project Disabled")
 def disabled_message(freestyle):
     with allure.step("Click Disable button"):
         freestyle.switch_to_disable()
@@ -54,7 +54,7 @@ def disabled_message(freestyle):
 
 
 @pytest.fixture
-@allure.title("enable_automatically fixture")
+@allure.title("Prepare: make Freestyle Project Enabled automatically")
 def enable_automatically(freestyle: FreestyleProjectConfigPage):
     from pages.freestyle_project_page import FreestyleProjectPage
     with allure.step("Make Freestyle project is disable"):
