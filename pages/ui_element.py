@@ -104,6 +104,9 @@ class UIElementMixin:
         self.wait_to_be_clickable(checkbox).click()
         return self
 
+    def get_attribute(self, locator, attribute) -> str | None:
+        return self.wait_to_be_visible(locator).get_attribute(attribute)
+
     def get_visible_text(self, locator, timeout=10) -> str:
         return self.wait_to_be_visible(locator, timeout).text.strip()
 

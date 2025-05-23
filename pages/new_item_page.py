@@ -156,5 +156,5 @@ class NewItemPage(BasePage):
     def select_item_from_dropdown(self):
         return self.click_on(self.Locators.DROPDOWN_COPY)
 
-    def get_value_copy_from(self):
-        return self.get_value(self.Locators.COPY_FROM).strip()
+    def get_copy_from_field_value(self):
+        return self.get_attribute(self.Locators.COPY_FROM, "value")
