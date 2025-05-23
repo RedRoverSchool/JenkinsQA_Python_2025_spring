@@ -33,4 +33,23 @@ def test_verify_table_column_headers(create_job_pipeline_env, main_page):
     with allure.step("Verify headers presence"):
         assert actual_headers, "No headers found in the table (empty list)"
     with allure.step("Validate headers format and order"):
-        assert actual_headers == expected_headers, f"Headers mismatch. Expected:{expected_headers}, actual:{actual_headers}"
+        assert actual_headers == expected_headers, \
+            f"Headers mismatch. Expected:{expected_headers}, actual:{actual_headers}"
+
+
+@allure.epic("Dashboard with the items")
+@allure.story("View All Jobs")
+@allure.title("Verification of default state for job without configuration")
+@allure.description("Verify that a newly created job without any build history or configuration displays the correct"
+                    " default state in the dashboard jobs table.")
+@allure.testcase("TC_12.001.03")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/757", name="Github issue")
+def test_verify_default_project_state(create_job_pipeline_env, main_page):
+    actual_info = main_page.get_project_row_data(new_pipeline_name)
+    with allure.step("Load expected default project state data"):
+        expected_rows_data = list(DashboardTable.DEFAULT_PROJECT_DATA.values())
+    with allure.step("Check that actual data is present"):
+        assert actual_info, "No data returned from the table"
+    with allure.step("Verify that project status data matches the expected default state"):
+        assert actual_info == expected_rows_data, \
+            f"Project data doesn't match expected values. Expected: {expected_rows_data}, actual: {actual_info}"

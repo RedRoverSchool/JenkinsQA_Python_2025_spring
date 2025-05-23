@@ -24,10 +24,16 @@ class MainPage(BasePage, UIElementMixin):
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
         FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
         TABLE_HEADERS = (By.XPATH, "//table[@id='projectstatus']//thead//th")
+        CELLS_IN_JOB_ROW = (By.XPATH, "//td[../td//a[contains(@href, 'job')]]")
+        TABLE_SVG = (By.CSS_SELECTOR, "td svg")
 
         @staticmethod
         def table_item_link(name: str):
             return By.LINK_TEXT, quote(name)
+
+        @staticmethod
+        def cells_in_job_row(name: str):
+            return By.XPATH, f"//td[../td//a[contains(@href, {quote(name)})]]"
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -42,6 +48,21 @@ class MainPage(BasePage, UIElementMixin):
         elements = self.find_elements(*self.Locators.TABLE_HEADERS)
         return [el.text.replace("↑", "").replace("↓", "").replace("\n", "").strip()
                 for el in elements]
+
+    @allure.step("Get status information for project '{name}' from Dashboard")
+    def get_project_row_data(self, name):
+        cells = self.find_elements(*self.Locators.cells_in_job_row(name))
+        data = [
+            cells[0].find_element(*self.Locators.TABLE_SVG).get_attribute("title"),
+            cells[1].find_element(*self.Locators.TABLE_SVG).get_attribute("title"),
+            cells[2].find_element(*self.Locators.TABLE_ITEM).text.strip(),
+            cells[3].text.strip(),
+            cells[4].text.strip(),
+            cells[5].text.strip(),
+            cells[6].text.strip()
+        ]
+        self.logger.debug(f" Data row for project '{name}': {data}")
+        return data
 
     def go_to_new_item_page(self):
         from pages.new_item_page import NewItemPage
