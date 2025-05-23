@@ -101,7 +101,7 @@ class FreestyleProjectConfigPage(BasePage):
             items_post_build_action.append(item.text)
         return items_post_build_action
 
-    def get_port_build_actions_element(self):
+    def get_post_build_actions_element(self):
         return self.wait_for_element(self.Locators.POST_BUILD_ACTIONS)
 
     def get_windows_size(self, handle):
