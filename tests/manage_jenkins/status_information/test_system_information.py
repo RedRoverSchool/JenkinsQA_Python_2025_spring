@@ -1,4 +1,4 @@
-from tests.manage_jenkins.status_information.data import SystemInformationData as SI
+from tests.manage_jenkins.data import SystemInformationData as SI, ManageJenkinsData as MJ
 
 
 def test_open_system_information_page(manage_jenkins_page):
@@ -83,7 +83,7 @@ def test_plugins_tab_display_plugins_info(plugins_tab):
 
 
 def test_memory_usage_tab_select_timespan(memory_usage_tab):
-    for option in SI.TIMESPAN_OPTIONS:
+    for option in MJ.TIMESPAN_OPTIONS:
         assert memory_usage_tab.get_graph_for_selected_timespan_option(option), \
             f"Graph for timespan option '{option}' is not displayed, or displayed incorrectly"
 
