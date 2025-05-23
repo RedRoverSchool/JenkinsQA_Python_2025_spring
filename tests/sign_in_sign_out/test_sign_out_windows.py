@@ -14,6 +14,7 @@ def test_sign_out_from_all_windows(main_page):
         main_window_handle = main_page.get_current_window_handle()
     with allure.step("Open dashboard in new \"second window\""):
         new_main_page = main_page.open_dashboard_in_new_window()
+    with allure.step("Assert that \"second windows\" is \"Login page\" window")
         assert new_main_page.get_title() == DASHBOARD_TITLE
     with allure.step("Doing Sign out on the \"second window\""):
         login_page = Header(new_main_page).sign_out()
@@ -21,5 +22,5 @@ def test_sign_out_from_all_windows(main_page):
     with allure.step("Come back to the first \"window\""):
         main_window = new_main_page.switch_to_window(main_window_handle)
         main_window.refresh()
-    with allure.step("Assert that \"first windows\" is \"Login page\" widows"):
+    with allure.step("Assert that \"first windows\" is \"Login page\" window"):
         assert main_window.title == LOGIN_PAGE_TITLE
