@@ -6,7 +6,6 @@ from pages.new_item_page import NewItemPage
 from tests.new_item.data import Copy
 
 
-
 @pytest.fixture(scope="function")
 @allure.title("Prepare a page for copy")
 def prepare_page_for_copy(new_item_page: NewItemPage) -> NewItemPage:
