@@ -49,11 +49,15 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return FolderConfigPage(self.driver, name).wait_for_url()
 
+    @allure.step("Create new freestyle project: \"{name}\"")
     def create_new_freestyle_project(self, name):
         from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locators.ITEM_FREESTYLE_PROJECT).click()
-        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
+        with allure.step("Input project name \"{name}\""):
+            self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        with allure.step("Select \"Freestyle project\" type"):
+            self.wait_to_be_clickable(self.Locators.ITEM_FREESTYLE_PROJECT).click()
+        with allure.step("Click \"OK\" button"):
+            self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
 
     def create_new_pipeline_project(self, name):

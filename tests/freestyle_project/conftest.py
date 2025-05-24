@@ -27,12 +27,14 @@ def freestyle(main_page):
 
 
 @pytest.fixture
+@allure.title("Create Freestyle Project")
 def freestyle_config_page(new_item_page: NewItemPage):
     freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(Freestyle.project_name)
     return freestyle_config_page
 
 
 @pytest.fixture(scope="function")
+@allure.title("Create unique project name")
 def generate_unique_project_name() -> str:
     return f"freestyle-{uuid.uuid4().hex[:8]}"
 
@@ -108,14 +110,8 @@ def description_appears(freestyle):
 
 
 @pytest.fixture(scope="function")
+@allure.title("Generate new project Token in User security settings.")
 def get_token(main_page: MainPage, config):
-    """
-    Fixture that navigates to the user's security settings, revokes any existing
-    access tokens associated with the current project (as defined by data.project_name),
-    and generates a new token for that project.
-    Returns:
-        str: The newly generated project-specific token.
-    """
     security_page = main_page.header.go_to_the_user_page().go_to_security_page()
     token = security_page.generate_token(Freestyle.project_name)
     user_page = security_page.save_settings(config.jenkins.USERNAME)
@@ -125,14 +121,9 @@ def get_token(main_page: MainPage, config):
 
 
 @pytest.fixture(scope="function")
+@allure.title("Enable and trigger remote build using Jenkins API.")
 def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config,
                                                 driver) -> MainPage:
-    """
-    Fixture that configures a Freestyle project to allow remote builds,
-    triggers the build using the Jenkins remote API, and waits for the build to complete.
-    Returns:
-        project_name
-    """
     auth_token = get_token
     logger.info(f"Getting auth token: {auth_token}")
 
@@ -147,6 +138,7 @@ def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page
 
 
 @pytest.fixture(scope="function")
+@allure.title("Set Up Scheduled Build and Wait for Completion.")
 def create_freestyle_project_and_build_periodically(freestyle_config_page: FreestyleProjectConfigPage):
     """
     Fixture that configures a Freestyle project to trigger builds periodically using a cron schedule.

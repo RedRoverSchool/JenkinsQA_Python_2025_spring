@@ -1,3 +1,5 @@
+import allure
+
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -10,6 +12,7 @@ class UserPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/user/{username}/"
 
+    @allure.step("Go to the Security page")
     def go_to_security_page(self):
         from pages.security_page import SecurityPage
         self.wait_to_be_clickable(self.Locators.SECURITY_BUTTON).click()

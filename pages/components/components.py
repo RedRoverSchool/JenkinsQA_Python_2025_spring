@@ -14,6 +14,7 @@ class Header(UIElementMixin):
         from pages.main_page import MainPage
         return self.navigate_to(MainPage, self.Locators.HEADER_LOGO)
 
+    @allure.step("Go to the User page by clicking user name")
     def go_to_the_user_page(self):
         from pages.user_page import UserPage
         return self.navigate_to(UserPage, self.Locators.USER_PAGE_LINK, self.config.jenkins.USERNAME)
