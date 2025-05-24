@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -58,6 +59,8 @@ class FreestyleProjectPage(BasePage):
     def get_menu_items_texts(self):
         return [item.text for item in self.wait_to_be_visible_all(self.Locators.MENU_ITEMS)]
 
+    @allure.step("Wait up to {timeout} seconds for the build to appear in the build history.")
     def wait_for_build_execution(self, timeout):
-        self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+        with allure.step("Wait for 'Builds' link to be visible"):
+            self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
         return self

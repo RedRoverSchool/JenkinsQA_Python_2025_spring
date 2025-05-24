@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 
+import allure
 import pytest
 from selenium import webdriver
 
@@ -32,6 +33,7 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture(scope="session")
+@allure.title("Set up config from context for test session.")
 def config():
     parent_branch = f"origin/{os.getenv('github.base_ref', 'main')}"
     output = subprocess.run(["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
@@ -42,11 +44,13 @@ def config():
 
 
 @pytest.fixture(scope="function", autouse=True)
+@allure.title("Clear Jenkins data before each test run.")
 def jenkins_reset(config):
     clear_data(config)
 
 
 @pytest.fixture(scope="function")
+@allure.title("Configure WebDriver with options and save failure screenshot.")
 def driver(request, config):
     match config.browser.NAME:
         case "chrome":
@@ -89,17 +93,20 @@ def driver(request, config):
 
 
 @pytest.fixture(scope="function")
+@allure.title("Launch browser and open the Login Page.")
 def login_page(driver) -> LoginPage:
     return LoginPage(driver).open()
 
 
 @pytest.fixture(scope="function")
+@allure.title("Log in with valid credentials and open the Jenkins Main Page.")
 def main_page(login_page, config) -> MainPage:
     main_page = login_page.login(config.jenkins.USERNAME, config.jenkins.PASSWORD)
     return main_page
 
 
 @pytest.fixture(scope="function")
+@allure.title("Navigate to the New Item Page.")
 def new_item_page(main_page) -> NewItemPage:
     return main_page.go_to_new_item_page()
 

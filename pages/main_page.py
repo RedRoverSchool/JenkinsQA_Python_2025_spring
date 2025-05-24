@@ -64,10 +64,12 @@ class MainPage(BasePage, UIElementMixin):
         self.logger.debug(f" Data row for project '{name}': {data}")
         return data
 
+    @allure.step("Go to the New Item Page by clicking New Item button.")
     def go_to_new_item_page(self):
         from pages.new_item_page import NewItemPage
         return self.navigate_to(NewItemPage, self.Locators.NEW_ITEM_BUTTON)
 
+    @allure.step("Go to the Build History page by clicking Build History button.")
     def go_to_build_history_page(self):
         from pages.build_history_page import BuildHistoryPage
         self.wait_to_be_clickable(self.Locators.BUILD_HISTORY_BUTTON).click()
@@ -83,18 +85,23 @@ class MainPage(BasePage, UIElementMixin):
         from pages.folder_page import FolderPage
         return self.navigate_to(FolderPage, self.Locators.table_item_link(name), name)
 
+    @allure.step("Expand build queue info block if it is collapsed.")
     def show_build_queue_info_block(self):
         if self.wait_to_be_visible(self.Locators.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
             self.wait_for_element(self.Locators.BUILD_QUEUE_TOGGLE).click()
 
+    @allure.step("Wait for Jenkins build queue to start, finish, and clear.")
     def wait_for_build_queue_executed(self):
         self.show_build_queue_info_block()
-        logger.info("Getting message 'Build Queue (1)'")
-        self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_HEADER, "Build Queue (1)", 10)
-        logger.info("Getting message 'Build Queue'")
-        self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_HEADER, "Build Queue", 10)
-        logger.info("Getting message 'No builds in the queue.'")
-        self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
+        with allure.step("Wait for the build to start and the 'Build Queue (1)' header to appear."):
+            logger.info("Getting message 'Build Queue (1)'")
+            self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_HEADER, "Build Queue (1)", 10)
+        with allure.step("Wait for the build finished and the \"Build Queue\" header to appear."):
+            logger.info("Getting message 'Build Queue'")
+            self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_HEADER, "Build Queue", 10)
+        with allure.step("Wait for the message \"No builds in the queue.\" to appear."):
+            logger.info("Getting message 'No builds in the queue.'")
+            self.wait_text_to_be_present(self.Locators.BUILD_QUEUE_STATUS_MESSAGE, "No builds in the queue.", 10)
         return self
 
     def open_dashboard_in_new_window(self):

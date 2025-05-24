@@ -115,3 +115,8 @@ class UIElementMixin:
 
     def is_element_selected(self, locator) -> bool:
         return self.wait_for_element(locator).is_selected()
+
+    def hover_over_element(self, locator):
+        element = self.wait_to_be_visible(locator)
+        ActionChains(self.driver).move_to_element(element).perform()
+        return element
