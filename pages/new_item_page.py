@@ -135,9 +135,9 @@ class NewItemPage(BasePage):
 
     def get_dropdown_text(self):
         try:
-            return self.wait_to_be_visible(self.Locators.DROPDOWN_COPY).text.splitlines()
+            return self.get_visible_text_lines(self.Locators.DROPDOWN_COPY)
         except TimeoutException:
-            self.logger.error("Dropdown did not open and is not present in the DOM.")
+            self.logger.error("Dropdown did not appear: element is not visible on the page.")
             return []
 
     def enter_item_name(self, name):
@@ -160,5 +160,5 @@ class NewItemPage(BasePage):
     def select_item_from_dropdown(self):
         return self.click_on(self.Locators.DROPDOWN_COPY)
 
-    def get_value_copy_from(self):
-        return self.get_value(self.Locators.COPY_FROM).strip()
+    def get_copy_from_field_value(self):
+        return self.get_attribute(self.Locators.COPY_FROM, "value")

@@ -68,9 +68,9 @@ def test_error_page_displays_header_and_message(new_item_page: NewItemPage, prep
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/661", name="Github issue")
 def test_select_item_from_dropdown(prepare_page_for_copy):
     prepare_page_for_copy.enter_first_character_in_copy_from(Copy.FOLDER_NAME_TO_COPY).select_item_from_dropdown()
-    value = prepare_page_for_copy.get_value_copy_from()
+    field_value = prepare_page_for_copy.get_copy_from_field_value()
 
-    assert value == Copy.FOLDER_NAME_TO_COPY, \
+    assert field_value == Copy.FOLDER_NAME_TO_COPY, \
         f"Expected value '{Copy.FOLDER_NAME_TO_COPY}' NOT FOUND"
 
 

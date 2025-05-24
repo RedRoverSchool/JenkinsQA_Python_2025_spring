@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.fixture
-@allure.title("Create Freestyle Project")
+@allure.title("Prepare: Create Freestyle Project")
 def freestyle(main_page):
     with allure.step("Create Freestyle Project"):
         freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
@@ -40,14 +40,14 @@ def generate_unique_project_name() -> str:
 
 
 @pytest.fixture
-@allure.title("tooltip fixture")
+@allure.title("Prepare: Get tooltip")
 def tooltip(freestyle: FreestyleProjectConfigPage):
     with allure.step("Get tooltip"):
         return freestyle.get_tooltip(Freestyle.tooltip_enable)
 
 
 @pytest.fixture
-@allure.title("disabled_message fixture")
+@allure.title("Prepare: make Freestyle Project Disabled")
 def disabled_message(freestyle):
     with allure.step("Click Disable button"):
         freestyle.switch_to_disable()
@@ -56,7 +56,7 @@ def disabled_message(freestyle):
 
 
 @pytest.fixture
-@allure.title("enable_automatically fixture")
+@allure.title("Prepare: make Freestyle Project Enabled automatically")
 def enable_automatically(freestyle: FreestyleProjectConfigPage):
     from pages.freestyle_project_page import FreestyleProjectPage
     with allure.step("Make Freestyle project is disable"):
@@ -81,31 +81,43 @@ def enable_automatically(freestyle: FreestyleProjectConfigPage):
 
 
 @pytest.fixture()
+@allure.title("Prepare: add description")
 def can_add_description(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    freestyle.click_apply_button()
+    with allure.step("Add description to Freestyle Projet"):
+        freestyle.add_description(Freestyle.description_text)
+        freestyle.click_apply_button()
     return freestyle.get_description()
 
 
 @pytest.fixture()
+@allure.title("Prepare: save Freestyle Project without description")
 def empty_configure(freestyle):
-    project_page = freestyle.click_save_button()
+    with allure.step("Saving Freestyle Project without description and/or scm"):
+        project_page = freestyle.click_save_button()
     return project_page.get_h1_value()
 
 
 @pytest.fixture()
+@allure.title("Prepare for testing \"preview\" and \"hide\"")
 def preview_hide(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    preview = freestyle.is_preview_visible()
-    freestyle.click_preview()
-    hide = freestyle.is_hide_preview_visible()
-    return [preview, hide]
+    with allure.step("Type text to the description field"):
+        freestyle.add_description(Freestyle.description_text)
+    with allure.step("Is \"preview\" button is visible"):
+        preview = freestyle.is_preview_visible()
+    with allure.step("Click \"preview\" button"):
+        freestyle.click_preview()
+    with allure.step("Is \"hide\" button is visible"):
+        hide = freestyle.is_hide_preview_visible()
+    with allure.step("Return list [preview, hide]"):
+        return [preview, hide]
 
 
 @pytest.fixture()
+@allure.title("Prepare to testing is Description text appears on the Project General page")
 def description_appears(freestyle):
-    freestyle.add_description(Freestyle.description_text)
-    project_page = freestyle.click_save_button()
+    with allure.step("Add description to the Freestyle Project"):
+        freestyle.add_description(Freestyle.description_text)
+        project_page = freestyle.click_save_button()
     return project_page.get_description()
 
 

@@ -23,17 +23,46 @@ class MainPage(BasePage, UIElementMixin):
         BUILD_QUEUE_STATUS_MESSAGE = (By.CLASS_NAME, "pane")
         BUILD_QUEUE_TOGGLE = (By.CSS_SELECTOR, "a[href = '/toggleCollapse?paneId=buildQueue']")
         FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
+        TABLE_HEADERS = (By.XPATH, "//table[@id='projectstatus']//thead//th")
+        CELLS_IN_JOB_ROW = (By.XPATH, "//td[../td//a[contains(@href, 'job')]]")
+        TABLE_SVG = (By.CSS_SELECTOR, "td svg")
+
+        @staticmethod
+        def table_item_link(name: str):
+            return By.LINK_TEXT, quote(name)
+
+        @staticmethod
+        def cells_in_job_row(name: str):
+            return By.XPATH, f"//td[../td//a[contains(@href, {quote(name)})]]"
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/"
 
-    def get_table_item_locator(self, name: str):
-        return (By.LINK_TEXT, quote(name))
-
     @allure.step("Get list of items from \"Dashboard\"")
     def get_item_list(self):
         return [item.text for item in self.find_elements(*self.Locators.TABLE_ITEM)]
+
+    @allure.step("Get actual headers from \"Dashboard\"")
+    def get_table_headers_list(self):
+        elements = self.find_elements(*self.Locators.TABLE_HEADERS)
+        return [el.text.replace("↑", "").replace("↓", "").replace("\n", "").strip()
+                for el in elements]
+
+    @allure.step("Get status information for project '{name}' from Dashboard")
+    def get_project_row_data(self, name):
+        cells = self.find_elements(*self.Locators.cells_in_job_row(name))
+        data = [
+            cells[0].find_element(*self.Locators.TABLE_SVG).get_attribute("title"),
+            cells[1].find_element(*self.Locators.TABLE_SVG).get_attribute("title"),
+            cells[2].find_element(*self.Locators.TABLE_ITEM).text.strip(),
+            cells[3].text.strip(),
+            cells[4].text.strip(),
+            cells[5].text.strip(),
+            cells[6].text.strip()
+        ]
+        self.logger.debug(f" Data row for project '{name}': {data}")
+        return data
 
     def go_to_new_item_page(self):
         from pages.new_item_page import NewItemPage
@@ -52,7 +81,7 @@ class MainPage(BasePage, UIElementMixin):
     @allure.step("Go to the folder page: \"{name}\"")
     def go_to_the_folder_page(self, name):
         from pages.folder_page import FolderPage
-        return self.navigate_to(FolderPage, self.get_table_item_locator(name), name)
+        return self.navigate_to(FolderPage, self.Locators.table_item_link(name), name)
 
     def show_build_queue_info_block(self):
         if self.wait_to_be_visible(self.Locators.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
@@ -80,3 +109,8 @@ class MainPage(BasePage, UIElementMixin):
         self.logger.info(f"Clicking on folder with locator: {locator}")
         self.click_on(locator, timeout=timeout)
         return FolderPage(self.driver, folder_name).wait_for_url()
+
+    @allure.step('Go to the pipeline page: \"{name}\"')
+    def go_to_the_pipeline_page(self, name):
+        from pages.pipeline_page import PipelinePage
+        return self.navigate_to(PipelinePage, self.Locators.table_item_link(name), name)
