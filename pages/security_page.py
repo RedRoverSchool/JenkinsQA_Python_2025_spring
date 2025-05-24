@@ -16,20 +16,21 @@ class SecurityPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/user/{username}/security/"
 
-    @allure.step("Generate and copy new Token with name \"{name}\"")
+    @allure.step("Generate and copy new Token with the name \"{name}\".")
     def generate_token(self, name):
-        with allure.step("Click Add new token button"):
+        with allure.step("Click Add new token button."):
             self.wait_to_be_clickable(self.Locators.ADD_NEW_TOKEN_BUTTON).click()
-        with allure.step("Input token name \"{name\"}"):
+        with allure.step(f"Input token name \"{name}\"."):
             self.wait_to_be_visible(self.Locators.TOKEN_NAME).send_keys(name)
-        with allure.step("Click Generate button"):
+        with allure.step("Click Generate button."):
             self.wait_to_be_clickable(self.Locators.GENERATE_BUTTON).click()
-        with allure.step("Copy token"):
+        with allure.step("Copy token."):
             return self.wait_to_be_clickable(self.Locators.COPY_TOKEN_BUTTON).get_attribute("text")
 
-    @allure.step("Save settings")
+    @allure.step("Save security settings.")
     def save_settings(self, username):
         from pages.user_page import UserPage
-        with allure.step("Click Save button"):
+        with allure.step("Click Save button."):
             self.wait_to_be_clickable(self.Locators.SAVE_BUTTON).click()
-        return UserPage(self.driver, username).wait_for_url()
+        with allure.step(f"Go to User page - user \"{username}\"."):
+            return UserPage(self.driver, username).wait_for_url()

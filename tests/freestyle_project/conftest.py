@@ -28,9 +28,8 @@ def freestyle(main_page):
 
 @pytest.fixture
 @allure.title("Create Freestyle Project")
-def freestyle_config_page(new_item_page: NewItemPage):
-    freestyle_config_page: FreestyleProjectConfigPage = new_item_page.create_new_freestyle_project(Freestyle.project_name)
-    return freestyle_config_page
+def freestyle_config_page(new_item_page: NewItemPage) -> FreestyleProjectConfigPage:
+    return new_item_page.create_new_freestyle_project(Freestyle.project_name)
 
 
 @pytest.fixture(scope="function")
@@ -122,35 +121,34 @@ def description_appears(freestyle):
 
 
 @pytest.fixture(scope="function")
-@allure.title("Generate new project Token in User security settings.")
+@allure.title("Precondition: Generate and temporary save a new token in the User's Security Settings.")
 def get_token(main_page: MainPage, config):
     security_page = main_page.header.go_to_the_user_page().go_to_security_page()
     token = security_page.generate_token(Freestyle.project_name)
     user_page = security_page.save_settings(config.jenkins.USERNAME)
     user_page.header.go_to_the_main_page()
-
-    return token
+    with allure.step(f"Generated token: \"{token}\"."):
+        return token
 
 
 @pytest.fixture(scope="function")
-@allure.title("Enable and trigger remote build using Jenkins API.")
+@allure.title("Precondition: Configure Freestyle project for remote builds and trigger execution via API.")
 def create_freestyle_project_and_build_remotely(get_token, freestyle_config_page: FreestyleProjectConfigPage, config,
                                                 driver) -> MainPage:
     auth_token = get_token
     logger.info(f"Getting auth token: {auth_token}")
-
     main_page: MainPage = freestyle_config_page.set_trigger_builds_remotely(auth_token).header.go_to_the_main_page()
-
-    remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
-    logger.info(f"Triggering build for the project '{Freestyle.project_name}' via API.")
-    logger.info("Waiting for the build to finish ...")
+    with allure.step("Trigger the build via API and wait for it to finish."):
+        remote_build_trigger(driver, Freestyle.project_name, auth_token, config)
+        logger.info(f"Triggering build for the project '{Freestyle.project_name}' via API.")
+        logger.info("Waiting for the build to finish ...")
     main_page.wait_for_build_queue_executed()
 
     return main_page
 
 
 @pytest.fixture(scope="function")
-@allure.title("Set Up Scheduled Build and Wait for Completion.")
+@allure.title("Configure Freestyle project with cron schedule and wait for periodic build to complete.")
 def create_freestyle_project_and_build_periodically(freestyle_config_page: FreestyleProjectConfigPage):
     """
     Fixture that configures a Freestyle project to trigger builds periodically using a cron schedule.
