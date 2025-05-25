@@ -38,6 +38,9 @@ class BasePage(UIElementMixin):
             self.logger.error(f"Timeout when waiting for url {self.url}, current url: {self.driver.current_url}")
         return self
 
+    def get_url(self) -> str:
+        return self.driver.current_url
+
     def get_title(self) -> str:
         return self.driver.title
 

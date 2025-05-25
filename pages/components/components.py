@@ -8,6 +8,8 @@ class Header(UIElementMixin):
         HEADER_LOGO = (By.ID, "jenkins-home-link")
         USER_PAGE_LINK = (By.CSS_SELECTOR, "a[href*='/user/']")
         LOG_OUT = (By.XPATH, '//a[@href="/logout"]')
+        BREADCRUMB_BAR = (By.XPATH, "// div[ @ id = 'breadcrumbBar'] // a[ @ href = '/']")
+        LOG_OUT_LINK = (By.XPATH, "// a[ @ href = '/logout']")
 
     @allure.step("Go to the main page by clicking logo")
     def go_to_the_main_page(self):
@@ -22,3 +24,10 @@ class Header(UIElementMixin):
         from pages.login_page import LoginPage
         self.click_on(self.Locators.LOG_OUT)
         return LoginPage(self.driver)
+
+    def get_breadcrumb_bar_text(self):
+        return self.wait_to_be_visible(self.Locators.BREADCRUMB_BAR).text
+
+    def get_logout_link_text(self):
+        return self.wait_to_be_visible(self.Locators.LOG_OUT_LINK).text
+
