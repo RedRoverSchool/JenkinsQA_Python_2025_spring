@@ -1,15 +1,19 @@
 import re
 import json
 import logging
+
+import allure
 import requests
 
 logger = logging.getLogger(__name__)
 
 
+@allure.step("Extract Jenkins crumb token from HTML response.")
 def get_crumb(response):
     return re.findall(r'data-crumb-value="([a-z0-9]{64})"', response.text)[0]
 
 
+@allure.step("Create requests session using Selenium WebDriver cookies.")
 def get_session(driver):
     session = requests.Session()
     cookies = driver.get_cookies()
@@ -18,6 +22,7 @@ def get_session(driver):
     return session
 
 
+@allure.step("Fetch and update Jenkins CSRF crumb token.")
 def update_crumb(driver, config):
     session = get_session(driver)
     response = session.get(config.jenkins.base_url + "/crumbIssuer/api/json")
@@ -30,6 +35,7 @@ def update_crumb(driver, config):
         logger.error(f"failed to update crumb, {response.status_code} {response.text}")
 
 
+@allure.step("Trigger Jenkins job build remotely using API token.")
 def remote_build_trigger(driver, job_name, token, config):
     update_crumb(driver, config)
     session = get_session(driver)
@@ -102,6 +108,7 @@ def delete_by_link(session, url, names, crumb):
             logger.error(f"delete_by_link, {url=} {response.status_code=} {name=}")
 
 
+@allure.step("Reset Jenkins user theme and descriptions to default settings.")
 def reset_theme_description(session, config):
     crumb = get_crumb(get_page(session, config.jenkins.base_url, config))
 
@@ -138,6 +145,7 @@ def reset_theme_description(session, config):
         logger.error(f"Theme cleanup failed: {theme_payload}")
 
 
+@allure.step("Delete all existing jobs and views for the user session.")
 def delete_jobs_views(session, config):
     main_page = get_page(session, config.jenkins.base_url, config)
     view_page = get_page(session, config.jenkins.base_url + "/me/my-views/view/all/", config)
@@ -156,6 +164,7 @@ def delete_jobs_views(session, config):
     delete_by_link(session, url, names, crumb)
 
 
+@allure.step("Delete all Jenkins users except the current user.")
 def delete_users(session, config):
     user_page = get_page(session, config.jenkins.base_url + "/manage/securityRealm/", config)
     url = config.jenkins.base_url + "/manage/securityRealm/user/{}/doDelete"
@@ -164,6 +173,7 @@ def delete_users(session, config):
     delete_by_link(session, url, names, crumb)
 
 
+@allure.step("Delete all Jenkins nodes except the built-in node.")
 def delete_nodes(session, config):
     node_page = get_page(session, config.jenkins.base_url + "/computer/", config)
     url = config.jenkins.base_url + "/manage/computer/{}/doDelete"
@@ -172,6 +182,7 @@ def delete_nodes(session, config):
     delete_by_link(session, url, names, crumb)
 
 
+@allure.step("Delete all credential domains from Jenkins system store.")
 def delete_domains(session, config):
     system_page = get_page(session, config.jenkins.base_url + "/manage/credentials/store/system/", config)
     url = config.jenkins.base_url + "/manage/credentials/store/system/domain/{}/doDelete"
@@ -180,6 +191,7 @@ def delete_domains(session, config):
     delete_by_link(session, url, names, crumb)
 
 
+@allure.step("Revoke all API tokens for the current Jenkins user.")
 def delete_tokens(session, config):
     security_page = get_page(session, config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/security/", config)
     url = config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/descriptorByName/jenkins.security.ApiTokenProperty/revoke"
@@ -192,6 +204,7 @@ def delete_tokens(session, config):
             logger.error(f"failed to delete token with uuid={uuid}, response code: {response.status_code}")
 
 
+@allure.step("Clean up Jenkins data.")
 def clear_data(config):
     session = requests.Session()
     logger.info("running cleanup")

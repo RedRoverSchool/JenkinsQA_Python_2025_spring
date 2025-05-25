@@ -1,9 +1,9 @@
-import datetime
 import logging
 import os
 import subprocess
 import sys
 
+import allure
 import pytest
 from selenium import webdriver
 
@@ -12,6 +12,7 @@ from core.settings import Config
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.manage_jenkins.manage_jenkins_page import ManageJenkinsPage
+from pages.manage_jenkins.status_information.load_statistics_page import LoadStatisticsPage
 from pages.manage_jenkins.status_information.system_information_page import SystemInformationPage
 from pages.new_item_page import NewItemPage
 
@@ -31,6 +32,7 @@ def pytest_runtest_makereport(item, call):
 
 
 @pytest.fixture(scope="session")
+@allure.title("Set up config from context for test session.")
 def config():
     parent_branch = f"origin/{os.getenv('github.base_ref', 'main')}"
     output = subprocess.run(["git", "-c", "core.fileMode=false", "diff", "--name-status", parent_branch],
@@ -41,11 +43,13 @@ def config():
 
 
 @pytest.fixture(scope="function", autouse=True)
+@allure.title("Clear Jenkins data before each test run.")
 def jenkins_reset(config):
     clear_data(config)
 
 
 @pytest.fixture(scope="function")
+@allure.title("Configure WebDriver with options and save failure screenshot.")
 def driver(request, config):
     match config.browser.NAME:
         case "chrome":
@@ -71,16 +75,12 @@ def driver(request, config):
     if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
         logger.info(f"Test {request.node.name} failed, taking screenshot...")
         try:
-            screenshots_dir = os.path.join(project_root, "screenshots")
-            os.makedirs(screenshots_dir, exist_ok=True)
-
             test_name = "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
-            now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
-
-            driver.save_screenshot(screenshot_file)
-            logger.info(f"Screenshot saved to: {screenshot_file}")
-
+            allure.attach(
+                driver.get_screenshot_as_png(),
+                name=test_name,
+                attachment_type=allure.attachment_type.PNG,
+            )
         except Exception as e:
             logger.error(f"Failed to take screenshot: {e}")
 
@@ -88,17 +88,20 @@ def driver(request, config):
 
 
 @pytest.fixture(scope="function")
+@allure.title("Launch browser and open the Login Page.")
 def login_page(driver) -> LoginPage:
     return LoginPage(driver).open()
 
 
 @pytest.fixture(scope="function")
+@allure.title("Log in with valid credentials and open the Jenkins Main Page.")
 def main_page(login_page, config) -> MainPage:
     main_page = login_page.login(config.jenkins.USERNAME, config.jenkins.PASSWORD)
     return main_page
 
 
 @pytest.fixture(scope="function")
+@allure.title("Navigate to the New Item Page.")
 def new_item_page(main_page) -> NewItemPage:
     return main_page.go_to_new_item_page()
 
@@ -135,3 +138,8 @@ def memory_usage_tab(system_information_page) -> SystemInformationPage:
 def thread_dumps_tab(system_information_page) -> SystemInformationPage:
     system_information_page.click_on_thread_dumps_tab()
     return system_information_page
+
+
+@pytest.fixture(scope="function")
+def load_statistics_page(manage_jenkins_page) -> LoadStatisticsPage:
+    return manage_jenkins_page.go_to_load_statistics_page()

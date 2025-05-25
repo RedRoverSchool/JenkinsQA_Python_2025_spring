@@ -10,8 +10,6 @@ from pages.base_page import BasePage
 
 
 class NewItemPage(BasePage):
-    WAIT_FOR_PAGE = True
-
     class Locators:
         PAGE_NAME = (By.XPATH, "//h1[text()='New Item']")
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
@@ -36,13 +34,14 @@ class NewItemPage(BasePage):
         COPY_FROM = (By.ID, "from")
         DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
 
-    PAGE_READY_LOCATOR = Locators.PAGE_NAME
-
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/view/all/newJob"
 
-    @allure.step("Create new folder with name")
+    def wait_for_page(self):
+        return self.wait_for_element(self.Locators.PAGE_NAME)
+
+    @allure.step("Create new folder: \"{name}\"")
     def create_new_folder(self, name):
         from pages.folder_config_page import FolderConfigPage
         self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
@@ -50,12 +49,17 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return FolderConfigPage(self.driver, name).wait_for_url()
 
+    @allure.step("Create new freestyle project with the name \"{name}\".")
     def create_new_freestyle_project(self, name):
         from pages.freestyle_project_config_page import FreestyleProjectConfigPage
-        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locators.ITEM_FREESTYLE_PROJECT).click()
-        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
-        return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
+        with allure.step(f"Input project name \"{name}\"."):
+            self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
+        with allure.step("Select \"Freestyle project\" type."):
+            self.wait_to_be_clickable(self.Locators.ITEM_FREESTYLE_PROJECT).click()
+        with allure.step("Click \"OK\" button."):
+            self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
+        with allure.step("Go to the Freestyle Project Configuration page."):
+            return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
 
     def create_new_pipeline_project(self, name):
         from pages.pipeline_config_page import PipelineConfigPage
@@ -102,6 +106,7 @@ class NewItemPage(BasePage):
             *self.Locators.ANY_ENABLED_ERROR
         )
 
+    @allure.step("Create new Multi-configuration project: \"{name}\"")
     def create_new_multi_config_project(self, name):
         from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
         self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
@@ -121,6 +126,7 @@ class NewItemPage(BasePage):
     def get_item_type_descriptions(self):
         return [desc.text.strip() for desc in self.find_elements(*self.Locators.ITEM_DESCRIPTIONS)]
 
+    @allure.step("Create new Pipeline project: \"{name}\"")
     def create_new_pipeline(self, name):
         from pages.pipeline_config_page import PipelineConfigPage
         self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
@@ -130,9 +136,9 @@ class NewItemPage(BasePage):
 
     def get_dropdown_text(self):
         try:
-            return self.wait_to_be_visible(self.Locators.DROPDOWN_COPY).text.splitlines()
+            return self.get_visible_text_lines(self.Locators.DROPDOWN_COPY)
         except TimeoutException:
-            self.logger.error("Dropdown did not open and is not present in the DOM.")
+            self.logger.error("Dropdown did not appear: element is not visible on the page.")
             return []
 
     def enter_item_name(self, name):
@@ -151,3 +157,9 @@ class NewItemPage(BasePage):
         from pages.error_page_copy_from import ErrorPageCopyFrom
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
+
+    def select_item_from_dropdown(self):
+        return self.click_on(self.Locators.DROPDOWN_COPY)
+
+    def get_copy_from_field_value(self):
+        return self.get_attribute(self.Locators.COPY_FROM, "value")

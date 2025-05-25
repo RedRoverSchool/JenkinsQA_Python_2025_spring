@@ -11,11 +11,12 @@ class Header(UIElementMixin):
         BREADCRUMB_BAR = (By.XPATH, "// div[ @ id = 'breadcrumbBar'] // a[ @ href = '/']")
         LOG_OUT_LINK = (By.XPATH, "// a[ @ href = '/logout']")
 
-    @allure.step("Go to the main page by clicking logo")
+    @allure.step("Go to the main page by clicking logo.")
     def go_to_the_main_page(self):
         from pages.main_page import MainPage
         return self.navigate_to(MainPage, self.Locators.HEADER_LOGO)
 
+    @allure.step("Go to the User page by clicking the Username in the header.")
     def go_to_the_user_page(self):
         from pages.user_page import UserPage
         return self.navigate_to(UserPage, self.Locators.USER_PAGE_LINK, self.config.jenkins.USERNAME)

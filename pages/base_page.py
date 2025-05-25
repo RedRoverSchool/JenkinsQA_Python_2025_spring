@@ -7,31 +7,25 @@ from pages.components.components import Header
 
 
 class BasePage(UIElementMixin):
-    WAIT_FOR_PAGE = False
-    PAGE_READY_LOCATOR = None
-
-    def __init__(self, driver: WebDriver, timeout = 5):
+    def __init__(self, driver: WebDriver, timeout=5):
         super().__init__(driver)
         self.timeout = timeout
         self.base_url = self.config.jenkins.base_url
         self.header = Header(driver)
-        if self.WAIT_FOR_PAGE:
-            self.wait_for_page_ready()
-
-    def wait_for_page_ready(self):
-        self.wait_to_be_visible(self.PAGE_READY_LOCATOR)
 
     def open(self):
         self.driver.get(self.url)
         return self.wait_for_url()
 
     def wait_for_url(self):
-        if self.WAIT_FOR_PAGE:
+        if hasattr(self, "wait_for_page") and callable(self.wait_for_page):
+            self.logger.debug(f"Waiting for page content to load: {self.url}")
             try:
-                self.wait_for_page_ready()
+                self.wait_for_page()
+                self.logger.debug(f"Page content loaded: {self.url}")
                 return self
-            except Exception as e:
-                self.logger.warning(f"wait_for_page_ready failed: {e}")
+            except TimeoutException:
+                self.logger.error(f"Timeout while waiting for page content: {self.url}")
         try:
             self.wait.until(EC.url_to_be(self.url.replace(" ", "%20")))
         except TimeoutException:

@@ -32,12 +32,7 @@ class Copy:
     COPY_NAME = 'Copy_existing_item'
     HEADER_ERROR = 'Error'
     MESSAGE_ERROR = f'No such job: {NON_EXISTENT_FOLDER_NAME}'
-
-    PARAMS = [
-        (FOLDER_NAME_TO_COPY, [FOLDER_NAME_TO_COPY]),
-        (FOLDER_NAME_TO_COPY.lower(), [FOLDER_NAME_TO_COPY]),
-        (NON_EXISTENT_FOLDER_NAME, [ITEM_NOT_FOUND_MESSAGE])
-    ]
+    FOLDER_NAME_TO_COPY_2 = 'Folder_for_copy_2'
 
 
 title_fragment = "new item"
