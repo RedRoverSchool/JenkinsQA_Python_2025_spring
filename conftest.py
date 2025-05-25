@@ -1,4 +1,3 @@
-import datetime
 import logging
 import os
 import subprocess
@@ -76,16 +75,12 @@ def driver(request, config):
     if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
         logger.info(f"Test {request.node.name} failed, taking screenshot...")
         try:
-            screenshots_dir = os.path.join(project_root, "screenshots")
-            os.makedirs(screenshots_dir, exist_ok=True)
-
             test_name = "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
-            now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            screenshot_file = os.path.join(screenshots_dir, f"{test_name}_failure_{now}.png")
-
-            driver.save_screenshot(screenshot_file)
-            logger.info(f"Screenshot saved to: {screenshot_file}")
-
+            allure.attach(
+                driver.get_screenshot_as_png(),
+                name=test_name,
+                attachment_type=allure.attachment_type.PNG,
+            )
         except Exception as e:
             logger.error(f"Failed to take screenshot: {e}")
 

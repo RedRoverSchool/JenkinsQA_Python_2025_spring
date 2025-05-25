@@ -80,9 +80,6 @@ jobs:
           allure_results: build/allure-results
           gh_pages: gh-pages
           allure_history: allure-history
-          #allure_report: allure-report
-          #ref: gh-pages
-          #path: gh-pages
           keep_reports: 30
 
       - name: Commit allure_report to Github Pages
@@ -92,10 +89,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
-
-      - name: Attach screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/screenshots
