@@ -1,6 +1,11 @@
 import allure
 
 
+@allure.epic("Manage Jenkins")
+@allure.story("Add Plugins")
+@allure.title("User could be able to install plugins in the program")
+@allure.testcase("TC_10.003.01")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/784", name="Github issue")
 def test_plugins_available(plugins):
     with allure.step("Assert that menu item \"Available plugins\" is available"):
         assert plugins.is_available_plugins_displayed()
