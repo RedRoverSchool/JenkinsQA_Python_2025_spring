@@ -1,5 +1,4 @@
 import allure
-from tests.manage_jenkins.data import Plugins as DATA
 
 
 @allure.epic("Manage Jenkins")
