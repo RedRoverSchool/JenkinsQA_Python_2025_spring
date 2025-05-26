@@ -19,21 +19,6 @@ def test_display_dropdown_text(prepare_page_for_copy):
 
 @allure.epic("New Item")
 @allure.story("Copy from")
-@allure.title("Display dynamic dropdown in the \"Copy from\" lowercase character")
-@allure.testcase("TC_01.003.11")
-@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/670", name="Github issue")
-def test_display_dropdown_text_lowercase(prepare_page_for_copy):
-    with allure.step("Getting data"):
-        item_name, expected_result = Copy.FOLDER_NAME_TO_COPY.lower(), [Copy.FOLDER_NAME_TO_COPY]
-
-    dropdown_text = prepare_page_for_copy.enter_first_character_in_copy_from(item_name).get_dropdown_text()
-
-    assert dropdown_text, "Dropdown list is empty"
-    assert dropdown_text == expected_result, f"Expected text '{expected_result}' NOT FOUND"
-
-
-@allure.epic("New Item")
-@allure.story("Copy from")
 @allure.title("Display the dynamic drop-down with the text \"No items\"")
 @allure.testcase("TC: 01.003.03")
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/441", name="Github issue")
@@ -86,3 +71,18 @@ def test_display_dropdown_multiple_items(prepare_multiple_items):
 
     assert actual_dropdown_items, "Dropdown list is empty"
     assert actual_dropdown_items == expected_result, f"Expected list '{expected_result}' NOT FOUND"
+
+
+@allure.epic("New Item")
+@allure.story("Copy from")
+@allure.title("Display dynamic dropdown in the \"Copy from\" lowercase character")
+@allure.testcase("TC_01.003.11")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/670", name="Github issue")
+def test_display_dropdown_text_lowercase(prepare_page_for_copy):
+    with allure.step("Prepare test data for dropdown"):
+        item_name, expected_result = Copy.FOLDER_NAME_TO_COPY_LOWERCASE, [Copy.FOLDER_NAME_TO_COPY]
+
+    dropdown_text = prepare_page_for_copy.enter_first_character_in_copy_from(item_name).get_dropdown_text()
+
+    assert dropdown_text, "Dropdown list is empty"
+    assert dropdown_text == expected_result, f"Expected the drop-down text '{expected_result}' NOT FOUND"
