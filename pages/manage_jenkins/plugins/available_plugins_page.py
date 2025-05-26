@@ -7,6 +7,7 @@ class AvailablePluginsPage(BasePage):
         SEARCH_AVAILABLE_PLUGINS_FIELD = (By.XPATH, "//input[@placeholder='Search available plugins']")
         ITEMS_AVAILABLE_PLUGINS_LIST = (By.CSS_SELECTOR, 'tbody>tr')
         INSTALL_BUTTON = (By.XPATH, "//button[@id='button-install']")
+        CHECKBOX_PLUGIN = (By.CSS_SELECTOR, "tbody>tr span[class='jenkins-checkbox']")
 
 
     def __init__(self, driver, timeout=5):
@@ -37,3 +38,12 @@ class AvailablePluginsPage(BasePage):
         while count > 1:
             count = self.count_available_plugins()
         return self
+
+    def select_plugin_checkbox(self):
+        self.wait_for_element(self.Locator.CHECKBOX_PLUGIN).click()
+        return self
+
+    def click_install_button(self):
+        from pages.manage_jenkins.plugins.download_progress_page import DownloadProgressPage
+        self.click_on(self.Locator.INSTALL_BUTTON)
+        return DownloadProgressPage(self.driver)

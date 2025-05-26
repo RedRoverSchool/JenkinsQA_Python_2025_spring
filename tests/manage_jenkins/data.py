@@ -14,3 +14,4 @@ class SystemInformationData:
 
 class Plugins:
     PLUGIN_NAME = "SSH server"
+    TITLE_DOWNLOAD_PROGRESS_PAGE = "Download progress"
