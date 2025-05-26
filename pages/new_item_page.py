@@ -153,6 +153,7 @@ class NewItemPage(BasePage):
         self.enter_copy_from(name[0])
         return self
 
+    @allure.step("Try to copy from non-existent item: \"{copy_name}\", redirect to error page")
     def go_to_error_page_copy(self, name, copy_name):
         from pages.error_page_copy_from import ErrorPageCopyFrom
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()

@@ -9,6 +9,7 @@ from tests.manage_jenkins.data import ManageJenkinsData as MJ
 
 class ManageJenkinsPage(BasePage):
     class Locator:
+        PLUGINS = (By.XPATH, "//a[@href='pluginManager']/..")
         class StatusInformation:
             SYSTEM_INFORMATION = (By.XPATH, "//a[@href='systemInfo']/..")
             LOAD_STATISTICS = (By.XPATH, "//a[@href='load-statistics']/..")
@@ -34,6 +35,12 @@ class ManageJenkinsPage(BasePage):
         from pages.manage_jenkins.status_information.load_statistics_page import LoadStatisticsPage
         self.click_on(self.Locator.StatusInformation.LOAD_STATISTICS)
         return LoadStatisticsPage(self.driver).wait_for_url()
+
+    @allure.step("Go to Plugins Page")
+    def go_to_plugins_page(self):
+        from pages.manage_jenkins.plugins.plugins_page import PluginsPage
+        self.click_on(self.Locator.PLUGINS)
+        return PluginsPage(self.driver).wait_for_url()
 
     @allure.step("Select timespan option")
     def select_timespan(self, option: str) -> None:
