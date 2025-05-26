@@ -104,8 +104,19 @@ class UIElementMixin:
         self.wait_to_be_clickable(checkbox).click()
         return self
 
+    def get_attribute(self, locator, attribute) -> str | None:
+        return self.wait_to_be_visible(locator).get_attribute(attribute)
+
     def get_visible_text(self, locator, timeout=10) -> str:
         return self.wait_to_be_visible(locator, timeout).text.strip()
 
     def get_visible_text_lines(self, locator, timeout=10) -> list[str]:
         return self.get_visible_text(locator, timeout).splitlines()
+
+    def is_element_selected(self, locator) -> bool:
+        return self.wait_for_element(locator).is_selected()
+
+    def hover_over_element(self, locator):
+        element = self.wait_to_be_visible(locator)
+        ActionChains(self.driver).move_to_element(element).perform()
+        return element

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -40,6 +41,7 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_for_element(self.Locators.DESCRIPTION_FIELD).send_keys(description_text)
         return self
 
+    @allure.step("Click Save Button and go to the Freestyle Project Page.")
     def click_save_button(self):
         from pages.freestyle_project_page import FreestyleProjectPage
         self.wait_to_be_clickable(self.Locators.SAVE_BUTTON).click()
@@ -167,15 +169,23 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_clickable(self.Locators.ADD_POST_BUILD_ACTIONS)
         return self
 
+    @allure.step("Enable \"Trigger Builds Remotely\" and save with provided token \"{token}\".")
     def set_trigger_builds_remotely(self, token):
-        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
-        self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
-        return self.click_save_button()
+        with allure.step("Check \"Trigger Builds Remotely\" checkbox."):
+            self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
+        with allure.step(f"Input auth token \"{token}\"."):
+            self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
+        with allure.step("Save configurations."):
+            return self.click_save_button()
 
+    @allure.step("Enable 'Build periodically' and set cron schedule\"{schedule}\".")
     def set_trigger_builds_periodically(self, schedule):
-        self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
-        self.wait_to_be_visible(self.Locators.SCHEDULE).send_keys(schedule)
-        return self.click_save_button()
+        with allure.step("Check \"Build periodically\" checkbox."):
+            self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
+        with allure.step(f"Enter cron schedule '{schedule}' into the Schedule field"):
+            self.wait_to_be_visible(self.Locators.SCHEDULE).send_keys(schedule)
+        with allure.step("Save configurations."):
+            return self.click_save_button()
 
     def switch_to_disable(self):
         self.wait_to_be_clickable(self.Locators.ENABLE, 10).click()

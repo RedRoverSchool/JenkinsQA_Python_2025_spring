@@ -10,3 +10,4 @@ class Project:
 class ProjectToggle:
     WARNING_MESSAGE = "This project is currently disabled"
     STATUS_NOT_BUILT = "Not built"
+    TOOLTIP = "Enable or disable the current project"
