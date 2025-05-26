@@ -30,3 +30,10 @@ class AvailablePluginsPage(BasePage):
 
     def is_install_button_disabled(self):
         return self.wait_for_element(self.Locator.INSTALL_BUTTON).get_attribute("disabled")
+
+    def type_plugin_name_to_search_field(self, plugin_name):
+        self.enter_text(self.Locator.SEARCH_AVAILABLE_PLUGINS_FIELD, plugin_name)
+        count = 50
+        while count > 1:
+            count = self.count_available_plugins()
+        return self
