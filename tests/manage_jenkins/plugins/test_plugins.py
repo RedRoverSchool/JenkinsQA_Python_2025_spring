@@ -51,3 +51,26 @@ def test_plugin_install(plugins):
     else:
         with allure.step(f"Plugin \"{DATA.PLUGIN_NAME}\" has been installed already!"):
             assert True, "The plugin has been installed!"
+
+@allure.epic("Manage Jenkins")
+@allure.story("Remove Plugins")
+@allure.title("Uninstalling the plugin")
+@allure.testcase("TC_10.004.01")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/814", name="Github issue")
+def test_plugin_uninstall(inst):
+    with allure.step(f"Check that \"{DATA.PLUGIN_NAME}\" plugin is not installed."):
+        if not inst.is_plugin_installed(DATA.PLUGIN_NAME):
+            with allure.step(f"The \"{DATA.PLUGIN_NAME}\" plugin is not installed."):
+                assert True, f"Plugin \"{DATA.PLUGIN_NAME}\" is not installed, yet!"
+        else:
+            with allure.step(f"Type \"{DATA.PLUGIN_NAME}\" to search field."):
+                inst.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
+                with allure.step(f"Check that \"{DATA.PLUGIN_NAME}\" plugin already uninstalled."):
+                    if inst.is_uninstallation_pending():
+                        with allure.step(f"Plugin \"{DATA.PLUGIN_NAME}\" has been uninstalled already."):
+                            assert True, f"Plugin \"{DATA.PLUGIN_NAME}\" has been uninstalled already. Please, restart Jenkins to complete uninstall."
+                    else:
+                        with allure.step(f"Uninstall \"{DATA.PLUGIN_NAME}\" plugin."):
+                            inst.click_uninstall()
+                        with allure.step(f"Assert that \"{DATA.PLUGIN_NAME}\" plugin has been uninstalled."):
+                            assert inst.is_uninstallation_pending()

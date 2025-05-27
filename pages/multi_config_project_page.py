@@ -34,12 +34,13 @@ class MultiConfigProjectPage(BasePage):
     def get_text_warning_message(self):
         return self.get_visible_text_lines(self.Locators.WARNING_MESSAGE)[0]
 
+    @allure.step("Click the button 'Enable' to enable the project")
     def enable_project(self):
         self.click_on(self.Locators.ENABLE_BUTTON)
         return self
 
-    def wait_warning_message_to_disappear(self, timeout=5) -> bool:
-        return self.wait_element_to_disappear(self.Locators.WARNING_MESSAGE, timeout)
+    def wait_warning_message_to_disappear(self) -> bool:
+        return self.wait_element_to_disappear(self.Locators.WARNING_MESSAGE)
 
     def get_project_status_title(self) -> str:
         return self.wait_and_get_attribute(self.Locators.PROJECT_STATUS_ICON, "title")

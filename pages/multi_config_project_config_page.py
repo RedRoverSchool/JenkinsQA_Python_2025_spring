@@ -36,6 +36,7 @@ class MultiConfigProjectConfigPage(BasePage):
         self.click_on(self.Locators.SWITCH_BUTTON)
         return self
 
+    @allure.step("Click the button 'Save' to save project")
     def click_submit_button(self):
         return self.click_on(self.Locators.SUBMIT)
 

@@ -45,7 +45,7 @@ def test_display_warning_message(page_disabled_multi_config_project):
     warning_message = page_disabled_multi_config_project.get_text_warning_message()
 
     assert warning_message == ProjectToggle.WARNING_MESSAGE, \
-        f"Expected message '{ProjectToggle.WARNING_MESSAGE}' NOT FOUND"
+        f"Expected warning message '{ProjectToggle.WARNING_MESSAGE}' NOT FOUND"
 
 
 @allure.epic("Multi-configuration project Configuration")
