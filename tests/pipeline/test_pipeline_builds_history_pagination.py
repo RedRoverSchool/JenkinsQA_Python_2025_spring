@@ -1,6 +1,9 @@
-from conftest import logger
+import logging
+
 from pages.pipeline_page import PipelinePage
 from tests.pipeline.pipeline_data import BuildCounter
+
+logger = logging.getLogger(__name__)
 
 
 def test_pipeline_builds_history_pagination_31(create_builds):
