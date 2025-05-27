@@ -1,0 +1,103 @@
+INFO     core.jenkins_utils:jenkins_utils.py:210 running cleanup
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 403 None
+DEBUG    core.jenkins_utils:jenkins_utils.py:92 failed to get page on the first try, retrying after login
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /login?from=%2F HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /j_spring_security_check HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/securityRealm/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /computer/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/credentials/store/system/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /me/my-views/view/all/submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/appearance/configSubmit HTTP/1.1" 200 134
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /user/admin/security/ HTTP/1.1" 200 None
+DEBUG    conftest:conftest.py:60 Argument --remote-allow-origins=* added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-gpu added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --no-sandbox added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-dev-shm-usage added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --headless=new added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --window-size=1920,1080 added to the chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:101 Selenium Manager binary found at: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:114 Executing process: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --language-binding python --output json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Found chromedriver 136.0.7103.92 in PATH: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 chrome detected at /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Running command: /usr/bin/google-chrome --version
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Output: "Google Chrome 136.0.7103.92 "
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Detected browser: chrome 136.0.7103.92
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Required driver: chromedriver 136.0.7103.113
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Driver path: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Browser path: /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.service:service.py:231 Started executable: `/usr/bin/chromedriver` in a child process with pid: 13425 using 0 to output -3
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:52721
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.461ABBAC8AD9E84286BF14D29CD3C3C4.e.1/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.461ABBAC8AD9E84286BF14D29CD3C3C4.e.3/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.461ABBAC8AD9E84286BF14D29CD3C3C4.e.9/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/cookie HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 156
+DEBUG    core.jenkins_utils:jenkins_utils.py:31 update_crumb: 24e1b0f2a0c8e97261da57746b8e56a23ed2e1b96009cb39abcb5989891629c5
+DEBUG    LoginPage:login_page.py:32 login crumb: 24e1b0f2a0c8e97261da57746b8e56a23ed2e1b96009cb39abcb5989891629c5
+DEBUG    MainPage:ui_element.py:81 Navigating to NewItemPage with click on (('link text', 'New Item'),)
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'New Item'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.8453555CAAD7FC2FC84BBD0C7D2CB2CE.e.44/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.8453555CAAD7FC2FC84BBD0C7D2CB2CE.e.44/click HTTP/1.1" 200 0
+DEBUG    NewItemPage:base_page.py:22 Waiting for page content to load: http://localhost:8080/view/all/newJob
+DEBUG    NewItemPage:ui_element.py:28 waiting for presence_of_element_located(('xpath', "//h1[text()='New Item']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    NewItemPage:base_page.py:25 Page content loaded: http://localhost:8080/view/all/newJob
+DEBUG    NewItemPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', '#name'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.2CE851CA82E764F06C46CBF5C1E74091.e.46/value HTTP/1.1" 200 0
+DEBUG    NewItemPage:ui_element.py:28 waiting for element_to_be_clickable(('css selector', '[class*="cloudbees_hudson_plugins_folder"]'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.2CE851CA82E764F06C46CBF5C1E74091.e.68/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.2CE851CA82E764F06C46CBF5C1E74091.e.68/click HTTP/1.1" 200 0
+DEBUG    NewItemPage:ui_element.py:28 waiting for element_to_be_clickable(('css selector', '#ok-button'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.2CE851CA82E764F06C46CBF5C1E74091.e.69/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.2CE851CA82E764F06C46CBF5C1E74091.e.69/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    Header:ui_element.py:81 Navigating to MainPage with click on (('id', 'jenkins-home-link'),)
+DEBUG    Header:ui_element.py:28 waiting for element_to_be_clickable(('id', 'jenkins-home-link'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.17C300E7FD3BD5FE8AC1A7B7BDE10118.e.134/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.17C300E7FD3BD5FE8AC1A7B7BDE10118.e.134/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/url HTTP/1.1" 200 0
+DEBUG    MainPage:ui_element.py:81 Navigating to NewItemPage with click on (('link text', 'New Item'),)
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'New Item'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.DA2241FB73EE78688E3D8AB70E3AD671.e.180/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.DA2241FB73EE78688E3D8AB70E3AD671.e.180/click HTTP/1.1" 200 0
+DEBUG    NewItemPage:base_page.py:22 Waiting for page content to load: http://localhost:8080/view/all/newJob
+DEBUG    NewItemPage:ui_element.py:28 waiting for presence_of_element_located(('xpath', "//h1[text()='New Item']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    NewItemPage:base_page.py:25 Page content loaded: http://localhost:8080/view/all/newJob
+DEBUG    NewItemPage:ui_element.py:28 waiting for presence_of_element_located(('id', 'from'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.C05ECA143045DCF0F40AFE1B3DBAEF4A.e.189/value HTTP/1.1" 200 0
+DEBUG    NewItemPage:ui_element.py:28 waiting for visibility_of_element_located(('css selector', 'div.jenkins-dropdown'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "POST /session/04afd33da9d4c868932fceff08fd36d7/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "GET /session/04afd33da9d4c868932fceff08fd36d7/element/f.3E42F36E81CEE30E00746EB5B4909DDF.d.C05ECA143045DCF0F40AFE1B3DBAEF4A.e.256/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:52721 "DELETE /session/04afd33da9d4c868932fceff08fd36d7 HTTP/1.1" 200 0
