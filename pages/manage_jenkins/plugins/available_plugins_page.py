@@ -7,6 +7,7 @@ class AvailablePluginsPage(BasePage):
         SEARCH_AVAILABLE_PLUGINS_FIELD = (By.XPATH, "//input[@placeholder='Search available plugins']")
         ITEMS_AVAILABLE_PLUGINS_LIST = (By.CSS_SELECTOR, 'tbody>tr')
         INSTALL_BUTTON = (By.XPATH, "//button[@id='button-install']")
+        TABLE_BODY = (By.CSS_SELECTOR, "tbody")
         CHECKBOX_PLUGIN = (By.CSS_SELECTOR, "tbody>tr span[class='jenkins-checkbox']")
 
 
@@ -21,7 +22,10 @@ class AvailablePluginsPage(BasePage):
             return False
 
     def count_available_plugins(self):
-        return len(self.wait_to_be_visible_all(self.Locator.ITEMS_AVAILABLE_PLUGINS_LIST))
+        if len(self.wait_for_element(self.Locator.TABLE_BODY).text.split("\n")) > 1:
+            return len(self.wait_to_be_visible_all(self.Locator.ITEMS_AVAILABLE_PLUGINS_LIST))
+        else:
+            return 0
 
     def is_install_button_visible(self):
         if self.wait_to_be_visible(self.Locator.INSTALL_BUTTON):
@@ -35,8 +39,8 @@ class AvailablePluginsPage(BasePage):
     def type_plugin_name_to_search_field(self, plugin_name):
         self.enter_text(self.Locator.SEARCH_AVAILABLE_PLUGINS_FIELD, plugin_name)
         count = 50
-        while count > 1:
-            count = self.count_available_plugins()
+        while count > 5:
+            count = len(self.wait_for_element(self.Locator.TABLE_BODY).text.split("\n"))
         return self
 
     def select_plugin_checkbox(self):
