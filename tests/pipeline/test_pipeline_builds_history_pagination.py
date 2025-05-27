@@ -1,8 +1,6 @@
-import time
-
 from conftest import logger
 from pages.pipeline_page import PipelinePage
-from tests.pipeline.pipeline_data import BuildCounter, Config
+from tests.pipeline.pipeline_data import BuildCounter
 
 
 def test_pipeline_builds_history_pagination_31(create_builds):

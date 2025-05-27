@@ -1,13 +1,9 @@
 import time
-from typing import Any
-
-import allure
 import pytest
 import requests
 
 from conftest import logger, config
-from core.jenkins_utils import generate_token, remote_build_trigger
-from pages.main_page import MainPage
+from core.jenkins_utils import generate_token
 from pages.pipeline_page import PipelinePage
 from pages.pipeline_config_page import PipelineConfigPage
 
@@ -72,7 +68,7 @@ def trigger_builds(create_pipeline_job_by_api, driver, config, main_page) -> Pip
     job_name, username, token = create_pipeline_job_by_api
     base_url = config.jenkins.base_url
 
-    pipeline_page = main_page.go_to_the_pipeline_page(job_name)
+    pipeline_page = main_page.go_to_pipeline_page(job_name)
 
     for i in range(BuildCounter.build_history_limit_31):
         next_build_resp = requests.get(
