@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
+from tests.manage_jenkins.data import Plugins as DATA
 
 
 class InstalledPluginsPage(BasePage):
@@ -10,7 +11,7 @@ class InstalledPluginsPage(BasePage):
         UNINSTALL_BUTTON = (By.XPATH, f"//button[@title='Uninstall SSH server']")
         CONFIRM_UNINSTALL_BUTTON = (By.XPATH, "//button[@data-id='ok']")
         UNINSTALLATION_PENDING = (By.LINK_TEXT, "Uninstallation pending")
-        INSTALLED_PLUGIN = (By.XPATH, "//tr[@data-plugin-name='SSH server']")
+        INSTALLED_PLUGIN = (By.XPATH, f"//tr[@data-plugin-name='{DATA.PLUGIN_NAME}']")
 
 
     def __init__(self, driver, timeout=5):

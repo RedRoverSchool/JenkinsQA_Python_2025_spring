@@ -42,11 +42,11 @@ def test_plugin_install(plugins):
             assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
         with allure.step("Assert that \"Success\" displayed next to the \"Loading plugin extensions\" label"):
             assert progress_bar.is_success_loading_plugin_extensions()
-        with allure.step(f"Assert that \"Succeeds\" should be displayed next to the \"{DATA.PLUGIN_NAME}\""):
+        with allure.step(f"Assert that \"Success\" displayed next to the \"{DATA.PLUGIN_NAME}\""):
             assert progress_bar.is_success_plugin_name()
         with allure.step("go to \"Installed plugins\" page"):
             installed_plugins = progress_bar.go_to_installed_plugins_page()
-        with allure.step(f"Assert that the \"{DATA.PLUGIN_NAME}\" plugin displayed in the list of plugins on the “Installed plugins” page"):
+        with allure.step(f"Assert that the \"{DATA.PLUGIN_NAME}\" plugin exist in the list of plugins on the “Installed plugins” page"):
             assert installed_plugins.is_plugin_installed(DATA.PLUGIN_NAME)
     else:
         with allure.step(f"Plugin \"{DATA.PLUGIN_NAME}\" has been installed already!"):
