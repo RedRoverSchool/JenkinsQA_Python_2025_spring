@@ -2,7 +2,7 @@ import time
 import pytest
 import requests
 
-from conftest import logger, config
+from conftest import logger
 from core.jenkins_utils import generate_token
 from pages.pipeline_page import PipelinePage
 from pages.pipeline_config_page import PipelineConfigPage
@@ -38,7 +38,7 @@ def create_builds(create_pipeline_with_script):
 
 
 @pytest.fixture(scope="function")
-def jenkins_auth(config, driver):
+def jenkins_auth(driver, config):
     username = config.jenkins.USERNAME
     api_token = generate_token(config, driver, Config.job_name)
     return username, api_token
