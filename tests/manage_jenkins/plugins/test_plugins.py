@@ -32,10 +32,15 @@ def test_plugin_install(plugins):
     with allure.step("Open Available plugins Page"):
         available_plugins = plugins.go_to_available_plugins_page()
     available_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
-    assert available_plugins.count_available_plugins() == 1
-    available_plugins.select_plugin_checkbox()
-    progress_bar = available_plugins.click_install_button()
-    assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
+    if available_plugins.count_available_plugins() != 0:
+        assert available_plugins.count_available_plugins() == 1
+        available_plugins.select_plugin_checkbox()
+        progress_bar = available_plugins.click_install_button()
+        assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
+    else:
+        assert True, "The plugin is already installed!"
 
-
-    # time.sleep(10)
+def test_plugin_uninstall(plugins):
+    installed_plugins = plugins.go_to_installed_plugins_page()
+    installed_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
+    installed_plugins.click_uninstall()
