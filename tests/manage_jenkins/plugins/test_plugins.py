@@ -51,3 +51,9 @@ def test_plugin_install(plugins):
     else:
         with allure.step(f"Plugin \"{DATA.PLUGIN_NAME}\" has been installed already!"):
             assert True, "The plugin has been installed!"
+
+def test_plugin_uninstall(plugins):
+    installed_plugins = plugins.go_to_installed_plugins_page()
+    installed_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
+    installed_plugins.click_uninstall()
+
