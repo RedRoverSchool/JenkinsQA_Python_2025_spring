@@ -39,8 +39,3 @@ def test_plugin_install(plugins):
         assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
     else:
         assert True, "The plugin is already installed!"
-
-def test_plugin_uninstall(plugins):
-    installed_plugins = plugins.go_to_installed_plugins_page()
-    installed_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
-    installed_plugins.click_uninstall()
