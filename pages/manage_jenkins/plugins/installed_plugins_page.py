@@ -8,7 +8,7 @@ class InstalledPluginsPage(BasePage):
         SEARCH_INSTALLED_PLUGINS_FIELD = (By.XPATH, "//input[@placeholder='Search installed plugins']")
         ITEMS_INSTALLED_PLUGINS_LIST = (By.CSS_SELECTOR, 'tbody>tr')
         TABLE_BODY = (By.CSS_SELECTOR, "tbody")
-        UNINSTALL_BUTTON = (By.XPATH, f"//button[@title='Uninstall SSH server']")
+        UNINSTALL_BUTTON = (By.XPATH, f"//button[@title='Uninstall {DATA.PLUGIN_NAME}']")
         CONFIRM_UNINSTALL_BUTTON = (By.XPATH, "//button[@data-id='ok']")
         UNINSTALLATION_PENDING = (By.LINK_TEXT, "Uninstallation pending")
         INSTALLED_PLUGIN = (By.XPATH, f"//tr[@data-plugin-name='{DATA.PLUGIN_NAME}']")
