@@ -1,13 +1,15 @@
 import time
 import pytest
 import requests
+import logging
 
-from conftest import logger
 from core.jenkins_utils import generate_token
 from pages.pipeline_page import PipelinePage
 from pages.pipeline_config_page import PipelineConfigPage
 
 from tests.pipeline.pipeline_data import pipeline_project_name, Script, Config, BuildCounter
+
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="function")
