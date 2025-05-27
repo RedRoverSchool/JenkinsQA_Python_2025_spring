@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -10,6 +11,8 @@ class BuildHistoryPage(BasePage):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + "/view/all/builds"
 
-    def get_build_list(self):
+    @allure.step("Get existing builds list.")
+    def get_builds_list(self):
         self.wait_to_be_visible_all(self.Locators.TABLE_ITEM, 10)
-        return [item.text for item in self.find_elements(*self.Locators.TABLE_ITEM)]
+        item_list = [item.text for item in self.find_elements(*self.Locators.TABLE_ITEM)]
+        return item_list

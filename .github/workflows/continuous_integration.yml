@@ -9,6 +9,8 @@ jobs:
   run-pytest:
     name: 'run pytest tests'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       JENKINS_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       JENKINS_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -60,22 +62,30 @@ jobs:
       - name: Wait for the Jenkins
         run: ./.github/wait-for-jenkins.sh
 
-      - name: check scope of changes
-        id: scope_check
-        run: ./.github/diff-checker.sh
-
       - name: pytest run all tests
-        if: steps.scope_check.outputs.run_all_tests == 'true'
-        run: pytest
+        run: pytest --alluredir=build/allure-results
 
-      - name: pytest run picked tests
-        if: steps.scope_check.outputs.run_all_tests == 'false'
-        run: pytest --picked --mode=branch --parent-branch=origin/${{ github.base_ref }}
-        #run: pytest
-
-      - name: Attach screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - name: Get Allure history
+        uses: actions/checkout@v4.2.2
+        if: always()
+        continue-on-error: true
         with:
-          name: screenshots
-          path: ${{ github.workspace }}/screenshots
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate allure report
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
+        with:
+          allure_results: build/allure-results
+          gh_pages: gh-pages
+          allure_history: allure-history
+          keep_reports: 30
+
+      - name: Commit allure_report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
