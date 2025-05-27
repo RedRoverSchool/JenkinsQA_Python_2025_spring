@@ -57,3 +57,5 @@ class BuildCounter:
     build_history_limit_31 = 31
     build_history_limit_60 = 60
     build_history_limit_61 = 61
+    build_history_page_limit = 30
+    amount_to_wait = 5

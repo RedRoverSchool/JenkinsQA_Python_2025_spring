@@ -20,8 +20,8 @@ class PipelinePage(BasePage):
         BUILD_NOW_BUTTON = (By.LINK_TEXT, "Build Now")
         BUILDS_NEXT_PAGE_BUTTON = (By.ID, "down")
         BUILDS_PREV_PAGE_BUTTON = (By.ID, "up")
-        BUILDS_LINKS = (By.CSS_SELECTOR, "#jenkins-build-history .app-builds-container__item__inner a[href*='job/']")
-        BUILDS_LINKS_INNER = (By.CSS_SELECTOR, ".app-builds-container__item__inner__link")
+        BUILDS_LINKS = (By.CSS_SELECTOR, "#jenkins-build-history a.app-builds-container__item__inner__link")
+        BUILD_HISTORY_CONTAINER = (By.CSS_SELECTOR, "jenkins-build-history")
 
     def __init__(self, driver, pipeline_project_name, timeout=10):
         super().__init__(driver, timeout=timeout)
@@ -63,26 +63,41 @@ class PipelinePage(BasePage):
         self.wait_to_be_clickable(self.Locators.BUILD_NOW_BUTTON).click()
         return self
 
-    def get_builds_inner_links(self):
-        return self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS_INNER)
+    def wait_for_build_execution(self, build_number):
+        self.wait_to_be_visible((By.CSS_SELECTOR, f"#jenkins-build-history a[href$='/{build_number}/']"), 30)
+        return self
 
-    def get_builds_list(self, count):
-        self.wait_to_be_visible((By.CSS_SELECTOR, f"#jenkins-builds .app-builds-container__item__inner a[href*='/{count}/']"), 25)
+    def scroll_to_the_end_of_builds_list(self):
+        builds = self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
+        last_build_link = builds[-1]
+        self.driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth' });", last_build_link)
+        return self
+
+    def scroll_to_the_top_of_builds_list(self):
+        builds = self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
+        first_build_link = builds[0]
+        self.driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth' });", first_build_link)
+        return self
+
+    def get_builds_list(self):
         return self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
 
-    # def get_next_page_button(self, count):
-    #     self.wait_to_be_visible((By.CSS_SELECTOR, f"#jenkins-builds .app-builds-container__item__inner a[href*='/{count}/']"))
-    #
-    #     return self.Locators.BUILDS_NEXT_PAGE_BUTTON
+    def get_next_page_button(self):
+        self.scroll_to_the_end_of_builds_list()
+        return self.find_element(*self.Locators.BUILDS_NEXT_PAGE_BUTTON)
 
+    def get_previous_page_button(self):
+        self.scroll_to_the_end_of_builds_list()
+        return self.find_element(*self.Locators.BUILDS_PREV_PAGE_BUTTON)
 
-    # def click_builds_next_page_button(self):
-    #     import time
-    #     time.sleep(5)
-    #     self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON)
-    #     return self
+    def click_next_page_button(self):
+        self.scroll_to_the_end_of_builds_list()
+        self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON)
+        self.scroll_to_the_top_of_builds_list()
+        self.get_builds_list()
+        return self
 
-    # def click_builds_prev_page_button(self):
-    #     self.scroll_into_view(self.Locators.BUILDS_PREV_PAGE_BUTTON)
-    #     self.wait_to_be_clickable(self.Locators.BUILDS_PREV_PAGE_BUTTON, 10).click()
-    #     return self
+    def go_to_the_last_build_history_page(self, full_pages):
+        if full_pages > 1:
+            self.scroll_to_the_end_of_builds_list().click_next_page_button().scroll_to_the_end_of_builds_list()
+        return self
