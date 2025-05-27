@@ -29,15 +29,25 @@ def test_plugins_available(plugins):
 def test_plugin_install(plugins):
     with allure.step("Open Available plugins Page"):
         available_plugins = plugins.go_to_available_plugins_page()
-    available_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
+    with allure.step(f"Type plugin name \"{DATA.PLUGIN_NAME}\"for install."):
+        available_plugins.type_plugin_name_to_search_field(DATA.PLUGIN_NAME)
     if available_plugins.count_available_plugins() != 0:
-        assert available_plugins.count_available_plugins() == 1
-        available_plugins.select_plugin_checkbox()
-        progress_bar = available_plugins.click_install_button()
-        assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
-        assert progress_bar.is_success_loading_plugin_extensions()
-        assert progress_bar.is_success_plugin_name()
-        installed_plugins = progress_bar.go_to_installed_plugins_page()
-        assert installed_plugins.is_plugin_installed(DATA.PLUGIN_NAME)
+        with allure.step("Assert that plugin has been found."):
+            assert available_plugins.count_available_plugins() == 1
+        with allure.step("Selection founded plugin to install."):
+            available_plugins.select_plugin_checkbox()
+        with allure.step("Plugin's installation."):
+            progress_bar = available_plugins.click_install_button()
+        with allure.step("Assert that “Download progress” page opens"):
+            assert progress_bar.get_title_page() == DATA.TITLE_DOWNLOAD_PROGRESS_PAGE
+        with allure.step("Assert that \"Success\" displayed next to the \"Loading plugin extensions\" label"):
+            assert progress_bar.is_success_loading_plugin_extensions()
+        with allure.step(f"Assert that \"Succeeds\" should be displayed next to the \"{DATA.PLUGIN_NAME}\""):
+            assert progress_bar.is_success_plugin_name()
+        with allure.step("go to \"Installed plugins\" page"):
+            installed_plugins = progress_bar.go_to_installed_plugins_page()
+        with allure.step(f"Assert that the \"{DATA.PLUGIN_NAME}\" plugin displayed in the list of plugins on the “Installed plugins” page"):
+            assert installed_plugins.is_plugin_installed(DATA.PLUGIN_NAME)
     else:
-        assert True, "The plugin has been installed!"
+        with allure.step(f"Plugin \"{DATA.PLUGIN_NAME}\" has been installed already!"):
+            assert True, "The plugin has been installed!"
