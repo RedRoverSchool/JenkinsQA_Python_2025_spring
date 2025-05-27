@@ -7,6 +7,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 from pages.base_page import BasePage
+from pages.folder_config_page import FolderConfigPage
+from pages.freestyle_project_config_page import FreestyleProjectConfigPage
+from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
+from pages.multibranch_pipeline_config_page import MultibranchPipelineConfigPage
+from pages.organization_folder_config_page import OrganizationFolderConfigPage
+from pages.pipeline_config_page import PipelineConfigPage
 
 
 class NewItemPage(BasePage):
@@ -15,7 +21,7 @@ class NewItemPage(BasePage):
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
         ITEM_FOLDER = (By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
         OK_BUTTON = (By.CSS_SELECTOR, '#ok-button')
-
+        ITEM_ORGANIZATION_FOLDER = (By.CLASS_NAME, "jenkins_branch_OrganizationFolder")
         ITEM_PIPELINE_PROJECT = (By.CLASS_NAME, "org_jenkinsci_plugins_workflow_job_WorkflowJob")
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
         ITEM_MULTIBRANCH_PIPELINE_PROJECT = (
@@ -33,6 +39,15 @@ class NewItemPage(BasePage):
         ITEM_DESCRIPTIONS = (By.XPATH, "//div[@class='desc']")
         COPY_FROM = (By.ID, "from")
         DROPDOWN_COPY = (By.CSS_SELECTOR, "div.jenkins-dropdown")
+
+    PROJECT_TYPE_MAP = {
+        "Freestyle project": (Locators.ITEM_FREESTYLE_PROJECT, FreestyleProjectConfigPage),
+        "Pipeline": (Locators.ITEM_PIPELINE_PROJECT, PipelineConfigPage),
+        "Multi-configuration project": (Locators.ITEM_MULTI_CONFIG_PROJECT, MultiConfigProjectConfigPage),
+        "Folder": (Locators.ITEM_FOLDER, FolderConfigPage),
+        "Multibranch Pipeline": (Locators.ITEM_MULTIBRANCH_PIPELINE_PROJECT, MultibranchPipelineConfigPage),
+        "Organization Folder": (Locators.ITEM_ORGANIZATION_FOLDER, OrganizationFolderConfigPage),
+    }
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -74,12 +89,6 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.ITEM_MULTIBRANCH_PIPELINE_PROJECT).click()
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return MultibranchPipelineConfigPage(self.driver, name)
-
-    def get_pipeline_element(self):
-        return self.find_element(*self.Locators.ITEM_PIPELINE_PROJECT)
-
-    def get_freestyle_element(self):
-        return self.find_element(*self.Locators.ITEM_FREESTYLE_PROJECT)
 
     def click_ok_button(self):
         return self.click_on(self.Locators.OK_BUTTON)
@@ -149,6 +158,7 @@ class NewItemPage(BasePage):
         self.enter_text(self.Locators.COPY_FROM, name)
         return self
 
+    @allure.step("Enter the first character of the item name into the 'Copy from' input field")
     def enter_first_character_in_copy_from(self, name):
         self.enter_copy_from(name[0])
         return self
@@ -159,8 +169,25 @@ class NewItemPage(BasePage):
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
 
+    @allure.step("Click an item from dropdown")
     def select_item_from_dropdown(self):
         return self.click_on(self.Locators.DROPDOWN_COPY)
 
     def get_copy_from_field_value(self):
-        return self.get_attribute(self.Locators.COPY_FROM, "value")
+        return self.wait_and_get_attribute(self.Locators.COPY_FROM, "value")
+
+    def select_item_and_get_element(self, project_type: str):
+        locator = self.PROJECT_TYPE_MAP[project_type][0]
+        self.scroll_into_view(self.wait_for_element(locator))
+        self.click_on(locator)
+        return self.wait_for_element(locator)
+
+    @allure.step('Create new {project_type}: {project_name}')
+    def create_project(self, project_type, project_name):
+        locator, page_class = self.PROJECT_TYPE_MAP[project_type]
+        self.enter_item_name(project_name)
+        self.scroll_into_view(self.wait_for_element(locator))
+        self.click_on(locator)
+        self.click_on(self.Locators.OK_BUTTON)
+        return page_class(self.driver, project_name).wait_for_url()
+

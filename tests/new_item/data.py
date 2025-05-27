@@ -27,8 +27,8 @@ expected_item_descriptions = [
 
 class Copy:
     FOLDER_NAME_TO_COPY = "Folder_for_copy"
-    NON_EXISTENT_FOLDER_NAME = 'Non_existent_folder_name'
-    ITEM_NOT_FOUND_MESSAGE = 'No items'
+    NON_EXISTENT_FOLDER_NAME = "Non_existent_folder_name"
+    ITEM_NOT_FOUND_MESSAGE = "No items"
     COPY_NAME = "Copy_existing_item"
     HEADER_ERROR = "Error"
     MESSAGE_ERROR = f"No such job: {NON_EXISTENT_FOLDER_NAME}"
