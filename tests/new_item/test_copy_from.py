@@ -14,7 +14,7 @@ def test_display_dropdown_text(prepare_page_for_copy):
     dropdown_text = prepare_page_for_copy.enter_first_character_in_copy_from(item_name).get_dropdown_text()
 
     assert dropdown_text, "Dropdown list is empty"
-    assert dropdown_text == expected_result, f"Expected text '{expected_result}' NOT FOUND"
+    assert dropdown_text == expected_result, f"Expected the dropdown text '{expected_result}' NOT FOUND"
 
 
 @allure.epic("New Item")
@@ -28,7 +28,7 @@ def test_display_dropdown_text_negative(prepare_page_for_copy):
     dropdown_text = prepare_page_for_copy.enter_first_character_in_copy_from(item_name).get_dropdown_text()
 
     assert dropdown_text, "Dropdown list is empty"
-    assert dropdown_text == expected_result, f"Expected text '{expected_result}' NOT FOUND"
+    assert dropdown_text == expected_result, f"Expected the dropdown text '{expected_result}' NOT FOUND"
 
 
 @allure.epic("New Item")
@@ -56,7 +56,7 @@ def test_select_item_from_dropdown(prepare_page_for_copy):
     field_value = prepare_page_for_copy.get_copy_from_field_value()
 
     assert field_value == Copy.FOLDER_NAME_TO_COPY, \
-        f"Expected value '{Copy.FOLDER_NAME_TO_COPY}' NOT FOUND"
+        f"Expected field value '{Copy.FOLDER_NAME_TO_COPY}' NOT FOUND"
 
 
 @allure.epic("New Item")

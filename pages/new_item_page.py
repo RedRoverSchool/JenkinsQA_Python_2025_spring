@@ -158,6 +158,7 @@ class NewItemPage(BasePage):
         self.enter_text(self.Locators.COPY_FROM, name)
         return self
 
+    @allure.step("Enter the first character of the item name into the 'Copy from' input field")
     def enter_first_character_in_copy_from(self, name):
         self.enter_copy_from(name[0])
         return self
@@ -168,14 +169,25 @@ class NewItemPage(BasePage):
         self.enter_item_name(name).enter_copy_from(copy_name).click_ok_button()
         return ErrorPageCopyFrom(self.driver).wait_for_url()
 
+    @allure.step("Click an item from dropdown")
     def select_item_from_dropdown(self):
         return self.click_on(self.Locators.DROPDOWN_COPY)
 
     def get_copy_from_field_value(self):
-        return self.get_attribute(self.Locators.COPY_FROM, "value")
+        return self.wait_and_get_attribute(self.Locators.COPY_FROM, "value")
 
     def select_item_and_get_element(self, project_type: str):
         locator = self.PROJECT_TYPE_MAP[project_type][0]
         self.scroll_into_view(self.wait_for_element(locator))
         self.click_on(locator)
         return self.wait_for_element(locator)
+
+    @allure.step('Create new {project_type}: {project_name}')
+    def create_project(self, project_type, project_name):
+        locator, page_class = self.PROJECT_TYPE_MAP[project_type]
+        self.enter_item_name(project_name)
+        self.scroll_into_view(self.wait_for_element(locator))
+        self.click_on(locator)
+        self.click_on(self.Locators.OK_BUTTON)
+        return page_class(self.driver, project_name).wait_for_url()
+

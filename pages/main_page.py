@@ -33,7 +33,7 @@ class MainPage(BasePage, UIElementMixin):
 
         @staticmethod
         def cells_in_job_row(name: str):
-            return By.XPATH, f"//td[../td//a[contains(@href, {quote(name)})]]"
+            return By.XPATH, f"//tr[@id='job_{name}']/td"
 
     def __init__(self, driver, timeout=5):
         super().__init__(driver, timeout=timeout)
