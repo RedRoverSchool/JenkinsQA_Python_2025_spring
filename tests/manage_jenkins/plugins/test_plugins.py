@@ -23,7 +23,7 @@ def test_plugins_available(plugins):
 
 @allure.epic("Manage Jenkins")
 @allure.story("Add Plugins")
-@allure.title("User could be able to install plugins in the program")
+@allure.title("Installing the plugin")
 @allure.testcase("TC_10.003.02")
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/784", name="Github issue")
 def test_plugin_install(plugins):
