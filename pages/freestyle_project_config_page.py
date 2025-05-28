@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -17,7 +18,9 @@ class FreestyleProjectConfigPage(BasePage):
         HIDE_PREVIEW = (By.LINK_TEXT, 'Hide preview')
         NOTIFICATION = (By.ID, 'notification-bar')
         BUILDS_REMOTELY_CHECKBOX = (By.CSS_SELECTOR, "input[name='pseudoRemoteTrigger']~label")
+        BUILDS_PERIODICALLY_CHECKBOX = (By.CSS_SELECTOR, "input[name='hudson-triggers-TimerTrigger']~label")
         AUTH_TOKEN = (By.NAME, "authToken")
+        SCHEDULE = (By.NAME, "_.spec")
         BUILD_STEPS = (By.CSS_SELECTOR, '#build-steps')
         POST_BUILD_ACTIONS = (By.ID, 'post-build-actions')
         ENVIRONMENT = (By.ID, 'environment')
@@ -38,6 +41,7 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_for_element(self.Locators.DESCRIPTION_FIELD).send_keys(description_text)
         return self
 
+    @allure.step("Click Save Button and go to the Freestyle Project Page.")
     def click_save_button(self):
         from pages.freestyle_project_page import FreestyleProjectPage
         self.wait_to_be_clickable(self.Locators.SAVE_BUTTON).click()
@@ -99,7 +103,7 @@ class FreestyleProjectConfigPage(BasePage):
             items_post_build_action.append(item.text)
         return items_post_build_action
 
-    def get_port_build_actions_element(self):
+    def get_post_build_actions_element(self):
         return self.wait_for_element(self.Locators.POST_BUILD_ACTIONS)
 
     def get_windows_size(self, handle):
@@ -165,12 +169,23 @@ class FreestyleProjectConfigPage(BasePage):
         self.wait_to_be_clickable(self.Locators.ADD_POST_BUILD_ACTIONS)
         return self
 
+    @allure.step("Enable \"Trigger Builds Remotely\" and save with provided token \"{token}\".")
     def set_trigger_builds_remotely(self, token):
-        checkbox = self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX)
-        self.scroll_into_view(checkbox)
-        self.wait_to_be_clickable(checkbox).click()
-        self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
-        return self.click_save_button()
+        with allure.step("Check \"Trigger Builds Remotely\" checkbox."):
+            self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_REMOTELY_CHECKBOX))
+        with allure.step(f"Input auth token \"{token}\"."):
+            self.wait_to_be_visible(self.Locators.AUTH_TOKEN).send_keys(token)
+        with allure.step("Save configurations."):
+            return self.click_save_button()
+
+    @allure.step("Enable 'Build periodically' and set cron schedule\"{schedule}\".")
+    def set_trigger_builds_periodically(self, schedule):
+        with allure.step("Check \"Build periodically\" checkbox."):
+            self.check_checkbox(self.wait_for_element(self.Locators.BUILDS_PERIODICALLY_CHECKBOX))
+        with allure.step(f"Enter cron schedule '{schedule}' into the Schedule field"):
+            self.wait_to_be_visible(self.Locators.SCHEDULE).send_keys(schedule)
+        with allure.step("Save configurations."):
+            return self.click_save_button()
 
     def switch_to_disable(self):
         self.wait_to_be_clickable(self.Locators.ENABLE, 10).click()

@@ -5,19 +5,18 @@ from pages.base_page import BasePage
 
 
 class PipelineConfigPage(BasePage):
-    WAIT_FOR_PAGE = True
-
     class Locators:
         GENERAL_BUTTON = (By.ID, "general")
         DESCRIPTION_FIELD = (By.NAME, 'description')
         SAVE_BUTTON = (By.NAME, "Submit")
 
-    PAGE_READY_LOCATOR = Locators.GENERAL_BUTTON
-
     def __init__(self, driver, pipeline_name, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.pipeline_name = pipeline_name
         self.url = self.base_url + f"/job/{quote(pipeline_name)}/configure"
+
+    def wait_for_page(self):
+        return self.wait_for_element(self.Locators.GENERAL_BUTTON)
 
     def add_description(self, text_for_description):
         self.wait_for_element(self.Locators.DESCRIPTION_FIELD).send_keys(text_for_description)

@@ -13,7 +13,7 @@ class ErrorPageCopyFrom(BasePage):
         self.url = self.base_url + "/view/all/createItem"
 
     def get_header_error(self):
-        return self.wait_for_element(self.Locators.HEADER_ERROR).text.strip()
+        return self.get_visible_text(self.Locators.HEADER_ERROR)
 
     def get_message_error(self):
-        return self.wait_for_element(self.Locators.MESSAGE_ERROR).text.strip()
+        return self.get_visible_text(self.Locators.MESSAGE_ERROR)

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -12,6 +13,7 @@ class FreestyleProjectPage(BasePage):
         CONFIGURE_MENU_ITEM = (By.LINK_TEXT, 'Configure')
         DESCRIPTION = (By.ID, 'description')
         MENU_ITEMS = (By.XPATH, '//div[@class="task "]')
+        BUILDS_LINK = (By.CSS_SELECTOR, "#jenkins-build-history>div>span~div a")
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -56,3 +58,9 @@ class FreestyleProjectPage(BasePage):
 
     def get_menu_items_texts(self):
         return [item.text for item in self.wait_to_be_visible_all(self.Locators.MENU_ITEMS)]
+
+    @allure.step("Wait up to {timeout} seconds for the build to appear in the build history.")
+    def wait_for_build_execution(self, timeout):
+        with allure.step("Wait for 'Builds' link to be visible"):
+            self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+        return self

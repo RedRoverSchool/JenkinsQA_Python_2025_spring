@@ -1,21 +1,24 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+from pages.folder_page import FolderPage
+
 
 class FolderConfigPage(BasePage):
     class Locators:
         GENERAL_BUTTON = (By.ID, "general")
-        SUBMIT_BTN = (By.CSS_SELECTOR, "[name='Submit']")
-        DISPLAY_NAME = (By.XPATH, "//*[@id='main-panel']/h1")
+        SAVE_BUTTON = (By.CSS_SELECTOR, "[name='Submit']")
         DESCRIPTION = (By.XPATH, "//*[@id='view-message']")
         DESCRIPTION_FIELD = (By.CSS_SELECTOR, "div.setting-main> textarea")
         PREVIEW = (By.CLASS_NAME, "textarea-show-preview")
         TEXT_PREVIEW = (By.CLASS_NAME, "textarea-preview")
         HIDE_PREVIEW = (By.CLASS_NAME, "textarea-hide-preview")
         HEALTH_METRICS = (By.ID, "health-metrics")
+        FOLDER_NAME = (By.CSS_SELECTOR, "#main-panel> h1")
 
     def __init__(self, driver, folder_name,  timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/job/{folder_name}/configure"
+        self.name = folder_name
 
     def set_description(self, description):
         self.find_element(*self.Locators.DESCRIPTION_FIELD).send_keys(description)
@@ -40,6 +43,10 @@ class FolderConfigPage(BasePage):
         element = self.find_element(*self.Locators.HEALTH_METRICS)
         return element is not None and element.is_displayed() and element.is_enabled()
 
-    def get_folder_header_text(self):
-        header = self.find_element(*self.Locators.DISPLAY_NAME)
-        return header.text.strip()
+    def click_save_button(self):
+        self.click_on(self.Locators.SAVE_BUTTON)
+        return FolderPage(self.driver, folder_name = self.name).wait_for_url()
+
+    def get_folder_name_after_click_save(self):
+        name = self.wait_to_be_visible(self.Locators.FOLDER_NAME).text
+        return name

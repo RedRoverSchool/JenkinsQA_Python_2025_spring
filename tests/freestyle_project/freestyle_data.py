@@ -46,7 +46,7 @@ class Freestyle:
     ]
 
 class FreestyleConfigOptTriggers:
-    
+
     TRIGGER_OPT_NAMES = [
         'pseudoRemoteTrigger',
         'jenkins-triggers-ReverseBuildTrigger',
@@ -54,3 +54,11 @@ class FreestyleConfigOptTriggers:
         'com-cloudbees-jenkins-GitHubPushTrigger',
         'hudson-triggers-SCMTrigger'
     ]
+
+class CronTimer:
+    cron_schedule_every_minute = "*/1 * * * *"
+    cron_schedule_every_two_minutes = "H/2 * * * *"
+    timeout = {
+        "*/1 * * * *": 60,
+        "H/2 * * * *": 120
+    }
