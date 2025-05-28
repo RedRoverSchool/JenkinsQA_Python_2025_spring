@@ -1,14 +1,15 @@
-from pages.base_page import BasePage
+from pages.manage_jenkins.plugins.plugins_page import PluginsPage
 from selenium.webdriver.common.by import By
 
 
-class AvailablePluginsPage(BasePage):
+class AvailablePluginsPage(PluginsPage):
     class Locator:
         SEARCH_AVAILABLE_PLUGINS_FIELD = (By.XPATH, "//input[@placeholder='Search available plugins']")
         ITEMS_AVAILABLE_PLUGINS_LIST = (By.CSS_SELECTOR, 'tbody>tr')
         INSTALL_BUTTON = (By.XPATH, "//button[@id='button-install']")
         TABLE_BODY = (By.CSS_SELECTOR, "tbody")
         CHECKBOX_PLUGIN = (By.CSS_SELECTOR, "tbody>tr span[class='jenkins-checkbox']")
+        INSTALLED_PLUGINS = (By.LINK_TEXT, "Installed plugins")
 
 
     def __init__(self, driver, timeout=5):
