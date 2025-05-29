@@ -1,0 +1,215 @@
+INFO     core.jenkins_utils:jenkins_utils.py:210 running cleanup
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 403 None
+DEBUG    core.jenkins_utils:jenkins_utils.py:92 failed to get page on the first try, retrying after login
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /login?from=%2F HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /j_spring_security_check HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/securityRealm/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /computer/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/credentials/store/system/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /me/my-views/view/all/submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/appearance/configSubmit HTTP/1.1" 200 132
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /user/admin/security/ HTTP/1.1" 200 None
+DEBUG    conftest:conftest.py:60 Argument --remote-allow-origins=* added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-gpu added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --no-sandbox added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-dev-shm-usage added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --headless=new added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --window-size=1920,1080 added to the chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:101 Selenium Manager binary found at: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:114 Executing process: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --language-binding python --output json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Found chromedriver 136.0.7103.92 in PATH: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 chrome detected at /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Running command: /usr/bin/google-chrome --version
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Output: "Google Chrome 136.0.7103.92 "
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Detected browser: chrome 136.0.7103.92
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Required driver: chromedriver 136.0.7103.113
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Driver path: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Browser path: /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.service:service.py:231 Started executable: `/usr/bin/chromedriver` in a child process with pid: 10447 using 0 to output -3
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:49215
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3F812CEBEEEF5DCF82C584F3A906D168.e.1/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3F812CEBEEEF5DCF82C584F3A906D168.e.3/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3F812CEBEEEF5DCF82C584F3A906D168.e.9/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/cookie HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 156
+DEBUG    core.jenkins_utils:jenkins_utils.py:31 update_crumb: 5d5d6cad4c4032c75eff94a876904d5c2b31d6540a85aef69074b5c3689ea66b
+DEBUG    LoginPage:login_page.py:32 login crumb: 5d5d6cad4c4032c75eff94a876904d5c2b31d6540a85aef69074b5c3689ea66b
+DEBUG    MainPage:ui_element.py:56 Click on locator ('link text', 'Manage Jenkins')
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Manage Jenkins'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.AB45B91A6B16675F70DA28C2E9767CB1.e.44/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.AB45B91A6B16675F70DA28C2E9767CB1.e.44/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    ManageJenkinsPage:ui_element.py:56 Click on locator ('xpath', "//a[@href='pluginManager']/..")
+DEBUG    ManageJenkinsPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//a[@href='pluginManager']/.."),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.026D9275F600A1CA873AA4BF06B43DFB.e.79/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.026D9275F600A1CA873AA4BF06B43DFB.e.79/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    PluginsPage:ui_element.py:56 Click on locator ('link text', 'Available plugins')
+DEBUG    PluginsPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Available plugins'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.B12CCFF508E8E5513198D0945A4F5592.e.150/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.B12CCFF508E8E5513198D0945A4F5592.e.150/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('xpath', "//input[@placeholder='Search available plugins']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.154/value HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.260/text HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.260/text HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.260/text HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.260/text HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.260/text HTTP/1.1" 200 0
+DEBUG    AvailablePluginsPage:ui_element.py:56 Click on locator ('link text', 'Installed plugins')
+DEBUG    AvailablePluginsPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Installed plugins'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.261/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.6FFAF0F0BA8C5E2853A58D0D62D51401.e.261/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for text_to_be_present_in_element(('xpath', "//tr[@data-plugin-name='SSH server']"), 'SSH server')
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.469/text HTTP/1.1" 200 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for presence_of_element_located(('xpath', "//input[@placeholder='Search installed plugins']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.264/value HTTP/1.1" 200 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', 'tbody'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.504/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 404 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for presence_of_element_located(('xpath', "//button[@title='Uninstall SSH server']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.494/click HTTP/1.1" 200 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//button[@data-id='ok']"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "GET /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.505/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element/f.04D39429871960378D15C74983688283.d.3592EA183C070B00AF191455B1821C09.e.505/click HTTP/1.1" 200 0
+DEBUG    InstalledPluginsPage:ui_element.py:28 waiting for visibility_of_all_elements_located(('css selector', 'tbody>tr'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "POST /session/2a4e2f30985683d52cd5c6cc00f40f1d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:49215 "DELETE /session/2a4e2f30985683d52cd5c6cc00f40f1d HTTP/1.1" 200 0
