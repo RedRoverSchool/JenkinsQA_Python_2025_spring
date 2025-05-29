@@ -177,5 +177,6 @@ def freestyle_pj_conf_page(freestyle):
 
 
 @pytest.fixture
+@allure.title("Prepare: Go to Main Page")
 def access(freestyle) -> MainPage:
     return freestyle.navigate_to(MainPage, FreestyleProjectConfigPage.Locators.HEADER_LOGO)
