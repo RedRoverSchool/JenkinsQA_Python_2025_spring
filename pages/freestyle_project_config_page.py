@@ -7,6 +7,7 @@ class FreestyleProjectConfigPage(BasePage):
     class Locators:
         H1 = (By.CSS_SELECTOR, '.jenkins-app-bar__content>h1')
         H2_LOCATOR = (By.ID, "general")
+        HEADER_LOGO = (By.ID, "jenkins-home-link")
         ENABLE = (By.CLASS_NAME, 'jenkins-toggle-switch__label__checked-title')
         DISABLE = (By.CLASS_NAME, 'jenkins-toggle-switch__label__unchecked-title')
         ENABLE_TEXT = (By.XPATH, '//label[@class="jenkins-toggle-switch__label "]')

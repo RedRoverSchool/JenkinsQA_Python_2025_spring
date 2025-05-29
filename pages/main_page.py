@@ -8,6 +8,7 @@ from pages.base_page import BasePage
 from pages.ui_element import UIElementMixin
 from pages.folder_page import FolderPage
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -25,6 +26,7 @@ class MainPage(BasePage, UIElementMixin):
         FOLDER_LINK_LOCATOR = "//*[@id='job_{}']/td[3]/a"
         TABLE_HEADERS = (By.XPATH, "//table[@id='projectstatus']//thead//th")
         CELLS_IN_JOB_ROW = (By.XPATH, "//td[../td//a[contains(@href, 'job')]]")
+        PROJECT_BUTTON = (By.XPATH, "//table[@id='projectstatus']//tbody//td[3]/a")
         TABLE_SVG = (By.CSS_SELECTOR, "td svg")
 
         @staticmethod
@@ -63,6 +65,12 @@ class MainPage(BasePage, UIElementMixin):
         ]
         self.logger.debug(f" Data row for project '{name}': {data}")
         return data
+
+    @allure.step("Click on Project name")
+    def click_on_project(self, name):
+        from pages.freestyle_project_page import FreestyleProjectPage
+        self.find_element(*self.Locators.PROJECT_BUTTON).click()
+        return FreestyleProjectPage(self.driver, name).wait_for_url()
 
     @allure.step("Go to the New Item Page by clicking New Item button.")
     def go_to_new_item_page(self):

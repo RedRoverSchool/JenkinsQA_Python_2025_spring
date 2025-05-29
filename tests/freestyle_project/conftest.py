@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture
 @allure.title("Prepare: Create Freestyle Project")
-def freestyle(main_page):
+def freestyle(main_page) -> FreestyleProjectConfigPage:
     with allure.step("Create Freestyle Project"):
         freestyle_config_page = main_page.go_to_new_item_page().create_new_freestyle_project(Freestyle.project_name)
     with allure.step("Wait for title FreestyleProjectConfigPage"):
@@ -174,3 +174,8 @@ def create_freestyle_project_and_build_periodically(freestyle_config_page: Frees
 @pytest.fixture
 def freestyle_pj_conf_page(freestyle):
     return FreestylePJConfOptPage(freestyle)
+
+
+@pytest.fixture
+def access(freestyle) -> MainPage:
+    return freestyle.navigate_to(MainPage, FreestyleProjectConfigPage.Locators.HEADER_LOGO)
