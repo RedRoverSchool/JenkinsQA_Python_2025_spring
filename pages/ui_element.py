@@ -117,3 +117,6 @@ class UIElementMixin:
         element = self.wait_to_be_visible(locator)
         ActionChains(self.driver).move_to_element(element).perform()
         return element
+
+    def is_element_displayed(self, locator) -> bool:
+        return self.wait_to_be_visible(locator).is_displayed()

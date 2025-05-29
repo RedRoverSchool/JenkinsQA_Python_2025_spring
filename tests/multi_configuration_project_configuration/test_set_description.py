@@ -1,4 +1,4 @@
-from tests.multi_config.data import description_text, project_name
+from tests.multi_configuration_project_configuration.data import description_text, project_name
 
 
 def test_set_description_for_multi_config_project(multi_config_project_config_page):

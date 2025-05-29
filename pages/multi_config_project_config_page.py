@@ -16,6 +16,7 @@ class MultiConfigProjectConfigPage(BasePage):
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/job/{name}/configure"
+        self.name = name
 
     def set_description(self, text, name):
         from pages.multi_config_project_page import MultiConfigProjectPage
@@ -36,21 +37,17 @@ class MultiConfigProjectConfigPage(BasePage):
         self.click_on(self.Locators.SWITCH_BUTTON)
         return self
 
-    @allure.step("Click the button 'Save' to save project")
-    def click_submit_button(self):
-        return self.click_on(self.Locators.SUBMIT)
-
     def is_project_enabled(self) -> bool:
         return self.is_element_selected(self.Locators.SWITCH_INPUT)
 
     def is_project_disabled(self) -> bool:
         return not self.is_project_enabled()
 
-    @allure.step("Save \"{name}\" project and go to project page")
-    def submit_and_open_project_page(self, name):
-        from pages.multi_config_project_page import MultiConfigProjectPage
-        self.click_submit_button()
-        return MultiConfigProjectPage(self.driver, name).wait_for_url()
+    def submit_and_open_project_page(self):
+        with allure.step(f"Click the button 'Save' to save \"{self.name}\" project and go to project page"):
+            from pages.multi_config_project_page import MultiConfigProjectPage
+            self.click_on(self.Locators.SUBMIT)
+            return MultiConfigProjectPage(self.driver, self.name).wait_for_url()
 
     def get_switch_tooltip_text(self) -> str:
         self.hover_over_element(self.Locators.SWITCH_BUTTON)
