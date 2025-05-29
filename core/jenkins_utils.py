@@ -204,6 +204,31 @@ def delete_tokens(session, config):
             logger.error(f"failed to delete token with uuid={uuid}, response code: {response.status_code}")
 
 
+@allure.step("Generate a new Jenkins API token for the current user.")
+def generate_token(config, driver, token_name="api-token"):
+    update_crumb(driver, config)
+    session = get_session(driver)
+    security_page = get_page(session, config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/security/", config)
+    url = config.jenkins.base_url + f"/user/{config.jenkins.USERNAME}/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken"
+    headers = {"Content-Type": "application/x-www-form-urlencoded", "Jenkins-Crumb": get_crumb(security_page)}
+    data = f"newTokenName={token_name}"
+
+    logger.info(f"Generating Jenkins API token with name: {token_name}")
+    response = session.post(url=url, headers=headers, data=data)
+
+    if not response.ok:
+        logger.error(f"Failed to generate token. Status: {response.status_code}, Response: {response.text}")
+        return None
+
+    try:
+        token_value = response.json()["data"]["tokenValue"]
+        logger.info(f"Generated token: {token_value[:4]}...")  # Log partial token only
+        return token_value
+    except Exception as e:
+        logger.error(f"Failed to parse token response: {e}")
+        return None
+
+
 @allure.step("Clean up Jenkins data.")
 def clear_data(config):
     session = requests.Session()
