@@ -2,7 +2,6 @@ import logging
 from urllib.parse import quote
 
 import allure
-from allure_commons.reporter import AllureReporter
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
