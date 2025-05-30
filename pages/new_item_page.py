@@ -125,6 +125,7 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
 
+    @allure.step("Get item names from UI")
     def get_item_type_names(self):
         elements = self.wait_to_be_visible_all(self.Locators.ITEM_TYPES)
         return [element.text for element in elements]
@@ -132,6 +133,7 @@ class NewItemPage(BasePage):
     def copy_from_option_is_displayed(self):
         return self.wait_to_be_visible(self.Locators.COPY_FROM).is_displayed()
 
+    @allure.step("Get item type descriptions from UI")
     def get_item_type_descriptions(self):
         return [desc.text.strip() for desc in self.find_elements(*self.Locators.ITEM_DESCRIPTIONS)]
 
