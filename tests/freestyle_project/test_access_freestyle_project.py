@@ -16,3 +16,15 @@ def test_access_freestyle_project(access):
         freestyle_page: FreestyleProjectPage = access.click_on_project(DATA.project_name)
     with allure.step("Assert that opened Freestyle Project Page"):
         assert freestyle_page.get_h1_value() == DATA.project_name
+
+@allure.epic("Freestyle Project Management")
+@allure.story("Access to the Project options from dropdown menu")
+@allure.title("Get set items dropdown menu")
+@allure.testcase("TC_18.002.01")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/839", name="Github issue")
+def test_access_from_dropdown(access):
+    access.hover_to_dropdown_project()
+    elems = access.get_list_dropdown_project_elems()
+    items = access.get_list_dropdown_project_items(elems)
+    with allure.step("Assert that set items dropdown menu eqeal to expexcted result."):
+        assert items == DATA.ITEMS_DROPDOWN_PROJECT

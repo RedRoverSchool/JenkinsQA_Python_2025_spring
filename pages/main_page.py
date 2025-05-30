@@ -2,12 +2,12 @@ import logging
 from urllib.parse import quote
 
 import allure
+from allure_commons.reporter import AllureReporter
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from pages.ui_element import UIElementMixin
 from pages.folder_page import FolderPage
-
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +27,8 @@ class MainPage(BasePage, UIElementMixin):
         TABLE_HEADERS = (By.XPATH, "//table[@id='projectstatus']//thead//th")
         CELLS_IN_JOB_ROW = (By.XPATH, "//td[../td//a[contains(@href, 'job')]]")
         PROJECT_BUTTON = (By.XPATH, "//table[@id='projectstatus']//tbody//td[3]/a")
+        DROPDOWN_PROJECT_BUTTON = (By.XPATH, "//table[@id='projectstatus']//tbody//td[3]/a/button")
+        DROPDOWN_PROJECT_ITEMS = (By.CLASS_NAME, "jenkins-dropdown__item ")
         TABLE_SVG = (By.CSS_SELECTOR, "td svg")
 
         @staticmethod
@@ -71,6 +73,22 @@ class MainPage(BasePage, UIElementMixin):
         from pages.freestyle_project_page import FreestyleProjectPage
         self.find_element(*self.Locators.PROJECT_BUTTON).click()
         return FreestyleProjectPage(self.driver, name).wait_for_url()
+
+    @allure.step("Hover and click on dropdown Project")
+    def hover_to_dropdown_project(self):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_element(*self.Locators.PROJECT_BUTTON)).perform()
+        actions.move_to_element(self.find_element(*self.Locators.DROPDOWN_PROJECT_BUTTON)).click().perform()
+        return self
+
+    @allure.step("Get list WebElements dropdown menu")
+    def get_list_dropdown_project_elems(self):
+        return self.wait_to_be_visible_all(self.Locators.DROPDOWN_PROJECT_ITEMS)
+
+    @allure.step("Get set items dropdown menu")
+    def get_list_dropdown_project_items(self, elems):
+        return {el.text for el in elems}
 
     @allure.step("Go to the New Item Page by clicking New Item button.")
     def go_to_new_item_page(self):

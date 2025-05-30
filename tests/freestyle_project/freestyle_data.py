@@ -44,6 +44,14 @@ class Freestyle:
         "Set build status on GitHub commit [deprecated]",
         "Delete workspace when build is done"
     ]
+    ITEMS_DROPDOWN_PROJECT = {
+        'Changes',
+        'Workspace',
+        'Build Now',
+        'Configure',
+        'Delete Project',
+        'Rename'
+    }
 
 class FreestyleConfigOptTriggers:
 
