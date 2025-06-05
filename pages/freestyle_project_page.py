@@ -1,6 +1,11 @@
 import allure
+import logging
+
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+
+
+logger = logging.getLogger(__name__)
 
 
 class FreestyleProjectPage(BasePage):
@@ -62,5 +67,10 @@ class FreestyleProjectPage(BasePage):
     @allure.step("Wait up to {timeout} seconds for the build to appear in the build history.")
     def wait_for_build_execution(self, timeout):
         with allure.step("Wait for 'Builds' link to be visible"):
-            self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+            build_link = self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+            if not build_link:
+                logger.error(f"'Builds' link was not found within {timeout} seconds.")
+            else:
+                logger.info(f"'Builds' link appeared within {timeout} seconds.")
+
         return self

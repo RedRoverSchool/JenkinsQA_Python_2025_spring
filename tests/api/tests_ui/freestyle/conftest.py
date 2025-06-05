@@ -19,6 +19,7 @@ def create_freestyle_project_scheduled_every_minute_by_api():
     token, crumb_headers = BaseAPI.generate_token()
     headers = {"Content-Type": "application/xml", **crumb_headers}
 
+    logger.info(f"Creating Freestyle project '{project_name}' with schedule '{timer}' via API POST request.")
     with allure.step(f"Sending POST to create item: {project_name} with config.xml as attached."):
         response = requests.post(
             create_item_url,
