@@ -72,17 +72,22 @@ def driver(request, config):
 
     yield driver
 
-    if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
-        logger.info(f"Test {request.node.name} failed, taking screenshot...")
-        try:
-            test_name = "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
-            allure.attach(
-                driver.get_screenshot_as_png(),
-                name=test_name,
-                attachment_type=allure.attachment_type.PNG,
-            )
-        except Exception as e:
-            logger.error(f"Failed to take screenshot: {e}")
+    if hasattr(request.node, "rep_call"):
+        rep = request.node.rep_call
+
+        if rep.failed:
+            logger.info(f"Test {request.node.name} failed, taking screenshot...")
+
+            if not hasattr(rep, "wasxfail") or rep.wasxfail:
+                try:
+                    test_name = "".join(ch for ch in request.node.name if ch not in r'\/:*?<>|"')
+                    allure.attach(
+                        driver.get_screenshot_as_png(),
+                        name=test_name,
+                        attachment_type=allure.attachment_type.PNG,
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to take screenshot: {e}")
 
     driver.quit()
 
