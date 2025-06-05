@@ -1,5 +1,3 @@
-from typing import Any
-
 import allure
 import logging
 import requests
@@ -42,7 +40,7 @@ class BaseAPI:
         crumb_headers = cls.get_crumb_headers(session)
 
         if not crumb_headers:
-            logger.error(f"Failed to create crumb_headers.")
+            logger.error("Failed to create crumb_headers.")
             return None
 
         url = f"{cls.BASE_URL}/user/{cls.USERNAME}/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken"
