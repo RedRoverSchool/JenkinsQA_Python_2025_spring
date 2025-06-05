@@ -7,9 +7,9 @@ class BuildTriggers:
     TITLE = "Triggers"
     DESCRIPTION = ("Set up automated actions that start your build based on specific events, "
                    "like code changes or scheduled times.")
-    TRIGGER_LABELS = ['Build after other projects are built',
-                      'Build periodically',
-                      'GitHub hook trigger for GITScm polling',
-                      'Poll SCM',
-                      'Trigger builds remotely (e.g., from scripts)']
+    TRIGGER_LABELS = ["Build after other projects are built",
+                      "Build periodically",
+                      "GitHub hook trigger for GITScm polling",
+                      "Poll SCM",
+                      "Trigger builds remotely (e.g., from scripts)"]
     TRIGGER_CHECKBOXES_IDS = ["cb8", "cb9", "cb10", "cb11", "cb12"]

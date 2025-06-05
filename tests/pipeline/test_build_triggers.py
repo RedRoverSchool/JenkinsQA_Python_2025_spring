@@ -90,3 +90,15 @@ def test_disable_trigger_checkboxes_by_labels(pipeline_config_page_enable_trigge
 
     assertions.soft_assert_list_length_equal(checkboxes_unchecked, BuildTriggers.TRIGGER_CHECKBOXES_IDS)
     assertions.soft_assert_all_elements_true(checkboxes_unchecked)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("Display of helper icons (tooltips) near trigger checkbox labels")
+@allure.testcase("TC_03.003.09")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/846", name="Github issue")
+def test_display_helper_icons_near_trigger_labels(pipeline_project_config_page):
+    helper_icons = pipeline_project_config_page.is_helper_icons_displayed()
+
+    assertions.soft_assert_list_length_equal(helper_icons, BuildTriggers.TRIGGER_CHECKBOXES_IDS)
+    assertions.soft_assert_all_elements_true(helper_icons)
