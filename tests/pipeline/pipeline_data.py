@@ -13,3 +13,8 @@ class BuildTriggers:
                       "Poll SCM",
                       "Trigger builds remotely (e.g., from scripts)"]
     TRIGGER_CHECKBOXES_IDS = ["cb8", "cb9", "cb10", "cb11", "cb12"]
+    TRIGGER_HELPER_TOOLTIPS = ["Help for feature: Build after other projects are built",
+                               "Help for feature: Build periodically",
+                               "Help for feature: GitHub hook trigger for GITScm polling",
+                               "Help for feature: Poll SCM",
+                               "Help for feature: Trigger builds remotely (e.g., from scripts)"]

@@ -16,6 +16,7 @@ class PipelineConfigPage(BasePage):
         TRIGGER_LABELS = (By.XPATH, "//span[input[contains(@name, 'Trigger')]]")
         TRIGGER_CHECKBOXES = (By.XPATH, "//*[contains(@name, 'Trigger') and @type='checkbox']")
         TRIGGER_HELPER_ICONS = (By.CSS_SELECTOR, "div[class*='checkbox'] a[helpurl*='rigger'] > span")
+        TRIGGER_HELPER_TOOLTIPS = (By.CLASS_NAME, "tippy-box")
 
     def __init__(self, driver, pipeline_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -81,3 +82,7 @@ class PipelineConfigPage(BasePage):
     @allure.step("Get display status of helper icons for trigger checkboxes")
     def is_helper_icons_displayed(self) -> list[bool]:
         return self.is_elements_displayed(self.Locators.TRIGGER_HELPER_ICONS)
+
+    @allure.step("Get visible tooltip text for helper icons for trigger checkboxes")
+    def get_trigger_helper_tooltips(self) -> list[str]:
+        return self.get_tooltip_texts(self.Locators.TRIGGER_HELPER_ICONS, self.Locators.TRIGGER_HELPER_TOOLTIPS)

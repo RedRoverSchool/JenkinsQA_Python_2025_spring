@@ -52,7 +52,7 @@ class UIElementMixin:
     def wait_for_new_window(self, num_windows = 2):
         return self.wait.until(EC.number_of_windows_to_be(num_windows))
 
-    def wait_element_to_disappear(self, locator, timeout=5) -> bool:
+    def wait_element_to_disappear(self, locator, timeout=10) -> bool:
         return self._wait_for(timeout, EC.invisibility_of_element_located, locator)
 
     def click_on(self, locator, timeout=5) -> None:
@@ -135,8 +135,8 @@ class UIElementMixin:
     def is_elements_unselected(self, locator) -> list[bool]:
         return [not state for state in self.is_elements_selected(locator)]
 
-    def hover_over_element(self, locator):
-        element = self.wait_to_be_visible(locator)
+    def hover_over_element(self, target) -> WebElement:
+        element = self.wait_to_be_visible(target) if isinstance(target, tuple) else target
         ActionChains(self.driver).move_to_element(element).perform()
         return element
 
@@ -146,3 +146,16 @@ class UIElementMixin:
     def is_elements_displayed(self, locator) -> list[bool]:
         elements = self.wait_for_elements(locator)
         return [self.scroll_and_get_element(el).is_displayed() for el in elements]
+
+    def _get_tooltip_text(self, element: WebElement, tooltip_locator) -> str:
+        self.scroll_into_view(element)
+        self.hover_over_element(element)
+        try:
+            return self.wait_to_be_visible(tooltip_locator).text.strip()
+        except TimeoutException:
+            self.logger.error("Tooltip did not appear for element: %s", element)
+            return ""
+
+    def get_tooltip_texts(self, el_locator, tooltip_locator) -> list[str]:
+        elements = self.wait_for_elements(el_locator)
+        return [self._get_tooltip_text(el, tooltip_locator) for el in elements]
