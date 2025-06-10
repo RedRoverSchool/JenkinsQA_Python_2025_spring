@@ -39,6 +39,9 @@ class MultiConfigProjectPage(BasePage):
         self.click_on(self.Locators.ENABLE_BUTTON)
         return self
 
+    def is_enable_button_displayed(self) -> bool:
+        return self.is_element_displayed(self.Locators.ENABLE_BUTTON)
+
     def wait_warning_message_to_disappear(self) -> bool:
         return self.wait_element_to_disappear(self.Locators.WARNING_MESSAGE)
 

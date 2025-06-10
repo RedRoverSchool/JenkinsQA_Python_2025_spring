@@ -76,11 +76,10 @@ class NewItemPage(BasePage):
         with allure.step("Go to the Freestyle Project Configuration page."):
             return FreestyleProjectConfigPage(self.driver, name).wait_for_url()
 
+    @allure.step("Create new Pipeline project: \"{name}\"")
     def create_new_pipeline_project(self, name):
         from pages.pipeline_config_page import PipelineConfigPage
-        self.wait_for_element(self.Locators.ITEM_NAME).send_keys(name)
-        self.wait_to_be_clickable(self.Locators.ITEM_PIPELINE_PROJECT).click()
-        self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
+        self.enter_item_name(name).click_pipeline_project().click_ok_button()
         return PipelineConfigPage(self.driver, name).wait_for_url()
 
     def create_new_multibranch_pipeline_project(self, name):
@@ -90,8 +89,14 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return MultibranchPipelineConfigPage(self.driver, name)
 
+    @allure.step("Click \"OK\" button")
     def click_ok_button(self):
         return self.click_on(self.Locators.OK_BUTTON)
+
+    @allure.step("Click \"Pipeline\" project")
+    def click_pipeline_project(self):
+        self.click_on(self.Locators.ITEM_PIPELINE_PROJECT)
+        return self
 
     def click_element(self, element):
         self.wait_to_be_clickable(element).click()
@@ -125,6 +130,7 @@ class NewItemPage(BasePage):
         self.wait_to_be_clickable(self.Locators.OK_BUTTON).click()
         return MultiConfigProjectConfigPage(self.driver, name).wait_for_url()
 
+    @allure.step("Get item names from UI")
     def get_item_type_names(self):
         elements = self.wait_to_be_visible_all(self.Locators.ITEM_TYPES)
         return [element.text for element in elements]
@@ -132,6 +138,7 @@ class NewItemPage(BasePage):
     def copy_from_option_is_displayed(self):
         return self.wait_to_be_visible(self.Locators.COPY_FROM).is_displayed()
 
+    @allure.step("Get item type descriptions from UI")
     def get_item_type_descriptions(self):
         return [desc.text.strip() for desc in self.find_elements(*self.Locators.ITEM_DESCRIPTIONS)]
 
@@ -150,6 +157,7 @@ class NewItemPage(BasePage):
             self.logger.error("Dropdown did not appear: element is not visible on the page.")
             return []
 
+    @allure.step("Enter \"{name}\" in the \"Item Name\" field")
     def enter_item_name(self, name):
         self.enter_text(self.Locators.ITEM_NAME, name)
         return self

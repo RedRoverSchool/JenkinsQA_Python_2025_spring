@@ -34,6 +34,9 @@ class UIElementMixin:
     def wait_for_element(self, locator, timeout=5) -> WebElement:
         return self._wait_for(timeout, EC.presence_of_element_located, locator)
 
+    def wait_for_elements(self, locator, timeout=5) -> list[WebElement]:
+        return self._wait_for(timeout, EC.presence_of_all_elements_located, locator)
+
     def wait_to_be_clickable(self, locator, timeout=5) -> WebElement:
         return self._wait_for(timeout, EC.element_to_be_clickable, locator)
 
@@ -49,14 +52,19 @@ class UIElementMixin:
     def wait_for_new_window(self, num_windows = 2):
         return self.wait.until(EC.number_of_windows_to_be(num_windows))
 
-    def wait_element_to_disappear(self, locator, timeout=5) -> bool:
+    def wait_element_to_disappear(self, locator, timeout=10) -> bool:
         return self._wait_for(timeout, EC.invisibility_of_element_located, locator)
 
     def click_on(self, locator, timeout=5) -> None:
         self.logger.debug(f"Click on locator {locator}")
         self._wait_for(timeout, EC.element_to_be_clickable, locator).click()
 
-    def enter_text(self, locator, text):
+    def click_elements(self, locator: tuple) -> "UIElementMixin":
+        clickable_elements = self.wait_for_elements(locator)
+        [self.scroll_into_view(el).wait_to_be_clickable(el).click() for el in clickable_elements]
+        return self
+
+    def enter_text(self, locator, text) -> None:
         return self.wait_for_element(locator).send_keys(text)
 
     def get_value(self, locator) -> str | None:
@@ -70,6 +78,13 @@ class UIElementMixin:
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',
             element)
         return self
+
+    def scroll_and_get_element(self, element: WebElement) -> WebElement:
+        self.driver.execute_script(
+            'arguments[0].scrollIntoView({block: "center", inline: "center"})',
+            element
+        )
+        return element
 
     def scroll_to_element(self, By, Selector):
         actions = ActionChains(self.driver)
@@ -113,7 +128,49 @@ class UIElementMixin:
     def is_element_selected(self, locator) -> bool:
         return self.wait_for_element(locator).is_selected()
 
-    def hover_over_element(self, locator):
-        element = self.wait_to_be_visible(locator)
+    def is_elements_selected(self, locator) -> list[bool]:
+        elements = self.wait_for_elements(locator)
+        return [el.is_selected() for el in elements]
+
+    def is_elements_unselected(self, locator) -> list[bool]:
+        return [not state for state in self.is_elements_selected(locator)]
+
+    def hover_over_element(self, target) -> WebElement:
+        element = self.wait_to_be_visible(target) if isinstance(target, tuple) else target
         ActionChains(self.driver).move_to_element(element).perform()
         return element
+
+    def is_element_displayed(self, locator) -> bool:
+        return self.wait_to_be_visible(locator).is_displayed()
+
+    def is_elements_displayed(self, locator) -> list[bool]:
+        elements = self.wait_for_elements(locator)
+        return [self.scroll_and_get_element(el).is_displayed() for el in elements]
+
+    def get_tooltip_text(self, icon_element: WebElement, tooltip_locator) -> str:
+        try:
+            self.scroll_into_view(icon_element)
+            self.hover_over_element(icon_element)
+            return self.wait_to_be_visible(tooltip_locator).text.strip()
+        except TimeoutException:
+            self.logger.error("Tooltip did not appear for locator: %s", tooltip_locator)
+            return ""
+
+    def wait_until_tooltip_disappears(self, icon_element: WebElement, tooltip_locator, hover_out_locator) -> bool:
+        try:
+            self.scroll_into_view(icon_element)
+            self.hover_over_element(icon_element)
+            self.wait_to_be_visible(tooltip_locator)
+            self.hover_over_element(hover_out_locator)
+            return self.wait_element_to_disappear(tooltip_locator)
+        except TimeoutException:
+            self.logger.error("Tooltip did not disappear for locator: %s", tooltip_locator)
+            return False
+
+    def get_tooltip_texts(self, el_locator, tooltip_locator) -> list[str]:
+        elements = self.wait_for_elements(el_locator)
+        return [self.get_tooltip_text(el, tooltip_locator) for el in elements]
+
+    def wait_all_tooltips_to_disappear(self, icon_locator, tooltip_locator, hover_out_locator) -> list[bool]:
+        elements = self.wait_for_elements(icon_locator)
+        return [self.wait_until_tooltip_disappears(el, tooltip_locator, hover_out_locator) for el in elements]

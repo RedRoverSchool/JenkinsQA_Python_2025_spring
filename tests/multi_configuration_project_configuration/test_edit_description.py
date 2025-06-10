@@ -1,4 +1,4 @@
-from tests.multi_config.data import updated_description_text
+from tests.multi_configuration_project_configuration.data import updated_description_text
 
 
 def test_edit_description_from_project_page(multi_config_project_with_description):
