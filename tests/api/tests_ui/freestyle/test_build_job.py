@@ -1,5 +1,4 @@
 from tests.freestyle_project import freestyle_data
-from selenium.webdriver.common.by import By
 
 
 def test_not_advanced_checkboxes(create_empty_job_with_api, main_page):

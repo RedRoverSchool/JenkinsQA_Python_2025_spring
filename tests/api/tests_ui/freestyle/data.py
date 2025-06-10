@@ -44,7 +44,7 @@ class Config:
 
     @classmethod
     def get_empty_job_xml(cls) -> str:
-        return f"""
+        return """
             <project>
                 <keepDependencies>false</keepDependencies>
                 <properties/>
