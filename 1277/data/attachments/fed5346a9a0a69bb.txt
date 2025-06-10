@@ -1,0 +1,363 @@
+INFO     core.jenkins_utils:jenkins_utils.py:235 running cleanup
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 403 None
+DEBUG    core.jenkins_utils:jenkins_utils.py:92 failed to get page on the first try, retrying after login
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /login?from=%2F HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /j_spring_security_check HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/securityRealm/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /computer/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/credentials/store/system/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /me/my-views/view/all/submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/appearance/configSubmit HTTP/1.1" 200 135
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /user/admin/security/ HTTP/1.1" 200 None
+DEBUG    conftest:conftest.py:60 Argument --remote-allow-origins=* added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-gpu added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --no-sandbox added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --disable-dev-shm-usage added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --headless=new added to the chrome
+DEBUG    conftest:conftest.py:60 Argument --window-size=1920,1080 added to the chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:101 Selenium Manager binary found at: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:114 Executing process: /opt/hostedtoolcache/Python/3.12.10/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --language-binding python --output json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Found chromedriver 137.0.7151.55 in PATH: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 chrome detected at /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Running command: /usr/bin/google-chrome --version
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Output: "Google Chrome 137.0.7151.55 "
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Detected browser: chrome 137.0.7151.55
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Required driver: chromedriver 137.0.7151.70
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Driver path: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Browser path: /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.service:service.py:231 Started executable: `/usr/bin/chromedriver` in a child process with pid: 13066 using 0 to output -3
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:36877
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.3D1054CE4EA5E49E0447E5484456DDDC.e.2/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.3D1054CE4EA5E49E0447E5484456DDDC.e.3/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.3D1054CE4EA5E49E0447E5484456DDDC.e.6/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/cookie HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 155
+DEBUG    core.jenkins_utils:jenkins_utils.py:31 update_crumb: b06e38f99de1383652cebc7023a17e79a93d8e5b7ad3368c61495334a077b4a2
+DEBUG    LoginPage:login_page.py:32 login crumb: b06e38f99de1383652cebc7023a17e79a93d8e5b7ad3368c61495334a077b4a2
+DEBUG    MainPage:ui_element.py:59 Click on locator ('link text', 'Manage Jenkins')
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Manage Jenkins'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.032A1AF8C17FD037B34A0826A96CEA5C.e.47/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.032A1AF8C17FD037B34A0826A96CEA5C.e.47/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    ManageJenkinsPage:ui_element.py:59 Click on locator ('xpath', "//a[@href='systemInfo']/..")
+DEBUG    ManageJenkinsPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//a[@href='systemInfo']/.."),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.3CB7D9EDE0D80022403B7E2341E55A3A.e.64/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.3CB7D9EDE0D80022403B7E2341E55A3A.e.64/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/url HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//a[@href='#'][text()='Environment Variables']/..")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//a[@href='#'][text()='Environment Variables']/.."),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.78/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.78/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.82/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.83/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.98/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.99/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.84/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.100/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.101/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.85/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.102/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.103/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.86/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.104/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.105/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.87/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.106/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.107/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.88/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.108/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.109/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.89/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.110/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.111/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.90/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.112/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.113/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.91/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.114/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.115/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.92/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.116/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.80/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.93/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.117/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.118/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.94/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.119/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.120/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.95/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.121/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.122/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.96/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.123/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.124/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.97/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.125/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.126/text HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='COPY_REFERENCE_FILE_LOG']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='COPY_REFERENCE_FILE_LOG']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.127/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.127/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='COPY_REFERENCE_FILE_LOG']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='COPY_REFERENCE_FILE_LOG']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.128/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.128/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.129/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.129/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.130/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.130/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='HOSTNAME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='HOSTNAME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.79/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.79/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='HOSTNAME']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='HOSTNAME']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.131/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.131/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JAVA_HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JAVA_HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.132/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.132/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JAVA_HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JAVA_HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.133/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.133/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_HOME']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.134/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.134/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_HOME']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.135/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.135/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_INCREMENTALS_REPO_MIRROR']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_INCREMENTALS_REPO_MIRROR']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.136/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.136/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_INCREMENTALS_REPO_MIRROR']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_INCREMENTALS_REPO_MIRROR']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.137/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.137/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_SLAVE_AGENT_PORT']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_SLAVE_AGENT_PORT']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.138/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.138/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_SLAVE_AGENT_PORT']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_SLAVE_AGENT_PORT']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.139/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.139/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_UC']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_UC']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.140/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.140/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_UC']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_UC']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.141/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.141/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_UC_EXPERIMENTAL']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_UC_EXPERIMENTAL']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.142/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.142/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_UC_EXPERIMENTAL']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_UC_EXPERIMENTAL']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.143/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.143/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_VERSION']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_VERSION']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.144/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.144/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='JENKINS_VERSION']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='JENKINS_VERSION']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.145/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.145/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='LANG']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='LANG']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.146/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.146/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='LANG']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='LANG']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.147/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.147/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='PATH']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='PATH']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.148/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.148/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='PATH']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='PATH']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.149/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.149/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='PWD']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='PWD']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.150/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.150/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='PWD']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='PWD']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.151/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.151/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='REF']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='REF']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.152/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.152/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='REF']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='REF']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.153/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.153/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='SHLVL']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='SHLVL']]//button[contains(normalize-space(.), 'Hidden value, click to show this value')]"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.154/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.154/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    SystemInformationPage:ui_element.py:59 Click on locator ('xpath', "//tr[td[normalize-space(text())='SHLVL']]//div[contains(@class, 'app-hidden-info-hide')]//button")
+DEBUG    SystemInformationPage:ui_element.py:28 waiting for element_to_be_clickable(('xpath', "//tr[td[normalize-space(text())='SHLVL']]//div[contains(@class, 'app-hidden-info-hide')]//button"),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "GET /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.155/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element/f.FEFCC7B7A25D984AC14596D6BBFF90C8.d.B8C2F55C3CC47ACDC529FCEF0C14BDDE.e.155/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "POST /session/fe1877def00ec9f78dd9c82fda21981b/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:36877 "DELETE /session/fe1877def00ec9f78dd9c82fda21981b HTTP/1.1" 200 0
