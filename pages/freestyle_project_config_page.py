@@ -1,5 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+
 from pages.base_page import BasePage
 
 
@@ -32,6 +34,7 @@ class FreestyleProjectConfigPage(BasePage):
         LIST_POST_BUILD_ACTIONS = (By.CLASS_NAME, 'jenkins-dropdown__item ')
         GITHUB_PROJECT_OPTION = (By.CSS_SELECTOR, 'input[name="githubProject"]')
         PROJECT_URL_FIELD = (By.XPATH, '//*[contains(text(),"Project url")]//following-sibling::div/input')
+        ALL_NOT_ADVANCED_CHECKBOXES = (By.CSS_SELECTOR, 'input[type="checkbox"]:not(.dropdownList-container *).optional-block-control')
 
     def __init__(self, driver, project_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -123,10 +126,30 @@ class FreestyleProjectConfigPage(BasePage):
         return self.wait_to_be_visible(self.Locators.ENABLE, 10)
 
     def is_disable(self):
+        breakpoint()
         return self.wait_to_be_visible(self.Locators.DISABLE, 10)
 
     def is_enable_text(self):
         return self.wait_for_element(self.Locators.ENABLE_TEXT).text
+
+    def get_all_not_advanced_checkboxes(self) -> list[WebElement]:
+        return self.wait_for_elements(self.Locators.ALL_NOT_ADVANCED_CHECKBOXES)
+
+    def get_all_displayed_checkboxes(self) -> list[WebElement]:
+        displayed_checkboxes = []
+        for checkbox in self.get_all_not_advanced_checkboxes():
+            if checkbox.is_displayed():
+                displayed_checkboxes.append(checkbox)
+
+        return displayed_checkboxes
+
+    def get_all_checkboxes_names(self) -> list[str]:
+        all_checkboxes_texts = []
+        for checkbox in self.get_all_not_advanced_checkboxes():
+            all_checkboxes_texts.append(
+                checkbox.find_element(By.XPATH, "..").find_element(By.CSS_SELECTOR, "label").text)
+
+        return all_checkboxes_texts
 
     def is_preview_visible(self):
         if self.wait_to_be_clickable(self.Locators.PREVIEW):
