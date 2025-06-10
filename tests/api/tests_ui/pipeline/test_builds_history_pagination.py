@@ -6,6 +6,7 @@ from tests.api.tests_ui.pipeline.data import BuildsCounter
 
 logger = logging.getLogger(__name__)
 
+
 @allure.epic("Pipeline Management")
 @allure.story("View Build History monitor")
 @allure.title("Paginate builds when count exceeds 30")
