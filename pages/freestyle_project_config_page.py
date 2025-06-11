@@ -126,7 +126,6 @@ class FreestyleProjectConfigPage(BasePage):
         return self.wait_to_be_visible(self.Locators.ENABLE, 10)
 
     def is_disable(self):
-        breakpoint()
         return self.wait_to_be_visible(self.Locators.DISABLE, 10)
 
     def is_enable_text(self):
