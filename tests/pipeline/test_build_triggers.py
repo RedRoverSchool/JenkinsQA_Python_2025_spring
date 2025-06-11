@@ -176,3 +176,15 @@ def test_display_radio_buttons_and_labels(pipeline_config_page_enable_build_afte
 
     assertions.soft_assert_list_length_equal(actual_labels, BuildTriggers.RADIO_BUTTON_LABELS)
     assertions.soft_assert_lists_equal_by_index(actual_labels, BuildTriggers.RADIO_BUTTON_LABELS)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("Radio buttons are visible when trigger is enabled")
+@allure.testcase("TC_03.003.15")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/863", name="Github issue")
+def test_all_radio_buttons_are_visible(pipeline_config_page_enable_build_after_checkbox):
+    actual_value = pipeline_config_page_enable_build_after_checkbox.get_trigger_radio_buttons_value()
+
+    assertions.soft_assert_list_length_equal(actual_value, BuildTriggers.RADIO_BUTTON_VALUE)
+    assertions.soft_assert_lists_equal_by_index(actual_value, BuildTriggers.RADIO_BUTTON_VALUE)

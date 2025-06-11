@@ -22,6 +22,7 @@ class PipelineConfigPage(BasePage):
         TRIGGER_PROJECTS_INPUT_LABEL = (By.CSS_SELECTOR, "div[nameref='cb8'] .help-sibling")
         TRIGGER_PROJECTS_INPUT_ERROR = (By.CSS_SELECTOR, "div[nameref='cb8'] .error")
         TRIGGER_RADIO_BUTTON_LABELS = (By.CSS_SELECTOR, "div[nameref='cb8'] .jenkins-radio__label")
+        TRIGGER_RADIO_BUTTON = (By.XPATH, "//*[contains(@name, 'Trigger') and @type='radio']")
 
     def __init__(self, driver, pipeline_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -127,3 +128,7 @@ class PipelineConfigPage(BasePage):
     @allure.step("Get all radio button labels for 'Build after other projects are built'")
     def get_radio_button_labels(self) -> list[str]:
         return self.get_clean_texts_from_elements(self.Locators.TRIGGER_RADIO_BUTTON_LABELS)
+
+    @allure.step("Check if all radio buttons are displayed")
+    def get_trigger_radio_buttons_value(self) -> list[str]:
+        return self.get_attributes_with_scroll(self.Locators.TRIGGER_RADIO_BUTTON, "value")

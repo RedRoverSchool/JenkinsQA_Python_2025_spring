@@ -91,6 +91,10 @@ class UIElementMixin:
         element = self.wait_for_element(locator)
         return self.scroll_wait_get_attribute(element, attribute_name)
 
+    def get_attributes_with_scroll(self, locator: tuple, attribute_name: str) -> list[str]:
+        elements = self.wait_for_elements(locator)
+        return [self.scroll_and_get_attribute(el, attribute_name) for el in elements]
+
     def scroll_into_view(self, element):
         self.driver.execute_script(
             'arguments[0].scrollIntoView({block: "center", inline: "center"})',
@@ -219,6 +223,14 @@ class UIElementMixin:
     def scroll_wait_get_attribute(self, element: WebElement, attribute_name: str) -> str:
         try:
             return self._scroll_wait(element).get_attribute(attribute_name)
+        except TimeoutException:
+            self.logger.error("Element not visible for reading attribute '%s'", attribute_name)
+            return ""
+
+    def scroll_and_get_attribute(self, element: WebElement, attribute_name: str) -> str:
+        try:
+            self.scroll_into_view(element)
+            return element.get_attribute(attribute_name)
         except TimeoutException:
             self.logger.error("Element not visible for reading attribute '%s'", attribute_name)
             return ""
