@@ -17,3 +17,7 @@ def soft_assert_all_elements_true(actual: list):
 
 def soft_assert_text_equal(actual: str, expected: str):
     check.equal(actual, expected)
+
+
+def soft_assert_element_true(actual: bool):
+    check.is_true(actual)
