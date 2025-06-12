@@ -63,7 +63,7 @@ class PipelinePage(BasePage):
     def get_header_pipeline_page(self) -> str:
         return self.get_visible_text(self.Locators.HEADER)
 
-    @allure.step("Get builds list")
+    @allure.step("Get builds list in Builds History section.")
     def get_builds_list(self):
         return self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
 
@@ -75,37 +75,37 @@ class PipelinePage(BasePage):
     @allure.step("Get \"Previous page\" button")
     def get_previous_page_button(self):
         self.scroll_to_the_end_of_builds_list()
-        return self.find_element(*self.Locators.BUILDS_PREV_PAGE_BUTTON)
+        return self.wait_to_be_visible(self.Locators.BUILDS_PREV_PAGE_BUTTON, 10)
 
     @allure.step("Scroll to the end of builds list")
     def scroll_to_the_end_of_builds_list(self):
-        builds = self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
+        builds = self.get_builds_list()
         last_build_link = builds[-1]
         self.driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth' });", last_build_link)
         return self
 
     @allure.step("Scroll to the top of builds list")
     def scroll_to_the_top_of_builds_list(self):
-        builds = self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
+        builds = self.get_builds_list()
         first_build_link = builds[0]
         self.driver.execute_script("arguments[0].scrollIntoView({ behavior: 'smooth' });", first_build_link)
         return self
 
     @allure.step("Click \"Next page\" button")
     def click_next_page_button(self):
+        logger.info("Scroll to the ends")
         self.scroll_to_the_end_of_builds_list()
-        self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON)
+        logger.info("Click next")
+        self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON, 10)
+        logger.info("Scroll to the top")
         self.scroll_to_the_top_of_builds_list()
-        self.get_builds_list()
         return self
 
     @allure.step("Click \"Previous page\" button")
     def click_previous_page_button(self):
         self.scroll_to_the_end_of_builds_list()
-        self.click_on(self.Locators.BUILDS_PREV_PAGE_BUTTON)
+        self.click_on(self.Locators.BUILDS_PREV_PAGE_BUTTON, 10)
         self.scroll_to_the_top_of_builds_list()
-        self.scroll_to_the_end_of_builds_list()
-        self.get_builds_list()
         return self
 
     @allure.step("Get single build number")

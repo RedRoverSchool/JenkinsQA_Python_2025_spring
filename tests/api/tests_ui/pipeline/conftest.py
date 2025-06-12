@@ -11,8 +11,8 @@ from tests.api.tests_ui.pipeline.data import Data, BuildsCounter
 logger = logging.getLogger(__name__)
 
 
-@allure.step("Create a new Pipeline project with a script as attached.")
 @pytest.fixture(scope="function")
+@allure.title("Create a new Pipeline project with a script as attached.")
 def create_pipeline_project_scripted_keep_70_by_api():
     token, crumb_headers = BaseAPI.generate_token()
     project_name, log_rotator, script, config_xml = Data.get_pipeline_scripted_keep_70_data(token)
@@ -40,8 +40,8 @@ def create_pipeline_project_scripted_keep_70_by_api():
     return project_name, user, token
 
 
-@allure.step("Trigger 31 builds remotely.")
 @pytest.fixture
+@allure.title("Trigger 31 builds remotely.")
 def trigger_builds_31(create_pipeline_project_scripted_keep_70_by_api):
     job_name, user, token = create_pipeline_project_scripted_keep_70_by_api
     job_name_encoded = job_name.replace(" ", "%20")
@@ -50,9 +50,9 @@ def trigger_builds_31(create_pipeline_project_scripted_keep_70_by_api):
     job_info_url = f"{job_url}/api/json"
     build_delay_0_url = f"{job_url}/build?delay=0sec"
     auth = (user, token)
-    timeout_short = 60
-    timeout_long = 120
+    timeout = 60
 
+    logger.info("Triggering 31 remote builds (estimated wait: ~3 minutes)...")
     for i in range(builds_to_trigger):
         job_info_resp = requests.get(job_info_url, auth=auth)
         next_build_number = job_info_resp.json()["nextBuildNumber"]
@@ -61,7 +61,7 @@ def trigger_builds_31(create_pipeline_project_scripted_keep_70_by_api):
 
         requests.post(build_delay_0_url, auth=auth)
 
-        for _ in range(timeout_short):
+        for _ in range(timeout):
             build_info_resp = requests.get(build_info_url, auth=auth)
             if build_info_resp.status_code == 200:
                 break
@@ -69,10 +69,11 @@ def trigger_builds_31(create_pipeline_project_scripted_keep_70_by_api):
         else:
             logger.warning(f"Build #{next_build_number} did not start in time")
 
-        for _ in range(timeout_long):
+        for _ in range(timeout):
             build_info = build_info_resp.json()
             if not build_info.get("building", True):
-                logger.info(f"Build #{next_build_number} finished.")
+                if next_build_number == 31:
+                    logger.info(f"Build #{next_build_number} finished.")
                 break
             time.sleep(1)
             build_info_resp = requests.get(build_info_url, auth=auth)

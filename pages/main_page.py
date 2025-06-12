@@ -136,7 +136,7 @@ class MainPage(BasePage, UIElementMixin):
         from pages.pipeline_page import PipelinePage
         return self.navigate_to(PipelinePage, self.Locators.table_item_link(name), name)
 
-    @allure.step("Go to the Pipeline page.")
+    @allure.step("Go to the Pipeline page by clicking the pipeline \"{name}\" link.")
     def go_to_pipeline_page(self, name):
         from pages.pipeline_page import PipelinePage
         self.wait_to_be_clickable(self.Locators.TABLE_ITEM).click()
