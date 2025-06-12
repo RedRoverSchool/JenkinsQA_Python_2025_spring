@@ -87,13 +87,19 @@ class UIElementMixin:
     def wait_and_get_attribute(self, locator, attribute_name) -> str:
         return self.wait_to_be_visible(locator).get_attribute(attribute_name)
 
-    def wait_and_get_attribute_with_scroll(self, locator: tuple, attribute_name: str) -> str:
+    def get_attribute_with_scroll(self, locator: tuple, attribute_name: str) -> str:
         element = self.wait_for_element(locator)
         return self.scroll_wait_get_attribute(element, attribute_name)
 
     def get_attributes_with_scroll(self, locator: tuple, attribute_name: str) -> list[str]:
         elements = self.wait_for_elements(locator)
         return [self.scroll_and_get_attribute(el, attribute_name) for el in elements]
+
+    def get_value_attribute_with_scroll(self, locator: tuple) -> str:
+        return self.get_attribute_with_scroll(locator, "value")
+
+    def get_value_attributes_with_scroll(self, locator: tuple) -> list[str]:
+        return self.get_attributes_with_scroll(locator, "value")
 
     def scroll_into_view(self, element):
         self.driver.execute_script(
@@ -148,7 +154,7 @@ class UIElementMixin:
         element = self.wait_for_element(locator)
         return self.wait_scroll_get_text(element)
 
-    def get_texts_from_elements(self, locator) -> list[str]:
+    def get_texts_with_scroll(self, locator) -> list[str]:
         elements = self.wait_for_elements(locator)
         return [self.wait_scroll_get_text(el) for el in elements]
 

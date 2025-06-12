@@ -119,7 +119,7 @@ class PipelineConfigPage(BasePage):
 
     @allure.step("Get current value of 'Projects to watch'")
     def get_projects_input_value(self) -> str:
-        return self.wait_and_get_attribute_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT, "value")
+        return self.get_value_attribute_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT)
 
     @allure.step("Get error message under 'Projects to watch'")
     def get_projects_input_error_text(self) -> str:
@@ -127,8 +127,8 @@ class PipelineConfigPage(BasePage):
 
     @allure.step("Get all radio button labels for 'Build after other projects are built'")
     def get_radio_button_labels(self) -> list[str]:
-        return self.get_texts_from_elements(self.Locators.TRIGGER_RADIO_BUTTON_LABELS)
+        return self.get_texts_with_scroll(self.Locators.TRIGGER_RADIO_BUTTON_LABELS)
 
     @allure.step("Check if all radio buttons are displayed")
     def get_trigger_radio_buttons_value(self) -> list[str]:
-        return self.get_attributes_with_scroll(self.Locators.TRIGGER_RADIO_BUTTON, "value")
+        return self.get_value_attributes_with_scroll(self.Locators.TRIGGER_RADIO_BUTTON)
