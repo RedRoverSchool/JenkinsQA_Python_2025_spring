@@ -93,11 +93,8 @@ class PipelinePage(BasePage):
 
     @allure.step("Click \"Next page\" button")
     def click_next_page_button(self):
-        logger.info("Scroll to the ends")
         self.scroll_to_the_end_of_builds_list()
-        logger.info("Click next")
         self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON, 10)
-        logger.info("Scroll to the top")
         self.scroll_to_the_top_of_builds_list()
         return self
 

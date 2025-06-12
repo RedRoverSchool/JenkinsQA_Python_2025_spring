@@ -108,6 +108,7 @@ class Config:
 
 class Data:
     @classmethod
+    @allure.step(f"Create data for Pipeline project")
     def get_pipeline_scripted_keep_70_data(cls, token: str):
         item_name = create_unique_name(prefix="pipeline-api")
         description = Description.get_pipeline_scripted_keep_70_builds_remotely_description()
@@ -115,5 +116,11 @@ class Data:
         script = Script.two_stages_with_post
         config_xml = Config.get_pipeline_scripted_keep_70_builds_remotely_xml(description, script, token, log_rotator)
 
-        with allure.step(f"Create data for Pipeline project \"{item_name}\", with {log_rotator} builds to keep. Triggers builds remotely."):
-            return item_name, log_rotator, script, config_xml
+        data = (
+            f"Pipeline name: {item_name}\n"
+            f"Description: {description}\n"
+            f"Log rotator: {log_rotator}\n"
+        )
+        allure.attach(data, name="Pipeline Data", attachment_type=allure.attachment_type.TEXT)
+
+        return item_name, log_rotator, script, config_xml

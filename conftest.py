@@ -74,6 +74,14 @@ def driver(request, config):
     driver.quit()
 
 
+@allure.step("Save screenshot.")
+def save_screenshot(driver, test_name):
+    safe_name = "".join(ch for ch in test_name if ch not in r'\/:*?<>|"')
+    path = os.path.join("screenshots", f"{safe_name}.png")
+    os.makedirs("screenshots", exist_ok=True)
+    driver.save_screenshot(path)
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 @allure.title("Get result and screenshot.")
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -95,6 +103,7 @@ def pytest_runtest_makereport(item, call):
         if driver:
             try:
                 test_name = "".join(ch for ch in item.name if ch not in r'\/:*?<>|"')
+                save_screenshot(driver, test_name)
                 allure.attach(
                     driver.get_screenshot_as_png(),
                     name=f"screenshot_{test_name}",

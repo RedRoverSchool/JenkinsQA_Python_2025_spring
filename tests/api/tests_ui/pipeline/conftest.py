@@ -41,7 +41,7 @@ def create_pipeline_project_scripted_keep_70_by_api():
 
 
 @pytest.fixture
-@allure.title("Trigger 31 builds remotely.")
+@allure.title("Trigger 31 pipeline builds via remote API call")
 def trigger_builds_31(create_pipeline_project_scripted_keep_70_by_api):
     job_name, user, token = create_pipeline_project_scripted_keep_70_by_api
     job_name_encoded = job_name.replace(" ", "%20")
