@@ -181,7 +181,7 @@ def test_display_radio_buttons_and_labels(pipeline_config_page_enable_build_afte
 @allure.epic("Pipeline Configuration")
 @allure.story("Build Triggers")
 @allure.title("Radio buttons are visible when trigger is enabled")
-@allure.testcase("TC_03.003.15")
+@allure.testcase("TC_03.003.16")
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/863", name="Github issue")
 def test_all_radio_buttons_are_visible(pipeline_config_page_enable_build_after_checkbox):
     actual_value = pipeline_config_page_enable_build_after_checkbox.get_trigger_radio_buttons_value()
