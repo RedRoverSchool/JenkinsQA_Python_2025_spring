@@ -111,7 +111,7 @@ class PipelineConfigPage(BasePage):
 
     @allure.step("Get visible text of the 'Projects to watch' input label")
     def get_projects_input_label(self) -> str:
-        return self.get_visible_text_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT_LABEL)
+        return self.get_text_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT_LABEL)
 
     @allure.step("Get display status of the 'Projects to watch' input fields")
     def is_projects_input_displayed(self) -> bool:
@@ -123,11 +123,11 @@ class PipelineConfigPage(BasePage):
 
     @allure.step("Get error message under 'Projects to watch'")
     def get_projects_input_error_text(self) -> str:
-        return self.get_visible_text_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT_ERROR)
+        return self.get_text_with_scroll(self.Locators.TRIGGER_PROJECTS_INPUT_ERROR)
 
     @allure.step("Get all radio button labels for 'Build after other projects are built'")
     def get_radio_button_labels(self) -> list[str]:
-        return self.get_clean_texts_from_elements(self.Locators.TRIGGER_RADIO_BUTTON_LABELS)
+        return self.get_texts_from_elements(self.Locators.TRIGGER_RADIO_BUTTON_LABELS)
 
     @allure.step("Check if all radio buttons are displayed")
     def get_trigger_radio_buttons_value(self) -> list[str]:

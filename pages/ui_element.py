@@ -144,13 +144,13 @@ class UIElementMixin:
     def get_visible_text(self, locator) -> str:
         return self.wait_to_be_visible(locator).text.strip()
 
-    def get_visible_text_with_scroll(self, locator) -> str:
+    def get_text_with_scroll(self, locator) -> str:
         element = self.wait_for_element(locator)
-        return self.get_clean_text_from_element_with_scroll(element)
+        return self.wait_scroll_get_text(element)
 
-    def get_clean_texts_from_elements(self, locator) -> list[str]:
+    def get_texts_from_elements(self, locator) -> list[str]:
         elements = self.wait_for_elements(locator)
-        return [self.get_clean_text_from_element_with_scroll(el) for el in elements]
+        return [self.wait_scroll_get_text(el) for el in elements]
 
     def get_visible_text_lines(self, locator) -> list[str]:
         return self.get_visible_text(locator).splitlines()
@@ -205,7 +205,7 @@ class UIElementMixin:
             self.logger.error("Tooltip did not disappear for locator: %s", tooltip_locator)
             return False
 
-    def get_clean_text_from_element_with_scroll(self, element: WebElement) -> str:
+    def wait_scroll_get_text(self, element: WebElement) -> str:
         try:
             return self._scroll_wait(element).text.strip()
         except TimeoutException:
