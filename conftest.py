@@ -74,7 +74,6 @@ def driver(request, config):
     driver.quit()
 
 
-@allure.step("Save screenshot.")
 def save_screenshot(driver, test_name):
     safe_name = "".join(ch for ch in test_name if ch not in r'\/:*?<>|"')
     path = os.path.join("screenshots", f"{safe_name}.png")

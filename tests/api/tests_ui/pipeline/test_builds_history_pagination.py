@@ -65,16 +65,16 @@ def test_builds_history_pagination_31(trigger_builds_31, main_page):
     with allure.step(f"Assert the first build number on the second page is {expected_build_number_on_the_second_page}"):
         assert build_number == expected_build_number_on_the_second_page, \
             f"Expected build number is \"#1\", but got \"{build_number}\""
-    with allure.step("Assert the 'Next page' button is displayed"):
+    with allure.step("Assert the 'Next page' button is displayed on the second page"):
         assert pipeline_page.get_next_page_button().is_displayed(), \
             "Next page button is not displayed when it should be."
-    with allure.step("Assert the 'Next page' button is disabled"):
+    with allure.step("Assert the 'Next page' button is disabled on the second page"):
         assert pipeline_page.get_next_page_button().get_attribute("class").endswith("disabled"), \
             "Next page button does not have a 'disabled' class as expected."
-    with allure.step("Assert the 'Previous page' button is displayed"):
+    with allure.step("Assert the 'Previous page' button is displayed on the second page"):
         assert pipeline_page.get_previous_page_button().is_displayed(), \
             "Previous page button is not displayed when it should be."
-    with allure.step("Assert the 'Previous page' button is enabled"):
+    with allure.step("Assert the 'Previous page' button is enabled on the second page"):
         assert pipeline_page.get_previous_page_button().is_enabled(), \
             "Previous page button is not enabled when it should be."
 
@@ -84,15 +84,15 @@ def test_builds_history_pagination_31(trigger_builds_31, main_page):
     with allure.step(f"Assert the number of builds on the first page is {limit_per_page} after returning"):
         assert builds_on_the_first_page_when_return == limit_per_page, \
             f"Expected {limit_per_page} builds on the first page, but got {builds_on_first_page}."
-    with allure.step("Assert the 'Next page' button is displayed"):
+    with allure.step("Assert the 'Next page' button is displayed on the first after returning"):
         assert pipeline_page.get_next_page_button().is_displayed(), \
             "Next page button is not displayed when it should be."
-    with allure.step("Assert the 'Next page' button is enabled"):
+    with allure.step("Assert the 'Next page' button is enabled on the first after returning"):
         assert pipeline_page.get_next_page_button().is_enabled(), \
             "Next page button is not enabled when it should be."
-    with allure.step("Assert the 'Previous page' button is displayed"):
+    with allure.step("Assert the 'Previous page' button is displayed on the first after returning"):
         assert pipeline_page.get_previous_page_button().is_displayed(), \
             "Previous page button is not displayed when it should be."
-    with allure.step("Assert the 'Previous page' button is disabled"):
+    with allure.step("Assert the 'Previous page' button is disabled on the first after returning"):
         assert pipeline_page.get_previous_page_button().get_attribute("class").endswith("disabled"), \
             "Previous page button does not have a 'disabled' class as expected."

@@ -96,6 +96,7 @@ class PipelinePage(BasePage):
         self.scroll_to_the_end_of_builds_list()
         self.click_on(self.Locators.BUILDS_NEXT_PAGE_BUTTON, 10)
         self.scroll_to_the_top_of_builds_list()
+        self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
         return self
 
     @allure.step("Click \"Previous page\" button")
@@ -103,6 +104,7 @@ class PipelinePage(BasePage):
         self.scroll_to_the_end_of_builds_list()
         self.click_on(self.Locators.BUILDS_PREV_PAGE_BUTTON, 10)
         self.scroll_to_the_top_of_builds_list()
+        self.wait_to_be_visible_all(self.Locators.BUILDS_LINKS, 10)
         return self
 
     @allure.step("Get single build number")
