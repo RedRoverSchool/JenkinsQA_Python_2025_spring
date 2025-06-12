@@ -108,7 +108,7 @@ class Config:
 
 class Data:
     @classmethod
-    @allure.step(f"Create data for Pipeline project")
+    @allure.step("Create data for Pipeline project")
     def get_pipeline_scripted_keep_70_data(cls, token: str):
         item_name = create_unique_name(prefix="pipeline-api")
         description = Description.get_pipeline_scripted_keep_70_builds_remotely_description()
