@@ -1,11 +1,13 @@
 import allure
 import logging
 import requests
+from datetime import datetime
 from requests.auth import HTTPBasicAuth
 
 from core.settings import Config
 
 logger = logging.getLogger(__name__)
+
 
 class BaseAPI:
     config = Config.load()
@@ -32,7 +34,6 @@ class BaseAPI:
 
         return crumb_headers
 
-
     @classmethod
     @allure.step("Generate a new Jenkins API token for the current user.")
     def generate_token(cls, token_name="api-token") -> tuple[str, dict[str, str]] | None:
@@ -46,7 +47,7 @@ class BaseAPI:
         url = f"{cls.BASE_URL}/user/{cls.USERNAME}/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken"
         headers = {"Content-Type": "application/json", **crumb_headers}
         auth = cls.AUTH
-        data = f"newTokenName={token_name}"
+        data = f"newTokenName={token_name}-{datetime.now().isoformat().replace(":", ".")[:18]}"
 
         logger.info(f"Generating Jenkins API token at: \"/{url.split("/")[-1]}\"")
         with allure.step(f"POST to generate new token: {token_name}"):

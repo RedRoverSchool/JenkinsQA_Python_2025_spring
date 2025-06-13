@@ -22,3 +22,9 @@ def pipeline_project_config_page(new_item_page) -> PipelineConfigPage:
 @allure.title("Prepare a configuration page with trigger checkboxes enabled")
 def pipeline_config_page_enable_trigger_checkboxes(pipeline_project_config_page) -> PipelineConfigPage:
     return pipeline_project_config_page.click_trigger_labels()
+
+
+@pytest.fixture(scope="function")
+@allure.title("Prepare a configuration page with the 'Build after other projects are built' trigger checkbox enabled")
+def pipeline_config_page_enable_build_after_checkbox(pipeline_project_config_page) -> PipelineConfigPage:
+    return pipeline_project_config_page.click_trigger_build_after_other_projects()

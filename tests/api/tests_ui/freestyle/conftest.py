@@ -1,11 +1,13 @@
 import logging
+from typing import Dict, Any
+
 import allure
 import pytest
 import requests
 
 from tests.api.support.base_api import BaseAPI
-from tests.api.tests_ui.freestyle.data import Data
-
+from tests.api.tests_ui.freestyle.data import Data, Config
+from tests.api.utils.helpers import create_unique_word_name
 
 logger = logging.getLogger(__name__)
 
@@ -36,3 +38,32 @@ def create_freestyle_project_scheduled_every_minute_by_api():
             logger.info(f"Waiting for the build to finish (up to {timeout} sec)...")
 
     return project_name, timeout
+
+
+@allure.step("Create a new empty/not configured freestyle project via Jenkins API.")
+@pytest.fixture(scope="function")
+def create_empty_job_with_api() -> Dict[str, Any]:
+    name = create_unique_word_name(prefix="api-freestyle")
+    url = f"{BaseAPI.BASE_URL}/createItem?name={name}"
+    params = {"name": name}
+    token, crumb_headers = BaseAPI.generate_token()
+    headers = {"Content-Type": "application/xml", **crumb_headers}
+    user = BaseAPI.USERNAME
+
+    response = requests.post(
+        url,
+        params=params,
+        auth=(user, token),
+        headers=headers,
+        data=Config.get_empty_job_xml()
+    )
+
+    if response.status_code not in [200, 201]:
+        pytest.fail(f"Precondition failed. Failed to create an empty job: {response.status_code} - {response.text}")
+
+    return {
+        "job_name": name,
+        "job_url": url,
+        "token": token,
+        "crumb_headers": crumb_headers
+    }

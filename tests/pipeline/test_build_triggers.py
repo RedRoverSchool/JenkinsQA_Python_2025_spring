@@ -138,3 +138,53 @@ def test_create_pipeline_project_without_triggers(pipeline_project_config_page):
 
     assertions.soft_assert_text_equal(pipeline_page.get_title(), BuildTriggers.PIPELINE_PAGE_TITLE)
     assertions.soft_assert_text_equal(pipeline_page.get_header_pipeline_page(), BuildTriggers.PIPELINE_PAGE_HEADER)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("Display of “Projects to watch” the input field and its label")
+@allure.testcase("TC_03.003.13")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/850", name="Github issue")
+def test_display_input_field_and_label(pipeline_config_page_enable_build_after_checkbox):
+    display_status_input_field = pipeline_config_page_enable_build_after_checkbox.is_projects_input_displayed()
+    visible_text_projects_input_label = pipeline_config_page_enable_build_after_checkbox.get_projects_input_label()
+
+    assertions.soft_assert_element_true(display_status_input_field)
+    assertions.soft_assert_text_equal(visible_text_projects_input_label, BuildTriggers.PROJECTS_INPUT_LABEL)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("The 'Projects to Watch' field is empty by default and results in an error message being displayed")
+@allure.testcase("TC_03.003.14")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/851", name="Github issue")
+def test_projects_to_watch_default_empty_and_error(pipeline_config_page_enable_build_after_checkbox):
+    value = pipeline_config_page_enable_build_after_checkbox.get_projects_input_value()
+    error = pipeline_config_page_enable_build_after_checkbox.get_projects_input_error_text()
+
+    assertions.soft_assert_text_equal(value, BuildTriggers.EMPTY_PROJECTS_VALUE)
+    assertions.soft_assert_text_equal(error, BuildTriggers.EMPTY_PROJECTS_ERROR)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("Labels of trigger radio buttons are correct")
+@allure.testcase("TC_03.003.15")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/862", name="Github issue")
+def test_display_radio_buttons_and_labels(pipeline_config_page_enable_build_after_checkbox):
+    actual_labels = pipeline_config_page_enable_build_after_checkbox.get_radio_button_labels()
+
+    assertions.soft_assert_list_length_equal(actual_labels, BuildTriggers.RADIO_BUTTON_LABELS)
+    assertions.soft_assert_lists_equal_by_index(actual_labels, BuildTriggers.RADIO_BUTTON_LABELS)
+
+
+@allure.epic("Pipeline Configuration")
+@allure.story("Build Triggers")
+@allure.title("Radio buttons are visible when trigger is enabled")
+@allure.testcase("TC_03.003.16")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/863", name="Github issue")
+def test_all_radio_buttons_are_visible(pipeline_config_page_enable_build_after_checkbox):
+    actual_value = pipeline_config_page_enable_build_after_checkbox.get_trigger_radio_buttons_value()
+
+    assertions.soft_assert_list_length_equal(actual_value, BuildTriggers.RADIO_BUTTON_VALUE)
+    assertions.soft_assert_lists_equal_by_index(actual_value, BuildTriggers.RADIO_BUTTON_VALUE)
