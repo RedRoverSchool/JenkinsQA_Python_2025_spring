@@ -132,3 +132,4 @@ class PipelineConfigPage(BasePage):
     @allure.step("Check if all radio buttons are displayed")
     def get_trigger_radio_buttons_value(self) -> list[str]:
         return self.get_value_attributes_with_scroll(self.Locators.TRIGGER_RADIO_BUTTON)
+
