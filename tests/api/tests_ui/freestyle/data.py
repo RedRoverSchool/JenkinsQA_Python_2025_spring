@@ -4,7 +4,7 @@ from tests.api.utils.helpers import create_unique_name
 
 
 class CronTimer:
-    every_minute: dict[str, str | int]  = {
+    every_minute: dict[str, str | int] = {
         "timer": "*/1 * * * *",
         "schedule": "1 min",
         "timeout": 60
@@ -14,6 +14,7 @@ class CronTimer:
         "schedule": "2 min",
         "timeout": 120
     }
+
 
 class Config:
     @classmethod
@@ -40,6 +41,26 @@ class Config:
                 <buildWrappers/>
             </project>
             """
+
+    @classmethod
+    def get_empty_job_xml(cls) -> str:
+        return """
+            <project>
+                <keepDependencies>false</keepDependencies>
+                <properties/>
+                <scm class="hudson.scm.NullSCM"/>
+                <canRoam>false</canRoam>
+                <disabled>false</disabled>
+                <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+                <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+                <triggers/>
+                <concurrentBuild>false</concurrentBuild>
+                <builders/>
+                <publishers/>
+                <buildWrappers/>
+            </project>
+            """
+
 
 class Description:
     description = "Created via Jenkins API."

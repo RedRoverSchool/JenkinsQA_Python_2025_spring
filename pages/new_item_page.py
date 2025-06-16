@@ -20,7 +20,7 @@ class NewItemPage(BasePage):
         PAGE_NAME = (By.XPATH, "//h1[text()='New Item']")
         ITEM_NAME = (By.CSS_SELECTOR, '#name')
         ITEM_FOLDER = (By.CSS_SELECTOR, '[class*="cloudbees_hudson_plugins_folder"]')
-        OK_BUTTON = (By.CSS_SELECTOR, '#ok-button')
+        OK_BUTTON: tuple[str, str] = (By.CSS_SELECTOR, '#ok-button')
         ITEM_ORGANIZATION_FOLDER = (By.CLASS_NAME, "jenkins_branch_OrganizationFolder")
         ITEM_PIPELINE_PROJECT = (By.CLASS_NAME, "org_jenkinsci_plugins_workflow_job_WorkflowJob")
         ITEM_FREESTYLE_PROJECT = (By.CLASS_NAME, "hudson_model_FreeStyleProject")
