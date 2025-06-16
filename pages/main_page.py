@@ -145,6 +145,5 @@ class MainPage(BasePage, UIElementMixin):
     @allure.step('Go to the organization folder page: \"{project_name}\"')
     def go_to_the_organization_folder_page(self, project_name):
         from pages.organization_folder_page import OrganizationFolderPage
-        # self.navigate_to(OrganizationFolderPage, self.Locators.table_item_link(project_name), project_name)
         self.wait_to_be_clickable(self.Locators.PROJECT_BUTTON).click()
         return OrganizationFolderPage(self.driver, project_name).wait_for_url()
