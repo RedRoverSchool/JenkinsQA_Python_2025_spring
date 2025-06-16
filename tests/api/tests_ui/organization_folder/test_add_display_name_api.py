@@ -1,6 +1,5 @@
 import allure
-from tests.api.tests_ui.organization_folder.data import Config, project_name, display_name, description
-from pages.organization_folder_page import OrganizationFolderPage
+from tests.api.tests_ui.organization_folder.data import project_name, display_name
 
 
 @allure.epic("Organization folder Configuration")
