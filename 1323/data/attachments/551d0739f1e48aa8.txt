@@ -1,0 +1,150 @@
+WARNING  conftest:conftest.py:36 M       core/jenkins_utils.py
+WARNING  conftest:conftest.py:36 M       pages/multibranch_pipeline_config_page.py
+WARNING  conftest:conftest.py:36 M       pages/new_item_page.py
+WARNING  conftest:conftest.py:36 M       pages/ui_element.py
+WARNING  conftest:conftest.py:36 M       tests/api/support/base_api.py
+WARNING  conftest:conftest.py:36 M       tests/freestyle_project/freestyle_data.py
+WARNING  conftest:conftest.py:36 M       tests/freestyle_project/test_post_build_actions.py
+WARNING  conftest:conftest.py:36 A       tests/multibranch_pipeline_configuration/conftest.py
+WARNING  conftest:conftest.py:36 A       tests/multibranch_pipeline_configuration/test_change_properties.py
+INFO     core.jenkins_utils:jenkins_utils.py:210 running cleanup
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 403 None
+DEBUG    core.jenkins_utils:jenkins_utils.py:92 failed to get page on the first try, retrying after login
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /login?from=%2F HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /j_spring_security_check HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/securityRealm/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /computer/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/credentials/store/system/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /me/my-views/view/all/submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/appearance/configSubmit HTTP/1.1" 200 133
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /user/admin/security/ HTTP/1.1" 200 None
+DEBUG    conftest:conftest.py:90 Argument --remote-allow-origins=* added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --disable-gpu added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --no-sandbox added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --disable-dev-shm-usage added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --headless=new added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --window-size=1920,1080 added to the chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:101 Selenium Manager binary found at: /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:114 Executing process: /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --language-binding python --output json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Sending stats to Plausible: Props { browser: "chrome", browser_version: "", os: "linux", arch: "x86_64", lang: "python", selenium_version: "4.31" }
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Found chromedriver 137.0.7151.70 in PATH: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 chrome detected at /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Running command: /usr/bin/google-chrome --version
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Output: "Google Chrome 137.0.7151.103 "
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Detected browser: chrome 137.0.7151.103
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Discovering versions from https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Required driver: chromedriver 137.0.7151.119
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Driver path: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Browser path: /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.service:service.py:231 Started executable: `/usr/bin/chromedriver` in a child process with pid: 2746 using 0 to output -3
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:48105
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.5A8FB69EE4C782FF87ED9FE0174DAA91.e.1/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.5A8FB69EE4C782FF87ED9FE0174DAA91.e.3/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.5A8FB69EE4C782FF87ED9FE0174DAA91.e.9/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/cookie HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 155
+DEBUG    core.jenkins_utils:jenkins_utils.py:31 update_crumb: 9778926f158640e46e2a1a4078be180d51f4a4b0a0738f434651d21ec9eb6146
+DEBUG    LoginPage:login_page.py:32 login crumb: 9778926f158640e46e2a1a4078be180d51f4a4b0a0738f434651d21ec9eb6146
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 155
+INFO     tests.api.support.base_api:base_api.py:52 Generating Jenkins API token at: "/generateNewToken"
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken HTTP/1.1" 200 166
+INFO     tests.api.support.base_api:base_api.py:63 Generated token: 11d0...
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Star-Lord-The-Charming-Freestyle HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Gamora_The_Fierce_Pipeline HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Drax_The_Destroyer_MultiConfig HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Rocket%20The%20Clever%20Folder HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Groot_The_Mighty_Multibranch HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=Nebula_The_Ruthless_OrgFolder HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/refresh HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/screenshot HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.90/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.91/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.92/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.99/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.93/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.94/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.95/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.96/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Star-Lord-The-Charming-Freestyle': ['Not built', '100%', 'Star-Lord-The-Charming-Freestyle', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.100/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.101/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.102/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.109/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.103/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.104/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.105/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.106/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Gamora_The_Fierce_Pipeline': ['Not built', '100%', 'Gamora_The_Fierce_Pipeline', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.110/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.111/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.112/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.117/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.41/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.42/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.113/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.114/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Drax_The_Destroyer_MultiConfig': ['Not built', '100%', 'Drax_The_Destroyer_MultiConfig', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.118/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.119/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.120/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.127/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.121/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.122/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.123/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.124/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Rocket The Clever Folder': ['Folder', '100%', 'Rocket The Clever Folder', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.128/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.129/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.130/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.137/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.131/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.132/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.133/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.134/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Groot_The_Mighty_Multibranch': ['Multibranch Pipeline', '100%', 'Groot_The_Mighty_Multibranch', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.138/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.139/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "POST /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.88/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.146/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.140/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.141/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.142/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "GET /session/7396277aea6d1e99ade8e59bfc20390d/element/f.2AA05D39DAA6175F1230E9133C68D67F.d.CD1BFA866CDF2F8FE74DDC34392D1761.e.143/text HTTP/1.1" 200 0
+DEBUG    MainPage:main_page.py:66  Data row for project 'Nebula_The_Ruthless_OrgFolder': ['Organization Folder', '100%', 'Nebula_The_Ruthless_OrgFolder', 'N/A', 'N/A', 'N/A', '']
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:48105 "DELETE /session/7396277aea6d1e99ade8e59bfc20390d HTTP/1.1" 200 0
