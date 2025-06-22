@@ -1,6 +1,6 @@
 import allure
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.remote.webelement import WebElement
 from pages.base_page import BasePage
 
 
@@ -12,6 +12,7 @@ class MultiConfigProjectConfigPage(BasePage):
         SWITCH_INPUT = (By.ID, "enable-disable-project")
         SWITCH_TOOLTIP = (By.CLASS_NAME, "tippy-content")
         HELP_DISCARD_BUILDS = (By.XPATH, "//a[@tooltip='Help for feature: Discard old builds']")
+        ENVIRONMENT_SECTION = (By.CSS_SELECTOR, ".jenkins-section:has(#environment)")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -56,3 +57,9 @@ class MultiConfigProjectConfigPage(BasePage):
     @allure.step("Hover over help for feature: 'Discard old builds'")
     def hover_over_help_discard_builds(self):
         return self.hover_over_element(self.Locators.HELP_DISCARD_BUILDS)
+
+    @allure.step("Get environment section")
+    def get_environment_section(self) -> WebElement:
+        environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
+        self.scroll_into_view(environment_section)
+        return self.wait_to_be_visible_element(environment_section)

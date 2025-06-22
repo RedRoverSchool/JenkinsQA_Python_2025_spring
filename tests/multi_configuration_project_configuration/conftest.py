@@ -5,6 +5,7 @@ from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
 from tests.multi_configuration_project_configuration.data import ProjectToggle, project_name
 
 
+@allure.title("Create Multi-configuration project")
 @pytest.fixture
 def multi_config_project_config_page(new_item_page):
     return new_item_page.create_new_multi_config_project(project_name)
