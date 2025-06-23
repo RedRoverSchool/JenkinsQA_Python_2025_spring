@@ -13,6 +13,7 @@ class MultiConfigProjectConfigPage(BasePage):
         SWITCH_TOOLTIP = (By.CLASS_NAME, "tippy-content")
         HELP_DISCARD_BUILDS = (By.XPATH, "//a[@tooltip='Help for feature: Discard old builds']")
         ENVIRONMENT_SECTION = (By.CSS_SELECTOR, ".jenkins-section:has(#environment)")
+        DELETE_WORKSPACE_CHECKBOX = (By.CSS_SELECTOR, "input[name*='PreBuildCleanup']~label")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -63,3 +64,10 @@ class MultiConfigProjectConfigPage(BasePage):
         environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
         self.scroll_into_view(environment_section)
         return self.wait_to_be_visible_element(environment_section)
+
+    @allure.step("Click 'Delete workspace' checkbox in Environment section")
+    def click_delete_workspace_checkbox(self):
+        environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
+        self.scroll_into_view(environment_section)
+        self.click_on(self.Locators.DELETE_WORKSPACE_CHECKBOX)
+        return self
