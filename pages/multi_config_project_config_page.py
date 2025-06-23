@@ -15,6 +15,7 @@ class MultiConfigProjectConfigPage(BasePage):
         ENVIRONMENT_SECTION = (By.CSS_SELECTOR, ".jenkins-section:has(#environment)")
         DELETE_WORKSPACE_CHECKBOX = (By.CSS_SELECTOR, "input[name*='PreBuildCleanup']~label")
         USE_SECRET_TEXT = (By.CSS_SELECTOR, "input[name*='SecretBuildWrapper'] ~ label")
+        ADD_TIMESTAMP_CHECKBOX = (By.CSS_SELECTOR, "input[name*='Timestamp'] ~ label")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -78,4 +79,11 @@ class MultiConfigProjectConfigPage(BasePage):
         environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
         self.scroll_into_view(environment_section)
         self.click_on(self.Locators.USE_SECRET_TEXT)
+        return self
+
+    @allure.step("Click 'Add timestamps to the Console Output' checkbox in Environment section")
+    def click_add_timestamps_to_console_output_checkbox(self):
+        environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
+        self.scroll_into_view(environment_section)
+        self.click_on(self.Locators.ADD_TIMESTAMP_CHECKBOX)
         return self
