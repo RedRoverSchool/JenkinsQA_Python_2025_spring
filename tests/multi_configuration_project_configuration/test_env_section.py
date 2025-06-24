@@ -44,3 +44,13 @@ def test_add_timestamps_to_console_output_is_selected(multi_config_project_confi
         page = multi_config_project_config_page.click_add_timestamps_to_console_output_checkbox()
         assert page.is_elements_selected(page.Locators.ADD_TIMESTAMP_CHECKBOX)
 
+
+@allure.epic("Multi-configuration project Configuration")
+@allure.story("Configure Environment")
+@allure.title("Inspect build log for published build scans is_selected")
+@allure.testcase("TC_04.007.05")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/891", name="Github issue")
+def test_add_timestamps_to_console_output_is_selected(multi_config_project_config_page):
+    with allure.step("Assert that 'Add timestamps to the Console output' checkbox is selected"):
+        page = multi_config_project_config_page.click_build_scans_checkbox()
+        assert page.is_elements_selected(page.Locators.BUILD_SCANS_CHECKBOX)

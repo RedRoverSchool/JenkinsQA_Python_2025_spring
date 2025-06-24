@@ -16,6 +16,7 @@ class MultiConfigProjectConfigPage(BasePage):
         DELETE_WORKSPACE_CHECKBOX = (By.CSS_SELECTOR, "input[name*='PreBuildCleanup']~label")
         USE_SECRET_TEXT = (By.CSS_SELECTOR, "input[name*='SecretBuildWrapper'] ~ label")
         ADD_TIMESTAMP_CHECKBOX = (By.CSS_SELECTOR, "input[name*='Timestamp'] ~ label")
+        BUILD_SCANS_CHECKBOX = (By.CSS_SELECTOR, "input[name *= 'BuildScan'] ~ label")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -86,4 +87,11 @@ class MultiConfigProjectConfigPage(BasePage):
         environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
         self.scroll_into_view(environment_section)
         self.click_on(self.Locators.ADD_TIMESTAMP_CHECKBOX)
+        return self
+
+    @allure.step("Click 'Inspect build log for published build scans' checkbox in Environment section")
+    def click_build_scans_checkbox(self):
+        environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
+        self.scroll_into_view(environment_section)
+        self.click_on(self.Locators.BUILD_SCANS_CHECKBOX)
         return self
