@@ -1,0 +1,23 @@
+
+            <project>
+                <actions/>
+                <description>Created via Jenkins API. Builds every 1 min (*/1 * * * *).</description>
+                <keepDependencies>false</keepDependencies>
+                <properties/>
+                <scm class="hudson.scm.NullSCM"/>
+                <canRoam>true</canRoam>
+                <disabled>false</disabled>
+                <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+                <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+                <triggers>
+                  <hudson.triggers.TimerTrigger>
+                  <spec>*/1 * * * *</spec>
+                  </hudson.triggers.TimerTrigger>
+                </triggers>
+                <quietPeriod>10</quietPeriod>
+                <concurrentBuild>false</concurrentBuild>
+                <builders/>
+                <publishers/>
+                <buildWrappers/>
+            </project>
+            
