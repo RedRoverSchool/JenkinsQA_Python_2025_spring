@@ -17,6 +17,7 @@ class MultiConfigProjectConfigPage(BasePage):
         USE_SECRET_TEXT = (By.CSS_SELECTOR, "input[name*='SecretBuildWrapper'] ~ label")
         ADD_TIMESTAMP_CHECKBOX = (By.CSS_SELECTOR, "input[name*='Timestamp'] ~ label")
         BUILD_SCANS_CHECKBOX = (By.CSS_SELECTOR, "input[name *= 'BuildScan'] ~ label")
+        ADVANCED_SECTION = (By.ID, "advanced-project-options")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -67,6 +68,12 @@ class MultiConfigProjectConfigPage(BasePage):
         environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
         self.scroll_into_view(environment_section)
         return self.wait_to_be_visible_element(environment_section)
+
+    @allure.step("Get Advanced Project Options section")
+    def get_advanced_section(self):
+        advanced_section = self.wait_to_be_visible(self.Locators.ADVANCED_SECTION)
+        self.scroll_into_view(advanced_section)
+        return advanced_section
 
     @allure.step("Click 'Delete workspace' checkbox in Environment section")
     def click_delete_workspace_checkbox(self):
