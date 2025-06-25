@@ -18,6 +18,7 @@ class MultiConfigProjectConfigPage(BasePage):
         ADD_TIMESTAMP_CHECKBOX = (By.CSS_SELECTOR, "input[name*='Timestamp'] ~ label")
         BUILD_SCANS_CHECKBOX = (By.CSS_SELECTOR, "input[name *= 'BuildScan'] ~ label")
         ADVANCED_SECTION = (By.ID, "advanced-project-options")
+        TERMINATE_BUILD_CHECKBOX = (By.CSS_SELECTOR, "input[name*='build_timeout'] ~ label")
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -101,4 +102,11 @@ class MultiConfigProjectConfigPage(BasePage):
         environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
         self.scroll_into_view(environment_section)
         self.click_on(self.Locators.BUILD_SCANS_CHECKBOX)
+        return self
+
+    @allure.step("Click 'Terminate build' checkbox in Environment section")
+    def click_terminate_build_checkbox(self):
+        environment_section = self.wait_to_be_visible(self.Locators.ENVIRONMENT_SECTION)
+        self.scroll_into_view(environment_section)
+        self.click_on(self.Locators.TERMINATE_BUILD_CHECKBOX)
         return self
