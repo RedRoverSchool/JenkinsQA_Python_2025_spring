@@ -67,3 +67,13 @@ def create_empty_job_with_api() -> Dict[str, Any]:
         "token": token,
         "crumb_headers": crumb_headers
     }
+
+
+@pytest.fixture(scope="function")
+def create_freestyle_scheduled_project_by_xml_via_api(jenkins_steps, main_page):
+    project_name, timer, timeout, config_xml = Data.get_freestyle_scheduled_every_minute_data()
+    jenkins_steps.post_create_item(project_name, config_xml)
+    main_page.driver.refresh()
+    main_page.go_to_freestyle_project_page(project_name).wait_for_build_execution(timeout)
+    json_data = jenkins_steps.get_job_config_json(project_name)
+    return project_name, json_data

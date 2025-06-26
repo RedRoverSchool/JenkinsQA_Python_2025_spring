@@ -1,3 +1,5 @@
+import time
+
 import allure
 import logging
 
@@ -67,10 +69,13 @@ class FreestyleProjectPage(BasePage):
     @allure.step("Wait up to {timeout} seconds for the build to appear in the build history.")
     def wait_for_build_execution(self, timeout):
         with allure.step("Wait for 'Builds' link to be visible"):
+            start = time.time()
             build_link = self.wait_for_element(self.Locators.BUILDS_LINK, timeout)
+            elapsed = round(time.time() - start, 2)
+
             if not build_link:
-                logger.error(f"'Builds' link was not found within {timeout} seconds.")
+                logger.error(f"'Builds' link was not found within {timeout} seconds. Waited: {elapsed} seconds.")
             else:
-                logger.info(f"'Builds' link appeared within {timeout} seconds.")
+                logger.info(f"'Builds' link appeared in {elapsed} seconds.")
 
         return self
