@@ -54,3 +54,14 @@ def test_inspect_build_log_for_published_build_scans_is_selected(multi_config_pr
     with allure.step("Assert that 'Inspect build log for published build scans' checkbox is selected"):
         page = multi_config_project_config_page.click_build_scans_checkbox()
         assert page.is_elements_selected(page.Locators.BUILD_SCANS_CHECKBOX)
+
+
+@allure.epic("Multi-configuration project Configuration")
+@allure.story("Configure Environment")
+@allure.title("Terminate a build if it's stuck is_selected")
+@allure.testcase("TC_04.007.06")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/898", name="Github issue")
+def test_terminate_a_build_is_selected(multi_config_project_config_page):
+    with allure.step("Assert that 'Terminate a build' checkbox is selected"):
+        page = multi_config_project_config_page.click_terminate_build_checkbox()
+        assert page.is_elements_selected(page.Locators.TERMINATE_BUILD_CHECKBOX)
