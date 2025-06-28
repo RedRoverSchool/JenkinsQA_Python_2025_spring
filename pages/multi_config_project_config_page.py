@@ -1,3 +1,5 @@
+import time
+
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -19,6 +21,12 @@ class MultiConfigProjectConfigPage(BasePage):
         BUILD_SCANS_CHECKBOX = (By.CSS_SELECTOR, "input[name *= 'BuildScan'] ~ label")
         ADVANCED_SECTION = (By.ID, "advanced-project-options")
         TERMINATE_BUILD_CHECKBOX = (By.CSS_SELECTOR, "input[name*='build_timeout'] ~ label")
+        SOURCE_CODE_MANAGEMENT_BUTTON = (By.CSS_SELECTOR, "button[data-section-id='source-code-management']" )
+        GIT_RADIOBUTTON = (By.CSS_SELECTOR, "label[for='radio-block-1']")
+        REPOSITORY_URL_INPUT = (By.NAME, "_.url")
+        SAVE_BUTTON = (By.NAME, "Submit")
+        ERROR = (By.CSS_SELECTOR, "[name='userRemoteConfigs'] .validation-error-area--visible>.error")
+
 
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -110,3 +118,30 @@ class MultiConfigProjectConfigPage(BasePage):
         self.scroll_into_view(environment_section)
         self.click_on(self.Locators.TERMINATE_BUILD_CHECKBOX)
         return self
+
+    @allure.step("Click 'Source Code Management' side menu")
+    def click_source_code_management_button (self):
+        self.click_on(self.Locators.SOURCE_CODE_MANAGEMENT_BUTTON, timeout=10)
+        return self
+
+    @allure.step("Click 'Git' radiobutton")
+    def click_git_radiobutton (self):
+        self.click_on(self.Locators.GIT_RADIOBUTTON)
+        return self
+
+
+    @allure.step("Input Repository URL link")
+    def input_repository_url (self, link):
+        self.enter_text(self.Locators.REPOSITORY_URL_INPUT, link)
+        return self
+
+    @allure.step("Click Save button")
+    def click_save_button (self, name):
+        from pages.multi_config_project_page import MultiConfigProjectPage
+        self.click_on(self.Locators.SAVE_BUTTON)
+        return MultiConfigProjectPage(self.driver, name).wait_for_url()
+
+    @allure.step("Get invalid GitHub link error text")
+    def get_invalid_github_link_error_text(self):
+        error = self.wait_to_be_visible(self.Locators.ERROR)
+        return error.text.split("\n")[0]
