@@ -9,3 +9,9 @@ class ProjectToggle:
     STATUS_ENABLE_PROJECT = "Not built"
     STATUS_DISABLE_PROJECT = "Disabled"
     TOOLTIP = "Enable or disable the current project"
+
+
+class GitHubConnection:
+    INVALID_GITHUB_LINK = "https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring.git"+"1"
+    FAILED_CONNECTION_ERROR_MESSAGE = f"Failed to connect to repository : Command \"git.exe ls-remote -h -- {INVALID_GITHUB_LINK} HEAD\" returned status code 128:"
+
