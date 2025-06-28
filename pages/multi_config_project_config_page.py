@@ -20,7 +20,7 @@ class MultiConfigProjectConfigPage(BasePage):
         ADVANCED_SECTION = (By.ID, "advanced-project-options")
         TERMINATE_BUILD_CHECKBOX = (By.CSS_SELECTOR, "input[name*='build_timeout'] ~ label")
         SOURCE_CODE_MANAGEMENT_BUTTON = (By.CSS_SELECTOR, "button[data-section-id='source-code-management']" )
-        GIT_RADIOBUTTON = (By.CSS_SELECTOR, "#source-code-management~.radioBlock-container input[value='1']")
+        GIT_RADIOBUTTON = (By.XPATH, "//*[@id='source-code-management']/../*[@class='radioBlock-container']//label[text()='Git']")
         REPOSITORY_URL_INPUT = (By.NAME, "_.url")
         SAVE_BUTTON = (By.NAME, "Submit")
         ERROR = (By.CSS_SELECTOR, "[name='userRemoteConfigs'] .validation-error-area--visible>.error")
