@@ -5,6 +5,7 @@ from tests.multibranch_pipeline_configuration.mbp_data import Toggle
 class MultibranchPipelineConfigPage(BasePage):
     class Locators:
         PROPERTIES_SECTION = (By.ID, "properties")
+        BRANCH_SOURCES_SECTION = (By.ID, "branch-sources")
 
     def __init__(self, driver, job_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -18,3 +19,9 @@ class MultibranchPipelineConfigPage(BasePage):
         properties_section = self.wait_to_be_visible(self.Locators.PROPERTIES_SECTION)
         self.scroll_into_view(properties_section)
         return properties_section
+
+    @allure.step("Get Branch Sources section element")
+    def get_branch_sources_section(self):
+        branch_sources_section = self.wait_to_be_visible(self.Locators.BRANCH_SOURCES_SECTION)
+        self.scroll_into_view(branch_sources_section)
+        return branch_sources_section
