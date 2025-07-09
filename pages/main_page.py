@@ -99,6 +99,12 @@ class MainPage(BasePage, UIElementMixin):
         self.wait_to_be_clickable(self.Locators.PROJECT_BUTTON).click()
         return FreestyleProjectPage(self.driver, project_name).wait_for_url()
 
+    @allure.step("Go to the Multiconfig project page by clicking project link.")
+    def go_to_multiconfig_project_page(self, project_name):
+        from pages.multi_config_project_page import MultiConfigProjectPage
+        self.wait_to_be_clickable(self.Locators.PROJECT_BUTTON).click()
+        return MultiConfigProjectPage(self.driver, project_name).wait_for_url()
+
     @allure.step("Expand build queue info block if it is collapsed.")
     def show_build_queue_info_block(self):
         if self.wait_to_be_visible(self.Locators.BUILD_QUEUE_BLOCK).get_attribute("class").__contains__("collapsed"):
