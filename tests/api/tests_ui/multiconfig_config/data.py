@@ -2,7 +2,7 @@ project_name = "MyProject"
 
 class GitHubConnection:
     INVALID_GITHUB_LINK = "https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring.git"+"1"
-    FAILED_CONNECTION_ERROR_MESSAGE = f"Failed to connect to repository : Command \"git.exe ls-remote -h -- {INVALID_GITHUB_LINK} HEAD\" returned status code 128:"
+    FAILED_CONNECTION_ERROR_MESSAGE = f"Failed to connect to repository : Command \"git ls-remote -h -- {INVALID_GITHUB_LINK} HEAD\" returned status code 128:"
 
 class Config:
     @classmethod
