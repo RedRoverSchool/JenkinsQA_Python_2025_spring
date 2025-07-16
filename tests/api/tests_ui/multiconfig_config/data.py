@@ -5,6 +5,27 @@ class GitHubConnection:
     FAILED_CONNECTION_ERROR_MESSAGE = f"Failed to connect to repository : Command \"git ls-remote -h -- {INVALID_GITHUB_LINK} HEAD\" returned status code 128:"
 
 class Config:
+    config_base_xml = """
+    <matrix-project plugin="matrix-project@847.v88a_f90ff9f20">
+        <keepDependencies>false</keepDependencies>
+        <properties/>
+        <scm class="hudson.scm.NullSCM"/>
+        <canRoam>false</canRoam>
+        <disabled>false</disabled>
+        <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+        <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+        <triggers/>
+        <concurrentBuild>false</concurrentBuild>
+        <axes/>
+        <builders/>
+        <publishers/>
+        <buildWrappers/>
+        <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+            <runSequentially>false</runSequentially>
+        </executionStrategy>
+    </matrix-project>
+    """
+
     @classmethod
     def get_multiconfig_github_link_xml(cls, github_link: str, branch_name: str = "*/main") -> str:
         return f"""
