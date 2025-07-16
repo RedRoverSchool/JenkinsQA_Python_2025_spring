@@ -3,9 +3,18 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from tests.multibranch_pipeline_configuration.mbp_data import Toggle
 class MultibranchPipelineConfigPage(BasePage):
+
+    class Projects_name:
+        MBP_TITLE = "Multibranch_Pipeline_Project"
+        LIBRARY_NAME = 'Test_1'
     class Locators:
         PROPERTIES_SECTION = (By.ID, "properties")
         BRANCH_SOURCES_SECTION = (By.ID, "branch-sources")
+        BUTTON_ADD = (By.CSS_SELECTOR, ".jenkins-button.repeatable-add")
+        TITLE_ADDED_PROPERTY = (By.CLASS_NAME, "repeated-chunk__header")
+        INPUT_ADDED_PROPERTY = (By.NAME, "_.name")
+        BUTTON_SAVE = (By.NAME, "Submit")
+        CONFIGURE_OPTION = (By.CSS_SELECTOR, "a.task-link[href$='/configure']")
 
     def __init__(self, driver, job_name, timeout=5):
         super().__init__(driver, timeout=timeout)
@@ -25,3 +34,38 @@ class MultibranchPipelineConfigPage(BasePage):
         branch_sources_section = self.wait_to_be_visible(self.Locators.BRANCH_SOURCES_SECTION)
         self.scroll_into_view(branch_sources_section)
         return branch_sources_section
+    
+    @allure.step("In the Properties section, click “Add Property”")
+    def add_properties(self):
+        self.wait_to_be_clickable(self.Locators.BUTTON_ADD).click()
+        new_property = self.wait_to_be_visible(self.Locators.TITLE_ADDED_PROPERTY).text
+        return new_property
+    
+    @allure.step("Enter the name of property")
+    def enter_item_name(self):
+        self.enter_text(self.Locators.INPUT_ADDED_PROPERTY, self.Projects_name.LIBRARY_NAME)
+        return self.Projects_name.LIBRARY_NAME
+    
+    @allure.step("Click the “Save” button at the bottom of the page")
+    def click_save_property(self):
+        self.wait_to_be_clickable(self.Locators.BUTTON_SAVE).click()
+        return self
+    
+    @allure.step("Redirect to the project\n's main page")
+    def main_page_availability(self):
+        return self.find_element(By.XPATH, f"//h1[contains(normalize-space(.), '{self.Projects_name.MBP_TITLE}')]")
+        
+    @allure.step("Re-enter the Configure page")
+    def click_on_configure(self):
+        return self.wait_to_be_clickable(self.Locators.CONFIGURE_OPTION).click()
+    
+    @allure.step("Verify that the added and edited property values are correctly saved and displayed")
+    def find_added_property(self):
+        values = []
+        target = self.Projects_name.LIBRARY_NAME
+        inputs = self.find_elements(By.CSS_SELECTOR, "input.jenkins-input.validated")
+        # inputs = self.find_elements(self.Locators.INPUT_ADDED_PROPERTY)
+        for inp in inputs:
+            values.append(inp.get_attribute("value"))
+        if target in values:
+            return target

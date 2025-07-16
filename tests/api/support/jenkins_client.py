@@ -27,3 +27,11 @@ class JenkinsClient(BaseAPI):
             return response
 
         return response
+
+    def get(self, endpoint: str, params: dict = None) -> requests.Response:
+        headers = {'Content-Type': 'application/json'}
+        headers.update(self.crumb_headers)
+        url = f"{self.BASE_URL}/{endpoint}"
+        response = self.session.get(url, headers=headers, params=params)
+        logger.info(f"[GET] /{endpoint} - Status: {response.status_code} - {response.reason}")
+        return response

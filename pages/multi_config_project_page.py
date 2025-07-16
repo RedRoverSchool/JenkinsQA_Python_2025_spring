@@ -15,6 +15,7 @@ class MultiConfigProjectPage(BasePage):
         PROJECT_STATUS_ICON = (By.CSS_SELECTOR, "#matrix svg.icon-md")
         CONFIGURE_MENU_ITEM = (By.XPATH, "//span[text()='Configure']/..")
 
+
     def __init__(self, driver, name, timeout=5):
         super().__init__(driver, timeout=timeout)
         self.url = self.base_url + f"/job/{name}/"
@@ -48,6 +49,7 @@ class MultiConfigProjectPage(BasePage):
     def get_project_status_title(self) -> str:
         return self.wait_and_get_attribute(self.Locators.PROJECT_STATUS_ICON, "title")
 
+    @allure.step("Go to Configure page")
     def go_to_configure_page(self):
         with allure.step(f'Go to Configure page of project "{self.name}"'):
             from pages.multi_config_project_config_page import MultiConfigProjectConfigPage

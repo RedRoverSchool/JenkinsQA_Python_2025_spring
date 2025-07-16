@@ -94,10 +94,15 @@ class MainPage(BasePage, UIElementMixin):
         return self.navigate_to(FolderPage, self.Locators.table_item_link(name), name)
 
     @allure.step("Go to the Freestyle project page by clicking project link.")
-    def go_to_freestyle_project_page(self, project_name):
+    def go_to_freestyle_project_page(self, name):
         from pages.freestyle_project_page import FreestyleProjectPage
+        return self.navigate_to(FreestyleProjectPage, self.Locators.table_item_link(name), name)
+
+    @allure.step("Go to the Multiconfig project page by clicking project link.")
+    def go_to_multiconfig_project_page(self, project_name):
+        from pages.multi_config_project_page import MultiConfigProjectPage
         self.wait_to_be_clickable(self.Locators.PROJECT_BUTTON).click()
-        return FreestyleProjectPage(self.driver, project_name).wait_for_url()
+        return MultiConfigProjectPage(self.driver, project_name).wait_for_url()
 
     @allure.step("Expand build queue info block if it is collapsed.")
     def show_build_queue_info_block(self):
