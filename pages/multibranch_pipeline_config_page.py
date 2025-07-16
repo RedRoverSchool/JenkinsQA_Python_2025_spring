@@ -10,6 +10,8 @@ class MultibranchPipelineConfigPage(BasePage):
     class Locators:
         PROPERTIES_SECTION = (By.ID, "properties")
         BRANCH_SOURCES_SECTION = (By.ID, "branch-sources")
+        ADD_SOURCE_BUTTON = (By.XPATH, '//*[@id="main-panel"]/form/div[1]/section[1]/div[2]/div/div/div[2]/button')
+        ADD_SOURCE_ITEM =  (By.CLASS_NAME, 'jenkins-dropdown__item ')
         BUTTON_ADD = (By.CSS_SELECTOR, ".jenkins-button.repeatable-add")
         TITLE_ADDED_PROPERTY = (By.CLASS_NAME, "repeated-chunk__header")
         INPUT_ADDED_PROPERTY = (By.NAME, "_.name")
@@ -34,6 +36,26 @@ class MultibranchPipelineConfigPage(BasePage):
         branch_sources_section = self.wait_to_be_visible(self.Locators.BRANCH_SOURCES_SECTION)
         self.scroll_into_view(branch_sources_section)
         return branch_sources_section
+
+    @allure.step("Scroll to Branch Sources section")
+    def scroll_to_branch_sources_section(self):
+        branch_sources_section = self.wait_to_be_visible(self.Locators.BRANCH_SOURCES_SECTION)
+        self.scroll_into_view(branch_sources_section)
+        return self
+
+    @allure.step('Click on "Add source" button')
+    def click_add_source_button(self):
+        from selenium.webdriver import ActionChains
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_element(*self.Locators.ADD_SOURCE_BUTTON)).click().perform()
+        return self
+
+    def get_add_source_items(self) -> list:
+        list_add_source_items = self.wait_to_be_visible_all(self.Locators.ADD_SOURCE_ITEM)
+        add_source_items = []
+        for item in list_add_source_items:
+            add_source_items.append(item.text)
+        return add_source_items
     
     @allure.step("In the Properties section, click “Add Property”")
     def add_properties(self):

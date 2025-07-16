@@ -16,3 +16,11 @@ class Toggle:
     TOGGLE_ENABLED_ERROR_TEXT = "The toggle switch must be enabled!"
     TOGGLE_TOOLTIP_ERROR_TEXT = "Something went wrong with the tooltip!"
     TOGGLE_TOOLTIP_ATTRIBUTE = ("aria-describedby", "tooltip")
+
+
+class BranchSources:
+    EXPECTED_SOURCES = [
+        'Git',
+        'GitHub',
+        'Single repository & branch'
+    ]
