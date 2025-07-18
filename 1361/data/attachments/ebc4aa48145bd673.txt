@@ -1,0 +1,222 @@
+INFO     core.jenkins_utils:jenkins_utils.py:210 running cleanup
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 403 None
+DEBUG    core.jenkins_utils:jenkins_utils.py:92 failed to get page on the first try, retrying after login
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /login?from=%2F HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /j_spring_security_check HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /job/freestyle-api-5e23719a/doDelete HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/securityRealm/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /computer/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /manage/credentials/store/system/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET / HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /me/my-views/view/all/submitDescription HTTP/1.1" 302 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /me/my-views/view/all/ HTTP/1.1" 200 None
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/appearance/configSubmit HTTP/1.1" 200 135
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /user/admin/security/ HTTP/1.1" 200 None
+INFO     core.jenkins_utils:jenkins_utils.py:201 deleting token with uuid 41c33bdd-0f5f-4c21-8e76-1f51d2487a81
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/descriptorByName/jenkins.security.ApiTokenProperty/revoke HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 154
+INFO     tests.api.support.base_api:base_api.py:52 Generating Jenkins API token at: "/generateNewToken"
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /user/admin/descriptorByName/jenkins.security.ApiTokenProperty/generateNewToken HTTP/1.1" 200 167
+INFO     tests.api.support.base_api:base_api.py:63 Generated token: 1154...
+DEBUG    conftest:conftest.py:90 Argument --remote-allow-origins=* added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --disable-gpu added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --no-sandbox added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --disable-dev-shm-usage added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --headless=new added to the chrome
+DEBUG    conftest:conftest.py:90 Argument --window-size=1920,1080 added to the chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:101 Selenium Manager binary found at: /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:114 Executing process: /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/selenium/webdriver/common/linux/selenium-manager --browser chrome --debug --language-binding python --output json
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Found chromedriver 138.0.7204.94 in PATH: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 chrome detected at /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Running command: /usr/bin/google-chrome --version
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Output: "Google Chrome 138.0.7204.100 "
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Detected browser: chrome 138.0.7204.100
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Required driver: chromedriver 138.0.7204.157
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Driver path: /usr/bin/chromedriver
+DEBUG    selenium.webdriver.common.selenium_manager:selenium_manager.py:140 Browser path: /usr/bin/google-chrome
+DEBUG    selenium.webdriver.common.service:service.py:231 Started executable: `/usr/bin/chromedriver` in a child process with pid: 3458 using 0 to output -3
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:40263
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.F65A82F54F7FD943555E3452B7DA7B5B.e.2/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.F65A82F54F7FD943555E3452B7DA7B5B.e.3/value HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.F65A82F54F7FD943555E3452B7DA7B5B.e.6/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/cookie HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /crumbIssuer/api/json HTTP/1.1" 200 155
+DEBUG    core.jenkins_utils:jenkins_utils.py:31 update_crumb: 9467dbae8c0c1ee77cfa8d651ec205b4bf9ab72f43e0673150f65c9adbedb1b8
+DEBUG    LoginPage:login_page.py:32 login crumb: 9467dbae8c0c1ee77cfa8d651ec205b4bf9ab72f43e0673150f65c9adbedb1b8
+DEBUG    urllib3.connectionpool:connectionpool.py:241 Starting new HTTP connection (1): localhost:8080
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "POST /createItem?name=freestyle-api-232c17c2 HTTP/1.1" 200 0
+INFO     tests.api.support.jenkins_client:jenkins_client.py:23 [POST /createItem?name=freestyle-api-232c17c2] Status: 200 - OK
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/refresh HTTP/1.1" 200 0
+DEBUG    MainPage:ui_element.py:126 Navigating to FreestyleProjectPage with click on (('link text', 'freestyle-api-232c17c2'), 'freestyle-api-232c17c2')
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'freestyle-api-232c17c2'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.5B88F75D7C1DCB396B5FDE2E4C4E1716.e.106/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.5B88F75D7C1DCB396B5FDE2E4C4E1716.e.106/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    FreestyleProjectPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', '#jenkins-build-history>div>span~div a'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 404 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+INFO     pages.freestyle_project_page:freestyle_project_page.py:79 'Builds' link appeared in 55.36 seconds.
+DEBUG    urllib3.connectionpool:connectionpool.py:289 Resetting dropped connection: localhost
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:8080 "GET /job/freestyle-api-232c17c2/api/json?pretty=true HTTP/1.1" 200 556
+INFO     tests.api.support.jenkins_client:jenkins_client.py:36 [GET] /job/freestyle-api-232c17c2/api/json - Status: 200 - OK
+DEBUG    MainPage:ui_element.py:126 Navigating to FreestyleProjectPage with click on (('link text', 'freestyle-api-232c17c2'), 'freestyle-api-232c17c2')
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'freestyle-api-232c17c2'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.190258099850DC87E43252DDC25C289D.e.135/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.190258099850DC87E43252DDC25C289D.e.135/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    FreestyleProjectPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Build Now'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.4D935D1C4F22AB1249723C5F2C333D11.e.149/enabled HTTP/1.1" 200 0
+DEBUG    FreestyleProjectPage:ui_element.py:28 waiting for presence_of_element_located(('css selector', '.job-index-headline.page-headline'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.4D935D1C4F22AB1249723C5F2C333D11.e.151/text HTTP/1.1" 200 0
+DEBUG    FreestyleProjectPage:ui_element.py:28 waiting for presence_of_element_located(('id', 'description'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.4D935D1C4F22AB1249723C5F2C333D11.e.152/text HTTP/1.1" 200 0
+DEBUG    Header:ui_element.py:126 Navigating to MainPage with click on (('id', 'jenkins-home-link'),)
+DEBUG    Header:ui_element.py:28 waiting for element_to_be_clickable(('id', 'jenkins-home-link'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.4D935D1C4F22AB1249723C5F2C333D11.e.153/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.4D935D1C4F22AB1249723C5F2C333D11.e.153/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    MainPage:ui_element.py:28 waiting for element_to_be_clickable(('link text', 'Build History'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.336506412FBE026B1E6EC9B742E90536.e.165/enabled HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.336506412FBE026B1E6EC9B742E90536.e.165/click HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/url HTTP/1.1" 200 0
+DEBUG    BuildHistoryPage:ui_element.py:28 waiting for visibility_of_all_elements_located(('css selector', '#projectStatus>tbody>tr'),)
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/execute/sync HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "POST /session/ecad170ca458f307012b926754cb464e/elements HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "GET /session/ecad170ca458f307012b926754cb464e/element/f.03372E06F34FD37AA6899C75419699C2.d.1EF4F938D9F16DD294C247051961E338.e.203/text HTTP/1.1" 200 0
+DEBUG    urllib3.connectionpool:connectionpool.py:544 http://localhost:40263 "DELETE /session/ecad170ca458f307012b926754cb464e HTTP/1.1" 200 0
