@@ -1,0 +1,34 @@
+
+    <matrix-project plugin="matrix-project@847.v88a_f90ff9f20">
+      <description></description>
+      <keepDependencies>false</keepDependencies>
+      <properties/>
+      <scm class="hudson.scm.NullSCM"/>
+      <canRoam>true</canRoam>
+      <disabled>false</disabled>
+      <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+      <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+      <triggers/>
+      <concurrentBuild>false</concurrentBuild>
+      <axes/>
+      <builders/>
+      <publishers/>
+      <buildWrappers>
+        <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.45"/>
+        <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@603.vd951319b_1c03"/>
+        <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.26"/>
+        <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.32">
+          <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+            <timeoutMinutes>60</timeoutMinutes>
+          </strategy>
+          <operationList>
+            <hudson.plugins.build__timeout.operations.AbortOperation/>
+          </operationList>
+        </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+        <hudson.plugins.gradle.buildscan.BuildScanPublisher plugin="gradle@2.8"/>
+      </buildWrappers>
+      <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+        <runSequentially>false</runSequentially>
+      </executionStrategy>
+    </matrix-project>
+    
