@@ -17,3 +17,9 @@ def test_environment_section_exists(create_multiconfig_project_api, main_page):
 
     with allure.step("Assert Environment section is displayed"):
         assert environment_section.is_displayed()
+
+
+def test_delete_checkbox_is_selected(create_multiconfig_project_with_env_options_api, main_page):
+    page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
+    with allure.step("Assert that 'Delete workspace' checkbox is selected"):
+        assert page.is_elements_selected(page.Locators.DELETE_WORKSPACE_CHECKBOX)
