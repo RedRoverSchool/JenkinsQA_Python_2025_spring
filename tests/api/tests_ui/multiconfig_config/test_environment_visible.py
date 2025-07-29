@@ -44,3 +44,16 @@ def test_use_secret_text_checkbox_is_selected(create_multiconfig_project_with_en
     with allure.step("Assert 'Use secret text(s) or file(s)' checkbox is selected'"):
         assert page.is_elements_selected(page.Locators.USE_SECRET_TEXT)
 
+
+@allure.epic("Multi-configuration Project")
+@allure.story("Build Environment section")
+@allure.title("UI: Verify 'Add timestamps to the Console Output' checkbox is selected")
+@allure.description(
+    "Ensure 'Add timestamps to Console Output' checkbox is selected on Configure page of multi-configuration project")
+@allure.testcase("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/889", name="TC_04.007.04")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/889", name="Github issue")
+def test_add_timestamps_checkbox_selected(create_multiconfig_project_with_env_options_api, main_page):
+    page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
+    with allure.step("Assert 'Add timestamps to the Console Output' checkbox is selected"):
+        assert page.is_elements_selected(page.Locators.ADD_TIMESTAMP_CHECKBOX)
+
