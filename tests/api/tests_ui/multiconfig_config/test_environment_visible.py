@@ -1,6 +1,5 @@
 import allure
 from tests.api.tests_ui.multiconfig_config.data import project_name
-import pytest
 
 
 @allure.epic("Multi-configuration Project")
@@ -58,4 +57,3 @@ def test_add_timestamps_checkbox_selected(create_multiconfig_project_with_env_op
     page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
     with allure.step("Assert 'Add timestamps to the Console Output' checkbox is selected"):
         assert page.is_elements_selected(page.Locators.ADD_TIMESTAMP_CHECKBOX)
-
