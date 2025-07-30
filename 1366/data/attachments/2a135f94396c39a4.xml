@@ -1,0 +1,29 @@
+
+    <matrix-project plugin="matrix-project@845.vffd7fa_f27555">
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties/>
+    <scm class="hudson.scm.NullSCM"/>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers/>
+    <concurrentBuild>false</concurrentBuild>
+    <axes/>
+    <builders/>
+    <publishers/>
+    <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.48">
+    <deleteDirs>false</deleteDirs>
+    <cleanupParameter/>
+    <externalDelete/>
+    <disableDeferredWipeout>false</disableDeferredWipeout>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+    </buildWrappers>
+    <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+    </executionStrategy>
+    </matrix-project>
+    
