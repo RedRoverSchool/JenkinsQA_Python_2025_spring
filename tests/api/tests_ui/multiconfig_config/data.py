@@ -182,3 +182,28 @@ class Config:
     </executionStrategy>
     </matrix-project>
     """
+
+    config_Inspect_build_log_xml = """
+    <matrix-project plugin="matrix-project@845.vffd7fa_f27555">
+    <actions/>
+    <description/>
+    <keepDependencies>false</keepDependencies>
+    <properties/>
+    <scm class="hudson.scm.NullSCM"/>
+    <canRoam>true</canRoam>
+    <disabled>false</disabled>
+    <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <triggers/>
+    <concurrentBuild>false</concurrentBuild>
+    <axes/>
+    <builders/>
+    <publishers/>
+    <buildWrappers>
+    <hudson.plugins.gradle.BuildScanBuildWrapper plugin="gradle@2.14.1"/>
+    </buildWrappers>
+    <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+    </executionStrategy>
+    </matrix-project>
+    """

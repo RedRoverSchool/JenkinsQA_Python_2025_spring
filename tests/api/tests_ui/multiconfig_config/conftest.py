@@ -34,3 +34,9 @@ def create_multiconfig_project_with_env_options_use_secrets_api(jenkins_steps):
 @pytest.fixture
 def create_multiconfig_project_with_env_options_add_timestamps_api(jenkins_steps):
     jenkins_steps.post_create_item(project_name, Config.config_add_timestamps_xml)
+
+
+@allure.title("API: Create project with Environment options enabled")
+@pytest.fixture
+def create_multiconfig_project_with_env_options_build_lod_api(jenkins_steps):
+    jenkins_steps.post_create_item(project_name, Config.config_Inspect_build_log_xml)

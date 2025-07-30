@@ -56,3 +56,11 @@ def test_add_timestamps_checkbox_selected(create_multiconfig_project_with_env_op
     page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
     with allure.step("Assert 'Add timestamps to the Console Output' checkbox is selected"):
         assert page.is_elements_selected(page.Locators.ADD_TIMESTAMP_CHECKBOX)
+
+
+@allure.testcase("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/891", name="TC_04.007.04")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/891", name="Github issue")
+def test_Inspect_build_log_published_build_checkbox_selected(create_multiconfig_project_with_env_options_build_lod_api, main_page):
+    page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
+    with allure.step("Assert 'Inspect build log for published build' checkbox is selected"):
+        assert page.is_elements_selected(page.Locators.BUILD_SCANS_CHECKBOX)
