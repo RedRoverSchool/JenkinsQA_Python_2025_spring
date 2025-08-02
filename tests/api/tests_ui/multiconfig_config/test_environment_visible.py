@@ -64,3 +64,16 @@ def test_Inspect_build_log_published_build_checkbox_selected(create_multiconfig_
     page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
     with allure.step("Assert 'Inspect build log for published build' checkbox is selected"):
         assert page.is_elements_selected(page.Locators.BUILD_SCANS_CHECKBOX)
+
+
+@allure.epic("Multi-configuration Project")
+@allure.story("Build Environment section")
+@allure.title("UI: Verify 'Add timestamps to the Console Output' checkbox is selected")
+@allure.description(
+    "Ensure 'Add timestamps to Console Output' checkbox is selected on Configure page of multi-configuration project")
+@allure.testcase("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/898", name="TC_04.007.06")
+@allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/898", name="Github issue")
+def test_terminate_build_selected(create_multiconfig_project_with_env_options_terminate_build_api, main_page):
+    page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
+    with allure.step("Assert 'Terminate a build if it's stuck' checkbox is selected"):
+        assert page.is_elements_selected(page.Locators.TERMINATE_BUILD_CHECKBOX)
