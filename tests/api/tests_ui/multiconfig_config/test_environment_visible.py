@@ -1,5 +1,7 @@
 import allure
 from tests.api.tests_ui.multiconfig_config.data import project_name
+import pytest
+from pages.multi_config_project_config_page import MultiConfigProjectConfigPage
 
 
 @allure.epic("Multi-configuration Project")
@@ -60,7 +62,8 @@ def test_add_timestamps_checkbox_selected(create_multiconfig_project_with_env_op
 
 @allure.testcase("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/891", name="TC_04.007.04")
 @allure.link("https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/891", name="Github issue")
-def test_Inspect_build_log_published_build_checkbox_selected(create_multiconfig_project_with_env_options_build_lod_api, main_page):
+def test_Inspect_build_log_published_build_checkbox_selected(create_multiconfig_project_with_env_options_build_lod_api,
+                                                             main_page):
     page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
     with allure.step("Assert 'Inspect build log for published build' checkbox is selected"):
         assert page.is_elements_selected(page.Locators.BUILD_SCANS_CHECKBOX)
@@ -77,3 +80,69 @@ def test_terminate_build_selected(create_multiconfig_project_with_env_options_te
     page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
     with allure.step("Assert 'Terminate a build if it's stuck' checkbox is selected"):
         assert page.is_elements_selected(page.Locators.TERMINATE_BUILD_CHECKBOX)
+
+
+@allure.epic("Multi-configuration Project")
+@allure.story("Build Environment section")
+@allure.title("UI: 'Use secret text(s) or file(s)' is selected and config can be saved")
+@allure.description("Assert checkbox is selected, click Save, verify redirect to Project page")
+@allure.testcase(url="https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/901", name="TC_04.007.07")
+@allure.link(url="https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/901", name="Github issue")
+def test_use_secret_text_checkbox_and_save(create_multiconfig_project_with_env_options_use_secrets_api, main_page):
+    config_page = main_page.go_to_multiconfig_project_page(project_name).go_to_configure_page()
+
+    with allure.step("Assert 'Use secret text(s) or file(s)' checkbox is selected"):
+        assert config_page.is_elements_selected(config_page.Locators.USE_SECRET_TEXT)
+
+    with allure.step("Click Save and wait for Project page"):
+        project_page = config_page.submit_and_open_project_page()
+
+    with allure.step("Verify redirect to Project page (not /configure)"):
+        assert "/configure" not in project_page.driver.current_url.lower()
+
+
+CASES = [
+    ("Delete workspace", "create_multiconfig_project_with_env_options_delete_api", "DELETE_WORKSPACE_CHECKBOX"),
+    ("Use secret text(s) or file(s)", "create_multiconfig_project_with_env_options_use_secrets_api", "USE_SECRET_TEXT"),
+    ("Add timestamps to the Console Output", "create_multiconfig_project_with_env_options_add_timestamps_api",
+     "ADD_TIMESTAMP_CHECKBOX"),
+    ("Inspect build log for published build scans", "create_multiconfig_project_with_env_options_build_lod_api",
+     "BUILD_SCANS_CHECKBOX"),
+    ("Terminate a build if it's stuck", "create_multiconfig_project_with_env_options_terminate_build_api",
+     "TERMINATE_BUILD_CHECKBOX"),
+]
+
+
+@pytest.mark.parametrize(
+    "title, fixture_name, locator_name",
+    CASES,
+    ids=[c[0] for c in CASES]
+)
+@allure.epic("Multi-configuration Project")
+@allure.story("Build Environment section")
+@allure.title("UI: 'Use secret text(s) or file(s)' is selected and config can be saved")
+@allure.description("Assert checkboxes is selected, click Save, verify redirect to Project page")
+@allure.testcase(url="https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/901", name="TC_04.007.07")
+@allure.link(url="https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/901", name="Github issue")
+def test_env_checkbox_selected_and_save(title, fixture_name, locator_name, request, main_page):
+    request.getfixturevalue(fixture_name)
+
+    main_page.driver.get(main_page.base_url + f"/job/{project_name}/configure")
+    config_page = MultiConfigProjectConfigPage(main_page.driver, project_name).wait_for_url()
+
+    allure.dynamic.title(f"UI: '{title}' checkbox is selected and config can be saved")
+    allure.dynamic.description("Assert checkbox is selected, click Save, verify redirect to Project page")
+    allure.dynamic.link(
+        "https://github.com/RedRoverSchool/JenkinsQA_Python_2025_spring/issues/887",
+        name="Github issue"
+    )
+
+    locator = getattr(config_page.Locators, locator_name)
+    with allure.step(f"Assert '{title}' checkbox is selected"):
+        assert config_page.is_elements_selected(locator)
+
+    with allure.step("Click Save and wait for Project page"):
+        project_page = config_page.submit_and_open_project_page()
+
+    with allure.step("Verify redirect to Project page (not /configure)"):
+        assert "/configure" not in project_page.driver.current_url.lower()
